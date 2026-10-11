@@ -531,6 +531,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val PSIPHON = Compatibility(
+        name = "Psiphon",
+        packageName = "com.psiphon3.subscription",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0xF5A623,
+        signatures = setOf(
+            "76dbef15f67726d451a12359b8579c0d7a9f635d526aa37424df131632f17810",
+        ),
+        targets = listOf(AppTarget(version = "2.5.11", versionCode = 506, minSdk = 24)),
+    )
+
     val PYDROID = Compatibility(
         name = "Pydroid 3",
         packageName = "ru.iiec.pydroid3",

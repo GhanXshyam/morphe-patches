@@ -194,6 +194,7 @@ ICONS = {
     "com.stresscodes.wallp": "walp.png",
     "com.spocky.projengmenu": "projectivy.png",
     "com.myvitale.forus": "forus.png",
+    "com.psiphon3.subscription": "psiphon.png",
     "com.michaldrabik.showly2": "showly.png",
     "co.steezy.app": "steezy.png",
     "com.sqcom.shangqing": "sqcom.png",
