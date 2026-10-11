@@ -390,6 +390,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "1.3.2", versionCode = 15, minSdk = 24)),
     )
 
+    val MY_APK = Compatibility(
+        name = "My APK",
+        packageName = "com.andatsoft.myapk.fwa",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0x5D3FC6,
+        signatures = setOf(
+            "3fa505df0e471b20b0bf0511cd05c0ecfa2fa53a9bbed6bf51886e1b7c0db90b",
+        ),
+        targets = listOf(AppTarget(version = "4.1.1", versionCode = 3231, minSdk = 26)),
+    )
+
     val NOTESNOOK = Compatibility(
         name = "Notesnook",
         packageName = "com.streetwriters.notesnook",
