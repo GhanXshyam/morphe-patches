@@ -237,6 +237,7 @@ body:
         - The app opens, then crashes
         - The patched feature is still locked or still shows ads
         - The patch has no visible effect
+        - A patch is missing from the list in Manager
         - Something else the app used to do stopped working
     validations:
       required: true
