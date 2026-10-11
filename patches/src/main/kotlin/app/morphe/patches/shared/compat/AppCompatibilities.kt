@@ -398,7 +398,7 @@ internal object AppCompatibilities {
         packageName = "com.soulbreakers.mymoveset",
         apkFileType = ApkFileType.XAPK,
         appIconColor = 0x9F1C3B,
-        targets = listOf(AppTarget(version = "1.3.2", versionCode = 15, minSdk = 24)),
+        targets = listOf(AppTarget(version = "1.4.0", versionCode = 16, minSdk = 24)),
     )
 
     val MY_APK = Compatibility(
