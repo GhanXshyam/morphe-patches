@@ -154,6 +154,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val DEVCHECK = Compatibility(
+        name = "DevCheck",
+        packageName = "flar2.devcheck",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x1E88E5,
+        signatures = setOf(
+            "f816aa5ff72263d1a9a6afb81e4c25e72fbf9002444f80a6e043f080c7010990",
+        ),
+        targets = listOf(AppTarget(version = "6.57", versionCode = 657, minSdk = 32)),
+    )
+
     val DWG_FASTVIEW = Compatibility(
         name = "DWG FastView",
         packageName = "com.gstarmc.android",
