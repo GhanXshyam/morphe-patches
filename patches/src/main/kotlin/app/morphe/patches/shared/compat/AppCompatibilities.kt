@@ -712,6 +712,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "5.23.0", versionCode = 299, minSdk = 24)),
     )
 
+    val STORYWISE = Compatibility(
+        name = "Storywise",
+        packageName = "com.storywise.storywise",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xD9543D,
+        signatures = setOf(
+            "a8434fb26c0ef24c8bffe4cca13ad81322adfb580854db3a7adf7ee783a60512",
+        ),
+        targets = listOf(AppTarget(version = "1.0.3", versionCode = 34, minSdk = 24)),
+    )
+
     val SYMFONIUM = Compatibility(
         name = "Symfonium",
         packageName = "app.symfonik.music.player",

@@ -2,27 +2,23 @@
  * Copyright (C) 2026 hxreborn
  * SPDX-License-Identifier: GPL-3.0-only
  */
-package app.morphe.patches.memoneet.misc.gms
+package app.morphe.patches.shared.misc.gms
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.gms.GMS_CORE_SIGN_IN_CLASS
-import app.morphe.patches.shared.misc.gms.bindGmsCoreSignInTypes
-import app.morphe.patches.shared.misc.gms.gmsCoreSpoofedSignaturePatch
-import app.morphe.patches.shared.misc.gms.redirectGmsPackageToGmsCore
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 @Suppress("unused")
-val gmsCoreSupportPatch = bytecodePatch(
+val getCredentialGmsCoreSupportPatch = bytecodePatch(
     name = "GmsCore support",
     description = "Signs in through GmsCore instead of Google Play Services. " +
         "Requires GmsCore to be installed.",
 ) {
-    compatibleWith(AppCompatibilities.MEMONEET)
+    compatibleWith(AppCompatibilities.MEMONEET, AppCompatibilities.STORYWISE)
     extendWith("extensions/extension.mpe")
 
     dependsOn(gmsCoreSpoofedSignaturePatch)
