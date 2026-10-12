@@ -198,6 +198,7 @@ ICONS = {
     "com.psiphon3.subscription": "psiphon.png",
     "com.michaldrabik.showly2": "showly.png",
     "co.steezy.app": "steezy.png",
+    "com.storywise.storywise": "storywise.png",
     "com.sqcom.shangqing": "sqcom.png",
     "com.zhiliaoapp.musically": "tiktok.png",
     "ch.protonmail.android": "protonmail.png",
