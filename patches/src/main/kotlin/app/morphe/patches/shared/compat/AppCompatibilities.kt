@@ -746,6 +746,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val VIDEO_EDITOR = Compatibility(
+        name = "Video Editor",
+        packageName = "videoeditor.videomaker.videoeditorforyoutube",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0xFF9800,
+        signatures = setOf(
+            "97c78f212f647fc96059ef8b81f239bc047be8f285ae59486a53a5e1ed09349a",
+        ),
+        targets = listOf(AppTarget(version = "1.621.196", versionCode = 196, minSdk = 26)),
+    )
+
     val VLLO = Compatibility(
         name = "VLLO",
         packageName = "com.darinsoft.vimo",
