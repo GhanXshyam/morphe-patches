@@ -32,14 +32,13 @@ val unlockPremiumPatch = bytecodePatch(
     compatibleWith(AppCompatibilities.PROJECTIVY)
 
     execute {
-        val methods = PtApplicationMarkerFingerprint.matchSingle().classDef.methods
-
         PremiumCheckFingerprint.matchSingle().method.returnEarly(true)
 
-        // Force the billing state setter to mark premium as active.
-        methods.singleOrNull {
-            it.parameterTypes == listOf("Lcom/spocky/projengmenu/PTApplication;", "Z")
-        }?.addInstruction(0, "const/4 p1, 0x0")
+        val trialStateSetter = TrialStateSetterFingerprint.matchSingle().method
+        if (trialStateSetter.parameterTypes.lastOrNull()?.toString() != "Z") {
+            throw PatchException("Trial state setter does not end in a boolean parameter")
+        }
+        trialStateSetter.addInstruction(0, "const/4 p1, 0x0")
 
         if (classDefBy(ACCESSIBILITY_SERVICE_CLASS).staticFields.any { it.type == "B" }) {
             val initializer = AccessibilityServiceByteInitFingerprint.matchSingle()

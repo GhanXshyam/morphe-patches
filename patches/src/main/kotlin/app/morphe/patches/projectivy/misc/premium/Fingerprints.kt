@@ -38,6 +38,17 @@ internal object PremiumCheckFingerprint : Fingerprint(
     ),
 )
 
+internal object TrialStateSetterFingerprint : Fingerprint(
+    classFingerprint = PtApplicationMarkerFingerprint,
+    returnType = "V",
+    filters = listOf(
+        methodCall(
+            definingClass = "Ljava/lang/System;",
+            name = "currentTimeMillis",
+        ),
+    ),
+)
+
 internal const val ACCESSIBILITY_SERVICE_CLASS =
     "Lcom/spocky/projengmenu/services/ProjectivyAccessibilityService;"
 
