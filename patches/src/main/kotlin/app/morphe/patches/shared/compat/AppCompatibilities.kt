@@ -420,6 +420,7 @@ internal object AppCompatibilities {
         targets = listOf(
             AppTarget(version = "3.4.12", versionCode = 4197422, minSdk = 24),
             AppTarget(version = "3.4.13", versionCode = 4197423, minSdk = 24),
+            AppTarget(version = "3.4.14", versionCode = 4197424, minSdk = 24),
         ),
     )
 
