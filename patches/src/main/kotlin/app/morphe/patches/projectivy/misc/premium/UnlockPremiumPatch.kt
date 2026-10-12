@@ -18,7 +18,6 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
-import com.android.tools.smali.dexlib2.AccessFlags
 
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
@@ -30,11 +29,7 @@ val unlockPremiumPatch = bytecodePatch(
     execute {
         val methods = PtApplicationMarkerFingerprint.matchSingle().classDef.methods
 
-        methods.single {
-            AccessFlags.STATIC.isSet(it.accessFlags) &&
-                it.returnType == "Z" &&
-                it.parameterTypes.isEmpty()
-        }.returnEarly(true)
+        PremiumCheckFingerprint.matchSingle().method.returnEarly(true)
 
         // Force the billing state setter to mark premium as active.
         methods.singleOrNull {

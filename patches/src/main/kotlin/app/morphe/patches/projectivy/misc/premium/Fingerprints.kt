@@ -14,7 +14,25 @@
 package app.morphe.patches.projectivy.misc.premium
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.methodCall
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
 internal object PtApplicationMarkerFingerprint : Fingerprint(
     strings = listOf("ptutils"),
+)
+
+internal object PremiumCheckFingerprint : Fingerprint(
+    classFingerprint = PtApplicationMarkerFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "Z",
+    parameters = emptyList(),
+    filters = listOf(
+        methodCall(
+            definingClass = "this",
+            parameters = listOf("Z"),
+            returnType = "Z",
+            opcode = Opcode.INVOKE_STATIC,
+        ),
+    ),
 )
