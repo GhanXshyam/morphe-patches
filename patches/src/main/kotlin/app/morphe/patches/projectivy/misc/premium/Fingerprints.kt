@@ -14,6 +14,7 @@
 package app.morphe.patches.projectivy.misc.premium
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.fieldAccess
 import app.morphe.patcher.methodCall
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
@@ -36,3 +37,13 @@ internal object PremiumCheckFingerprint : Fingerprint(
         ),
     ),
 )
+
+internal const val ACCESSIBILITY_SERVICE_CLASS =
+    "Lcom/spocky/projengmenu/services/ProjectivyAccessibilityService;"
+
+internal object AccessibilityServiceByteInitFingerprint : Fingerprint(
+    definingClass = ACCESSIBILITY_SERVICE_CLASS,
+    name = "<clinit>",
+    filters = listOf(fieldAccess(type = "B", opcode = Opcode.SPUT_BYTE)),
+)
+
