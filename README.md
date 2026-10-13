@@ -15,7 +15,7 @@
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.49.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.49.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;169 patches total
+> **[v1.49.1](https://github.com/hxreborn/morphe-patches/releases/tag/v1.49.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;169 patches total
 <a id="1weather"></a>
 <details>
 <summary><img src=".github/assets/icons/oneweather.png" width="18" align="top">&nbsp;&nbsp;1Weather&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>

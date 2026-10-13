@@ -233,12 +233,12 @@ body:
       description: Newest first.
       options:
         # generated:versions
+        - "1.49.1"
         - "1.49.0"
         - "1.48.0"
         - "1.47.0"
         - "1.46.0"
         - "1.45.0"
-        - "1.44.0"
         - "Older than these"
         # /generated
     validations:

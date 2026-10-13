@@ -1,3 +1,9 @@
+## [1.49.1](https://github.com/hxreborn/morphe-patches/compare/v1.49.0...v1.49.1) (2026-10-13)
+
+### Bug Fixes
+
+* **imo - GmsCore support:** list GmsCore accounts for chat backup ([22b5e02](https://github.com/hxreborn/morphe-patches/commit/22b5e02de2444004bb6ef2c522628ccfc4c9395b))
+
 ## [1.49.0](https://github.com/hxreborn/morphe-patches/compare/v1.48.0...v1.49.0) (2026-10-13)
 
 ### Bug Fixes
