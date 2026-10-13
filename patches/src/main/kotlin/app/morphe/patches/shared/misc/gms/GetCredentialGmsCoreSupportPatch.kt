@@ -21,10 +21,11 @@ val getCredentialGmsCoreSupportPatch = bytecodePatch(
     compatibleWith(AppCompatibilities.MEMONEET, AppCompatibilities.STORYWISE)
     extendWith("extensions/extension.mpe")
 
-    dependsOn(gmsCoreSpoofedSignaturePatch)
+    dependsOn(gmsCoreSpoofedSignaturePatch, gmsCoreManifestPatch)
 
     execute {
         bindGmsCoreSignInTypes()
+        renameCloudMessagingToGmsCore()
 
         GetCredentialHandlerFingerprint.matchSingle().let { match ->
             val (isEmpty, activityRead, _, completeFailure) = match.instructionMatches.map { it.index }
