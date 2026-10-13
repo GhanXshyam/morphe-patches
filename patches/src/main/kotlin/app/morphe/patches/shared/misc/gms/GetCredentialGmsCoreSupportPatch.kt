@@ -18,7 +18,7 @@ val getCredentialGmsCoreSupportPatch = bytecodePatch(
     description = "Signs in through GmsCore instead of Google Play Services. " +
         "Requires GmsCore to be installed.",
 ) {
-    compatibleWith(AppCompatibilities.MEMONEET, AppCompatibilities.STORYWISE)
+    compatibleWith(AppCompatibilities.JUJO, AppCompatibilities.MEMONEET, AppCompatibilities.STORYWISE)
     extendWith("extensions/extension.mpe")
 
     dependsOn(gmsCoreSpoofedSignaturePatch, gmsCoreManifestPatch)

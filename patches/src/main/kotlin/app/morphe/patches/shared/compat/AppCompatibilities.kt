@@ -280,6 +280,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "2026.08.1041", versionCode = 26081041, minSdk = 32)),
     )
 
+    val JUJO = Compatibility(
+        name = "Jujo",
+        packageName = "com.dev2a.junk_journal",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xE8B4A0,
+        signatures = setOf(
+            "851f5a9aa9e8287bdade98d0e41a0bdd13a685064307040133626697f16445e4",
+        ),
+        targets = listOf(AppTarget(version = "1.2.5", versionCode = 104, minSdk = 24)),
+    )
+
     val JVDROID = Compatibility(
         name = "Jvdroid",
         packageName = "ru.iiec.jvdroid",
