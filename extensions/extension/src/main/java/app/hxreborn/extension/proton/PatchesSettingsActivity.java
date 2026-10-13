@@ -4,6 +4,8 @@
  */
 package app.hxreborn.extension.proton;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -15,7 +17,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -28,6 +30,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import app.hxreborn.extension.protonmail.ScheduledDeletionEditor;
+import app.hxreborn.extension.protonmail.accountswipe.AccountAvatarSwipe;
+import app.hxreborn.extension.protonmail.accountswipe.AvatarSwitchStyleDialog;
 
 @SuppressLint("SetTextI18n")
 @SuppressWarnings("unused")
@@ -51,11 +55,11 @@ public final class PatchesSettingsActivity extends Activity {
 
     private static final int BACK_ICON_INSET_DP = 12;
 
-    private static final int CARD_RADIUS_DP = 13;
+    private static final int CARD_RADIUS_DP = 16;
 
-    private static final int CARD_GAP_DP = 14;
+    private static final int CARD_PADDING_DP = 16;
 
-    private static final int CARD_PADDING_DP = 20;
+    private static final int DIVIDER_DP = 1;
 
     private static final int ROW_MIN_HEIGHT_DP = 56;
 
@@ -75,9 +79,11 @@ public final class PatchesSettingsActivity extends Activity {
 
     private static final int SECTION_LABEL_INSET_DP = 4;
 
-    private static final int SECTION_LABEL_TOP_DP = 16;
+    private static final int SECTION_LABEL_TOP_DP = 20;
 
-    private static final int SECTION_LABEL_BOTTOM_DP = 8;
+    private static final int SECTION_LABEL_BOTTOM_DP = 12;
+
+    private static final int SECTION_LABEL_SP = 16;
 
     private static final int FIELD_TEXT_SP = 14;
 
@@ -155,55 +161,69 @@ public final class PatchesSettingsActivity extends Activity {
         column.setPadding(dp(SCREEN_INSET_DP), dp(SCREEN_TOP_PADDING_DP), dp(SCREEN_INSET_DP),
                 dp(SCREEN_BOTTOM_PADDING_DP));
 
-        if (AppliedPatches.scheduledDeletion()) {
-            column.addView(card(row(ScheduledDeletionEditor.SETTINGS_ROW_TITLE, ScheduledDeletionEditor.summary(this),
-                    () -> ScheduledDeletionEditor.show(this, this::recreateContent))));
+        final List<View> accountRows = new ArrayList<>();
+        if (AppliedPatches.swipeToSwitchAccounts()) {
+            accountRows.add(row(AvatarSwitchStyleDialog.TITLE, AccountAvatarSwipe.getSwitchStyle().getLabel(),
+                    () -> AvatarSwitchStyleDialog.show(this, this::recreateContent)));
+            accountRows.add(switchRow("Vibrate on switch", "Tick when the account changes.",
+                    AccountAvatarSwipe.isHapticFeedbackEnabled(), new CheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(boolean enabled) {
+                            AccountAvatarSwipe.setHapticFeedbackEnabled(enabled);
+                        }
+                    }));
         }
+        addSection(column, AppliedPatches.SWIPE_TO_SWITCH_ACCOUNTS, accountRows);
 
+        final List<View> generalRows = new ArrayList<>();
+        if (AppliedPatches.scheduledDeletion()) {
+            generalRows.add(row(ScheduledDeletionEditor.SETTINGS_ROW_TITLE, ScheduledDeletionEditor.summary(this),
+                    () -> ScheduledDeletionEditor.show(this, this::recreateContent)));
+        }
+        if (UpsellingVisibility.isPatched()) {
+            generalRows.add(switchRow(AppliedPatches.HIDE_UPGRADE_PROMOTIONS, "Upgrade buttons, banners and offers.",
+                    UpsellingVisibility.isHidden(), new CheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(boolean hidden) {
+                            UpsellingVisibility.setHidden(hidden);
+                            confirmRestart();
+                        }
+                    }));
+        }
+        addSection(column, "General", generalRows);
+
+        final List<View> appearanceRows = new ArrayList<>();
         if (AccentColor.isPatched()) {
-            column.addView(
-                    card(row(AppliedPatches.ACCENT_COLOR, AccentColorDialog.getPresetLabel(AccentColor.getPreset()),
-                            AccentColor.getAccentColor(isDarkTheme()), () -> AccentColorDialog.show(this, () -> {
-                                recreateContent();
-                                confirmRestart();
-                            }))));
+            appearanceRows
+                .add(row(AppliedPatches.ACCENT_COLOR, AccentColorDialog.getPresetLabel(AccentColor.getPreset()),
+                        AccentColor.getAccentColor(isDarkTheme()), () -> AccentColorDialog.show(this, () -> {
+                            recreateContent();
+                            confirmRestart();
+                        })));
         }
         if (AmoledTheme.isPatched()) {
-            column.addView(card(switchRow(AppliedPatches.AMOLED_DARK_THEME, "Pure black backgrounds.",
+            appearanceRows.add(switchRow(AppliedPatches.AMOLED_DARK_THEME, "Pure black backgrounds.",
                     AmoledTheme.isEnabled(), new CheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(boolean enabled) {
                             AmoledTheme.setEnabled(enabled);
                             confirmRestart();
                         }
-                    })));
+                    }));
         }
-
         if (MaterialSwitches.isPatched()) {
-            column.addView(card(switchRow(AppliedPatches.MATERIAL_SWITCHES, "Check and close icons in switches.",
+            appearanceRows.add(switchRow(AppliedPatches.MATERIAL_SWITCHES, "Check and close icons in switches.",
                     MaterialSwitches.isEnabled(), new CheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(boolean enabled) {
                             MaterialSwitches.setEnabled(enabled);
                             confirmRestart();
                         }
-                    })));
+                    }));
         }
+        addSection(column, "Appearance", appearanceRows);
 
-        if (UpsellingVisibility.isPatched()) {
-            column
-                .addView(card(switchRow(AppliedPatches.HIDE_UPGRADE_PROMOTIONS, "Upgrade buttons, banners and offers.",
-                        UpsellingVisibility.isHidden(), new CheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(boolean hidden) {
-                                UpsellingVisibility.setHidden(hidden);
-                                confirmRestart();
-                            }
-                        })));
-        }
-
-        column.addView(sectionLabel("App"));
-        column.addView(card(appFields()));
+        addSection(column, "App", Collections.singletonList(appFields()));
 
         this.content.addView(column,
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -213,7 +233,11 @@ public final class PatchesSettingsActivity extends Activity {
         final TextView label = new TextView(this);
         label.setText(text);
         label.setTextColor(this.textWeakColor);
-        label.setTextSize(TypedValue.COMPLEX_UNIT_SP, ROW_SUMMARY_SP);
+        label.setTextSize(TypedValue.COMPLEX_UNIT_SP, SECTION_LABEL_SP);
+        label.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            label.setAccessibilityHeading(true);
+        }
         label.setPadding(dp(SECTION_LABEL_INSET_DP), dp(SECTION_LABEL_TOP_DP), dp(SECTION_LABEL_INSET_DP),
                 dp(SECTION_LABEL_BOTTOM_DP));
         return label;
@@ -266,7 +290,6 @@ public final class PatchesSettingsActivity extends Activity {
         final Switch control = new Switch(this);
         control.setContentDescription(title + ". " + summary);
         control.setChecked(checked);
-        control.setMinimumHeight(dp(ROW_MIN_HEIGHT_DP));
         final LinearLayout.LayoutParams controlParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         controlParams.setMarginStart(dp(ROW_CONTROL_START_MARGIN_DP));
@@ -319,21 +342,26 @@ public final class PatchesSettingsActivity extends Activity {
         return header;
     }
 
-    private View card(View child) {
+    private void addSection(LinearLayout column, String title, List<View> rows) {
+        if (rows.isEmpty()) {
+            return;
+        }
+
+        column.addView(sectionLabel(title));
         final LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.VERTICAL);
-
-        final GradientDrawable background = new GradientDrawable();
-        background.setColor(this.cardBackgroundColor);
-        background.setCornerRadius(dp(CARD_RADIUS_DP));
-        card.setBackground(background);
-        card.addView(child);
-
-        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.bottomMargin = dp(CARD_GAP_DP);
-        card.setLayoutParams(params);
-        return card;
+        card.setBackground(PatchesTheme.createRoundedRectangle(this, this.cardBackgroundColor, CARD_RADIUS_DP));
+        card.setClipToOutline(true);
+        for (int index = 0; index < rows.size(); index++) {
+            if (index != 0) {
+                final View divider = new View(this);
+                divider.setBackgroundColor(this.screenBackgroundColor);
+                card.addView(divider,
+                        new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(DIVIDER_DP)));
+            }
+            card.addView(rows.get(index));
+        }
+        column.addView(card);
     }
 
     private View row(String title, String summary, final Runnable onClick) {

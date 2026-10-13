@@ -16,6 +16,8 @@ public final class AppliedPatches {
     static final String HIDE_UPGRADE_PROMOTIONS = "Hide upgrade promotions";
     static final String MATERIAL_SWITCHES = "Material 3 switches";
 
+    static final String SWIPE_TO_SWITCH_ACCOUNTS = "Swipe to switch accounts";
+
     private AppliedPatches() {
 
     }
@@ -49,6 +51,10 @@ public final class AppliedPatches {
     }
 
     public static boolean unlockCustomTimePicker() {
+        return false;
+    }
+
+    public static boolean swipeToSwitchAccounts() {
         return false;
     }
 
@@ -116,6 +122,9 @@ public final class AppliedPatches {
         }
         if (unlockCustomTimePicker()) {
             names.add("Unlock custom time picker");
+        }
+        if (swipeToSwitchAccounts()) {
+            names.add(SWIPE_TO_SWITCH_ACCOUNTS);
         }
         if (removeServerChangeDelay()) {
             names.add("Remove server change delay");

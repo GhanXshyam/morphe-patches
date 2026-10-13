@@ -11,7 +11,7 @@ import java.lang.reflect.Proxy;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-final class UniffiCalls {
+public final class UniffiCalls {
 
     static final String UNIFFI_PACKAGE = "uniffi.mail_uniffi.";
 
@@ -25,7 +25,7 @@ final class UniffiCalls {
         return null;
     }
 
-    static Object invokeSuspending(Method method, Object target, Object... args) throws Exception {
+    public static Object invokeSuspending(Method method, Object target, Object... args) throws Exception {
         final Object dispatcher = ioDispatcher();
         if (dispatcher == null) {
             throw new IllegalStateException("I/O coroutine dispatcher is unavailable");
@@ -53,7 +53,7 @@ final class UniffiCalls {
         return blockingContinuation.result;
     }
 
-    static Object okValueOrNull(Object result) {
+    public static Object okValueOrNull(Object result) {
         return ("Ok".equals(simpleNameOf(result))) ? callNoArg(result, "getV1") : null;
     }
 
@@ -61,7 +61,7 @@ final class UniffiCalls {
         return methodNamed(Class.forName(UNIFFI_PACKAGE + "Mail_uniffiKt"), name);
     }
 
-    static Method methodNamed(Class<?> type, String name) throws NoSuchMethodException {
+    public static Method methodNamed(Class<?> type, String name) throws NoSuchMethodException {
         for (Method candidate : type.getMethods()) {
             if (candidate.getName().equals(name)) {
                 candidate.setAccessible(true);
@@ -71,7 +71,7 @@ final class UniffiCalls {
         throw new NoSuchMethodException(type.getName() + "." + name);
     }
 
-    static Object callNoArg(Object target, String name) {
+    public static Object callNoArg(Object target, String name) {
         try {
             return methodNamed(target.getClass(), name).invoke(target);
         } catch (Throwable throwable) {
@@ -79,7 +79,7 @@ final class UniffiCalls {
         }
     }
 
-    static String simpleNameOf(Object value) {
+    public static String simpleNameOf(Object value) {
         return (value != null) ? value.getClass().getSimpleName() : "null";
     }
 
