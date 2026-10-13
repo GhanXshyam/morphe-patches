@@ -580,6 +580,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "2.5.11", versionCode = 506, minSdk = 24)),
     )
 
+    val PUBLIC = Compatibility(
+        name = "Public",
+        packageName = "com.cardfeed.video_public",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xEA1A1A,
+        signatures = setOf(
+            "38687807198e57d53bef507efdc11a6f9bf19bf7c7643b89650edff812ba2c00",
+        ),
+        targets = listOf(AppTarget(version = "3.3.4", versionCode = 9070834, minSdk = 24)),
+    )
+
     val PYDROID = Compatibility(
         name = "Pydroid 3",
         packageName = "ru.iiec.pydroid3",
