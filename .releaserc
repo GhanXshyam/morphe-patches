@@ -60,7 +60,8 @@
           "README.md",
           ".github/assets/icons/*.png",
           ".github/ISSUE_TEMPLATE/bug_report.yml",
-          ".github/ISSUE_TEMPLATE/not_working.yml"
+          ".github/ISSUE_TEMPLATE/not_working.yml",
+          ".github/ISSUE_TEMPLATE/app_update.yml"
         ],
         "message": "chore: Release v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }

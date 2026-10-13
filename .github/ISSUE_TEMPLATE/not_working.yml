@@ -11,6 +11,8 @@ body:
         - Repatch on the newest release.
         - Install the unpatched APK and repeat the steps.
         - Search open and closed reports [here](https://github.com/hxreborn/morphe-patches/issues?q=is%3Aissue).
+        - App version newer than the ones listed below: that's an
+          [app update request](https://github.com/hxreborn/morphe-patches/issues/new?template=app_update.yml), not a bug.
   - type: dropdown
     id: app
     attributes:
