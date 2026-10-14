@@ -32,6 +32,7 @@ import android.widget.TextView;
 import app.hxreborn.extension.protonmail.ScheduledDeletionEditor;
 import app.hxreborn.extension.protonmail.accountswipe.AccountAvatarSwipe;
 import app.hxreborn.extension.protonmail.accountswipe.AvatarSwitchStyleDialog;
+import app.hxreborn.extension.protonpass.LayoutComponents;
 
 @SuppressLint("SetTextI18n")
 @SuppressWarnings("unused")
@@ -192,6 +193,19 @@ public final class PatchesSettingsActivity extends Activity {
         }
         addSection(column, "General", generalRows);
 
+        final List<View> layoutRows = new ArrayList<>();
+        if (LayoutComponents.isPatched()) {
+            layoutRows.add(layoutSwitchRow("Hide Help center", "Feedback, import/export and tutorial links.",
+                    LayoutComponents.HELP_CENTER));
+            if (LayoutComponents.hasSpreadTheWord()) {
+                layoutRows.add(layoutSwitchRow("Hide Spread the word", "Tell a friend and Rate app.",
+                        LayoutComponents.SPREAD_THE_WORD));
+            }
+            layoutRows
+                .add(layoutSwitchRow("Hide About", "Privacy policy and Terms of service.", LayoutComponents.ABOUT));
+        }
+        addSection(column, "Layout", layoutRows);
+
         final List<View> appearanceRows = new ArrayList<>();
         if (AccentColor.isPatched()) {
             appearanceRows
@@ -259,6 +273,16 @@ public final class PatchesSettingsActivity extends Activity {
         startActivity(launch);
         finishAffinity();
         Runtime.getRuntime().exit(0);
+    }
+
+    private View layoutSwitchRow(String title, String summary, final String key) {
+        return switchRow(title, summary, LayoutComponents.isHidden(key), new CheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(boolean hidden) {
+                LayoutComponents.setHidden(key, hidden);
+                confirmRestart();
+            }
+        });
     }
 
     private View switchRow(String title, String summary, boolean checked, final CheckedChangeListener onChange) {

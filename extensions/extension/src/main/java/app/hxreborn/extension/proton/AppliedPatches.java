@@ -7,6 +7,8 @@ package app.hxreborn.extension.proton;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.hxreborn.extension.protonpass.LayoutComponents;
+
 @SuppressWarnings("unused")
 public final class AppliedPatches {
 
@@ -107,6 +109,9 @@ public final class AppliedPatches {
         }
         if (MaterialSwitches.isPatched()) {
             names.add(MATERIAL_SWITCHES);
+        }
+        if (LayoutComponents.isPatched()) {
+            names.add("Hide layout components");
         }
         if (hidePromotionalMessages()) {
             names.add("Hide promotional messages");
