@@ -117,7 +117,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "9f2432d1e831e49c5fbfc4d8a089062ee6ad42f3e3f1402e9085c0973a71ef24",
         ),
-        targets = listOf(AppTarget(version = "2.9.8", versionCode = 31, minSdk = 23)),
+        targets = listOf(
+            AppTarget(version = "2.9.8", versionCode = 31, minSdk = 23),
+            AppTarget(version = "3.0.0", versionCode = 32, minSdk = 24),
+        ),
     )
 
     val CATZY = Compatibility(
