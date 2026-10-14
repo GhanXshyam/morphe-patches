@@ -190,6 +190,7 @@ ICONS = {
     "com.atlogis.atlomaps": "atlomaps.png",
     "com.shervinkoushan.anyTracker": "anytracker.png",
     "flar2.devcheck": "devcheck.png",
+    "com.ferdinandobermeier.focusmate": "focusnow.png",
     "com.adithya.memoneet": "memoneet.png",
     "com.halalfire.medicneet": "medicneet.png",
     "com.stresscodes.wallp": "walp.png",

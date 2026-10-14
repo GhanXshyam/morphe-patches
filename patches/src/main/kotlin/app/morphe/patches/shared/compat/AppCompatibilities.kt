@@ -246,6 +246,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val FOCUS_NOW = Compatibility(
+        name = "FocusNow",
+        packageName = "com.ferdinandobermeier.focusmate",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xFF5800,
+        signatures = setOf(
+            "7ea799fb96bbbe7cc574ce4667a75dcb96291fe8cf5d61f31d053d4f28aea3fa",
+        ),
+        targets = listOf(AppTarget(version = "3.8.0", versionCode = 237, minSdk = 24)),
+    )
+
     val FORUS = Compatibility(
         name = "ForusApp",
         packageName = "com.myvitale.forus",
