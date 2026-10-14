@@ -334,6 +334,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "p5.12.0", versionCode = 50138, minSdk = 29)),
     )
 
+    val LAGGUY_WALLPAPERS = Compatibility(
+        name = "Lagguy Wallpapers",
+        packageName = "com.lagguy.wallpapers",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xFFFFFF,
+        signatures = setOf(
+            "d39a40cf5446332eff3e40b9b203b5a8aa9b1f1d834f683df5bb1cc4d1d45edf",
+        ),
+        targets = listOf(AppTarget(version = "40.0.44", versionCode = 37, minSdk = 24)),
+    )
+
     val LED_BLINKER = Compatibility(
         name = "LED Blinker",
         packageName = "com.ledblinker",
