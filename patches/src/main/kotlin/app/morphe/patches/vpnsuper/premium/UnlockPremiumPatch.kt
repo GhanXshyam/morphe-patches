@@ -4,6 +4,7 @@
  */
 package app.morphe.patches.vpnsuper.premium
 
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
@@ -129,6 +130,10 @@ val unlockPremiumPatch = bytecodePatch(
             val register = getInstruction<TwoRegisterInstruction>(index).registerA
 
             replaceInstruction(index, "const/4 v$register, 0x1")
+        }
+
+        CrownClickFingerprint.matchSingle().let { crownClick ->
+            crownClick.method.addInstruction(crownClick.instructionMatches.first().index, "return-void")
         }
 
         val connectReport = ConnectReportToStringFingerprint.matchSingle()
