@@ -848,6 +848,7 @@ internal object AppCompatibilities {
             AppTarget(version = "2.32.0", versionCode = 23200, minSdk = 26),
             AppTarget(version = "2.33.0", versionCode = 23300, minSdk = 26),
             AppTarget(version = "2.33.1", versionCode = 23301, minSdk = 26),
+            AppTarget(version = "2.34.1", versionCode = 23401, minSdk = 26),
         ),
     )
 

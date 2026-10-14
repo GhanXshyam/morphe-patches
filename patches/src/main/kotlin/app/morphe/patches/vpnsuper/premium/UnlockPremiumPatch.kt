@@ -141,7 +141,9 @@ val unlockPremiumPatch = bytecodePatch(
         }
 
         mutableClassDefBy(connectReport.classDef.type).methods
-            .single { it.name == "<init>" }
+            .single {
+                it.name == "<init>" && it.indexOfFirstInstruction(filter = writes(promoBanners.first())) >= 0
+            }
             .apply {
                 promoBanners.reversed().forEach { banner ->
                     val index = indexOfFirstInstructionOrThrow(filter = writes(banner))
