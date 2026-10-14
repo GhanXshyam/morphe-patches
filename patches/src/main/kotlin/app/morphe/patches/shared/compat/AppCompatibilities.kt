@@ -357,7 +357,7 @@ internal object AppCompatibilities {
     )
 
     val LUMO = Compatibility(
-        name = "Lumo",
+        name = "Proton Lumo",
         packageName = "me.proton.android.lumo",
         apkFileType = ApkFileType.APKS_REQUIRED,
         appIconColor = 0x6D4AFF,
