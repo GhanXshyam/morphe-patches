@@ -1,3 +1,30 @@
+## [1.51.0](https://github.com/hxreborn/morphe-patches/compare/v1.50.0...v1.51.0) (2026-10-14)
+
+### Bug Fixes
+
+* **DevCheck - Unlock premium:** patch bundles that ship x86 libraries ([b87f85f](https://github.com/hxreborn/morphe-patches/commit/b87f85f67f2aa6e1057702f351017a34f1ebb618)), closes [#216](https://github.com/hxreborn/morphe-patches/issues/216)
+* **Proton Lumo:** show the app as Proton Lumo ([e240135](https://github.com/hxreborn/morphe-patches/commit/e24013540f362ba775443072475497d0f224dc56))
+* **Public - Hide ads:** remove the sponsor banner on the launch screen ([b657337](https://github.com/hxreborn/morphe-patches/commit/b65733713fd82bcea9c62e615d5b8d78dfc2dce5)), closes [#91](https://github.com/hxreborn/morphe-patches/issues/91)
+
+### New Features
+
+* **Lagguy Wallpapers - GmsCore support:** sign in with Google ([83179c1](https://github.com/hxreborn/morphe-patches/commit/83179c1fb8f22383d379af032c95bdbecb55bdd6)), closes [#214](https://github.com/hxreborn/morphe-patches/issues/214)
+* **Lagguy Wallpapers - Unlock premium:** unlock Pro walls and saves ([f538740](https://github.com/hxreborn/morphe-patches/commit/f5387401e466b09399c53320bd0344332d940548))
+* **Proton Lumo - Unlock premium:** unlock projects and hide upgrades ([0ea6307](https://github.com/hxreborn/morphe-patches/commit/0ea63075b0eb918b758adf60d02483100e7b047e)), closes [#206](https://github.com/hxreborn/morphe-patches/issues/206)
+* **Proton Mail - Swipe to switch accounts:** cycle accounts from avatar ([a3f30b6](https://github.com/hxreborn/morphe-patches/commit/a3f30b6fcd80d8d1863bec4027907c33f75eb59c))
+
+### Updated App Support
+
+* **Audible:** add support for `26.41.06` ([b6d18e2](https://github.com/hxreborn/morphe-patches/commit/b6d18e2ca2d03d35a8f182adfb437a94dba971e9))
+* **BlurWall:** add support for `3.0.0` ([7dbac60](https://github.com/hxreborn/morphe-patches/commit/7dbac602a0bc0d2f27d57b3c73c8ed380a8fed0b))
+* **Fast STL Viewer:** add support for `2.91` ([71471a4](https://github.com/hxreborn/morphe-patches/commit/71471a4d9a2b663ac1e8d63c4980c1272f229f6e))
+* **Fddb:** add support for `v7.8.5-Build-1-gms-release` ([d620c31](https://github.com/hxreborn/morphe-patches/commit/d620c31251c27e384676ed68d17bd17f47009519))
+* **Keepa:** add support for `6.3.1` ([8f39f25](https://github.com/hxreborn/morphe-patches/commit/8f39f25790fa48b7a9022109704f83f2f991dbc1))
+* **One4Home Launcher:** add support for `0.5.38` ([ae66981](https://github.com/hxreborn/morphe-patches/commit/ae669817bdc8c7e4edcb35763ca3c479410a7ca7))
+* **Proton Pass:** add support for `1.41.3` ([d17f40f](https://github.com/hxreborn/morphe-patches/commit/d17f40fe1523288cc73162bea0f7d39ab8ac555c))
+* **Ringtone Maker:** add support for `1.01.100.1012` ([b0d2bf6](https://github.com/hxreborn/morphe-patches/commit/b0d2bf684538b35945783d060afde5b566ebcaf4))
+* **Trainline:** add support for `416.0.0.183472` ([2c0ee27](https://github.com/hxreborn/morphe-patches/commit/2c0ee27407c1ebaab4ebba8a107dff69b29678ad))
+
 ## [1.50.0](https://github.com/hxreborn/morphe-patches/compare/v1.49.1...v1.50.0) (2026-10-14)
 
 ### Bug Fixes
