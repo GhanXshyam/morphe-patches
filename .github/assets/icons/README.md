@@ -98,6 +98,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `publicvideos.png` | Public (`com.cardfeed.video_public`) | Public App | APK 3.3.4, vector `res/drawable/ic_public_app_icon.xml` rasterized at 96x96 |
 | `lagguy.png` | Lagguy Wallpapers (`com.lagguy.wallpapers`) | Lagguy | APK 40.0.44, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `netanalyzer.png` | Network Analyzer (`net.techet.netanalyzerlite.an`) | Jiri Techet | APK 5.1, adaptive icon `res/mipmap-xxxhdpi-v4/lite_background.png` under `lite_foreground.png` |
+| `radiojavan.png` | Radio Javan (`com.radiojavan.androidradio`) | Radio Javan | APK 11.20.1, `res/mipmap-xxxhdpi-v4/ic_launcher_red_head.png` |
 
 Showly's icon is also published under GPLv3 in [`trakt/showly`](https://github.com/trakt/showly),
 so its copyright terms are compatible with this one. The rest are used under nominative fair

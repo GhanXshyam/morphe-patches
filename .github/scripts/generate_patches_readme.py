@@ -263,6 +263,7 @@ ICONS = {
     "com.hitrolab.audioeditor": "audiolab.png",
     "com.lagguy.wallpapers": "lagguy.png",
     "net.techet.netanalyzerlite.an": "netanalyzer.png",
+    "com.radiojavan.androidradio": "radiojavan.png",
 }
 
 
