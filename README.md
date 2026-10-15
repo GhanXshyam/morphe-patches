@@ -15,7 +15,7 @@
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.51.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.51.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;178 patches total
+> **[v1.52.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.52.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;183 patches total
 <a id="1weather"></a>
 <details>
 <summary><img src=".github/assets/icons/oneweather.png" width="18" align="top">&nbsp;&nbsp;1Weather&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
@@ -375,6 +375,24 @@
 
 </details>
 
+<a id="focusnow"></a>
+<details>
+<summary><img src=".github/assets/icons/focusnow.png" width="18" align="top">&nbsp;&nbsp;FocusNow&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 3.8.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="focusnow-disable-tracking"></a>[Disable tracking](patches/src/main/kotlin/app/morphe/patches/focusnow/misc/tracking/DisableTrackingPatch.kt) | Stops Firebase Analytics and Crashlytics from collecting usage data. |
+| <a id="focusnow-gmscore-support"></a>GmsCore support | Signs in through GmsCore instead of Google Play Services. Requires GmsCore to be installed. |
+| <a id="focusnow-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/focusnow/misc/premium/UnlockPremiumPatch.kt) | Unlocks FocusNow Pro. |
+
+</details>
+
 <a id="forusapp"></a>
 <details>
 <summary><img src=".github/assets/icons/forus.png" width="18" align="top">&nbsp;&nbsp;ForusApp&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
@@ -633,12 +651,28 @@
 
 **🎯 Supported versions:**
 
-| 4.0.02.0828.03 | 4.0.02.0831.03 | 4.0.02.0903.02 | 4.0.03.0918.03 |
-| :---: | :---: | :---: | :---: |
+| 4.0.03.0918.03 |
+| :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="moviebox-all-in-one"></a>[All-In-One](patches/src/main/kotlin/app/morphe/patches/moviebox/misc/allinone/AllInOnePatch.kt) | Enables video playback and downloads, removes ads and upsell prompts, bypasses the region block, and unlocks the hidden Laboratory menu. Requires Android 10 or later. |
+
+</details>
+
+<a id="moviebox-tv"></a>
+<details>
+<summary><img src=".github/assets/icons/movieboxtv.png" width="18" align="top">&nbsp;&nbsp;MovieBox TV&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 1.2.0.0923.web_socialmedia |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="moviebox-tv-all-in-one"></a>[All-In-One](patches/src/main/kotlin/app/morphe/patches/movieboxtv/misc/allinone/AllInOnePatch.kt) | Unlocks premium playback and removes ads, the region block and forced updates. Requires Android 10 or later. |
 
 </details>
 
@@ -854,7 +888,7 @@
 
 <a id="proton-pass"></a>
 <details>
-<summary><img src=".github/assets/icons/protonpass.png" width="18" align="top">&nbsp;&nbsp;Proton Pass&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
+<summary><img src=".github/assets/icons/protonpass.png" width="18" align="top">&nbsp;&nbsp;Proton Pass&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -866,6 +900,7 @@
 |----------|----------------|
 | <a id="proton-pass-amoled-dark-theme"></a>[AMOLED dark theme](patches/src/main/kotlin/app/morphe/patches/protonpass/misc/theme/AmoledThemePatch.kt) | Replaces the dark theme background with pure black. |
 | <a id="proton-pass-custom-accent-color"></a>[Custom accent color](patches/src/main/kotlin/app/morphe/patches/protonpass/misc/theme/AccentColorPatch.kt) | Changes the accent color. Choose a color in the patches menu. |
+| <a id="proton-pass-hide-layout-components"></a>[Hide layout components](patches/src/main/kotlin/app/morphe/patches/protonpass/misc/layout/HideLayoutComponentsPatch.kt) | Adds settings to hide the Help center, Spread the word and About sections. |
 | <a id="proton-pass-hide-promotional-messages"></a>[Hide promotional messages](patches/src/main/kotlin/app/morphe/patches/protonpass/misc/inappmessages/HidePromotionalMessagesPatch.kt) | Hides promotional banners, offers and pop-up messages. |
 | <a id="proton-pass-hide-upgrade-promotions"></a>[Hide upgrade promotions](patches/src/main/kotlin/app/morphe/patches/protonpass/misc/upselling/HideUpgradePromotionsPatch.kt) | Hides the Upgrade buttons, upgrade prompts and the welcome offer after signing in. Plan limits still apply. |
 | <a id="proton-pass-material-3-switches"></a>[Material 3 switches](patches/src/main/kotlin/app/morphe/patches/protonpass/misc/theme/MaterialSwitchesPatch.kt) | Shows switches in the Material 3 style with check and close icons. |
@@ -1267,8 +1302,8 @@
 
 **🎯 Supported versions:**
 
-| 2.32.0 | 2.33.0 | 2.33.1 |
-| :---: | :---: | :---: |
+| 2.32.0 | 2.33.0 | 2.33.1 | 2.34.1 |
+| :---: | :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|

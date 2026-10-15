@@ -1,3 +1,27 @@
+## [1.52.0](https://github.com/hxreborn/morphe-patches/compare/v1.51.0...v1.52.0) (2026-10-15)
+
+### Bug Fixes
+
+* **MovieBox - All-In-One:** play streams that failed to load ([7557f30](https://github.com/hxreborn/morphe-patches/commit/7557f302660f6a9c17be47c4b75f59b5f683f426))
+* **MovieBox - All-In-One:** start downloads on the first attempt ([ef91d14](https://github.com/hxreborn/morphe-patches/commit/ef91d141dd9edfec71354e01dc0db439d1fe61a5))
+* **MovieBox - All-In-One:** stop downloads saving the update clip ([a06955d](https://github.com/hxreborn/morphe-patches/commit/a06955d773596402c105aaa76f01f619b2d2b95a)), closes [#207](https://github.com/hxreborn/morphe-patches/issues/207)
+* **MovieBox:** remove `4.0.02` app targets ([6cc1ad1](https://github.com/hxreborn/morphe-patches/commit/6cc1ad17067a02fbd41cd00aec13814e7d7390a0))
+* **Proton Pass - Hide upgrade promotions:** hide Pass Monitor upsells ([bc4e69e](https://github.com/hxreborn/morphe-patches/commit/bc4e69ebd69f1bfaaadc7bcdc4b9bf75a1a0977f))
+* **VPN Super Unlimited Proxy - Unlock premium:** skip the crown paywall ([2a8db47](https://github.com/hxreborn/morphe-patches/commit/2a8db47fbdf22d222980cf3b65aab774c7870308))
+
+### New Features
+
+* **FocusNow - Disable tracking:** stop Firebase usage data collection ([185e70e](https://github.com/hxreborn/morphe-patches/commit/185e70e9199338b45c5cca7e178e59ef74e038d1))
+* **FocusNow - GmsCore support:** sign in with Google through GmsCore ([5426100](https://github.com/hxreborn/morphe-patches/commit/5426100b92e21d9681cb5ad6105644a444014eec))
+* **FocusNow - Unlock premium:** unlock Pro features ([f22abe5](https://github.com/hxreborn/morphe-patches/commit/f22abe58c5256e3d777dd019bcda74cc2f8028d8)), closes [#218](https://github.com/hxreborn/morphe-patches/issues/218)
+* **iJiami:** add support for 32-bit ARM packer builds ([bf4e36b](https://github.com/hxreborn/morphe-patches/commit/bf4e36bd578556e7d2432f687c0c89e3bcce40e6))
+* **MovieBox TV - All-In-One:** unlock premium playback and remove ads ([5ca7225](https://github.com/hxreborn/morphe-patches/commit/5ca7225fc8f609960d62f370a263777d71ab9d50)), closes [#76](https://github.com/hxreborn/morphe-patches/issues/76)
+* **Proton Pass - Hide layout components:** add toggles to hide sections ([ec55345](https://github.com/hxreborn/morphe-patches/commit/ec55345384bc264cd6ddd44b5313dcf292b2e207)), closes [#211](https://github.com/hxreborn/morphe-patches/issues/211)
+
+### Updated App Support
+
+* **VPN Super Unlimited Proxy:** add support for `2.34.1` ([79473a7](https://github.com/hxreborn/morphe-patches/commit/79473a734c7c9364b13dc23d29b897a62a98a472)), closes [#219](https://github.com/hxreborn/morphe-patches/issues/219)
+
 ## [1.51.0](https://github.com/hxreborn/morphe-patches/compare/v1.50.0...v1.51.0) (2026-10-14)
 
 ### Bug Fixes
