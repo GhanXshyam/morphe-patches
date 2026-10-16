@@ -48,3 +48,13 @@ internal object UpgradePlanBannerFlagFingerprint : Fingerprint(
         fieldAccess(opcode = Opcode.IPUT_BOOLEAN, definingClass = "this", location = MatchAfterWithin(8)),
     ),
 )
+
+internal object ThreadUpsellMapperFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC, AccessFlags.FINAL),
+    strings = listOf("RemoteUpsellInformation `title` is missing"),
+)
+
+internal object UpsellTypeEnumFingerprint : Fingerprint(
+    name = "<clinit>",
+    strings = listOf("UPGRADE_TO_PRO", "OPEN_SUBSCRIPTION_PROMO", "RUN_QUERY_IN_COMPUTER", "SHARE_LOCATION"),
+)
