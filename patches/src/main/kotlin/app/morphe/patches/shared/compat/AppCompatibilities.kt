@@ -320,7 +320,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "851f5a9aa9e8287bdade98d0e41a0bdd13a685064307040133626697f16445e4",
         ),
-        targets = listOf(AppTarget(version = "1.2.5", versionCode = 104, minSdk = 24)),
+        targets = listOf(
+            AppTarget(version = "1.2.5", versionCode = 104, minSdk = 24),
+            AppTarget(version = "1.2.6", versionCode = 106, minSdk = 24),
+        ),
     )
 
     val JVDROID = Compatibility(
