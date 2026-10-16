@@ -492,15 +492,11 @@ public final class AppPatch {
             try {
                 JSONObject root = new JSONObject(playInfo);
                 JSONObject data = root.getJSONObject("data");
-                JSONArray rows = new JSONObject(get(apiBase + RESOURCE_LIST + "?subjectId=" + subjectId
-                        + "&page=1&perPage=8&all=0&startPosition=1&endPosition=1&pagerMode=2&resolution=0&se="
-                        + season + "&epFrom=" + episode + "&epTo=" + episode + "&isVip=true"))
-                        .getJSONObject("data").getJSONArray("list");
+                List<JSONObject> rows = fetchEpisodeResources(subjectId, season, episode);
                 List<JSONObject> streams = new ArrayList<>();
-                for (int i = 0; i < rows.length(); i++) {
+                for (int i = 0; i < rows.size(); i++) {
                     try {
-                        JSONObject row = rows.getJSONObject(i);
-                        if (row.optInt("se", -1) != season || row.optInt("ep", -1) != episode) continue;
+                        JSONObject row = rows.get(i);
                         String resourceId = row.getString("resourceId");
                         String url = fetchDirectFileUrl(subjectId, resourceId, row.optString("resourceLink"));
                         if (url.isEmpty()) continue;
@@ -522,7 +518,7 @@ public final class AppPatch {
                     Log.w(TAG, "play-info " + key + ": no direct file");
                     return null;
                 }
-                Collections.sort(streams, (a, b) -> Integer.compare(b.optInt("resolutions"), a.optInt("resolutions")));
+                Collections.sort(streams, (a, b) -> Integer.compare(a.optInt("resolutions"), b.optInt("resolutions")));
                 StringBuilder resolutions = new StringBuilder();
                 for (JSONObject stream : streams) {
                     if (resolutions.length() > 0) resolutions.append(',');
@@ -537,6 +533,62 @@ public final class AppPatch {
                 Log.w(TAG, "play-info " + key + ": direct files not resolved", e);
                 return null;
             }
+        }
+
+        private List<JSONObject> fetchEpisodeResources(String subjectId, int season, int episode)
+                throws IOException, JSONException {
+            JSONObject listing = fetchResourceListing(subjectId, season, episode, 0);
+            List<JSONObject> rows = new ArrayList<>();
+            addEpisodeRows(rows, listing.getJSONArray("list"), season, episode, 0);
+            JSONArray collectionResolutions = listing.optJSONArray("collectionResolutions");
+            if (collectionResolutions == null) {
+                return rows;
+            }
+            for (int i = 0; i < collectionResolutions.length(); i++) {
+                int resolution = collectionResolutions.getJSONObject(i).optInt("resolution");
+                if (resolution <= 0 || hasResolution(rows, resolution)) {
+                    continue;
+                }
+                try {
+                    JSONArray list = fetchResourceListing(subjectId, season, episode, resolution).getJSONArray("list");
+                    addEpisodeRows(rows, list, season, episode, resolution);
+                } catch (IOException | JSONException e) {
+                    Log.w(TAG, "resource list " + subjectId + "/" + season + "/" + episode + " at " + resolution
+                            + "p not read", e);
+                }
+            }
+            return rows;
+        }
+
+        private JSONObject fetchResourceListing(String subjectId, int season, int episode, int resolution)
+                throws IOException, JSONException {
+            return new JSONObject(get(apiBase + RESOURCE_LIST + "?subjectId=" + subjectId
+                    + "&page=1&perPage=8&all=0&startPosition=1&endPosition=1&pagerMode=2&resolution=" + resolution
+                    + "&se=" + season + "&epFrom=" + episode + "&epTo=" + episode + "&isVip=true"))
+                    .getJSONObject("data");
+        }
+
+        private static void addEpisodeRows(List<JSONObject> rows, JSONArray list, int season, int episode,
+                int resolution) throws JSONException {
+            for (int i = 0; i < list.length(); i++) {
+                JSONObject row = list.getJSONObject(i);
+                if (row.optInt("se", -1) != season || row.optInt("ep", -1) != episode) {
+                    continue;
+                }
+                if (resolution > 0 && row.optInt("resolution") != resolution) {
+                    continue;
+                }
+                rows.add(row);
+            }
+        }
+
+        private static boolean hasResolution(List<JSONObject> rows, int resolution) {
+            for (JSONObject row : rows) {
+                if (row.optInt("resolution") == resolution) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private String knownDirectFileUrl(String resourceId) {
