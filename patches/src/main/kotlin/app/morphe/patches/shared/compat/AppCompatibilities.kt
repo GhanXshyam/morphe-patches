@@ -110,6 +110,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "26.17", versionCode = 26910, minSdk = 26)),
     )
 
+    val BIOBIRD = Compatibility(
+        name = "Biobird Flashcards",
+        packageName = "com.biobird.exvee",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x075948,
+        signatures = setOf(
+            "908874fc41478d0780790e5c8a178727f83b2182c147f20689a3d5404fd4ded0",
+        ),
+        targets = listOf(AppTarget(version = "2.0.2", versionCode = 38, minSdk = 23)),
+    )
+
     val BLURWALL = Compatibility(
         name = "BlurWall",
         packageName = "apps.automan.blurwallpaper",
