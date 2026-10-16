@@ -21,6 +21,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 |---|---|---|---|
 | `allinonecalculator.png` | All-In-One Calculator (`all.in.one.calculator`) | allinonecalculator.com | APK 3.4.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |
 | `allvideoplayer.png` | All Video Player App (`com.allformatplayer.streamvideoplayer`) | Legend eSolution | APK 1.4, `res/drawable-xhdpi-v4/small_logo.png` |
+| `aloa.png` | Aloa (`com.getaloa.app`) | Aloa | APK 1.3.3, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `alpinequest.png` | AlpineQuest (`psyberia.alpinequest.free`) | Psyberia | APK 2.4.0e, `res/drawable-xxxhdpi-v4/core_icon_free_round.png` |
 | `depthpix.png` | DepthPix (`com.androholic.wallpapersdepthpix`) | Androholic | APK 1.0.12, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `devcheck.png` | DevCheck (`flar2.devcheck`) | flar2 | APK 6.57, adaptive icon `res/mipmap-xxxhdpi-v4/ic_launcher_background.webp` under `ic_launcher_foreground.webp` |

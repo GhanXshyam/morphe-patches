@@ -186,6 +186,7 @@ def versions_table(targets):
 ICONS = {
     "all.in.one.calculator": "allinonecalculator.png",
     "com.allformatplayer.streamvideoplayer": "allvideoplayer.png",
+    "com.getaloa.app": "aloa.png",
     "psyberia.alpinequest.free": "alpinequest.png",
     "com.atlogis.atlomaps": "atlomaps.png",
     "com.shervinkoushan.anyTracker": "anytracker.png",

@@ -35,6 +35,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "1.4", versionCode = 14, minSdk = 26)),
     )
 
+    val ALOA = Compatibility(
+        name = "Aloa",
+        packageName = "com.getaloa.app",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xFAB2AA,
+        signatures = setOf(
+            "48e539b414808f7a13343b5e10310d268f63030ba3cd479db290048ca0a77e8f",
+        ),
+        targets = listOf(AppTarget(version = "1.3.3", versionCode = 29, minSdk = 32)),
+    )
+
     val ALPINEQUEST = Compatibility(
         name = "AlpineQuest",
         packageName = "psyberia.alpinequest.free",
