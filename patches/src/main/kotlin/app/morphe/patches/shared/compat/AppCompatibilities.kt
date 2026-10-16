@@ -806,6 +806,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val SHEYTOON = Compatibility(
+        name = "Sheytoon",
+        packageName = "com.triovent.datingapp",
+        apkFileType = ApkFileType.XAPK_REQUIRED,
+        appIconColor = 0x01EBFA,
+        signatures = setOf(
+            "82b7283e0421735bf62ff3dc9890695b9cfc0b1b1696e48318c931c5cf6a9c7c",
+        ),
+        targets = listOf(AppTarget(version = "6.7", versionCode = 3030, minSdk = 26)),
+    )
+
     val SHOWLY = Compatibility(
         name = "Showly",
         packageName = "com.michaldrabik.showly2",
