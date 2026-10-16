@@ -169,6 +169,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val DEPTHPIX = Compatibility(
+        name = "DepthPix",
+        packageName = "com.androholic.wallpapersdepthpix",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x926FC5,
+        signatures = setOf(
+            "73ddcf1fcf184dd559d6239ea2de84c2a6f08d4224b78c4491dc921b5f11d54e",
+        ),
+        targets = listOf(AppTarget(version = "1.0.12", versionCode = 45, minSdk = 32)),
+    )
+
     val DEVCHECK = Compatibility(
         name = "DevCheck",
         packageName = "flar2.devcheck",
