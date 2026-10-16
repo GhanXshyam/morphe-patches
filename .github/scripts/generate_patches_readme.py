@@ -243,6 +243,7 @@ ICONS = {
     "com.vpn.free.hotspot.secure.vpnify": "vpnify.png",
     "ch.protonvpn.android": "protonvpn.png",
     "com.alokmandavgane.hinducalendar": "hinducalendar.png",
+    "com.outscar.bd.bongcal": "banglacalendar.png",
     "com.darinsoft.vimo": "vllo.png",
     "videoeditor.videomaker.videoeditorforyoutube": "videoeditor.png",
     "com.dubox.drive": "terabox.png",

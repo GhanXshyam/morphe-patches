@@ -110,6 +110,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "1.3.33", versionCode = 5163, minSdk = 32)),
     )
 
+    val BANGLA_CALENDAR = Compatibility(
+        name = "Bangla Calendar",
+        packageName = "com.outscar.bd.bongcal",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x006A4E,
+        signatures = setOf(
+            "d06b27d0bbcec5f0a462796ae16688880cc5740ca33abc9a96f4aaaf107f2cad",
+        ),
+        targets = listOf(AppTarget(version = "3.0.01c", versionCode = 302400127, minSdk = 32)),
+    )
+
     val BETTERSLEEP = Compatibility(
         name = "BetterSleep",
         packageName = "ipnossoft.rma.free",

@@ -66,6 +66,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `vpnify.png` | vpnify (`com.vpn.free.hotspot.secure.vpnify`) | VPNIFY | APK 2.3.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |
 | `protonvpn.png` | Proton VPN (`ch.protonvpn.android`) | Proton AG | APK 5.20.39.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |
 | `hinducalendar.png` | Hindu Calendar (`com.alokmandavgane.hinducalendar`) | Alok Mandavgane | APK 9.3.0, adaptive icon `res/drawable-v26/ic_launcher_vector.xml` |
+| `banglacalendar.png` | Bangla Calendar (`com.outscar.bd.bongcal`) | Outscar | APK 3.0.01c, `res/mipmap-xxxhdpi/ic_launcher.png` (square icon cut to a circle) |
 | `walp.png` | WalP - Stock HD Wallpapers (`com.stresscodes.wallp`) | Stress Codes | APK 10.2.1, adaptive icon `res/mipmap-anydpi/ic_launcher.xml` |
 | `vllo.png` | VLLO (`com.darinsoft.vimo`) | vimosoft | APK 13.7.4, adaptive icon `res/mipmap-anydpi-v26/vllo_icon.xml` |
 | `videoeditor.png` | Video Editor (`videoeditor.videomaker.videoeditorforyoutube`) | InShot Inc. | APK 1.621.196, `res/mipmap-xxxhdpi-v4/ic_launcher.png` (square icon cut to a circle) |
