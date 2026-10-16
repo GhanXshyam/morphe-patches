@@ -444,18 +444,18 @@ public final class AppPatch {
         public DashFile open(final String subjectId, final int season, final int episode, final int height,
                              String origin, long originSize, String resourceId, boolean fromStart) throws IOException {
             String label = SignedResource.key(subjectId, season, episode) + "@" + height;
-            if (origin != null && originSize > 0 && originLength(origin) == originSize) {
-                Log.i(TAG, label + ": redirect to origin, size " + originSize + " matches");
-                return null;
-            }
             String directFileUrl = knownDirectFileUrl(resourceId);
-            if (directFileUrl != null) throw new DashServer.RedirectException(directFileUrl);
+            if (directFileUrl != null) {
+                throw new DashServer.RedirectException(directFileUrl);
+            }
             SignedResource signed;
             try {
                 signed = resource(subjectId, season, episode, null);
             } catch (NoSignedResourceException noResource) {
-                if (origin == null) throw noResource;
-                directFileUrl = resolveDirectFileUrl(subjectId, resourceId, origin, originSize);
+                if (origin == null) {
+                    throw noResource;
+                }
+                directFileUrl = resolveDirectFileUrl(subjectId, resourceId, origin);
                 if (directFileUrl != null) {
                     Log.i(TAG, label + ": redirect to direct file on " + Uri.parse(directFileUrl).getHost());
                     throw new DashServer.RedirectException(directFileUrl);
@@ -463,7 +463,11 @@ public final class AppPatch {
                 diagnose(NO_STREAM);
                 throw new DashServer.UnavailableException(label + ": no signed DASH resource and no direct file");
             }
-            if (isHandedOff(label, subjectId, signed, resourceId, origin, originSize, fromStart)) {
+            if (origin != null && originSize > 0 && originLength(origin) == originSize) {
+                Log.i(TAG, label + ": redirect to origin, size " + originSize + " matches");
+                return null;
+            }
+            if (isHandedOff(label, subjectId, signed, resourceId, origin, fromStart)) {
                 throw new DashServer.UnavailableException(label + ": DASH on " + Uri.parse(signed.manifestUrl).getHost()
                         + ", leaving the download to the app's direct file");
             }
@@ -471,13 +475,13 @@ public final class AppPatch {
         }
 
         private boolean isHandedOff(String label, String subjectId, SignedResource signed, String resourceId,
-                                    String origin, long originSize, boolean fromStart) {
+                                    String origin, boolean fromStart) {
             synchronized (handedOff) {
                 Boolean decided = handedOff.get(label);
                 if (decided != null) return decided;
             }
             boolean handOff = fromStart && !DashFile.isUnpacedCdn(signed.manifestUrl)
-                    && resolveDirectFileUrl(subjectId, resourceId, origin, originSize) != null;
+                    && resolveDirectFileUrl(subjectId, resourceId, origin) != null;
             synchronized (handedOff) {
                 Boolean decided = handedOff.get(label);
                 if (decided != null) return decided;
@@ -598,11 +602,14 @@ public final class AppPatch {
             }
         }
 
-        private String resolveDirectFileUrl(String subjectId, String resourceId, String origin, long originSize) {
-            if (origin == null || originSize <= 0) return null;
+        private String resolveDirectFileUrl(String subjectId, String resourceId, String origin) {
             String known = knownDirectFileUrl(resourceId);
-            if (known != null) return known;
-            if (resourceId == null) return null;
+            if (known != null) {
+                return known;
+            }
+            if (origin == null || resourceId == null) {
+                return null;
+            }
             String url;
             long length;
             try {
@@ -612,9 +619,11 @@ public final class AppPatch {
                 Log.w(TAG, "direct file " + resourceId + " not checked", e);
                 return null;
             }
-            Log.i(TAG, "direct file " + resourceId + ": " + (url.isEmpty() ? "none"
-                    : Uri.parse(url).getHost() + ", " + length + " of " + originSize + " bytes"));
-            if (length != originSize) return null;
+            Log.i(TAG, "direct file " + resourceId + ": "
+                    + (url.isEmpty() ? "none" : Uri.parse(url).getHost() + ", " + length + " bytes"));
+            if (length <= 0 || url.equals(origin)) {
+                return null;
+            }
             synchronized (directFileUrls) {
                 directFileUrls.put(resourceId, url);
             }
