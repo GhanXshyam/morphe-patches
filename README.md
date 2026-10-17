@@ -1763,18 +1763,6 @@
 <br clear="left">
 
 &nbsp;
-## 🌍 MovieBox region
-
-MovieBox uses your SIM’s country code to choose your home feed and dubs, but rejects some
-countries. The patch blanks it, so MovieBox falls back to your IP address.
-
-To choose a country, open **Me → Settings → About us** and tap the version 7 times quickly. In
-**Laboratory**, choose a country under **National information**.
-
-If playback shows an update notice instead of the video, also set **HttpHost** to
-`api3.aoneroom.com` and pick Greece or Netherlands under **National information**. Both are needed.
-
-&nbsp;
 ## 📲 Installing
 
 [Add this source](https://morphe.software/add-source?github=hxreborn/morphe-patches) to Morphe
