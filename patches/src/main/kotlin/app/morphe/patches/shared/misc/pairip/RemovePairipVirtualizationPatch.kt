@@ -119,6 +119,7 @@ private val PAIRIP_HOOKED_LIBRARIES = mapOf(
         "libfastdev" to "libfastdev_quickjs_runtime.so",
     ),
     "com.darinsoft.vimo" to mapOf(
+        "libNvEffectSdkCore" to "libNvEffectSdkCore.so",
         "libonnxruntime" to "libonnxruntime.so",
         "libmediapipe_tasks_vision_jni" to "libmediapipe_tasks_vision_jni.so",
     ),
