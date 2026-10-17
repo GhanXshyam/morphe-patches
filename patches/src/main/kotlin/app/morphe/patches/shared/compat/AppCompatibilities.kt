@@ -332,7 +332,7 @@ internal object AppCompatibilities {
         signatures = setOf(
             "1dc3da6664982c69c3c7326282beaf0c6f153daa7da36bd7ec4cd4313e664651",
         ),
-        targets = listOf(AppTarget(version = "9.3.0", versionCode = 156, minSdk = 28)),
+        targets = listOf(AppTarget(version = "9.4.0", versionCode = 177, minSdk = 28)),
     )
 
     val IMO = Compatibility(
