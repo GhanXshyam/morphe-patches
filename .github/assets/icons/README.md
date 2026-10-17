@@ -41,6 +41,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `readera.png` | ReadEra (`org.readera`) | READERA LLC | APK 26.05.20, `mipmap/d` (round icon), xxxhdpi |
 | `moonreader.png` | Moon+ Reader (`com.flyersoft.moonreader`) | Moon+ | APK 10.7, adaptive icon `res/drawable-anydpi-v26/icon.xml` |
 | `calcnote.png` | CalcNote (`com.burton999.notecal`) | burton999 | APK 2.25.111, `res/drawable-xxhdpi-v4/ic_launcher.png` (square icon cut to a circle) |
+| `acalendar.png` | aCalendar (`org.withouthat.acalendar`) | Tapir Apps GmbH | APK 2.9.5, `res/mipmap-xxxhdpi-v4/ic_launcher.png` (square icon cut to a circle) |
 | `kick.png` | Kick (`com.kick.mobile`) | KICK - Live Streaming | APK 40.31.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `etsy.png` | Etsy (`com.etsy.android`) | Etsy, Inc | APK 7.96.0, adaptive icon `res/mipmap-anydpi-v21/ic_launcher.xml` |
 | `qrscanner.png` | QR & Barcode Scanner (`com.gamma.scan`) | Gamma Play | APK 2.2.224, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |

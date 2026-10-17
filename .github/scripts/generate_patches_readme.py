@@ -197,6 +197,7 @@ ICONS = {
     "com.halalfire.medicneet": "medicneet.png",
     "com.flyersoft.moonreader": "moonreader.png",
     "com.burton999.notecal": "calcnote.png",
+    "org.withouthat.acalendar": "acalendar.png",
     "com.biobird.exvee": "biobird.png",
     "com.stresscodes.wallp": "walp.png",
     "com.wallmaa.minimal.wallpapers": "wallmaa.png",

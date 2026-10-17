@@ -13,6 +13,17 @@ import app.morphe.patcher.patch.Compatibility
 
 @Suppress("MemberVisibilityCanBePrivate")
 internal object AppCompatibilities {
+    val ACALENDAR = Compatibility(
+        name = "aCalendar",
+        packageName = "org.withouthat.acalendar",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x0277BD,
+        signatures = setOf(
+            "6e3434746912534281a97d9db0c05d02b7c87b9c4486aa534658bd42fda43a1d",
+        ),
+        targets = listOf(AppTarget(version = "2.9.5", versionCode = 2009500, minSdk = 21)),
+    )
+
     val ALL_IN_ONE_CALCULATOR = Compatibility(
         name = "All-In-One Calculator",
         packageName = "all.in.one.calculator",
