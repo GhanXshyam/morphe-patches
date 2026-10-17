@@ -836,7 +836,10 @@ internal object AppCompatibilities {
         apkFileType = ApkFileType.APKS,
         appIconColor = 0xE31A1A,
         signatures = setOf("9ed9acdad7d1e0b3eb51e1e06cccdef979624cb3b6bc18fddcf7165e36b06c44"),
-        targets = listOf(AppTarget(version = "11.20.1", versionCode = 452, minSdk = 32)),
+        targets = listOf(
+            AppTarget(version = "11.20.1", versionCode = 452, minSdk = 32),
+            AppTarget(version = "11.21.1", versionCode = 458, minSdk = 32),
+        ),
     )
 
     val RAINDROP = Compatibility(
