@@ -46,7 +46,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -407,6 +411,8 @@ public final class AppPatch {
         private static final int ORIGIN_PROBE_TIMEOUT_MS = 10000;
         private static final int PLAY_INFO_ATTEMPTS = 5;
         private static final long PLAY_INFO_RETRY_DELAY_MS = 2000L;
+        private static final int DIRECT_FILE_SIZE_RETENTION = 512;
+        private static final long DIRECT_FILE_SIZE_TIMEOUT_MS = 5000L;
 
         private final ClassLoader loader;
         private final Object client;
@@ -414,6 +420,8 @@ public final class AppPatch {
         private final Map<String, SignedResource> resources = newLruMap(RESOURCE_RETENTION);
         private final Map<String, Long> originLengths = newLruMap(RESOURCE_RETENTION);
         private final Map<String, String> directFileUrls = newLruMap(RESOURCE_RETENTION);
+        private final Map<String, Long> directFileSizes = newLruMap(DIRECT_FILE_SIZE_RETENTION);
+        private final ExecutorService directFileSizeLookups = Executors.newCachedThreadPool();
         private final Map<String, Boolean> handedOff = newLruMap(RESOURCE_RETENTION);
         private final Map<String, FutureTask<DashFile>> files = newLruMap(FILE_RETENTION);
         private final CloudFrontPlayInfoClient cloudFrontPlayInfoClient = new CloudFrontPlayInfoClient();
@@ -632,10 +640,77 @@ public final class AppPatch {
 
         private String fetchDirectFileUrl(String subjectId, String resourceId, String origin) throws IOException,
                 JSONException {
+            JSONObject directFile = fetchDirectFile(subjectId, resourceId, origin);
+            return (directFile == null) ? "" : directFile.optString("resourceLink", "");
+        }
+
+        private JSONObject fetchDirectFile(String subjectId, String resourceId, String origin) throws IOException,
+                JSONException {
             JSONArray list = new JSONObject(get(apiBase + RESOURCE_POSITION + "?subjectId=" + subjectId
                     + "&resourceId=" + resourceId + "&failUrl=" + Uri.encode(origin)
                     + "&failCode=404&resourceNum=0&isVip=true")).getJSONObject("data").optJSONArray("list");
-            return list == null || list.length() == 0 ? "" : list.getJSONObject(0).optString("resourceLink", "");
+            return (list == null || list.length() == 0) ? null : list.getJSONObject(0);
+        }
+
+        String withDirectFileSizes(String body) {
+            try {
+                JSONObject root = new JSONObject(body);
+                JSONObject data = root.optJSONObject("data");
+                final String subjectId = (data == null) ? "" : data.optString("subjectId", "");
+                JSONArray list = (data == null) ? null : data.optJSONArray("list");
+                if (subjectId.isEmpty() || list == null) {
+                    return body;
+                }
+                List<Callable<Boolean>> lookups = new ArrayList<>();
+                for (int i = 0; i < list.length(); i++) {
+                    final JSONObject item = list.optJSONObject(i);
+                    if (item != null && !item.optString("resourceId", "").isEmpty()) {
+                        lookups.add(() -> resolveDirectFileSize(subjectId, item));
+                    }
+                }
+                int sized = 0;
+                for (Future<Boolean> lookup : this.directFileSizeLookups.invokeAll(lookups,
+                        DIRECT_FILE_SIZE_TIMEOUT_MS, TimeUnit.MILLISECONDS)) {
+                    try {
+                        if (!lookup.isCancelled() && lookup.get()) {
+                            sized++;
+                        }
+                    } catch (ExecutionException ex) {
+                        Log.w(TAG, "resource list " + subjectId + ": direct file size not read", ex.getCause());
+                    }
+                }
+                Log.i(TAG, "resource list " + subjectId + ": sized " + sized + " of " + lookups.size() + " items");
+                return (sized > 0) ? root.toString() : body;
+            } catch (JSONException | InterruptedException ex) {
+                Log.w(TAG, "resource list sizes not read: " + ex.getMessage());
+                return body;
+            }
+        }
+
+        private boolean resolveDirectFileSize(String subjectId, JSONObject item) throws IOException, JSONException {
+            String resourceId = item.getString("resourceId");
+            Long size;
+            synchronized (this.directFileSizes) {
+                size = this.directFileSizes.get(resourceId);
+            }
+            if (size == null) {
+                String origin = item.optString("resourceLink", "");
+                JSONObject directFile = fetchDirectFile(subjectId, resourceId, origin);
+                String url = (directFile == null) ? "" : directFile.optString("resourceLink", "");
+                long length = (directFile == null) ? 0 : directFile.optLong("size", 0);
+                if (url.isEmpty() || url.equals(origin) || length <= 0) {
+                    return false;
+                }
+                size = length;
+                synchronized (this.directFileSizes) {
+                    this.directFileSizes.put(resourceId, size);
+                }
+                synchronized (this.directFileUrls) {
+                    this.directFileUrls.put(resourceId, url);
+                }
+            }
+            item.put("size", String.valueOf(size));
+            return true;
         }
 
         private long originLength(String origin) {
@@ -913,7 +988,7 @@ public final class AppPatch {
                 out = rewritePlayInfo(text, requested.getQueryParameter("subjectId"),
                         parseQueryInt(requested, "se"), parseQueryInt(requested, "ep"));
             } else if (resourceList) {
-                out = routeDownloads ? rewriteResourceList(text) : text;
+                out = routeDownloads ? rewriteResourceList(source.withDirectFileSizes(text)) : text;
             } else {
                 out = rewriteMemberDays(text);
             }
