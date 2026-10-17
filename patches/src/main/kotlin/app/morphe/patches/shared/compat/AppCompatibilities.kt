@@ -1034,7 +1034,10 @@ internal object AppCompatibilities {
         packageName = "com.darinsoft.vimo",
         apkFileType = ApkFileType.APKS_REQUIRED,
         appIconColor = 0xF02050,
-        targets = listOf(AppTarget(version = "13.9.0", versionCode = 130900, minSdk = 27)),
+        targets = listOf(
+            AppTarget(version = "13.9.0", versionCode = 130900, minSdk = 27),
+            AppTarget(version = "13.9.6", versionCode = 130906, minSdk = 29),
+        ),
     )
 
     val VPNIFY = Compatibility(
