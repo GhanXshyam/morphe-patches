@@ -275,6 +275,7 @@ ICONS = {
     "com.radiojavan.androidradio": "radiojavan.png",
     "com.triovent.datingapp": "sheytoon.png",
     "in.krosbits.musicolet": "musicolet.png",
+    "com.youdao.hindict": "udictionary.png",
 }
 
     "com.lbrc.PeriodCalendar": "periodcalendar.png",

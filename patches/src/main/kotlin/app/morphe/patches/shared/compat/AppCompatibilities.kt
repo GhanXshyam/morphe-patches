@@ -1043,6 +1043,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "1.621.196", versionCode = 196, minSdk = 26)),
     )
 
+    val U_DICTIONARY = Compatibility(
+        name = "U Dictionary",
+        packageName = "com.youdao.hindict",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0xE8442F,
+        signatures = setOf(
+            "544b87c75e50d264962b1379931af73c85a75f7416ec3672d4afb261e553eb6c",
+        ),
+        targets = listOf(AppTarget(version = "6.7.5", versionCode = 399, minSdk = 23)),
+    )
+
     val VLLO = Compatibility(
         name = "VLLO",
         packageName = "com.darinsoft.vimo",
