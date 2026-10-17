@@ -728,7 +728,23 @@ Fddb v7.8.4-Build-1-gms-release
 
 ### What does not work
 
-The patch has no visible effect
+Something else the app used to do stopped working
+
+### Does it still happen with only one patch selected
+
+I have not tried it
+
+### Bug description
+
+{LONG}
+""", ONE_AND_TWO_PATCH_APPS)),
+    "two-patch app with a feature still locked passes without a one-patch test": ("pass", (f"""### App and version
+
+Fddb v7.8.4-Build-1-gms-release
+
+### What does not work
+
+The patched feature is still locked or still shows ads
 
 ### Does it still happen with only one patch selected
 
