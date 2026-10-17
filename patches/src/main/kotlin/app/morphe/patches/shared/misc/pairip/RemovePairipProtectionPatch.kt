@@ -38,6 +38,8 @@ val removePairipProtectionPatch = bytecodePatch {
     )
 
     execute {
+        if (classDefByOrNull(LICENSE_CLIENT_CLASS) == null) return@execute
+
         InitializeLicenseCheckFingerprint.matchSingle().method.returnEarly()
     }
 }

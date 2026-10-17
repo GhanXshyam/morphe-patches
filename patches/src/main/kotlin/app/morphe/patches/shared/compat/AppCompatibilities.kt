@@ -436,8 +436,12 @@ internal object AppCompatibilities {
         signatures = setOf(
             "a747eaee28611e25217b793c07bf302234405cfd1e19068162556c79e5bf04f0",
             "dcc9439ec1a6c6a8d0203f3423ee42bcc8b970628e53cb73a0393f398dd5b853",
+            "a5769b88d3c500f9c58c6939a7b09dc293630c8b93b69f4457888060bf1faa43",
         ),
-        targets = listOf(AppTarget(version = "2.1.4-gms", versionCode = 78, minSdk = 29)),
+        targets = listOf(
+            AppTarget(version = "2.1.4-gms", versionCode = 78, minSdk = 29),
+            AppTarget(version = "2.1.4-nogms", versionCode = 78, minSdk = 29),
+        ),
     )
 
     val MEDICNEET = Compatibility(
