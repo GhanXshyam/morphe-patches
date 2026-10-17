@@ -792,6 +792,17 @@ internal object AppCompatibilities {
 
     val IIEC_APPS = arrayOf(CXXDROID, JVDROID, PYDROID)
 
+    val QUICK_CURSOR = Compatibility(
+        name = "Quick Cursor",
+        packageName = "com.quickcursor",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x95585D,
+        signatures = setOf(
+            "137c725e8407123e717393db8559382f96677fcbab153624603796a98ae71250",
+        ),
+        targets = listOf(AppTarget(version = "3.0.2", versionCode = 250, minSdk = 24)),
+    )
+
     val QURANIFY = Compatibility(
         name = "Quranify",
         packageName = "com.mchutov.Quranify",
