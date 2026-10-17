@@ -26,7 +26,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -72,6 +75,8 @@ public final class AppPatch {
     private static final String RESOURCE_LIST_SEGMENT = "/subject-api/resource/";
     private static final String USER_PROFILE = BFF + "/user-api/profile";
     private static final String MEMBER_DETAIL = BFF + "/vip/member/detail";
+    private static final String APP_TAB = BFF + "/subject-api/bottom-tab";
+    private static final String HIDDEN_HOME_TABS_ASSET = "hx_hidden_home_tabs";
     private static final String[] URL_FIELDS = {"url", "resourceLink", "downloadUrl", "playUrl"};
     private static final int MEMBER_DAYS_LEFT = 9999;
     private static final String MEMBER_EXPIRY = "2099-12-31";
@@ -212,7 +217,8 @@ public final class AppPatch {
         boolean routeDownloads = !isMainProcess() || server != null;
         try {
             if (server != null) server.start();
-            Object wrapped = addInterceptor(client, interceptor(loader, source, routeDownloads));
+            Object wrapped = addInterceptor(client,
+                    interceptor(loader, source, routeDownloads, readHiddenHomeTabs()));
             clientField.set(instance, wrapped);
             try {
                 callFactory.set(retrofit, wrapped);
@@ -303,11 +309,35 @@ public final class AppPatch {
         return builder.getClass().getMethod("build").invoke(builder);
     }
 
-    private static Object interceptor(ClassLoader loader, MovieBoxSource source, boolean routeDownloads)
-            throws Exception {
+    private static Object interceptor(ClassLoader loader, MovieBoxSource source, boolean routeDownloads,
+            Set<String> hiddenHomeTabs) throws Exception {
         Class<?> interceptorClass = Class.forName(OKHTTP_INTERCEPTOR, false, loader);
         return Proxy.newProxyInstance(loader, new Class<?>[]{interceptorClass},
-                new DashInterceptor(loader, source, routeDownloads));
+                new DashInterceptor(loader, source, routeDownloads, hiddenHomeTabs));
+    }
+
+    private static Set<String> readHiddenHomeTabs() {
+        Set<String> tabCodes = new HashSet<>();
+        try {
+            Context application = (Context) Class.forName(ACTIVITY_THREAD).getMethod("currentApplication")
+                    .invoke(null);
+            try (InputStream asset = application.getAssets().open(HIDDEN_HOME_TABS_ASSET)) {
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                byte[] buffer = new byte[256];
+                for (int read; (read = asset.read(buffer)) != -1;) {
+                    bytes.write(buffer, 0, read);
+                }
+                for (String line : new String(bytes.toByteArray(), StandardCharsets.UTF_8).split("\n")) {
+                    if (!line.trim().isEmpty()) tabCodes.add(line.trim());
+                }
+            }
+        } catch (FileNotFoundException absent) {
+            return tabCodes;
+        } catch (Exception ex) {
+            Log.e(TAG, "cannot read " + HIDDEN_HOME_TABS_ASSET, ex);
+        }
+        Log.i(TAG, "hidden home tabs: " + tabCodes);
+        return tabCodes;
     }
 
     private static final class SignedResource {
@@ -907,11 +937,14 @@ public final class AppPatch {
         private final ClassLoader loader;
         private final MovieBoxSource source;
         private final boolean routeDownloads;
+        private final Set<String> hiddenHomeTabs;
 
-        DashInterceptor(ClassLoader loader, MovieBoxSource source, boolean routeDownloads) {
+        DashInterceptor(ClassLoader loader, MovieBoxSource source, boolean routeDownloads,
+                Set<String> hiddenHomeTabs) {
             this.loader = loader;
             this.source = source;
             this.routeDownloads = routeDownloads;
+            this.hiddenHomeTabs = hiddenHomeTabs;
         }
 
         @Override
@@ -946,7 +979,8 @@ public final class AppPatch {
             boolean playInfo = url.contains(PLAY_INFO_SEGMENT);
             boolean resourceList = url.contains(RESOURCE_LIST_SEGMENT);
             boolean memberInfo = url.contains(USER_PROFILE) || url.contains(MEMBER_DETAIL);
-            if (!playInfo && !resourceList && !memberInfo) return response;
+            boolean appTab = !hiddenHomeTabs.isEmpty() && url.contains(APP_TAB);
+            if (!playInfo && !resourceList && !memberInfo && !appTab) return response;
 
             Object body = response.getClass().getMethod("body").invoke(response);
             if (body == null) return response;
@@ -989,6 +1023,8 @@ public final class AppPatch {
                         parseQueryInt(requested, "se"), parseQueryInt(requested, "ep"));
             } else if (resourceList) {
                 out = routeDownloads ? rewriteResourceList(source.withDirectFileSizes(text)) : text;
+            } else if (url.contains(APP_TAB)) {
+                out = withoutHomeTabs(text, hiddenHomeTabs);
             } else {
                 out = rewriteMemberDays(text);
             }
@@ -1151,6 +1187,32 @@ public final class AppPatch {
         item.put("resourceLink", DashServer.buildUrl(subjectId, season, episode, height, origin, item.optLong("size", 0),
                 resourceId.isEmpty() ? null : resourceId));
         return true;
+    }
+
+    static String withoutHomeTabs(String body, Set<String> tabCodes) {
+        try {
+            JSONObject root = new JSONObject(body);
+            JSONObject data = root.optJSONObject("data");
+            JSONArray bottomTabs = (data != null) ? data.optJSONArray("bottomTabs") : null;
+            if (bottomTabs == null) return body;
+            int removed = 0;
+            for (int i = 0; i < bottomTabs.length(); i++) {
+                JSONObject bottomTab = bottomTabs.optJSONObject(i);
+                JSONArray subTabs = (bottomTab != null) ? bottomTab.optJSONArray("subTabs") : null;
+                if (subTabs == null) continue;
+                for (int j = subTabs.length() - 1; j >= 0; j--) {
+                    JSONObject subTab = subTabs.optJSONObject(j);
+                    if (subTab != null && tabCodes.contains(subTab.optString("tabCode"))) {
+                        subTabs.remove(j);
+                        removed++;
+                    }
+                }
+            }
+            return (removed > 0) ? root.toString() : body;
+        } catch (JSONException malformed) {
+            Log.w(TAG, "app tabs not rewritten: " + malformed.getMessage());
+            return body;
+        }
     }
 
     static String rewriteMemberDays(String body) {
