@@ -617,6 +617,7 @@ internal object AppCompatibilities {
             AppTarget(version = "0.4.97", versionCode = 309, minSdk = 29),
             AppTarget(version = "0.4.98", versionCode = 310, minSdk = 29),
             AppTarget(version = "0.5.38", versionCode = 350, minSdk = 32),
+            AppTarget(version = "0.5.68", versionCode = 380, minSdk = 32),
         ),
     )
 
