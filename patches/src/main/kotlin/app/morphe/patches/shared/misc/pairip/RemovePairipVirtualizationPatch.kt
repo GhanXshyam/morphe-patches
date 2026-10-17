@@ -129,6 +129,11 @@ private val PAIRIP_HOOKED_LIBRARIES = mapOf(
     "com.nieruo.healthapp" to mapOf(
         "librealmc" to "librealmc.so",
     ),
+    "com.lingodeer" to mapOf(
+        "libmp3lamest" to "libmp3lamest.so",
+        "librenderscript-toolkit" to "librenderscript-toolkit.so",
+        "libskegn" to "libskegn.so",
+    ),
     "flar2.devcheck" to mapOf(
         "libbenchmarksuite" to "libbenchmarksuite.so",
         "libdevcheck" to "libdevcheck.so",
@@ -265,6 +270,7 @@ val removePairipVirtualizationPatch = bytecodePatch {
         AppCompatibilities.CATZY,
         AppCompatibilities.DEVCHECK,
         AppCompatibilities.HINDU_CALENDAR,
+        AppCompatibilities.LINGODEER,
         AppCompatibilities.LUMO,
         AppCompatibilities.MUSICOLET,
         AppCompatibilities.VLLO,

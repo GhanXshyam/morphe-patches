@@ -251,6 +251,7 @@ ICONS = {
     "com.hapibits.soundlift": "echoequalizer.png",
     "com.imo.android.imoim": "imo.png",
     "com.ledblinker": "ledblinker.png",
+    "com.lingodeer": "lingodeer.png",
     "me.proton.android.lumo": "lumo.png",
     "com.fddb": "fddb.png",
     "com.performance.meshview": "faststlviewer.png",

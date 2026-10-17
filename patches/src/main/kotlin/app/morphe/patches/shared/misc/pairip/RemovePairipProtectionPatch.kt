@@ -26,6 +26,7 @@ val removePairipProtectionPatch = bytecodePatch {
         AppCompatibilities.KEEPA,
         AppCompatibilities.LAGGUY_WALLPAPERS,
         AppCompatibilities.LED_BLINKER,
+        AppCompatibilities.LINGODEER,
         AppCompatibilities.LUMO,
         AppCompatibilities.MEDICNEET,
         AppCompatibilities.MUSICOLET,

@@ -428,6 +428,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "26.01.08", versionCode = 12506, minSdk = 24)),
     )
 
+    val LINGODEER = Compatibility(
+        name = "LingoDeer",
+        packageName = "com.lingodeer",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x38D06C,
+        signatures = setOf(
+            "b341b1d855ee55eb2c6c9287eaafc6449c0b34065e170af7bf5bc21a03f05bf2",
+        ),
+        targets = listOf(AppTarget(version = "2.99.413", versionCode = 677, minSdk = 24)),
+    )
+
     val LUMO = Compatibility(
         name = "Proton Lumo",
         packageName = "me.proton.android.lumo",
