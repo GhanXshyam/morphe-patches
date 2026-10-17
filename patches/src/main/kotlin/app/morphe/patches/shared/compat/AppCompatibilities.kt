@@ -158,6 +158,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val CALCNOTE = Compatibility(
+        name = "CalcNote",
+        packageName = "com.burton999.notecal",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0x3DABE1,
+        signatures = setOf(
+            "81a63b3b52728ce385b0897c6f6537dfe994ae950a605dcea41feebb8150d569",
+        ),
+        targets = listOf(AppTarget(version = "2.25.111", versionCode = 1523, minSdk = 32)),
+    )
+
     val CATZY = Compatibility(
         name = "Catzy",
         packageName = "com.nieruo.healthapp",
