@@ -336,8 +336,6 @@ private fun BytecodePatchContext.resolveStubs(): Pair<Map<String, String>, Map<M
         "connection" to "Landroid/content/ServiceConnection;",
     ).forEach { (name, type) -> field("BindTask", name, type, pendingBind) }
 
-    member("RootServiceKeys", "intentBundle:Ljava/lang/String;", descriptor(RootServiceBundleKeyFingerprint.matchSingle().field(1)))
-
     val rootServiceReceiver = rootServiceReceiverConstructorFingerprint(rootServiceManager.type).matchSingle()
     classes[stub("RootServiceReceiver")] = rootServiceReceiver.classDef.type
     field("RootServiceReceiver", "mode", "B", rootServiceReceiver.field(0))
