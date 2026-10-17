@@ -15,7 +15,7 @@
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.53.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.53.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;222 patches total
+> **[v1.54.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.54.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;240 patches total
 <a id="1weather"></a>
 <details>
 <summary><img src=".github/assets/icons/oneweather.png" width="18" align="top">&nbsp;&nbsp;1Weather&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
@@ -73,6 +73,23 @@
 
 </details>
 
+<a id="aloa"></a>
+<details>
+<summary><img src=".github/assets/icons/aloa.png" width="18" align="top">&nbsp;&nbsp;Aloa&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 1.3.3 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="aloa-gmscore-support"></a>GmsCore support | Signs in through GmsCore instead of Google Play Services. Requires GmsCore to be installed. |
+| <a id="aloa-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/aloa/misc/premium/UnlockPremiumPatch.kt) | Unlocks conversations, tutor lessons and roadmaps. |
+
+</details>
+
 <a id="alpinequest"></a>
 <details>
 <summary><img src=".github/assets/icons/alpinequest.png" width="18" align="top">&nbsp;&nbsp;AlpineQuest&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
@@ -112,8 +129,8 @@
 
 **🎯 Supported versions:**
 
-| 1.0.6 | 1.1.0 |
-| :---: | :---: |
+| 1.0.6 | 1.1.0 | 2.0.0 |
+| :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
@@ -170,6 +187,23 @@
 
 </details>
 
+<a id="bangla-calendar"></a>
+<details>
+<summary><img src=".github/assets/icons/banglacalendar.png" width="18" align="top">&nbsp;&nbsp;Bangla Calendar&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 3.0.01c |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="bangla-calendar-disable-tracking"></a>[Disable tracking](patches/src/main/kotlin/app/morphe/patches/banglacalendar/misc/tracking/DisableTrackingPatch.kt) | Stops Firebase Analytics and Crashlytics from collecting usage data. |
+| <a id="bangla-calendar-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/banglacalendar/misc/premium/UnlockPremiumPatch.kt) | Unlocks premium and removes ads. |
+
+</details>
+
 <a id="bettersleep"></a>
 <details>
 <summary><img src=".github/assets/icons/bettersleep.png" width="18" align="top">&nbsp;&nbsp;BetterSleep&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
@@ -183,6 +217,23 @@
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="bettersleep-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/bettersleep/misc/premium/UnlockPremiumPatch.kt) | Unlocks all premium content and skips the free trial screen. |
+
+</details>
+
+<a id="biobird-flashcards"></a>
+<details>
+<summary><img src=".github/assets/icons/biobird.png" width="18" align="top">&nbsp;&nbsp;Biobird Flashcards&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2.0.2 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="biobird-flashcards-gmscore-support"></a>GmsCore support | Signs in through GmsCore instead of Google Play Services. Requires GmsCore to be installed. |
+| <a id="biobird-flashcards-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/biobird/misc/premium/UnlockPremiumPatch.kt) | Unlocks all chapters and previous-year papers. Signing in requires GmsCore support. |
 
 </details>
 
@@ -257,6 +308,24 @@
 | <a id="cxxdroid-amoled-dark-theme"></a>AMOLED dark theme | Adds an AMOLED option to Settings > Appearance > Editor theme (dark). Applies only while the Dark theme is active. |
 | <a id="cxxdroid-disable-tracking"></a>Disable tracking | Stops Firebase Analytics from collecting usage data. |
 | <a id="cxxdroid-unlock-premium"></a>Unlock premium | Unlocks premium and removes ads. |
+
+</details>
+
+<a id="depthpix"></a>
+<details>
+<summary><img src=".github/assets/icons/depthpix.png" width="18" align="top">&nbsp;&nbsp;DepthPix&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 1.0.12 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="depthpix-gmscore-support"></a>GmsCore support | Signs in through GmsCore instead of Google Play Services. Requires GmsCore to be installed. |
+| <a id="depthpix-hide-ads"></a>[Hide ads](patches/src/main/kotlin/app/morphe/patches/depthpix/ads/HideAdsPatch.kt) | Removes banner, native, interstitial and rewarded ads. |
+| <a id="depthpix-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/depthpix/misc/premium/UnlockPremiumPatch.kt) | Unlocks Pro wallpapers, 3D motion, particles and clock presets. Unlimited photo designs are not included. |
 
 </details>
 
@@ -416,7 +485,7 @@
 
 **🎯 Supported versions:**
 
-| 9.3.0 |
+| 9.4.0 |
 | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
@@ -481,8 +550,8 @@
 
 **🎯 Supported versions:**
 
-| 1.2.5 |
-| :---: |
+| 1.2.5 | 1.2.6 |
+| :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
@@ -646,7 +715,7 @@
 
 <a id="moviebox"></a>
 <details>
-<summary><img src=".github/assets/icons/moviebox.png" width="18" align="top">&nbsp;&nbsp;MovieBox&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary><img src=".github/assets/icons/moviebox.png" width="18" align="top">&nbsp;&nbsp;MovieBox&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -657,6 +726,9 @@
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="moviebox-all-in-one"></a>[All-In-One](patches/src/main/kotlin/app/morphe/patches/moviebox/misc/allinone/AllInOnePatch.kt) | Enables video playback and downloads, removes ads and upsell prompts, bypasses the region block, and unlocks the hidden Laboratory menu. Requires Android 10 or later. |
+| <a id="moviebox-hide-buzzbox"></a>[Hide BuzzBox](patches/src/main/kotlin/app/morphe/patches/moviebox/misc/buzzbox/HideBuzzBoxPatch.kt) | Removes the BuzzBox tabs from the bottom navigation bar and the home screen. |
+| <a id="moviebox-hide-midnight-tab"></a>[Hide Midnight tab](patches/src/main/kotlin/app/morphe/patches/moviebox/misc/midnight/HideMidnightTabPatch.kt) | Removes the Midnight 18+ tab from the home screen. Requires All-In-One. |
+| <a id="moviebox-hide-permanent-notification"></a>[Hide permanent notification](patches/src/main/kotlin/app/morphe/patches/moviebox/misc/permanentnotification/HidePermanentNotificationPatch.kt) | Hides the permanent notification. Requires All-In-One. |
 
 </details>
 
@@ -760,7 +832,7 @@
 
 <a id="notesnook"></a>
 <details>
-<summary><img src=".github/assets/icons/notesnook.png" width="18" align="top">&nbsp;&nbsp;Notesnook&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary><img src=".github/assets/icons/notesnook.png" width="18" align="top">&nbsp;&nbsp;Notesnook&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -770,6 +842,7 @@
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
+| <a id="notesnook-material-you-theme"></a>[Material You theme](patches/src/main/kotlin/app/morphe/patches/notesnook/theme/MaterialYouThemePatch.kt) | Applies the system accent colours to the default light and dark themes. Colours refresh when the app restarts, and start from the second launch. Requires Android 12 or later. |
 | <a id="notesnook-unlock-pro"></a>[Unlock pro](patches/src/main/kotlin/app/morphe/patches/notesnook/misc/premium/UnlockProPatch.kt) | Unlocks task lists, callouts, app lock, and the notebook, tag, colour and reminder limits. Requires a signed-in account. The server still enforces storage, attachment size, monographs and SMS 2FA. |
 
 </details>
@@ -792,17 +865,20 @@
 
 <a id="perplexity"></a>
 <details>
-<summary><img src=".github/assets/icons/perplexity.png" width="18" align="top">&nbsp;&nbsp;Perplexity&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary><img src=".github/assets/icons/perplexity.png" width="18" align="top">&nbsp;&nbsp;Perplexity&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 2.95.0 | 2.100.0 |
-| :---: | :---: |
+| 2.95.0 | 2.100.0 | 2.101.0 |
+| :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="perplexity-amoled-dark-theme"></a>[AMOLED dark theme](patches/src/main/kotlin/app/morphe/patches/perplexity/misc/theme/AmoledThemePatch.kt) | Replaces the dark theme background with pure black. |
+| <a id="perplexity-disable-tracking"></a>[Disable tracking](patches/src/main/kotlin/app/morphe/patches/perplexity/misc/tracking/DisableTrackingPatch.kt) | Stops usage events, crash reports and performance data from reaching Perplexity, Singular and Firebase. |
+| <a id="perplexity-gmscore-support"></a>GmsCore support | Signs in through GmsCore instead of Google Play Services. Requires GmsCore to be installed. |
+| <a id="perplexity-hide-upgrade-promotions"></a>[Hide upgrade promotions](patches/src/main/kotlin/app/morphe/patches/perplexity/misc/upselling/HideUpgradePromotionsPatch.kt) | Hides the subscription offer after signing in, the Upgrade plan banner, home screen promotions and upgrade cards in answers. Plan limits still apply. |
 
 </details>
 
@@ -913,18 +989,19 @@
 
 <a id="proton-lumo"></a>
 <details>
-<summary><img src=".github/assets/icons/lumo.png" width="18" align="top">&nbsp;&nbsp;Proton Lumo&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<summary><img src=".github/assets/icons/lumo.png" width="18" align="top">&nbsp;&nbsp;Proton Lumo&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 2.1.4-gms |
-| :---: |
+| 2.1.4-gms | 2.1.4-nogms |
+| :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="proton-lumo-material-3-switches"></a>[Material 3 switches](patches/src/main/kotlin/app/morphe/patches/lumo/misc/materialswitch/MaterialSwitchesPatch.kt) | Shows switches in the Material 3 style with check and close icons. |
 | <a id="proton-lumo-remove-tap-highlight"></a>[Remove tap highlight](patches/src/main/kotlin/app/morphe/patches/lumo/misc/taphighlight/RemoveWebTapHighlightPatch.kt) | Removes the highlight flash on tapped buttons and links. |
+| <a id="proton-lumo-store-encryption-key-in-tee"></a>[Store encryption key in TEE](patches/src/main/kotlin/app/morphe/patches/lumo/misc/strongbox/StoreKeyInTeePatch.kt) | Stores the local encryption key in the TEE instead of StrongBox. Prevents the Encryption error on devices whose StrongBox rejects the key. |
 | <a id="proton-lumo-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/lumo/misc/premium/UnlockPremiumPatch.kt) | Unlocks unlimited projects and removes upgrade prompts. Usage limits for models, messages and images still apply. |
 
 </details>
@@ -1231,6 +1308,22 @@
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="rubber-bands-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/rubberbands/misc/premium/UnlockPremiumPatch.kt) | Unlocks running and logging workouts, progress tracking and personal records (AI workout generation is not included). |
+
+</details>
+
+<a id="sheytoon"></a>
+<details>
+<summary><img src=".github/assets/icons/sheytoon.png" width="18" align="top">&nbsp;&nbsp;Sheytoon&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 6.7 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="sheytoon-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/sheytoon/misc/premium/UnlockPremiumPatch.kt) | Unlocks Sheytoon Select: unlimited likes, superlikes and quick notes, incognito mode, Second Look, and unblurred photos of the people who liked or viewed you. |
 
 </details>
 
