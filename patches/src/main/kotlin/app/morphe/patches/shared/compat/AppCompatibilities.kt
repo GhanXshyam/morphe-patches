@@ -672,6 +672,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val PERIOD_CALENDAR = Compatibility(
+        name = "Period Tracker and Calendar",
+        packageName = "com.lbrc.PeriodCalendar",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0xE74779,
+        signatures = setOf(
+            "626c56a43dab2f279a257008783c7e752d1ad9ad46cfff9fd858ce68d3ff10ab",
+        ),
+        targets = listOf(AppTarget(version = "13.3.2", versionCode = 21303020, minSdk = 24)),
+    )
+
     val POCKET_WHIP = Compatibility(
         name = "Pocket Whip",
         packageName = "com.greenstone.pocketwhip",
