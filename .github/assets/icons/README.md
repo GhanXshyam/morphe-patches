@@ -39,6 +39,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `perplexity.png` | Perplexity (`ai.perplexity.app.android`) | PerplexityAI | APK 2.95.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `trainline.png` | Trainline (`com.thetrainline`) | trainline | APK 414.0.0.182041, adaptive icon `mipmap/ttl_ic_launcher` |
 | `readera.png` | ReadEra (`org.readera`) | READERA LLC | APK 26.05.20, `mipmap/d` (round icon), xxxhdpi |
+| `moonreader.png` | Moon+ Reader (`com.flyersoft.moonreader`) | Moon+ | APK 10.7, adaptive icon `res/drawable-anydpi-v26/icon.xml` |
 | `kick.png` | Kick (`com.kick.mobile`) | KICK - Live Streaming | APK 40.31.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `etsy.png` | Etsy (`com.etsy.android`) | Etsy, Inc | APK 7.96.0, adaptive icon `res/mipmap-anydpi-v21/ic_launcher.xml` |
 | `qrscanner.png` | QR & Barcode Scanner (`com.gamma.scan`) | Gamma Play | APK 2.2.224, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |

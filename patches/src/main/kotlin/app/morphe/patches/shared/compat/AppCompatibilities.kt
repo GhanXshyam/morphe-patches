@@ -478,6 +478,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "62.6", versionCode = 626, minSdk = 24)),
     )
 
+    val MOON_READER = Compatibility(
+        name = "Moon+ Reader",
+        packageName = "com.flyersoft.moonreader",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0x5899FC,
+        signatures = setOf(
+            "5ac646ebc68017e4cc582b11b1c2ae5d29b15d9b0ac3a54fc60972417b41c9ad",
+        ),
+        targets = listOf(AppTarget(version = "10.7", versionCode = 1007000, minSdk = 21)),
+    )
+
     val MOVIEBOX = Compatibility(
         name = "MovieBox",
         packageName = "com.community.oneroom",
