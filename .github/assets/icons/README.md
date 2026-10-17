@@ -104,6 +104,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `netanalyzer.png` | Network Analyzer (`net.techet.netanalyzerlite.an`) | Jiri Techet | APK 5.1, adaptive icon `res/mipmap-xxxhdpi-v4/lite_background.png` under `lite_foreground.png` |
 | `radiojavan.png` | Radio Javan (`com.radiojavan.androidradio`) | Radio Javan | APK 11.20.1, `res/mipmap-xxxhdpi-v4/ic_launcher_red_head.png` |
 | `sheytoon.png` | Sheytoon (`com.triovent.datingapp`) | Sheytoon Inc. | APK 6.7, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |
+| `musicolet.png` | Musicolet (`in.krosbits.musicolet`) | Krosbits | APK 6.14.1 build540, adaptive icon `res/mipmap-anydpi-v26/ic_launcher_ex4.xml`, cut to a circle |
 
 Showly's icon is also published under GPLv3 in [`trakt/showly`](https://github.com/trakt/showly),
 so its copyright terms are compatible with this one. The rest are used under nominative fair

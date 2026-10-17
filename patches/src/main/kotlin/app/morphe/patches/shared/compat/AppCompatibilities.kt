@@ -493,6 +493,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val MUSICOLET = Compatibility(
+        name = "Musicolet",
+        packageName = "in.krosbits.musicolet",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x65FFA0,
+        signatures = setOf(
+            "8a4d4121f541e3644c1fd1e5c3502eb4bea49792cafd26e600d413cd1f10851f",
+        ),
+        targets = listOf(AppTarget(version = "6.14.1 build540", versionCode = 54000, minSdk = 32)),
+    )
+
     val MUSIXMATCH = Compatibility(
         name = "Musixmatch",
         packageName = "com.musixmatch.android.lyrify",

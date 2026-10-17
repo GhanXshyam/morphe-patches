@@ -134,6 +134,9 @@ private val PAIRIP_HOOKED_LIBRARIES = mapOf(
         "libdevcheck" to "libdevcheck.so",
         "libvulkan_info" to "libvulkan_info.so",
     ),
+    "in.krosbits.musicolet" to mapOf(
+        "lib_musicolet" to "lib_musicolet.so",
+    ),
     "me.proton.android.lumo" to mapOf(
         "libaccount_crux_ffi" to "libaccount_crux_ffi.so",
         "libjnidispatch" to "libjnidispatch.so",
@@ -263,6 +266,7 @@ val removePairipVirtualizationPatch = bytecodePatch {
         AppCompatibilities.DEVCHECK,
         AppCompatibilities.HINDU_CALENDAR,
         AppCompatibilities.LUMO,
+        AppCompatibilities.MUSICOLET,
         AppCompatibilities.VLLO,
     )
 
