@@ -189,7 +189,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "9cf85b81cc307a9dc367d5421dbe47737724275e92781c95768a8eef9e529a39",
         ),
-        targets = listOf(AppTarget(version = "1.61.0", versionCode = 281, minSdk = 24)),
+        targets = listOf(
+            AppTarget(version = "1.61.0", versionCode = 281, minSdk = 24),
+            AppTarget(version = "1.62.0", versionCode = 284, minSdk = 24),
+        ),
     )
 
     val CX_FILE_EXPLORER = Compatibility(
