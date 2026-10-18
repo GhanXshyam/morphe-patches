@@ -587,7 +587,7 @@ internal object AppCompatibilities {
             "03d4b741632d136bc23e2de4c6adcdb7712f1980b619c183221801730bbd0410",
         ),
         targets = listOf(
-            AppTarget(version = "4.0.03.0918.03", versionCode = 50020129, minSdk = 23),
+            AppTarget(version = "4.0.03.0918.03", versionCode = 50020129, minSdk = 29),
         ),
     )
 
@@ -600,7 +600,7 @@ internal object AppCompatibilities {
             "03d4b741632d136bc23e2de4c6adcdb7712f1980b619c183221801730bbd0410",
         ),
         targets = listOf(
-            AppTarget(version = "1.2.0.0923.web_socialmedia", versionCode = 50040018, minSdk = 23),
+            AppTarget(version = "1.2.0.0923.web_socialmedia", versionCode = 50040018, minSdk = 29),
         ),
     )
 
