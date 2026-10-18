@@ -30,6 +30,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import app.hxreborn.extension.protonmail.ScheduledDeletionEditor;
+import app.hxreborn.extension.protonmail.SidebarEntries;
 import app.hxreborn.extension.protonmail.accountswipe.AccountAvatarSwipe;
 import app.hxreborn.extension.protonmail.accountswipe.AvatarSwitchStyleDialog;
 import app.hxreborn.extension.protonpass.LayoutComponents;
@@ -204,6 +205,12 @@ public final class PatchesSettingsActivity extends Activity {
             layoutRows
                 .add(layoutSwitchRow("Hide About", "Privacy policy and Terms of service.", LayoutComponents.ABOUT));
         }
+        if (SidebarEntries.isPatched()) {
+            layoutRows.add(layoutSwitchRow("Hide Subscription", "Plan and billing entry in the sidebar.",
+                    SidebarEntries.SUBSCRIPTION));
+            layoutRows.add(layoutSwitchRow("Hide Report a problem", "Bug report entry in the sidebar.",
+                    SidebarEntries.REPORT_A_PROBLEM));
+        }
         addSection(column, "Layout", layoutRows);
 
         final List<View> appearanceRows = new ArrayList<>();
@@ -276,10 +283,10 @@ public final class PatchesSettingsActivity extends Activity {
     }
 
     private View layoutSwitchRow(String title, String summary, final String key) {
-        return switchRow(title, summary, LayoutComponents.isHidden(key), new CheckedChangeListener() {
+        return switchRow(title, summary, PatchSettings.isEnabled(key, false), new CheckedChangeListener() {
             @Override
             public void onCheckedChanged(boolean hidden) {
-                LayoutComponents.setHidden(key, hidden);
+                PatchSettings.setEnabled(key, hidden);
                 confirmRestart();
             }
         });
