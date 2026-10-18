@@ -25,8 +25,7 @@ private val foregroundSizeByDensity = mapOf(
 @Suppress("unused")
 val sharpenLauncherIconPatch = resourcePatch(
     name = "Sharpen launcher icon",
-    description = "Redraws the launcher icon from the splash screen artwork at full adaptive " +
-        "icon resolution. Leaves the alternate icons as they are.",
+    description = "Sharpens the default launcher icon. Alternate icons are unchanged.",
 ) {
     compatibleWith(AppCompatibilities.SERIALIZD)
 

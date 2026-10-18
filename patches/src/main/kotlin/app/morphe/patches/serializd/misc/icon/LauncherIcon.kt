@@ -14,7 +14,7 @@ import kotlin.math.roundToInt
 private const val MARK_MIN_GREEN = 150
 private const val MARK_MIN_GREEN_LEAD = 60
 private const val MARK_SHARE_OF_LAYER = 0.573
-private const val CHANNELS = 4
+private const val CHANNEL_COUNT = 4
 
 internal class LogoMark(val centerX: Double, val centerY: Double, val diameter: Int) {
     val layerSide: Double get() = diameter / MARK_SHARE_OF_LAYER
@@ -52,27 +52,29 @@ internal fun PngImage.resampleLayer(mark: LogoMark, size: Int): PngImage {
     }
 
     val scale = side / size
-    val taps = max(1, ceil(scale).toInt())
+    val samplesPerAxis = max(1, ceil(scale).toInt())
+    val sampleCount = samplesPerAxis * samplesPerAxis
+    val channelSums = DoubleArray(CHANNEL_COUNT)
     val pixels = IntArray(size * size)
 
     for (y in 0 until size) {
         for (x in 0 until size) {
-            val sum = DoubleArray(CHANNELS)
-            for (tapY in 0 until taps) {
-                for (tapX in 0 until taps) {
-                    val sourceX = left + (x + (tapX + 0.5) / taps) * scale - 0.5
-                    val sourceY = top + (y + (tapY + 0.5) / taps) * scale - 0.5
-                    sample(sourceX, sourceY, sum)
+            channelSums.fill(0.0)
+            for (sampleY in 0 until samplesPerAxis) {
+                for (sampleX in 0 until samplesPerAxis) {
+                    val sourceX = left + (x + (sampleX + 0.5) / samplesPerAxis) * scale - 0.5
+                    val sourceY = top + (y + (sampleY + 0.5) / samplesPerAxis) * scale - 0.5
+                    accumulateBilinearSample(sourceX, sourceY, channelSums)
                 }
             }
-            pixels[y * size + x] = pack(sum, taps * taps)
+            pixels[y * size + x] = averageArgb(channelSums, sampleCount)
         }
     }
 
     return PngImage(size, size, pixels)
 }
 
-private fun PngImage.sample(x: Double, y: Double, sum: DoubleArray) {
+private fun PngImage.accumulateBilinearSample(x: Double, y: Double, channelSums: DoubleArray) {
     val x0 = x.toInt().coerceIn(0, width - 1)
     val y0 = y.toInt().coerceIn(0, height - 1)
     val x1 = min(x0 + 1, width - 1)
@@ -80,20 +82,20 @@ private fun PngImage.sample(x: Double, y: Double, sum: DoubleArray) {
     val fx = (x - x0).coerceIn(0.0, 1.0)
     val fy = (y - y0).coerceIn(0.0, 1.0)
 
-    for (channel in 0 until CHANNELS) {
+    for (channel in 0 until CHANNEL_COUNT) {
         val shift = channel * 8
         val top = channelAt(x0, y0, shift) * (1 - fx) + channelAt(x1, y0, shift) * fx
         val bottom = channelAt(x0, y1, shift) * (1 - fx) + channelAt(x1, y1, shift) * fx
-        sum[channel] += top * (1 - fy) + bottom * fy
+        channelSums[channel] += top * (1 - fy) + bottom * fy
     }
 }
 
 private fun PngImage.channelAt(x: Int, y: Int, shift: Int): Int = (argb[y * width + x] ushr shift) and 0xff
 
-private fun pack(sum: DoubleArray, samples: Int): Int {
+private fun averageArgb(channelSums: DoubleArray, sampleCount: Int): Int {
     var pixel = 0
-    for (channel in 0 until CHANNELS) {
-        pixel = pixel or ((sum[channel] / samples).roundToInt().coerceIn(0, 255) shl (channel * 8))
+    for (channel in 0 until CHANNEL_COUNT) {
+        pixel = pixel or ((channelSums[channel] / sampleCount).roundToInt().coerceIn(0, 255) shl (channel * 8))
     }
     return pixel
 }
