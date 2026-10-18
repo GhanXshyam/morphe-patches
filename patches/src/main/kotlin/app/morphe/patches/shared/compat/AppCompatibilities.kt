@@ -206,6 +206,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val CUBASIS_LE_3 = Compatibility(
+        name = "Cubasis LE 3",
+        packageName = "com.steinberg.cubasisle3",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x1B5E88,
+        signatures = setOf(
+            "b655d27a9bafa034143c2a742979fef80da4a44a7cdf1b75b388eb416665570a",
+        ),
+        targets = listOf(AppTarget(version = "3.8.6", versionCode = 3080603, minSdk = 28)),
+    )
+
     val CX_FILE_EXPLORER = Compatibility(
         name = "Cx File Explorer",
         packageName = "com.cxinventor.file.explorer",
