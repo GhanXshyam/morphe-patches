@@ -170,6 +170,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val BOTIM = Compatibility(
+        name = "botim",
+        packageName = "im.thebot.messenger",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x1F8EFA,
+        signatures = setOf(
+            "4a75cf385d6aa8530a1a34ba4ed089da6bf1ae6989f62757839fd01e4f2fcd99",
+        ),
+        targets = listOf(AppTarget(version = "4.19.1", versionCode = 7132, minSdk = 24)),
+    )
+
     val CALCNOTE = Compatibility(
         name = "CalcNote",
         packageName = "com.burton999.notecal",
