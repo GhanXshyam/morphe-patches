@@ -223,6 +223,7 @@ ICONS = {
     "com.etsy.android": "etsy.png",
     "com.gamma.scan": "qrscanner.png",
     "com.cxinventor.file.explorer": "cx.png",
+    "com.gxnet.castle.indiatv": "castlefortv.png",
     "com.streetwriters.notesnook": "notesnook.png",
     "io.raindrop.raindropio": "raindrop.png",
     "app.rubberbands.fit": "rubberbands.png",

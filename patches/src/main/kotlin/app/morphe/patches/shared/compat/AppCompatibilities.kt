@@ -181,6 +181,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "2.25.111", versionCode = 1523, minSdk = 29)),
     )
 
+    val CASTLE_FOR_TV = Compatibility(
+        name = "Castle for TV",
+        packageName = "com.gxnet.castle.indiatv",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0xE53935,
+        signatures = setOf(
+            "17c6e44afc6b4c627fecdd30c27db7ad97cda41f728b74160ad55377dc4c7078",
+        ),
+        targets = listOf(AppTarget(version = "1.1.5", versionCode = 33, minSdk = 21)),
+    )
+
     val CATZY = Compatibility(
         name = "Catzy",
         packageName = "com.nieruo.healthapp",
