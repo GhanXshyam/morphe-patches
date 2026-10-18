@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -104,19 +103,7 @@ public final class PatchesSettingsActivity extends Activity {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(withNightMode(base, PatchesTheme.uiNightMode()));
-    }
-
-    private static Context withNightMode(Context base, int nightMode) {
-        final Configuration configuration = base.getResources().getConfiguration();
-        final int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        if (nightMode == Configuration.UI_MODE_NIGHT_UNDEFINED || nightMode == currentNightMode) {
-            return base;
-        }
-
-        final Configuration override = new Configuration(configuration);
-        override.uiMode = (configuration.uiMode & ~Configuration.UI_MODE_NIGHT_MASK) | nightMode;
-        return base.createConfigurationContext(override);
+        super.attachBaseContext(PatchesTheme.withNightMode(base));
     }
 
     @Override

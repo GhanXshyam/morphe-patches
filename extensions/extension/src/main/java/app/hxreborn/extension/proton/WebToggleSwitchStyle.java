@@ -54,7 +54,7 @@ final class WebToggleSwitchStyle {
 
     static void apply(Switch control) {
         final Context context = control.getContext();
-        final boolean night = PatchesTheme.isNightMode(context);
+        final boolean night = PatchesTheme.isAppNightMode(context);
         final int outline = night ? DARK_OUTLINE : LIGHT_OUTLINE;
         final int surface = night ? DARK_SURFACE : LIGHT_SURFACE;
         final int travel = dp(context, TRACK_WIDTH_DP - THUMB_DP - 2 * THUMB_INSET_DP);
