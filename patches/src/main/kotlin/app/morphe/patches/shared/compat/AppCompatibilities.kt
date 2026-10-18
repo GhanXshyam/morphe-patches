@@ -697,6 +697,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val OPAL = Compatibility(
+        name = "Opal",
+        packageName = "com.withopal.opal",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0x000000,
+        signatures = setOf(
+            "e9b037f4be157ee608de6aa922cda5cdbe614633171cc94544c40f08e9509286",
+        ),
+        targets = listOf(AppTarget(version = "4.14.0", versionCode = 4014000, minSdk = 29)),
+    )
+
     val PERPLEXITY = Compatibility(
         name = "Perplexity",
         packageName = "ai.perplexity.app.android",

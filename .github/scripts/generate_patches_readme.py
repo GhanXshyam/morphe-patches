@@ -195,6 +195,7 @@ ICONS = {
     "com.ferdinandobermeier.focusmate": "focusnow.png",
     "com.adithya.memoneet": "memoneet.png",
     "com.halalfire.medicneet": "medicneet.png",
+    "com.withopal.opal": "opal.png",
     "com.flyersoft.moonreader": "moonreader.png",
     "com.burton999.notecal": "calcnote.png",
     "org.withouthat.acalendar": "acalendar.png",

@@ -47,6 +47,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `castlefortv.png` | Castle for TV (`com.gxnet.castle.indiatv`) | Castle | APK 1.1.5, `res/S1.webp` (square icon cut to a circle) |
 | `acalendar.png` | aCalendar (`org.withouthat.acalendar`) | Tapir Apps GmbH | APK 2.9.5, `res/mipmap-xxxhdpi-v4/ic_launcher.png` (square icon cut to a circle) |
 | `quickcursor.png` | Quick Cursor (`com.quickcursor`) | Quick Cursor | APK 3.0.2, `res/mipmap-xxxhdpi-v4/launcher_icon_round.png` |
+| `opal.png` | Opal (`com.withopal.opal`) | Opal: The Focus Company | APK 4.14.0, adaptive icon `res/mipmap-anydpi-v26/ic_launcher.xml` (`ic_launcher_background` under `ic_launcher_foreground`, xxxhdpi) |
 | `kick.png` | Kick (`com.kick.mobile`) | KICK - Live Streaming | APK 40.31.0, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `etsy.png` | Etsy (`com.etsy.android`) | Etsy, Inc | APK 7.96.0, adaptive icon `res/mipmap-anydpi-v21/ic_launcher.xml` |
 | `qrscanner.png` | QR & Barcode Scanner (`com.gamma.scan`) | Gamma Play | APK 2.2.224, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |
