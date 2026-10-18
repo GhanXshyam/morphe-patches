@@ -264,6 +264,7 @@ ICONS = {
     "com.fddb": "fddb.png",
     "com.performance.meshview": "faststlviewer.png",
     "de.prosiebensat1digital.seventv": "joyn.png",
+    "at.zappn": "joyn-austria.png",
     "ru.iiec.cxxdroid": "cxxdroid.png",
     "ru.iiec.jvdroid": "jvdroid.png",
     "ru.iiec.pydroid3": "pydroid.png",

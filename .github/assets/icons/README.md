@@ -103,6 +103,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `biobird.png` | Biobird Flashcards (`com.biobird.exvee`) | Biobird | APK 2.0.2, `res/mipmap-xxxhdpi-v4/launcher_icon.png`, cut to a circle |
 | `keepa.png` | Keepa (`com.keepa.mobile`) | Keepa.com | APK 6.2.1, `res/mipmap-xxxhdpi-v4/ic_launcher_round.png` |
 | `joyn.png` | Joyn (`de.prosiebensat1digital.seventv`) | SevenOne Entertainment Group GmbH | APK 6.9.0-AOS-609012264, `res/mipmap-xxxhdpi-v4/ic_launcher.png`, cut to a circle |
+| `joyn-austria.png` | Joyn Austria (`at.zappn`) | ProSiebenSat.1 PULS 4 GmbH | APK 6.9.0-AOS-JOYN_AT-2212264, `res/mipmap-xxxhdpi-v4/ic_launcher.webp`, cut to a circle |
 | `photone.png` | Photone (`io.lightray.photone`) | Lightray Innovation GmbH | APK 1.5.4, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `audiolab.png` | AudioLab (`com.hitrolab.audioeditor`) | HitroLab | APK 1.3.33, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `imo.png` | imo (`com.imo.android.imoim`) | imo.im | APK 2026.08.1041, adaptive icon `res/drawable-anydpi-v26/b63.xml`, cut to a circle |
