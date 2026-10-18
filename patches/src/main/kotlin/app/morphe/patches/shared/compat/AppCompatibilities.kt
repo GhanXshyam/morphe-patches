@@ -493,6 +493,19 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "1.5.137", versionCode = 258, minSdk = 24)),
     )
 
+    val MAGIC_EARTH = Compatibility(
+        name = "Magic Earth",
+        packageName = "com.generalmagic.magicearth",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x9D85FD,
+        signatures = setOf(
+            "fa91bd3a8bfa2b03bda48422b238d584f23921154a5279e721f2f90a74d38806",
+        ),
+        targets = listOf(
+            AppTarget(version = "7.1.26.26.21DB1F1B.3C81F7001", versionCode = 2026112516, minSdk = 28),
+        ),
+    )
+
     val MEMONEET = Compatibility(
         name = "MemoNeet",
         packageName = "com.adithya.memoneet",

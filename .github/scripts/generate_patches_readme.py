@@ -276,6 +276,7 @@ ICONS = {
     "com.triovent.datingapp": "sheytoon.png",
     "in.krosbits.musicolet": "musicolet.png",
     "com.youdao.hindict": "udictionary.png",
+    "com.generalmagic.magicearth": "magicearth.png",
 }
 
     "com.lbrc.PeriodCalendar": "periodcalendar.png",
