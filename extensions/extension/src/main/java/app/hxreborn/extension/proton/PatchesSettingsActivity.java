@@ -29,6 +29,7 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import app.hxreborn.extension.protonauthenticator.SettingsSections;
 import app.hxreborn.extension.protonmail.ScheduledDeletionEditor;
 import app.hxreborn.extension.protonmail.SidebarEntries;
 import app.hxreborn.extension.protonmail.accountswipe.AccountAvatarSwipe;
@@ -210,6 +211,14 @@ public final class PatchesSettingsActivity extends Activity {
                     SidebarEntries.SUBSCRIPTION));
             layoutRows.add(layoutSwitchRow("Hide Report a problem", "Bug report entry in the sidebar.",
                     SidebarEntries.REPORT_A_PROBLEM));
+        }
+        if (SettingsSections.isPatched()) {
+            layoutRows.add(layoutSwitchRow("Hide Spread the word", "Tell a friend and Rate app.",
+                    SettingsSections.SPREAD_THE_WORD));
+            layoutRows.add(layoutSwitchRow("Hide Discover Proton", "Proton Mail, Pass, VPN, Drive and Calendar cards.",
+                    SettingsSections.DISCOVER_PROTON));
+            layoutRows.add(layoutSwitchRow("Hide Proton Pass banner", "Promotion card at the top of Settings.",
+                    SettingsSections.PASS_BANNER));
         }
         addSection(column, "Layout", layoutRows);
 
