@@ -203,6 +203,7 @@ ICONS = {
     "com.stresscodes.wallp": "walp.png",
     "com.wallmaa.minimal.wallpapers": "wallmaa.png",
     "com.spocky.projengmenu": "projectivy.png",
+    "app.privacynotes": "privacynotes.png",
     "com.myvitale.forus": "forus.png",
     "com.psiphon3.subscription": "psiphon.png",
     "com.cardfeed.video_public": "publicvideos.png",

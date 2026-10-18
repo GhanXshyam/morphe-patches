@@ -743,6 +743,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "3.8.3", versionCode = 742, minSdk = 24)),
     )
 
+    val PRIVACY_NOTES = Compatibility(
+        name = "Privacy Notes",
+        packageName = "app.privacynotes",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x1E40AF,
+        signatures = setOf(
+            "98a0bb5aaf694f6bea50adcb4a36d4b57a3c3e42f67aff08fbea4689696caa87",
+        ),
+        targets = listOf(AppTarget(version = "0.654.2", versionCode = 654002, minSdk = 24)),
+    )
+
     val PROJECTIVY = Compatibility(
         name = "Projectivy Launcher",
         packageName = "com.spocky.projengmenu",
