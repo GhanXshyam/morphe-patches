@@ -406,7 +406,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "44483f98c17bf49fbde08d3376af09c6fc1f9370c7a046c35a3dca45f5785150",
         ),
-        targets = listOf(AppTarget(version = "2026.08.1041", versionCode = 26081041, minSdk = 21)),
+        targets = listOf(
+            AppTarget(version = "2026.08.1041", versionCode = 26081041, minSdk = 21),
+            AppTarget(version = "2026.09.1051", versionCode = 26091051, minSdk = 32),
+        ),
     )
 
     val JUJO = Compatibility(
