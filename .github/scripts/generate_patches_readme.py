@@ -282,9 +282,8 @@ ICONS = {
     "in.krosbits.musicolet": "musicolet.png",
     "com.youdao.hindict": "udictionary.png",
     "com.generalmagic.magicearth": "magicearth.png",
-}
-
     "com.lbrc.PeriodCalendar": "periodcalendar.png",
+}
 
 ICON_DIR = Path(".github/assets/icons")
 PLAY_URL = "https://play.google.com/store/apps/details?id={}&hl=en&gl=US"
