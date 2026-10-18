@@ -280,6 +280,7 @@ ICONS = {
     "net.techet.netanalyzerlite.an": "netanalyzer.png",
     "com.radiojavan.androidradio": "radiojavan.png",
     "com.triovent.datingapp": "sheytoon.png",
+    "com.serializdmobile": "serializd.png",
     "in.krosbits.musicolet": "musicolet.png",
     "com.youdao.hindict": "udictionary.png",
     "com.generalmagic.magicearth": "magicearth.png",

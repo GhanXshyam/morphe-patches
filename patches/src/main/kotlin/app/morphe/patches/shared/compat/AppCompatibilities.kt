@@ -1015,6 +1015,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val SERIALIZD = Compatibility(
+        name = "Serializd",
+        packageName = "com.serializdmobile",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x44BBA4,
+        signatures = setOf(
+            "497a36a272a57be44383a0d2f21c532c968ea9d0e6b93ae66afd53c1d3aefa55",
+        ),
+        targets = listOf(AppTarget(version = "1.992", versionCode = 1992, minSdk = 24)),
+    )
+
     val SHEYTOON = Compatibility(
         name = "Sheytoon",
         packageName = "com.triovent.datingapp",
