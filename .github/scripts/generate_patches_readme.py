@@ -218,6 +218,7 @@ ICONS = {
     "com.audible.application": "audible.png",
     "app.symfonik.music.player": "symfonium.png",
     "ai.perplexity.app.android": "perplexity.png",
+    "com.poe.android": "poe.png",
     "com.thetrainline": "trainline.png",
     "org.readera": "readera.png",
     "com.kick.mobile": "kick.png",

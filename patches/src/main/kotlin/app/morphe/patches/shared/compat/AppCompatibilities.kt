@@ -732,6 +732,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "2.3", versionCode = 20, minSdk = 26)),
     )
 
+    val POE = Compatibility(
+        name = "Poe",
+        packageName = "com.poe.android",
+        apkFileType = ApkFileType.APKS,
+        appIconColor = 0x000000,
+        signatures = setOf(
+            "099909df5cf774e2a55b3d35a352ac33931dd218969cfcc766e570ee74c5170f",
+        ),
+        targets = listOf(AppTarget(version = "a3.77.2", versionCode = 3077006, minSdk = 26)),
+    )
+
     val PRAYER_TIMES = Compatibility(
         name = "Prayer Times and Qibla",
         packageName = "com.reworewo.prayertimes",
