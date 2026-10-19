@@ -1,0 +1,108 @@
+/*
+ * Copyright (C) 2026 hxreborn
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+package app.hxreborn.extension.protonpass;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+
+import app.hxreborn.extension.proton.PatchSettings;
+import app.hxreborn.extension.proton.PatchedBuild;
+
+@RunWith(RobolectricTestRunner.class)
+public final class LayoutComponentsTest {
+
+    @Before
+    public void useApplicationContext() {
+        PatchedBuild.useApplicationContext();
+    }
+
+    @Test
+    public void unpatchedBuildIgnoresAStoredHideSetting() {
+        // given
+        PatchSettings.setEnabled(LayoutComponents.HELP_CENTER, true);
+        PatchSettings.setEnabled(LayoutComponents.SPREAD_THE_WORD, true);
+        PatchSettings.setEnabled(LayoutComponents.ABOUT, true);
+
+        // then
+        assertFalse(LayoutComponents.isHelpCenterHidden());
+        assertFalse(LayoutComponents.isSpreadTheWordHidden());
+        assertFalse(LayoutComponents.isAboutHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void patchedBuildShowsEveryComponentUntilHidden() {
+        // then
+        assertFalse(LayoutComponents.isHelpCenterHidden());
+        assertFalse(LayoutComponents.isSpreadTheWordHidden());
+        assertFalse(LayoutComponents.isAboutHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void hidesHelpCenterAlone() {
+        // given
+        PatchSettings.setEnabled(LayoutComponents.HELP_CENTER, true);
+
+        // then
+        assertTrue(LayoutComponents.isHelpCenterHidden());
+        assertFalse(LayoutComponents.isSpreadTheWordHidden());
+        assertFalse(LayoutComponents.isAboutHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void hidesSpreadTheWordAlone() {
+        // given
+        PatchSettings.setEnabled(LayoutComponents.SPREAD_THE_WORD, true);
+
+        // then
+        assertTrue(LayoutComponents.isSpreadTheWordHidden());
+        assertFalse(LayoutComponents.isHelpCenterHidden());
+        assertFalse(LayoutComponents.isAboutHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void hidesTheAboutSectionAlone() {
+        // given
+        PatchSettings.setEnabled(LayoutComponents.ABOUT, true);
+
+        // then
+        assertTrue(LayoutComponents.isAboutHidden());
+        assertFalse(LayoutComponents.isHelpCenterHidden());
+        assertFalse(LayoutComponents.isSpreadTheWordHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void hidesAnyKeyPassedToIsHidden() {
+        // given
+        PatchSettings.setEnabled("hide_other", true);
+
+        // then
+        assertTrue(LayoutComponents.isHidden("hide_other"));
+        assertFalse(LayoutComponents.isHidden("hide_unset"));
+    }
+
+    @Implements(LayoutComponents.class)
+    public static final class Patched {
+
+        @Implementation
+        public static boolean isPatched() {
+            return true;
+        }
+
+    }
+
+}
