@@ -13,8 +13,7 @@ import app.morphe.util.matchSingle
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
     name = "Unlock premium",
-    description = "Removes the notebook limit and unlocks paid features the app checks locally. " +
-        "AI and cloud sync are controlled by the server.",
+    description = "Unlocks Pro features and removes the notebook limit. AI and cloud sync are not included.",
 ) {
     compatibleWith(AppCompatibilities.NOTEIN)
     dependsOn(removePairipProtectionPatch)
