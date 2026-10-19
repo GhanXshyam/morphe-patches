@@ -82,7 +82,7 @@ public final class SwitchThumbIconTest {
         final Object checked = SwitchThumbIcon.thumbContent(Function.class, true);
         final Object unchecked = SwitchThumbIcon.thumbContent(Function.class, false);
 
-        // then
+        // when
         assertTrue(checked.equals(checked));
         assertFalse(checked.equals(unchecked));
         assertEquals(System.identityHashCode(checked), checked.hashCode());

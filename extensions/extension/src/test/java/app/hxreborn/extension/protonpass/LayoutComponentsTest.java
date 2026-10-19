@@ -33,7 +33,7 @@ public final class LayoutComponentsTest {
         PatchSettings.setEnabled(LayoutComponents.SPREAD_THE_WORD, true);
         PatchSettings.setEnabled(LayoutComponents.ABOUT, true);
 
-        // then
+        // when
         assertFalse(LayoutComponents.isHelpCenterHidden());
         assertFalse(LayoutComponents.isSpreadTheWordHidden());
         assertFalse(LayoutComponents.isAboutHidden());
@@ -42,7 +42,6 @@ public final class LayoutComponentsTest {
     @Test
     @Config(shadows = Patched.class)
     public void patchedBuildShowsEveryComponentUntilHidden() {
-        // then
         assertFalse(LayoutComponents.isHelpCenterHidden());
         assertFalse(LayoutComponents.isSpreadTheWordHidden());
         assertFalse(LayoutComponents.isAboutHidden());
@@ -54,7 +53,7 @@ public final class LayoutComponentsTest {
         // given
         PatchSettings.setEnabled(LayoutComponents.HELP_CENTER, true);
 
-        // then
+        // when
         assertTrue(LayoutComponents.isHelpCenterHidden());
         assertFalse(LayoutComponents.isSpreadTheWordHidden());
         assertFalse(LayoutComponents.isAboutHidden());
@@ -66,7 +65,7 @@ public final class LayoutComponentsTest {
         // given
         PatchSettings.setEnabled(LayoutComponents.SPREAD_THE_WORD, true);
 
-        // then
+        // when
         assertTrue(LayoutComponents.isSpreadTheWordHidden());
         assertFalse(LayoutComponents.isHelpCenterHidden());
         assertFalse(LayoutComponents.isAboutHidden());
@@ -78,7 +77,7 @@ public final class LayoutComponentsTest {
         // given
         PatchSettings.setEnabled(LayoutComponents.ABOUT, true);
 
-        // then
+        // when
         assertTrue(LayoutComponents.isAboutHidden());
         assertFalse(LayoutComponents.isHelpCenterHidden());
         assertFalse(LayoutComponents.isSpreadTheWordHidden());
@@ -90,7 +89,7 @@ public final class LayoutComponentsTest {
         // given
         PatchSettings.setEnabled("hide_other", true);
 
-        // then
+        // when
         assertTrue(LayoutComponents.isHidden("hide_other"));
         assertFalse(LayoutComponents.isHidden("hide_unset"));
     }

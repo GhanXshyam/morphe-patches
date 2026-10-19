@@ -50,25 +50,17 @@ public final class PatchesThemeNightModeTest {
     @Test
     @Config(shadows = AlwaysNight.class)
     public void appNightModeOverridesALightSystem() {
-        // given
-        final Context context = application();
-
-        // then
         assertEquals(Configuration.UI_MODE_NIGHT_YES, PatchesTheme.uiNightMode());
-        assertFalse(PatchesTheme.isNightMode(context));
-        assertTrue(PatchesTheme.isAppNightMode(context));
+        assertFalse(PatchesTheme.isNightMode(application()));
+        assertTrue(PatchesTheme.isAppNightMode(application()));
     }
 
     @Test
     @Config(qualifiers = "night", shadows = AlwaysLight.class)
     public void appLightModeOverridesANightSystem() {
-        // given
-        final Context context = application();
-
-        // then
         assertEquals(Configuration.UI_MODE_NIGHT_NO, PatchesTheme.uiNightMode());
-        assertTrue(PatchesTheme.isNightMode(context));
-        assertFalse(PatchesTheme.isAppNightMode(context));
+        assertTrue(PatchesTheme.isNightMode(application()));
+        assertFalse(PatchesTheme.isAppNightMode(application()));
     }
 
     @Test

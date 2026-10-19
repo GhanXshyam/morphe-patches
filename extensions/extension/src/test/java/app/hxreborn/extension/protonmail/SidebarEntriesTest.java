@@ -32,7 +32,7 @@ public final class SidebarEntriesTest {
         PatchSettings.setEnabled(SidebarEntries.SUBSCRIPTION, true);
         PatchSettings.setEnabled(SidebarEntries.REPORT_A_PROBLEM, true);
 
-        // then
+        // when
         assertFalse(SidebarEntries.isSubscriptionHidden());
         assertFalse(SidebarEntries.isReportAProblemHidden());
     }
@@ -40,7 +40,6 @@ public final class SidebarEntriesTest {
     @Test
     @Config(shadows = Patched.class)
     public void patchedBuildShowsEveryEntryUntilHidden() {
-        // then
         assertFalse(SidebarEntries.isSubscriptionHidden());
         assertFalse(SidebarEntries.isReportAProblemHidden());
     }
@@ -51,7 +50,7 @@ public final class SidebarEntriesTest {
         // given
         PatchSettings.setEnabled(SidebarEntries.SUBSCRIPTION, true);
 
-        // then
+        // when
         assertTrue(SidebarEntries.isSubscriptionHidden());
         assertFalse(SidebarEntries.isReportAProblemHidden());
     }
@@ -62,7 +61,7 @@ public final class SidebarEntriesTest {
         // given
         PatchSettings.setEnabled(SidebarEntries.REPORT_A_PROBLEM, true);
 
-        // then
+        // when
         assertTrue(SidebarEntries.isReportAProblemHidden());
         assertFalse(SidebarEntries.isSubscriptionHidden());
     }
