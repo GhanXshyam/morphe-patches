@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""python3 issue_comment.py [--needs-info] <issue_comment-event.json> [patches-list.json]"""
+"""python3 issue_comment.py [--needs-info] [--unreleased] <issue_comment-event.json> [patches-list.json]"""
 
 import json
 import os
@@ -11,6 +11,7 @@ from pathlib import Path
 REPO = os.environ.get("GITHUB_REPOSITORY", "hxreborn/morphe-patches")
 CLOSED_MARKER = "<!-- closed-issue-bot -->"
 PING_MARKER = "<!-- status-ping-bot -->"
+UNRELEASED_MARKER = "<!-- unreleased-issue-bot -->"
 NO_REPLY = 3
 PING_WINDOW = timedelta(days=30)
 LOCK_DELAY = timedelta(days=8)
@@ -41,6 +42,12 @@ PING = re.compile(
     r"|\b(patiently|desperately)\s+waiting\b|\bwaiting\b[^.?!]{0,20}\b(patiently|desperately)\b"
     r"|\b(don'?t|do\s+not)\s+forget\s+(about\s+)?(us|me|this|it)\b"
     r"|\b(dev|you|maintainer)\s+(didn'?t|did\s+not|hasn'?t|has\s+not|haven'?t)\s+(even\s+)?(see|look|repl|respon)",
+    re.I,
+)
+RELEASE_QUESTION = re.compile(
+    r"\bwhen\b[^.?!]{0,40}\b(releas\w*|ship\w*|built|build|out|live|available|coming)\b"
+    r"|\b(releas\w*|build)\b[^.?!]{0,30}\b(yet|soon|date|eta)\b"
+    r"|\bnext\s+(release|build)\b",
     re.I,
 )
 NO_RUSH = re.compile(r"\bno\s+rush\b|\btake\s+your\s+time\b|\bno\s+pressure\b|\bnot\s+to\s+put\s+any\s+pressure\b", re.I)
@@ -90,6 +97,11 @@ def is_status_ping(comment):
     return OWNER_MENTION.search(own) is not None and not re.search(r"\w", unmentioned)
 
 
+def is_release_question(comment):
+    own = CODE.sub("", QUOTED.sub("", comment))
+    return is_status_ping(comment) or bool(RELEASE_QUESTION.search(own))
+
+
 def timestamp(value):
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
@@ -113,6 +125,13 @@ def ping_reply():
     return (
         f"{PING_MARKER}\n"
         "There's no ETA for this request yet. Any updates will be posted on this issue.\n"
+    )
+
+
+def unreleased_reply():
+    return (
+        f"{UNRELEASED_MARKER}\n"
+        "The commit that closed this issue is not in a release yet. A comment here names the release that includes it.\n"
     )
 
 
@@ -141,18 +160,23 @@ def closed_issue_reply(commented_at, issue_title="", patches_list=None, discussi
 
 
 if __name__ == "__main__":
-    needs_info = sys.argv[1] == "--needs-info"
-    args = sys.argv[2:] if needs_info else sys.argv[1:]
+    flags = {arg for arg in sys.argv[1:] if arg.startswith("--")}
+    args = [arg for arg in sys.argv[1:] if not arg.startswith("--")]
     event = json.loads(Path(args[0]).read_text(encoding="utf-8"))
     issue, comment = event["issue"], event["comment"]
-    if needs_info:
+    body = comment["body"] or ""
+    if "--needs-info" in flags:
         sys.exit(0 if answers_needs_info(issue, comment) else NO_REPLY)
     if issue["state"] == "open":
         if not is_early_status_ping(issue, comment):
             sys.exit(NO_REPLY)
         print(ping_reply(), end="")
+    elif "--unreleased" in flags:
+        if not (is_request(body) or is_release_question(body)):
+            sys.exit(NO_REPLY)
+        print(unreleased_reply(), end="")
     else:
-        if not is_request(comment["body"] or ""):
+        if not is_request(body):
             sys.exit(NO_REPLY)
         patches_list = json.loads(Path(args[1]).read_text(encoding="utf-8")) if len(args) > 1 else None
         labels = {label["name"] for label in issue.get("labels") or []}
