@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """python3 .github/scripts/test_issue_comment.py"""
 
+import json
+import os
+import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from issue_comment import timestamp, CLOSED_MARKER, PING_MARKER, is_early_status_ping, is_request, is_status_ping, ping_reply, closed_issue_reply
+from issue_comment import answers_needs_info, timestamp, CLOSED_MARKER, PING_MARKER, is_early_status_ping, is_request, is_status_ping, ping_reply, closed_issue_reply
 
 REQUESTS = [
     "Update the latest support version bro",
@@ -166,6 +170,75 @@ ok = flood == [False, False, False] and time.monotonic() - started < 2
 failures += not ok
 print(f"{'ok  ' if ok else 'FAIL'} long runs of question marks and newlines are read in linear time")
 
-total = len(REQUESTS) + len(NOT_REQUESTS) + len(PINGS) + len(NOT_PINGS) + 8
+HERE = Path(__file__).resolve().parent
+WORKFLOW = HERE.parent / "workflows" / "issue_comments.yml"
+
+FAKE_GH = r'''#!/usr/bin/env python3
+import json, os, re, sys
+
+args = sys.argv[1:]
+state = json.load(open(os.environ["FAKE_STATE"]))
+state["calls"].append(args)
+json.dump(state, open(os.environ["FAKE_STATE"], "w"))
+flags = {"--repo", "--remove-label", "--add-label"}
+valid = (
+    args[:2] == ["issue", "edit"] and len(args) >= 3 and re.fullmatch(r"\d+", args[2])
+    and all(a in flags or args[i - 1] in flags for i, a in enumerate(args[3:], 3))
+    and "--repo" in args and re.fullmatch(r"[\w.-]+/[\w.-]+", args[args.index("--repo") + 1])
+    and "--remove-label" in args and args[args.index("--remove-label") + 1] != ""
+)
+sys.exit(0 if valid else 1)
+'''
+
+
+def needs_info_script():
+    lines = WORKFLOW.read_text().splitlines()
+    start = lines.index("  needs-info:")
+    begin = next(i for i in range(start, len(lines)) if lines[i].strip() == "run: |") + 1
+    end = next((i for i in range(begin, len(lines)) if lines[i] and not lines[i].startswith(" " * 10)), len(lines))
+    return "\n".join(line[10:] for line in lines[begin:end])
+
+
+def run_needs_info(state, author="reporter", commenter="reporter", commenter_type="User", association="NONE", labels=("bug", "needs info")):
+    event = {
+        "issue": {"number": 7, "state": state, "user": {"login": author},
+                  "labels": [{"name": label} for label in labels]},
+        "comment": {"user": {"login": commenter, "type": commenter_type}, "author_association": association, "body": "here is the log"},
+    }
+    with tempfile.TemporaryDirectory() as temp:
+        temp = Path(temp)
+        (temp / "bin").mkdir()
+        (temp / "bin" / "gh").write_text(FAKE_GH)
+        (temp / "bin" / "gh").chmod(0o755)
+        (temp / "state.json").write_text(json.dumps({"calls": []}))
+        (temp / "event.json").write_text(json.dumps(event))
+        env = {"PATH": f"{temp / 'bin'}:{os.environ['PATH']}", "FAKE_STATE": str(temp / "state.json"),
+               "GITHUB_EVENT_PATH": str(temp / "event.json"), "ISSUE": "7", "REPO": "hxreborn/morphe-patches"}
+        done = subprocess.run(["bash", "-eo", "pipefail", "-c", needs_info_script()], env=env, cwd=HERE.parent.parent, capture_output=True, text=True)
+        return done.returncode, json.loads((temp / "state.json").read_text())["calls"]
+
+
+REMOVE = [["issue", "edit", "7", "--repo", "hxreborn/morphe-patches", "--remove-label", "needs info"]]
+NEEDS_INFO_CASES = [
+    ("the author's reply removes the label", dict(state="open"), REMOVE),
+    ("a reply on a closed issue leaves it", dict(state="closed"), []),
+    ("a bot reply leaves it", dict(state="open", commenter="github-actions[bot]", commenter_type="Bot", association="CONTRIBUTOR"), []),
+    ("another user's comment leaves it", dict(state="open", commenter="someone-else"), []),
+    ("a collaborator's own issue leaves it", dict(state="open", author="hxreborn", commenter="hxreborn", association="OWNER"), []),
+    ("an issue without the label leaves it", dict(state="open", labels=("bug",)), []),
+]
+for name, kwargs, calls in NEEDS_INFO_CASES:
+    status, seen = run_needs_info(**kwargs)
+    ok = status == 0 and seen == calls
+    failures += not ok
+    print(f"{'ok  ' if ok else 'FAIL'} needs info: {name}")
+
+ISSUE_EVENT = {"state": "open", "user": {"login": "reporter"}, "labels": [{"name": "needs info"}]}
+COMMENT_EVENT = {"user": {"login": "reporter", "type": "User"}, "author_association": "CONTRIBUTOR"}
+ok = answers_needs_info(ISSUE_EVENT, COMMENT_EVENT)
+failures += not ok
+print(f"{'ok  ' if ok else 'FAIL'} needs info: a contributor-association author counts as the reporter")
+
+total = len(REQUESTS) + len(NOT_REQUESTS) + len(PINGS) + len(NOT_PINGS) + 8 + len(NEEDS_INFO_CASES) + 1
 print(f"\n{total - failures}/{total} passed")
 sys.exit(1 if failures else 0)

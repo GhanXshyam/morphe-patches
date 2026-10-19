@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""python3 issue_comment.py <issue_comment-event.json> [patches-list.json]"""
+"""python3 issue_comment.py [--needs-info] <issue_comment-event.json> [patches-list.json]"""
 
 import json
 import os
@@ -14,6 +14,7 @@ PING_MARKER = "<!-- status-ping-bot -->"
 NO_REPLY = 3
 PING_WINDOW = timedelta(days=30)
 LOCK_DELAY = timedelta(days=8)
+COLLABORATORS = {"OWNER", "MEMBER", "COLLABORATOR"}
 
 REQUEST = re.compile(
     r"\b(update|upgrade|version|latest|newest|new|support|please|pls|plz|can you|could you|add|bring|fix|solutions?"
@@ -98,6 +99,16 @@ def is_early_status_ping(issue, comment):
     return is_status_ping(comment["body"] or "") and age <= PING_WINDOW
 
 
+def answers_needs_info(issue, comment):
+    return (
+        issue["state"] == "open"
+        and any(label["name"] == "needs info" for label in issue.get("labels") or [])
+        and comment["user"]["login"] == issue["user"]["login"]
+        and comment["user"]["type"] != "Bot"
+        and comment["author_association"] not in COLLABORATORS
+    )
+
+
 def ping_reply():
     return (
         f"{PING_MARKER}\n"
@@ -130,8 +141,12 @@ def closed_issue_reply(commented_at, issue_title="", patches_list=None, discussi
 
 
 if __name__ == "__main__":
-    event = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    needs_info = sys.argv[1] == "--needs-info"
+    args = sys.argv[2:] if needs_info else sys.argv[1:]
+    event = json.loads(Path(args[0]).read_text(encoding="utf-8"))
     issue, comment = event["issue"], event["comment"]
+    if needs_info:
+        sys.exit(0 if answers_needs_info(issue, comment) else NO_REPLY)
     if issue["state"] == "open":
         if not is_early_status_ping(issue, comment):
             sys.exit(NO_REPLY)
@@ -139,6 +154,6 @@ if __name__ == "__main__":
     else:
         if not is_request(comment["body"] or ""):
             sys.exit(NO_REPLY)
-        patches_list = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")) if len(sys.argv) > 2 else None
+        patches_list = json.loads(Path(args[1]).read_text(encoding="utf-8")) if len(args) > 1 else None
         labels = {label["name"] for label in issue.get("labels") or []}
         print(closed_issue_reply(timestamp(comment["created_at"]), issue.get("title") or "", patches_list, "discussion" in labels), end="")
