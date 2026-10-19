@@ -23,6 +23,7 @@ import app.morphe.patches.shared.misc.proton.literalWrittenTo
 import app.morphe.patches.shared.misc.proton.markFeaturePatched
 import app.morphe.patches.shared.misc.proton.MATERIAL_SWITCHES_CLASS
 import app.morphe.patches.shared.misc.generated.replaceStub
+import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.Opcode
@@ -195,20 +196,23 @@ private fun BytecodePatchContext.injectThumbContent() {
     val protonSwitch = ProtonSwitchFingerprint.matchSingle().method
     val thumbContentType = protonSwitch.parameterTypes[THUMB_CONTENT_PARAMETER].toString()
     val defaultMask = "p${protonSwitch.parameterTypes.lastIndex}"
+    val registers = protonSwitch.getFreeRegisterProvider(0, 2)
+    val contentRegister = registers.getFreeRegister4Bit()
+    val checkedRegister = registers.getFreeRegister4Bit()
 
     protonSwitch.addInstructionsWithLabels(
         0,
         """
-            and-int/lit8 v0, $defaultMask, $THUMB_CONTENT_DEFAULT_BIT
-            if-nez v0, :inject
+            and-int/lit8 v$contentRegister, $defaultMask, $THUMB_CONTENT_DEFAULT_BIT
+            if-nez v$contentRegister, :inject
             if-nez p$THUMB_CONTENT_PARAMETER, :original
             :inject
-            const-class v0, $thumbContentType
-            move/from16 v1, p0
-            invoke-static { v0, v1 }, $SWITCH_THUMB_ICON_CLASS->thumbContent(Ljava/lang/Class;Z)Ljava/lang/Object;
-            move-result-object v0
-            check-cast v0, $thumbContentType
-            move-object/from16 p$THUMB_CONTENT_PARAMETER, v0
+            const-class v$contentRegister, $thumbContentType
+            move/from16 v$checkedRegister, p0
+            invoke-static { v$contentRegister, v$checkedRegister }, $SWITCH_THUMB_ICON_CLASS->thumbContent(Ljava/lang/Class;Z)Ljava/lang/Object;
+            move-result-object v$contentRegister
+            check-cast v$contentRegister, $thumbContentType
+            move-object/from16 p$THUMB_CONTENT_PARAMETER, v$contentRegister
             and-int/lit8 $defaultMask, $defaultMask, ${THUMB_CONTENT_DEFAULT_BIT.inv()}
         """,
         ExternalLabel("original", protonSwitch.getInstruction(0)),
