@@ -667,6 +667,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "5.1", versionCode = 19502, minSdk = 29)),
     )
 
+    val NOTEIN = Compatibility(
+        name = "Notein",
+        packageName = "com.orion.notein.global",
+        apkFileType = ApkFileType.XAPK,
+        appIconColor = 0x0088FF,
+        signatures = setOf(
+            "740847519c431975924d4ea55d10ef2dad77d43c6565a9b6d3218c4c00c3279d",
+        ),
+        targets = listOf(AppTarget(version = "v2.1.27.0", versionCode = 406, minSdk = 26)),
+    )
+
     val NOTESNOOK = Compatibility(
         name = "Notesnook",
         packageName = "com.streetwriters.notesnook",

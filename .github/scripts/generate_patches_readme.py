@@ -230,6 +230,7 @@ ICONS = {
     "com.cxinventor.file.explorer": "cx.png",
     "com.gxnet.castle.indiatv": "castlefortv.png",
     "com.streetwriters.notesnook": "notesnook.png",
+    "com.orion.notein.global": "notein.png",
     "io.raindrop.raindropio": "raindrop.png",
     "app.rubberbands.fit": "rubberbands.png",
     "io.lightray.photone": "photone.png",

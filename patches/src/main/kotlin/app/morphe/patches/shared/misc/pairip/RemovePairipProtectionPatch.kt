@@ -32,6 +32,7 @@ val removePairipProtectionPatch = bytecodePatch {
         AppCompatibilities.MEDICNEET,
         AppCompatibilities.MUSICOLET,
         AppCompatibilities.MYMOVESET,
+        AppCompatibilities.NOTEIN,
         AppCompatibilities.OPAL,
         AppCompatibilities.POE,
         AppCompatibilities.PRAYER_TIMES,
