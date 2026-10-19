@@ -27,7 +27,7 @@ public final class LayoutComponentsTest {
     }
 
     @Test
-    public void unpatchedBuildIgnoresAStoredHideSetting() {
+    public void ignoresAStoredHideSettingWhenUnpatched() {
         // given
         PatchSettings.setEnabled(LayoutComponents.HELP_CENTER, true);
         PatchSettings.setEnabled(LayoutComponents.SPREAD_THE_WORD, true);
@@ -41,7 +41,7 @@ public final class LayoutComponentsTest {
 
     @Test
     @Config(shadows = Patched.class)
-    public void patchedBuildShowsEveryComponentUntilHidden() {
+    public void showsEveryComponentUntilHidden() {
         assertFalse(LayoutComponents.isHelpCenterHidden());
         assertFalse(LayoutComponents.isSpreadTheWordHidden());
         assertFalse(LayoutComponents.isAboutHidden());

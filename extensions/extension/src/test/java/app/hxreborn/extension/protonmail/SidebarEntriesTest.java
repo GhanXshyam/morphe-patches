@@ -27,7 +27,7 @@ public final class SidebarEntriesTest {
     }
 
     @Test
-    public void unpatchedBuildIgnoresAStoredHideSetting() {
+    public void ignoresAStoredHideSettingWhenUnpatched() {
         // given
         PatchSettings.setEnabled(SidebarEntries.SUBSCRIPTION, true);
         PatchSettings.setEnabled(SidebarEntries.REPORT_A_PROBLEM, true);
@@ -39,7 +39,7 @@ public final class SidebarEntriesTest {
 
     @Test
     @Config(shadows = Patched.class)
-    public void patchedBuildShowsEveryEntryUntilHidden() {
+    public void showsEveryEntryUntilHidden() {
         assertFalse(SidebarEntries.isSubscriptionHidden());
         assertFalse(SidebarEntries.isReportAProblemHidden());
     }
