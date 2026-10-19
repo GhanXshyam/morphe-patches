@@ -231,6 +231,7 @@ ICONS = {
     "com.gamma.scan": "qrscanner.png",
     "com.cxinventor.file.explorer": "cx.png",
     "com.gxnet.castle.indiatv": "castlefortv.png",
+    "com.external.castle": "castle.png",
     "com.streetwriters.notesnook": "notesnook.png",
     "com.orion.notein.global": "notein.png",
     "io.raindrop.raindropio": "raindrop.png",

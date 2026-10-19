@@ -206,6 +206,20 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "2.25.111", versionCode = 1523, minSdk = 29)),
     )
 
+    val CASTLE = Compatibility(
+        name = "Castle",
+        packageName = "com.external.castle",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0xE53935,
+        signatures = setOf(
+            "917ee66c56caf0a5201a17ac8eddff1575aeac1c6a1091a6e0d29b4c08176130",
+        ),
+        targets = listOf(
+            AppTarget(version = "2.1.1", versionCode = 148, minSdk = 23),
+            AppTarget(version = "2.1.3", versionCode = 157, minSdk = 23),
+        ),
+    )
+
     val CASTLE_FOR_TV = Compatibility(
         name = "Castle for TV",
         packageName = "com.gxnet.castle.indiatv",

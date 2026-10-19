@@ -46,6 +46,7 @@ Every icon comes from the app's own APK, at the version and resource listed belo
 | `moonreader.png` | Moon+ Reader (`com.flyersoft.moonreader`) | Moon+ | APK 10.7, adaptive icon `res/drawable-anydpi-v26/icon.xml` |
 | `calcnote.png` | CalcNote (`com.burton999.notecal`) | burton999 | APK 2.25.111, `res/drawable-xxhdpi-v4/ic_launcher.png` (square icon cut to a circle) |
 | `castlefortv.png` | Castle for TV (`com.gxnet.castle.indiatv`) | Castle | APK 1.1.5, `res/S1.webp` (square icon cut to a circle) |
+| `castle.png` | Castle (`com.external.castle`) | Castle | APK 2.1.3, `res/mipmap-xxxhdpi/ic_launcher_round.png` |
 | `acalendar.png` | aCalendar (`org.withouthat.acalendar`) | Tapir Apps GmbH | APK 2.9.5, `res/mipmap-xxxhdpi-v4/ic_launcher.png` (square icon cut to a circle) |
 | `quickcursor.png` | Quick Cursor (`com.quickcursor`) | Quick Cursor | APK 3.0.2, `res/mipmap-xxxhdpi-v4/launcher_icon_round.png` |
 | `opal.png` | Opal (`com.withopal.opal`) | Opal: The Focus Company | APK 4.14.0, adaptive icon `res/mipmap-anydpi-v26/ic_launcher.xml` (`ic_launcher_background` under `ic_launcher_foreground`, xxxhdpi) |
