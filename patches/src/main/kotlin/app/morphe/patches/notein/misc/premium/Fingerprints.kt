@@ -5,12 +5,13 @@
 package app.morphe.patches.notein.misc.premium
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.string
 
 internal object MembershipToStringFingerprint : Fingerprint(
     name = "toString",
     returnType = "Ljava/lang/String;",
     parameters = emptyList(),
-    strings = listOf("Membership(uid="),
+    filters = listOf(string("Membership(uid=")),
 )
 
 internal object MembershipGetTierFingerprint : Fingerprint(
