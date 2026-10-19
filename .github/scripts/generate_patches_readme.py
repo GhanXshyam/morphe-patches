@@ -184,6 +184,7 @@ def versions_table(targets):
 # Package name -> icon file in .github/assets/icons/. Apps with no entry render
 # without an icon, so adding a new app does not require touching this map.
 ICONS = {
+    "com.thesortdapp.sortd": "albo.png",
     "all.in.one.calculator": "allinonecalculator.png",
     "com.allformatplayer.streamvideoplayer": "allvideoplayer.png",
     "com.getaloa.app": "aloa.png",

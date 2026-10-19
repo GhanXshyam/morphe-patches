@@ -24,6 +24,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "2.9.5", versionCode = 2009500, minSdk = 21)),
     )
 
+    val ALBO = Compatibility(
+        name = "Albo",
+        packageName = "com.thesortdapp.sortd",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x1E1E1E,
+        signatures = setOf(
+            "ae23b6062bfe3fea5e0372c58ee809e0ee3eb3b356350cfaa2734dd6742c15b9",
+        ),
+        targets = listOf(AppTarget(version = "1.25.1", versionCode = 996, minSdk = 32)),
+    )
+
     val ALL_IN_ONE_CALCULATOR = Compatibility(
         name = "All-In-One Calculator",
         packageName = "all.in.one.calculator",
