@@ -8,21 +8,21 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
-import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.patch.PatchException
-import app.morphe.patcher.resource.resourceId
+import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.resource.ResourceType
+import app.morphe.patcher.resource.resourceId
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.protonvpn.misc.anchors.resourceFieldsPatch
 import app.morphe.patches.protonvpn.misc.settings.patchesSettingsPatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.generated.addStaticMethod
 import app.morphe.patches.shared.misc.generated.descriptor
+import app.morphe.patches.shared.misc.generated.replaceStub
+import app.morphe.patches.shared.misc.proton.MATERIAL_SWITCHES_CLASS
 import app.morphe.patches.shared.misc.proton.literalWrittenTo
 import app.morphe.patches.shared.misc.proton.markFeaturePatched
-import app.morphe.patches.shared.misc.proton.MATERIAL_SWITCHES_CLASS
-import app.morphe.patches.shared.misc.generated.replaceStub
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
@@ -30,8 +30,8 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.TypeReference
@@ -47,6 +47,8 @@ private const val UNCHECKED_TRACK_COLOR_PARAMETER = 5
 private const val UNCHECKED_TRACK_COLOR_DEFAULT_BIT = 0x20
 private const val UNCHECKED_ICON_COLOR_PARAMETER = 7
 private const val UNCHECKED_ICON_COLOR_DEFAULT_BIT = 0x80
+private const val CHECKED_TRACK_COLOR_ARGUMENT = 1
+private const val UNCHECKED_TRACK_COLOR_ARGUMENT = 5
 private const val SWITCH_ICON_SIZE_DP = 16f
 
 private fun BytecodePatchContext.addDrawIconMethod() {
@@ -178,9 +180,7 @@ private fun BytecodePatchContext.injectCheckedIconColor() {
 
 private fun BytecodePatchContext.injectCheckedThumbColor() {
     val colorsType = ProtonSwitchFingerprint.matchOrNull()?.method?.parameterTypes?.get(SWITCH_COLORS_PARAMETER)
-        ?: switchImplFingerprint().matchSingle().method.parameterTypes.first { type ->
-            classDefByOrNull(type.toString())?.methods?.any { it.isSwitchColorsConstructor() } == true
-        }
+        ?: switchImplFingerprint().matchSingle().method.parameterTypes.first { isSwitchColorsType(it) }
     val constructor = mutableClassDefBy(colorsType.toString()).methods.single { it.isSwitchColorsConstructor() }
 
     constructor.addInstructions(
@@ -219,10 +219,6 @@ private fun BytecodePatchContext.injectThumbContent() {
     )
 }
 
-private const val CHECKED_TRACK_COLOR_ARGUMENT = 1
-private const val UNCHECKED_TRACK_COLOR_ARGUMENT = 5
-
-
 private fun trackColorFields(switchColors: ClassDef): Pair<FieldReference, FieldReference> {
     val constructor = switchColors.methods.single { it.isSwitchColorsConstructor() }
     val implementation = constructor.implementation!!
@@ -256,9 +252,7 @@ private fun BytecodePatchContext.injectThumbIconIntoSwitchImpl() {
     val parameters = switchImpl.parameterTypes.map(CharSequence::toString)
     val checkedIndex = parameters.indexOf("Z")
     val composerType = parameters[parameters.lastIndex - 1]
-    val colorsIndex = parameters.indexOfFirst { type ->
-        classDefByOrNull(type)?.methods?.any { it.isSwitchColorsConstructor() } == true
-    }
+    val colorsIndex = parameters.indexOfFirst { isSwitchColorsType(it) }
     val (checkedTrack, uncheckedTrack) = trackColorFields(classDefBy(parameters[colorsIndex]))
 
     val instructions = switchImpl.instructions.toList()
