@@ -288,6 +288,7 @@ ICONS = {
     "com.youdao.hindict": "udictionary.png",
     "com.generalmagic.magicearth": "magicearth.png",
     "com.lbrc.PeriodCalendar": "periodcalendar.png",
+    "com.sygic.aura": "sygic.png",
 }
 
 ICON_DIR = Path(".github/assets/icons")

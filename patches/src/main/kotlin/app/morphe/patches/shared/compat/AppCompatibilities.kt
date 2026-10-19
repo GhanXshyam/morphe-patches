@@ -1118,6 +1118,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "1.0.3", versionCode = 34, minSdk = 24)),
     )
 
+    val SYGIC = Compatibility(
+        name = "Sygic",
+        packageName = "com.sygic.aura",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x1E90FF,
+        signatures = setOf(
+            "982d28261c4cbcc2ff8c9ce397d66af80150a0f4e684aed8eef328c0af169019",
+        ),
+        targets = listOf(AppTarget(version = "26.6.1-120585", versionCode = 272606010, minSdk = 32)),
+    )
+
     val SYMFONIUM = Compatibility(
         name = "Symfonium",
         packageName = "app.symfonik.music.player",
