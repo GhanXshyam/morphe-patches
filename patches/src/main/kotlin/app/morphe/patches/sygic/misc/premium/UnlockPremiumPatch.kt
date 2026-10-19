@@ -13,7 +13,6 @@ import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
-private const val PREMIUM_CLASS = "Lcom/sygic/navi/licensing/LicenseManager\$License\$Premium;"
 private const val PREMIUM_VALID_UNTIL_MILLIS = "4102444800000"
 
 @Suppress("unused")
@@ -26,6 +25,7 @@ val unlockPremiumPatch = bytecodePatch(
 
     execute {
         FeatureIsValidFingerprint.matchSingle().method.returnEarly(true)
+        PremiumLicenseConstructorFingerprint.matchSingle()
 
         LicenseParserFingerprint.matchSingle().let { match ->
             val constructorIndex = match.instructionMatches.last().index
@@ -49,8 +49,8 @@ val unlockPremiumPatch = bytecodePatch(
                         const-string v$validUntilRegister, "$PREMIUM_VALID_UNTIL_MILLIS"
                         invoke-static { v$validUntilRegister }, Ljava/lang/Long;->valueOf(Ljava/lang/String;)Ljava/lang/Long;
                         move-result-object v$validUntilRegister
-                        new-instance v$licenseRegister, $PREMIUM_CLASS
-                        invoke-direct { v$licenseRegister, v$premiumPlusRegister, v$validUntilRegister }, $PREMIUM_CLASS-><init>(ZLjava/lang/Long;)V
+                        new-instance v$licenseRegister, $PREMIUM_LICENSE_CLASS
+                        invoke-direct { v$licenseRegister, v$premiumPlusRegister, v$validUntilRegister }, $PREMIUM_LICENSE_CLASS-><init>(ZLjava/lang/Long;)V
                     """,
                 )
             }

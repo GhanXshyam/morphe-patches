@@ -9,6 +9,7 @@ import app.morphe.patcher.methodCall
 import app.morphe.patcher.string
 
 private const val LICENSE_CLASS = "Lcom/sygic/navi/licensing/LicenseManager\$License;"
+internal const val PREMIUM_LICENSE_CLASS = "Lcom/sygic/navi/licensing/LicenseManager\$License\$Premium;"
 
 internal object LicenseParserFingerprint : Fingerprint(
     name = "invokeSuspend",
@@ -35,4 +36,10 @@ internal object FeatureIsValidFingerprint : Fingerprint(
     classFingerprint = FeatureToStringFingerprint,
     returnType = "Z",
     parameters = emptyList(),
+)
+
+internal object PremiumLicenseConstructorFingerprint : Fingerprint(
+    definingClass = PREMIUM_LICENSE_CLASS,
+    name = "<init>",
+    parameters = listOf("Z", "Ljava/lang/Long;"),
 )
