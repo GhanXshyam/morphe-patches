@@ -1,0 +1,80 @@
+/*
+ * Copyright (C) 2026 hxreborn
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+package app.hxreborn.extension.protonmail;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+
+import app.hxreborn.extension.proton.PatchSettings;
+import app.hxreborn.extension.proton.PatchedBuild;
+
+@RunWith(RobolectricTestRunner.class)
+public final class SidebarEntriesTest {
+
+    @Before
+    public void useApplicationContext() {
+        PatchedBuild.useApplicationContext();
+    }
+
+    @Test
+    public void unpatchedBuildIgnoresAStoredHideSetting() {
+        // given
+        PatchSettings.setEnabled(SidebarEntries.SUBSCRIPTION, true);
+        PatchSettings.setEnabled(SidebarEntries.REPORT_A_PROBLEM, true);
+
+        // then
+        assertFalse(SidebarEntries.isSubscriptionHidden());
+        assertFalse(SidebarEntries.isReportAProblemHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void patchedBuildShowsEveryEntryUntilHidden() {
+        // then
+        assertFalse(SidebarEntries.isSubscriptionHidden());
+        assertFalse(SidebarEntries.isReportAProblemHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void hidesSubscriptionWithoutHidingReportAProblem() {
+        // given
+        PatchSettings.setEnabled(SidebarEntries.SUBSCRIPTION, true);
+
+        // then
+        assertTrue(SidebarEntries.isSubscriptionHidden());
+        assertFalse(SidebarEntries.isReportAProblemHidden());
+    }
+
+    @Test
+    @Config(shadows = Patched.class)
+    public void hidesReportAProblemWithoutHidingSubscription() {
+        // given
+        PatchSettings.setEnabled(SidebarEntries.REPORT_A_PROBLEM, true);
+
+        // then
+        assertTrue(SidebarEntries.isReportAProblemHidden());
+        assertFalse(SidebarEntries.isSubscriptionHidden());
+    }
+
+    @Implements(SidebarEntries.class)
+    public static final class Patched {
+
+        @Implementation
+        public static boolean isPatched() {
+            return true;
+        }
+
+    }
+
+}
