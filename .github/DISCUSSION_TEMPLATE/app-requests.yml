@@ -1,15 +1,14 @@
-name: 📱 App request
-description: Request patches for an app not supported here yet.
-title: "[App Request]: "
 labels: ["app request"]
 body:
   - type: markdown
     attributes:
       value: |
-        Before you ask:
+        Before you post:
 
-        - Check [existing requests](https://github.com/hxreborn/morphe-patches/issues?q=is%3Aissue+state%3Aopen+label%3A%22app+request%22+sort%3Areactions-%2B1-desc) first. If yours is there, upvote it.
-        - Hobby project. Upvotes aren't a queue and I can't promise anything.
+        - Check the [open requests](https://github.com/hxreborn/morphe-patches/discussions/categories/app-requests?discussions_q=is%3Aopen+category%3A%22App+Requests%22+sort%3Atop) first. If your app is there, upvote it instead of opening another one.
+        - One app per request. Use the app's name as the title.
+        - A bot checks every request. It links bundles that already patch the app, points out duplicates and asks for anything missing. You can have 3 requests open at a time.
+        - Hobby project. Upvotes show demand. They don't set the order, and nothing is promised.
         - I can only patch what the app decides on its own, not what the server enforces.
           MovieBox's SIM check was in the app, so it patched. Ask if you're not sure.
   - type: input
@@ -45,7 +44,7 @@ body:
     id: additional
     attributes:
       label: Additional info
-      description: Anything else useful.
+      description: Anything else useful, such as which features sit behind the paywall.
     validations:
       required: false
   - type: checkboxes
