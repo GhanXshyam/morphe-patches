@@ -34,7 +34,7 @@ jobs:
           printf '%s\n' 'This request is labelled `needs info` and has had no activity for 7 days. It is being closed automatically.' > "$RUNNER_TEMP/comment.md"
           bash -eo pipefail "$discussion" list app-requests |
           jq -r --arg cutoff "$cutoff" '.[] | select(.state == "OPEN" and .updatedAt < $cutoff)
-            | select((.labels | map(.name)) as $l | ($l | index("needs info")) and ($l | index("bot-wrong") | not)) | .number' |
+            | select((.labels | map(.name)) as $l | ($l | index("needs info")) and ($l | index("bot-wrong") | not) and ($l | index("in progress") | not)) | .number' |
           while read -r n; do
             if [ "$DRY_RUN" = true ]; then echo "would close #$n"; continue; fi
             bash -eo pipefail "$discussion" comment "$n" "$RUNNER_TEMP/comment.md" >/dev/null
