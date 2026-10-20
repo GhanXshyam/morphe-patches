@@ -9,8 +9,8 @@ body:
         - One app per request. Use the app's name as the title.
         - A bot checks every request. It links bundles that already patch the app, points out duplicates and asks for anything missing. You can have 3 requests open at a time.
         - Hobby project. Upvotes show demand. They don't set the order, and nothing is promised.
-        - I can only patch what the app decides on its own, not what the server enforces.
-          MovieBox's SIM check was in the app, so it patched. Ask if you're not sure.
+        - Features that depend on the app's servers (AI, cloud sync, streaming quality) may not be patchable.
+          It varies by app, so ask if you're not sure.
   - type: input
     id: app_name
     attributes:
@@ -56,7 +56,7 @@ body:
           required: true
         - label: I haven't requested this app from another patch bundle.
           required: true
-        - label: I understand that features the server controls (AI, cloud sync, streaming quality) cannot be patched.
+        - label: I understand that features depending on the app's servers (AI, cloud sync, streaming quality) may not be patchable.
           required: true
         - label: This isn't about a region lock. A VPN handles that, a patch doesn't.
           required: true
