@@ -58,3 +58,5 @@ body:
           required: true
         - label: I understand that features the server controls (AI, cloud sync, streaming quality) cannot be patched.
           required: true
+        - label: This isn't about a region lock. A VPN handles that, a patch doesn't.
+          required: true
