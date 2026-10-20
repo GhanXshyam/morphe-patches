@@ -9,6 +9,7 @@ This is a hobby project run by one developer. Requests for new apps go to Discus
 | Patching stopped with an error, or the APK would not install | [Patching or install failed](https://github.com/hxreborn/morphe-patches/issues/new?template=bug_report.yml) |
 | The patched app opens but misbehaves | [Patched app does not work](https://github.com/hxreborn/morphe-patches/issues/new?template=not_working.yml) |
 | A new feature for a supported app | [Feature request](https://github.com/hxreborn/morphe-patches/issues/new?template=feature_request.yml) |
+| A question about patching, installing or using the bundle | [Q&A](https://github.com/hxreborn/morphe-patches/discussions/new?category=q-a) in Discussions |
 
 ## Good to know
 
