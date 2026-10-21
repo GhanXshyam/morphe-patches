@@ -1227,7 +1227,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "982d28261c4cbcc2ff8c9ce397d66af80150a0f4e684aed8eef328c0af169019",
         ),
-        targets = listOf(AppTarget(version = "26.6.1-120585", versionCode = 272606010, minSdk = 32)),
+        targets = listOf(
+            AppTarget(version = "26.6.1-120585", versionCode = 272606010, minSdk = 32),
+            AppTarget(version = "26.6.2-121046", versionCode = 272606020, minSdk = 32),
+        ),
     )
 
     val SYMFONIUM = Compatibility(
