@@ -21,7 +21,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "6e3434746912534281a97d9db0c05d02b7c87b9c4486aa534658bd42fda43a1d",
         ),
-        targets = listOf(AppTarget(version = "2.9.5", versionCode = 2009500, minSdk = 21)),
+        targets = listOf(
+            AppTarget(version = "2.9.5", versionCode = 2009500, minSdk = 21),
+            AppTarget(version = "2.9.6", versionCode = 2009600, minSdk = 21),
+        ),
     )
 
     val ALBO = Compatibility(
