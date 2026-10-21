@@ -613,7 +613,10 @@ internal object AppCompatibilities {
             "0b35fb5df963d4382ba19bf70923a66a056334335721a4fe395bf9365721a151",
             "c3f2c1d09fe211d59fe243da4a639bd610a4cee4ee54ad5380c03f83310378cb",
         ),
-        targets = listOf(AppTarget(version = "62.6", versionCode = 626, minSdk = 24)),
+        targets = listOf(
+            AppTarget(version = "62.6", versionCode = 626, minSdk = 24),
+            AppTarget(version = "62.9", versionCode = 629, minSdk = 24),
+        ),
     )
 
     val MINISHARE = Compatibility(
