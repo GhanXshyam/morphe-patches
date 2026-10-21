@@ -1072,7 +1072,10 @@ internal object AppCompatibilities {
         apkFileType = ApkFileType.APKS,
         appIconColor = 0x1988E0,
         signatures = setOf("ddd75c66578654d085424804cb27c7b6e04fd36616045bfee140d9756ffca563"),
-        targets = listOf(AppTarget(version = "4.7.44", versionCode = 8698961, minSdk = 24)),
+        targets = listOf(
+            AppTarget(version = "4.7.44", versionCode = 8698961, minSdk = 24),
+            AppTarget(version = "4.8.0", versionCode = 8699017, minSdk = 32),
+        ),
     )
 
     val READERA = Compatibility(
