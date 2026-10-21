@@ -1038,7 +1038,10 @@ internal object AppCompatibilities {
         packageName = "com.sry.rateglance",
         apkFileType = ApkFileType.APKS,
         appIconColor = 0x0D192C,
-        targets = listOf(AppTarget(version = "1.17.6", versionCode = 304, minSdk = 26)),
+        targets = listOf(
+            AppTarget(version = "1.17.6", versionCode = 304, minSdk = 26),
+            AppTarget(version = "1.18.6", versionCode = 318, minSdk = 32),
+        ),
     )
 
     val RADIO_JAVAN = Compatibility(
