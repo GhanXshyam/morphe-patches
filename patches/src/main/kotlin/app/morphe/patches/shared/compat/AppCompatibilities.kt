@@ -68,7 +68,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "48e539b414808f7a13343b5e10310d268f63030ba3cd479db290048ca0a77e8f",
         ),
-        targets = listOf(AppTarget(version = "1.3.3", versionCode = 29, minSdk = 32)),
+        targets = listOf(
+            AppTarget(version = "1.3.3", versionCode = 29, minSdk = 32),
+            AppTarget(version = "1.3.4", versionCode = 30, minSdk = 32),
+        ),
     )
 
     val ALPINEQUEST = Compatibility(
