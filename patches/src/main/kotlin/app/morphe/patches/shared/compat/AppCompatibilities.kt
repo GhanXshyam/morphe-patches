@@ -611,7 +611,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "5ac646ebc68017e4cc582b11b1c2ae5d29b15d9b0ac3a54fc60972417b41c9ad",
         ),
-        targets = listOf(AppTarget(version = "10.7", versionCode = 1007000, minSdk = 21)),
+        targets = listOf(
+            AppTarget(version = "10.7", versionCode = 1007000, minSdk = 21),
+            AppTarget(version = "10.8", versionCode = 1008000, minSdk = 21),
+        ),
     )
 
     val MOVIEBOX = Compatibility(
