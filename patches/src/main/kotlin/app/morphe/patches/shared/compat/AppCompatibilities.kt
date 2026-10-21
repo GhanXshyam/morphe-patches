@@ -670,7 +670,10 @@ internal object AppCompatibilities {
         packageName = "com.soulbreakers.mymoveset",
         apkFileType = ApkFileType.XAPK,
         appIconColor = 0x9F1C3B,
-        targets = listOf(AppTarget(version = "1.4.0", versionCode = 16, minSdk = 24)),
+        targets = listOf(
+            AppTarget(version = "1.4.0", versionCode = 16, minSdk = 24),
+            AppTarget(version = "1.5.0", versionCode = 17, minSdk = 24),
+        ),
     )
 
     val MYSCRIPT_MATH = Compatibility(
