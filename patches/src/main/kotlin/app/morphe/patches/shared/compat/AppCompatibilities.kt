@@ -170,7 +170,10 @@ internal object AppCompatibilities {
         signatures = setOf(
             "908874fc41478d0780790e5c8a178727f83b2182c147f20689a3d5404fd4ded0",
         ),
-        targets = listOf(AppTarget(version = "2.0.2", versionCode = 38, minSdk = 23)),
+        targets = listOf(
+            AppTarget(version = "2.0.2", versionCode = 38, minSdk = 23),
+            AppTarget(version = "3.0.0", versionCode = 41, minSdk = 24),
+        ),
     )
 
     val BLURWALL = Compatibility(
