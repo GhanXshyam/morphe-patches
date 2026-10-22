@@ -297,6 +297,7 @@ ICONS = {
     "com.omniashare.minishare": "minishare.png",
     "com.naraorganics.nara": "narababy.png",
     "com.jndapp.glass.widgets": "glasswidgets.png",
+    "io.yuka.android": "yuka.png",
 }
 
 ICON_DIR = Path(".github/assets/icons")

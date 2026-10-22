@@ -168,6 +168,10 @@ private val PAIRIP_HOOKED_LIBRARIES = mapOf(
         "libjnidispatch" to "libjnidispatch.so",
         "libvosk" to "libvosk.so",
     ),
+    "io.yuka.android" to mapOf(
+        "librealmc" to "librealmc.so",
+        "libscanditsdk" to "libscanditsdk.so",
+    ),
 )
 
 private class WrappedLibrary(val file: File, val wrapped: ByteArray, val keyName: String, val key: ByteArray?)
@@ -312,6 +316,7 @@ val removePairipVirtualizationPatch = bytecodePatch {
         AppCompatibilities.MUSICOLET,
         AppCompatibilities.POE,
         AppCompatibilities.VLLO,
+        AppCompatibilities.YUKA,
     )
 
     dependsOn(removePairipResourcesPatch)

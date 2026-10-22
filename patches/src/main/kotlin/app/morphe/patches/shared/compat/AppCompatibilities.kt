@@ -1408,6 +1408,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "5.1.7_20260914", versionCode = 3799, minSdk = 24)),
     )
 
+    val YUKA = Compatibility(
+        name = "Yuka",
+        packageName = "io.yuka.android",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x6AC259,
+        signatures = setOf(
+            "a7e3c4a612680186937b02e7b89574d5fd62798b8cb668973992fa89f6198fcb",
+        ),
+        targets = listOf(AppTarget(version = "5.7", versionCode = 875, minSdk = 32)),
+    )
+
     val GRAPH_MESSENGER = Compatibility(
         name = "Graph Messenger",
         packageName = "ir.ilmili.telegraph",

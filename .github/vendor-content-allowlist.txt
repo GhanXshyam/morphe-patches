@@ -19,3 +19,4 @@ large patches/src/main/resources/pairip/flar2.devcheck-660.tsv
 large patches/src/main/resources/pairip/ipnossoft.rma.free-26910.tsv
 large patches/src/main/resources/pairip/in.krosbits.musicolet-54000.tsv
 large patches/src/main/resources/pairip/me.proton.android.lumo-78.tsv
+large patches/src/main/resources/pairip/io.yuka.android-875.tsv
