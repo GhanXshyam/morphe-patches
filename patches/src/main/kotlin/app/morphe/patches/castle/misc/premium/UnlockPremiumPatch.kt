@@ -5,6 +5,7 @@
 package app.morphe.patches.castle.misc.premium
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
@@ -26,6 +27,8 @@ private const val PREVIEW_PLAYLIST_CLASS = "${EXTENSION_PACKAGE}PreviewPlaylist;
 private const val FULL_HD_PLAYLIST_CLASS = "${EXTENSION_PACKAGE}FullHdPlaylist;"
 private const val VIDEO_BODY_CLASS = "Lcom/gxgx/daqiandy/requestBody/VideoBody;"
 private const val DEFAULT_CONSTRUCTOR_MARKER = "Lkotlin/jvm/internal/DefaultConstructorMarker;"
+private const val DEVICE_GUID_CLASS = "${EXTENSION_PACKAGE}DeviceGuid;"
+private const val GUID_GETTER_LOG = "getServiceOauthDeviceId Guid="
 
 private const val PREMIUM_VIP_INFO = """
     new-instance v0, Lcom/gxgx/base/bean/VipInfo;
@@ -44,6 +47,22 @@ private const val PREMIUM_VIP_INFO = """
 private const val NOT_PREVIEW = """
     sget-object v0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
     return-object v0
+"""
+
+private const val SWITCH_BLACKLISTED_GUID = """
+    iget-object v0, p0, Lcom/gxgx/daqiandy/bean/VideoBean;->inBlacklist:Ljava/lang/Boolean;
+    invoke-static { v0 }, $DEVICE_GUID_CLASS->switchGuidIfBlacklisted(Ljava/lang/Boolean;)Ljava/lang/Boolean;
+    move-result-object v0
+    return-object v0
+"""
+
+private const val USE_SWITCHED_GUID = """
+    invoke-static { }, $DEVICE_GUID_CLASS->switchedGuid()Ljava/lang/String;
+    move-result-object v0
+    if-eqz v0, :guid_not_switched
+    return-object v0
+    :guid_not_switched
+    nop
 """
 
 private const val REQUEST_HD_RESOLUTION = """
@@ -70,6 +89,10 @@ val unlockPremiumPatch = rawResourcePatch(
         editSecShellPayload {
             replaceBody(USER_CLASS, "getVipInfos", registers = 6, smali = PREMIUM_VIP_INFO)
             replaceBody(VIDEO_CLASS, "isPreview", registers = 2, smali = NOT_PREVIEW)
+            replaceBody(VIDEO_CLASS, "getInBlacklist", registers = 2, smali = SWITCH_BLACKLISTED_GUID)
+            methodsUsingString(GUID_GETTER_LOG)
+                .single { it.parameterTypes.isEmpty() && it.returnType == "Ljava/lang/String;" }
+                .addInstructionsWithLabels(0, USE_SWITCHED_GUID)
             val rechargeSheetClass = methodUsingString(RECHARGE_COUNTDOWN_COLOR).definingClass
             methods(rechargeSheetClass).single {
                 it.returnType == "V" && it.parameterTypes.size == 2 && it.parameterTypes[1] == "Ljava/lang/String;"
