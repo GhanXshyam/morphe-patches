@@ -18,6 +18,7 @@ body:
       options:
         # generated:apps
         - "1Weather"
+        - "3way"
         - "aCalendar"
         - "Albo"
         - "All Video Player App"
@@ -124,6 +125,7 @@ body:
         - "TeraBox"
         - "Trainline"
         - "U Dictionary"
+        - "Viber"
         - "Video Editor"
         - "VLLO"
         - "VPN Super Unlimited Proxy"

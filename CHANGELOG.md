@@ -1,3 +1,18 @@
+## [1.59.0-dev.1](https://github.com/hxreborn/morphe-patches/compare/v1.58.0...v1.59.0-dev.1) (2026-10-22)
+
+### Bug Fixes
+
+* **Projectivy - Unlock premium:** remove the patch ([0167300](https://github.com/hxreborn/morphe-patches/commit/01673008d6d475a0c1783a90974795d5b82c5da2))
+* **Showly - Unlock premium:** load News feed ([bec1d64](https://github.com/hxreborn/morphe-patches/commit/bec1d64a7aae69f8d5b4094e1c4840651dfb4da1))
+
+### New Features
+
+* **3way - Unlock premium:** unblur who viewed and liked you ([8c23e60](https://github.com/hxreborn/morphe-patches/commit/8c23e6095835afe9218007a9e0f8f72a805d1ff2))
+* **botim - Disable tracking:** stop Firebase and Adjust data collection ([1b7368e](https://github.com/hxreborn/morphe-patches/commit/1b7368ef6d413d587d75173bf1ec0e6d9f1a4e59)), closes [#280](https://github.com/hxreborn/morphe-patches/issues/280)
+* **Viber - Hide ads:** remove chat list, More, Explore and search ads ([cac1911](https://github.com/hxreborn/morphe-patches/commit/cac1911358f0e366f136691c8b6bbfe24015fca5))
+* **Viber - Hide More screen items:** remove Dating, Your News, upsells ([a0bb0a6](https://github.com/hxreborn/morphe-patches/commit/a0bb0a62f9b0db28aeea3f2ef1497e29e94e3c1c))
+* **Viber - Hide navigation buttons:** drop ChatGPT and Marketplace tabs ([9c8f448](https://github.com/hxreborn/morphe-patches/commit/9c8f4480c5d8cd134f3679d7789c189022ac1599))
+
 ## [1.58.0](https://github.com/hxreborn/morphe-patches/compare/v1.57.0...v1.58.0) (2026-10-22)
 
 ### Bug Fixes
