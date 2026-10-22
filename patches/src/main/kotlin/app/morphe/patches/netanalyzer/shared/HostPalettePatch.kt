@@ -13,6 +13,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.misc.smali.addMethod
 import app.morphe.patches.shared.misc.smali.descriptor
+import app.morphe.patches.shared.misc.smali.toJavaClassName
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -57,7 +58,7 @@ internal val hostPalettePatch = bytecodePatch {
             throw PatchException("$THEME reads ${paletteInstances.size} $paletteType instances, expected $THEME_PALETTES")
         }
         val paletteRegistration = listOf(
-            paletteInstances.first().definingClass.toJavaName(),
+            paletteInstances.first().definingClass.toJavaClassName(),
             paletteInstances.joinToString(LIST_SEPARATOR) { it.name },
             classDefBy(paletteType).propertyFields().toRegistration(),
         ).joinToString(REGISTRATION_SEPARATOR)

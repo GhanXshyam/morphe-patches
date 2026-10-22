@@ -21,6 +21,8 @@ internal fun descriptor(method: MethodReference): String = DexFormatter.INSTANCE
 
 internal fun descriptor(field: FieldReference): String = DexFormatter.INSTANCE.getFieldDescriptor(field)
 
+internal fun String.toJavaClassName() = removePrefix("L").removeSuffix(";").replace('/', '.')
+
 internal fun Method.parameterRegister(index: Int): String {
     val receiver = if (AccessFlags.STATIC.isSet(accessFlags)) 0 else 1
     val preceding = parameterTypes.take(index).sumOf { if (it == "J" || it == "D") 2 else 1 }

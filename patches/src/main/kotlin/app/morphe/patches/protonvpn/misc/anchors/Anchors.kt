@@ -66,8 +66,6 @@ private const val EXTENSION_MEMBERS_CLASS = "Lapp/hxreborn/extension/protonvpn/M
 internal fun BytecodePatchContext.setExtensionMember(member: String, value: String) =
     mutableClassDefBy(EXTENSION_MEMBERS_CLASS).methods.single { it.name == member }.returnEarly(value)
 
-internal fun String.toJavaClassName() = substring(1, length - 1).replace('/', '.')
-
 private fun Instruction.reference() = (this as? ReferenceInstruction)?.reference
 
 internal fun BytecodePatchContext.findPropertyField(toString: Fingerprint, property: String): FieldReference {

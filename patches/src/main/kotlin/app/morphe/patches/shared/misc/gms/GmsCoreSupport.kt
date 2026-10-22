@@ -18,6 +18,7 @@ import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patcher.string
 import app.morphe.patches.shared.misc.signature.replaceString
 import app.morphe.patches.shared.misc.signature.stockSigningCertificate
+import app.morphe.patches.shared.misc.smali.toJavaClassName
 import app.morphe.util.matchAllMethodIndicesForEach
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.Opcode
@@ -83,4 +84,3 @@ private fun Instruction.isString(value: String) =
     (opcode == Opcode.CONST_STRING || opcode == Opcode.CONST_STRING_JUMBO) &&
         ((this as? ReferenceInstruction)?.reference as? StringReference)?.string == value
 
-private fun String.toJavaClassName() = removePrefix("L").removeSuffix(";").replace('/', '.')
