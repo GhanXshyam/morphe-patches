@@ -1,3 +1,9 @@
+## [1.59.0-dev.5](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.4...v1.59.0-dev.5) (2026-10-22)
+
+### Bug Fixes
+
+* **Castle - Unlock premium:** play 1080p streams ([e6fae82](https://github.com/hxreborn/morphe-patches/commit/e6fae827100e7074c98a35da3608244be0704ce7))
+
 ## [1.59.0-dev.4](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.3...v1.59.0-dev.4) (2026-10-22)
 
 ### New Features
