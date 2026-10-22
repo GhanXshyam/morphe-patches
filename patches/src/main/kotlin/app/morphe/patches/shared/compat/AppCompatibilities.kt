@@ -1316,6 +1316,17 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget(version = "6.7.5", versionCode = 399, minSdk = 23)),
     )
 
+    val VIBER = Compatibility(
+        name = "Viber",
+        packageName = "com.viber.voip",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x7360F2,
+        signatures = setOf(
+            "6e9857865c0d4568e02ef76dc838ed282a3d24b12c7027b3926190d99b42fe09",
+        ),
+        targets = listOf(AppTarget(version = "29.1.1.0", versionCode = 1290101, minSdk = 32)),
+    )
+
     val VLLO = Compatibility(
         name = "VLLO",
         packageName = "com.darinsoft.vimo",
