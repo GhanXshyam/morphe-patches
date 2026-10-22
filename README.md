@@ -17,7 +17,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 ## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="48" align="absmiddle" alt="Patches"> Patches list
 
 <!-- PATCHES_START -->
-> **[v1.59.0-dev.1](https://github.com/hxreborn/morphe-patches/releases/tag/v1.59.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;298 patches total
+> **[v1.59.0-dev.2](https://github.com/hxreborn/morphe-patches/releases/tag/v1.59.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;298 patches total
 
 <table>
 <tr>
@@ -540,7 +540,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 | <a id="castle-disable-update-prompt"></a>[Disable update prompt](patches/src/main/kotlin/app/morphe/patches/castle/misc/update/DisableUpdatePromptPatch.kt) | Disables the new version dialog and the required update. |
 | <a id="castle-remove-ads"></a>[Remove ads](patches/src/main/kotlin/app/morphe/patches/castle/ads/RemoveAdsPatch.kt) | Removes banner, video, interstitial and rewarded ads. Actions that waited on a rewarded ad run immediately. |
 | <a id="castle-spoof-signature"></a>[Spoof signature](patches/src/main/kotlin/app/morphe/patches/castle/misc/fix/signature/SpoofSignaturePatch.kt) | Removes the modified app warning that stops video playback. |
-| <a id="castle-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/castle/misc/premium/UnlockPremiumPatch.kt) | Unlocks member-only titles and shows the account as Premium. Requires a signed-in account. |
+| <a id="castle-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/castle/misc/premium/UnlockPremiumPatch.kt) | Unlocks member-only titles, shows the account as Premium and removes the premium bundle offer. Requires a signed-in account. |
 
 </details>
 
@@ -568,8 +568,8 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 
 **🎯 Supported versions:**
 
-| 1.61.0 | 1.62.0 |
-| :---: | :---: |
+| 1.61.0 |
+| :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|

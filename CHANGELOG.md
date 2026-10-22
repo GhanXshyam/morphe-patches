@@ -1,3 +1,10 @@
+## [1.59.0-dev.2](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.1...v1.59.0-dev.2) (2026-10-22)
+
+### Bug Fixes
+
+* **Castle - Unlock premium:** remove the premium bundle offer sheet ([b87a23e](https://github.com/hxreborn/morphe-patches/commit/b87a23ee3c41ca8f6d5814a032b4339eff37fd68))
+* **Catzy:** remove `1.62.0` app target ([937c48d](https://github.com/hxreborn/morphe-patches/commit/937c48d3d21bfb3d3c748d78af8b39b6ef63e989))
+
 ## [1.59.0-dev.1](https://github.com/hxreborn/morphe-patches/compare/v1.58.0...v1.59.0-dev.1) (2026-10-22)
 
 ### Bug Fixes

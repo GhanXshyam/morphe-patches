@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-22T17:19:56",
-  "description": "## [1.59.0-dev.1](https://github.com/hxreborn/morphe-patches/compare/v1.58.0...v1.59.0-dev.1) (2026-10-22)\n\n### Bug Fixes\n\n* **Projectivy - Unlock premium:** remove the patch ([0167300](https://github.com/hxreborn/morphe-patches/commit/01673008d6d475a0c1783a90974795d5b82c5da2))\n* **Showly - Unlock premium:** load News feed ([bec1d64](https://github.com/hxreborn/morphe-patches/commit/bec1d64a7aae69f8d5b4094e1c4840651dfb4da1))\n\n### New Features\n\n* **3way - Unlock premium:** unblur who viewed and liked you ([8c23e60](https://github.com/hxreborn/morphe-patches/commit/8c23e6095835afe9218007a9e0f8f72a805d1ff2))\n* **botim - Disable tracking:** stop Firebase and Adjust data collection ([1b7368e](https://github.com/hxreborn/morphe-patches/commit/1b7368ef6d413d587d75173bf1ec0e6d9f1a4e59)), closes [#280](https://github.com/hxreborn/morphe-patches/issues/280)\n* **Viber - Hide ads:** remove chat list, More, Explore and search ads ([cac1911](https://github.com/hxreborn/morphe-patches/commit/cac1911358f0e366f136691c8b6bbfe24015fca5))\n* **Viber - Hide More screen items:** remove Dating, Your News, upsells ([a0bb0a6](https://github.com/hxreborn/morphe-patches/commit/a0bb0a62f9b0db28aeea3f2ef1497e29e94e3c1c))\n* **Viber - Hide navigation buttons:** drop ChatGPT and Marketplace tabs ([9c8f448](https://github.com/hxreborn/morphe-patches/commit/9c8f4480c5d8cd134f3679d7789c189022ac1599))",
-  "download_url": "https://github.com/hxreborn/morphe-patches/releases/download/v1.59.0-dev.1/patches-1.59.0-dev.1.mpp",
+  "created_at": "2026-10-22T17:47:13",
+  "description": "## [1.59.0-dev.2](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.1...v1.59.0-dev.2) (2026-10-22)\n\n### Bug Fixes\n\n* **Castle - Unlock premium:** remove the premium bundle offer sheet ([b87a23e](https://github.com/hxreborn/morphe-patches/commit/b87a23ee3c41ca8f6d5814a032b4339eff37fd68))\n* **Catzy:** remove `1.62.0` app target ([937c48d](https://github.com/hxreborn/morphe-patches/commit/937c48d3d21bfb3d3c748d78af8b39b6ef63e989))",
+  "download_url": "https://github.com/hxreborn/morphe-patches/releases/download/v1.59.0-dev.2/patches-1.59.0-dev.2.mpp",
   "signature_download_url": "",
-  "version": "1.59.0-dev.1"
+  "version": "1.59.0-dev.2"
 }

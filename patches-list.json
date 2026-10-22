@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.59.0-dev.1",
+  "version": "1.59.0-dev.2",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -7403,18 +7403,6 @@
               "isExperimental": false,
               "minSdk": 24,
               "description": null
-            },
-            {
-              "version": "1.62.0",
-              "versionCodes": {
-                "ARM64_V8A": 284,
-                "ARMEABI_V7A": 284,
-                "X86_64": 284,
-                "X86": 284
-              },
-              "isExperimental": false,
-              "minSdk": 24,
-              "description": null
             }
           ]
         }
@@ -8863,18 +8851,6 @@
               "isExperimental": false,
               "minSdk": 24,
               "description": null
-            },
-            {
-              "version": "1.62.0",
-              "versionCodes": {
-                "ARM64_V8A": 284,
-                "ARMEABI_V7A": 284,
-                "X86_64": 284,
-                "X86": 284
-              },
-              "isExperimental": false,
-              "minSdk": 24,
-              "description": null
             }
           ]
         }
@@ -10016,18 +9992,6 @@
               "isExperimental": false,
               "minSdk": 24,
               "description": null
-            },
-            {
-              "version": "1.62.0",
-              "versionCodes": {
-                "ARM64_V8A": 284,
-                "ARMEABI_V7A": 284,
-                "X86_64": 284,
-                "X86": 284
-              },
-              "isExperimental": false,
-              "minSdk": 24,
-              "description": null
             }
           ]
         }
@@ -11068,7 +11032,7 @@
     },
     {
       "name": "Unlock premium",
-      "description": "Unlocks member-only titles and shows the account as Premium. Requires a signed-in account.",
+      "description": "Unlocks member-only titles, shows the account as Premium and removes the premium bundle offer. Requires a signed-in account.",
       "default": true,
       "category": null,
       "dependencies": [
@@ -11174,18 +11138,6 @@
                 "ARMEABI_V7A": 281,
                 "X86_64": 281,
                 "X86": 281
-              },
-              "isExperimental": false,
-              "minSdk": 24,
-              "description": null
-            },
-            {
-              "version": "1.62.0",
-              "versionCodes": {
-                "ARM64_V8A": 284,
-                "ARMEABI_V7A": 284,
-                "X86_64": 284,
-                "X86": 284
               },
               "isExperimental": false,
               "minSdk": 24,

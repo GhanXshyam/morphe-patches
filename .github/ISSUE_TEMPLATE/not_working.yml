@@ -369,12 +369,12 @@ body:
       description: Newest first.
       options:
         # generated:versions
+        - "1.59.0-dev.2"
         - "1.59.0-dev.1"
         - "1.58.0"
         - "1.57.0"
         - "1.56.0"
         - "1.55.0"
-        - "1.54.0"
         - "Older than these"
         # /generated
     validations:
