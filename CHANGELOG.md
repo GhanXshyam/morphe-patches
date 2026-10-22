@@ -1,3 +1,10 @@
+## [1.59.0-dev.8](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.7...v1.59.0-dev.8) (2026-10-22)
+
+### Bug Fixes
+
+* **Castle - Unlock premium:** play on first tap on flagged installs ([8f53f67](https://github.com/hxreborn/morphe-patches/commit/8f53f674507693f80537602f9a9f0b51b5b57a21))
+* stop hiding 13 apps on older Android versions ([8d0464f](https://github.com/hxreborn/morphe-patches/commit/8d0464fca8251c0cb9def2cbde3d067b83c963dc))
+
 ## [1.59.0-dev.7](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.6...v1.59.0-dev.7) (2026-10-22)
 
 ### Bug Fixes
