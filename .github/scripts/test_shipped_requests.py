@@ -31,10 +31,12 @@ REQUESTS = [
 ]
 
 failures = 0
+checks = 0
 
 
 def check(ok, name):
-    global failures
+    global failures, checks
+    checks += 1
     failures += not ok
     print(f"{'ok  ' if ok else 'FAIL'} {name}")
 
@@ -62,5 +64,5 @@ check(several == "<!-- prerelease-bot -->\nA pre-release with patches for New Ap
       "Reply here whether it works.\n",
       "a several-feature request gets the pre-release line without the close notice")
 
-print(f"\n{9 - failures}/9 passed")
+print(f"\n{checks - failures}/{checks} passed")
 sys.exit(1 if failures else 0)
