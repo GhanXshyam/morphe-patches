@@ -135,6 +135,7 @@ body:
         - "Wattpad"
         - "Yanosik"
         - "Yi iot"
+        - "Yuka"
         # /generated
     validations:
       required: true

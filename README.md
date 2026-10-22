@@ -17,7 +17,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 ## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="48" align="absmiddle" alt="Patches"> Patches list
 
 <!-- PATCHES_START -->
-> **[v1.59.0-dev.2](https://github.com/hxreborn/morphe-patches/releases/tag/v1.59.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;298 patches total
+> **[v1.59.0-dev.3](https://github.com/hxreborn/morphe-patches/releases/tag/v1.59.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;299 patches total
 
 <table>
 <tr>
@@ -197,6 +197,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 <tr>
 <td align="center" width="25%"><a href="#yanosik"><img src=".github/assets/icons/pl.neptis.yanosik.mobi.android.png" width="40"><br>Yanosik</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#yi-iot"><img src=".github/assets/icons/yiiot.png" width="40"><br>Yi iot</a><br><sub>1 patch</sub></td>
+<td align="center" width="25%"><a href="#yuka"><img src=".github/assets/icons/yuka.png" width="40"><br>Yuka</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#universal">🌐<br>Universal</a><br><sub>1 patch</sub></td>
 </tr>
 </table>
@@ -2276,6 +2277,22 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="yi-iot-hide-ads"></a>[Hide ads](patches/src/main/kotlin/app/morphe/patches/yiiot/ads/HideAdsPatch.kt) | Removes splash, interstitial, banner and native ads. Keeps the optional ad that unlocks an alarm video. |
+
+</details>
+
+<a id="yuka"></a>
+<details>
+<summary><img src=".github/assets/icons/yuka.png" width="18" align="top">&nbsp;&nbsp;Yuka&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 5.7 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="yuka-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/yuka/misc/premium/UnlockPremiumPatch.kt) | Unlocks food preferences, diet alerts and the full history. Search and offline downloads need a paid subscription. Requires a root mount install. |
 
 </details>
 

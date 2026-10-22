@@ -353,6 +353,8 @@ body:
         - "Yanosik (another version, type it below)"
         - "Yi iot 5.1.7_20260914"
         - "Yi iot (another version, type it below)"
+        - "Yuka 5.7"
+        - "Yuka (another version, type it below)"
         # /generated
     validations:
       required: true
@@ -369,12 +371,12 @@ body:
       description: Newest first.
       options:
         # generated:versions
+        - "1.59.0-dev.3"
         - "1.59.0-dev.2"
         - "1.59.0-dev.1"
         - "1.58.0"
         - "1.57.0"
         - "1.56.0"
-        - "1.55.0"
         - "Older than these"
         # /generated
     validations:
@@ -730,6 +732,7 @@ body:
         - "Wattpad \u00b7 Unlock premium"
         - "Yanosik \u00b7 Unlock premium"
         - "Yi iot \u00b7 Hide ads"
+        - "Yuka \u00b7 Unlock premium"
         - "Not narrowed down yet"
         # /generated
   - type: input

@@ -364,6 +364,8 @@ body:
         - "Yanosik (another version, type it below)"
         - "Yi iot 5.1.7_20260914"
         - "Yi iot (another version, type it below)"
+        - "Yuka 5.7"
+        - "Yuka (another version, type it below)"
         # /generated
     validations:
       required: true
