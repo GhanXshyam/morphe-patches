@@ -10,9 +10,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Build;
 import android.text.InputType;
-import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import app.hxreborn.extension.shared.Dimensions;
 
 @TargetApi(Build.VERSION_CODES.S_V2)
 final class ExportConfiguration {
@@ -66,8 +67,7 @@ final class ExportConfiguration {
     }
 
     private static int dp(Context context, int value) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value,
-                context.getResources().getDisplayMetrics()));
+        return Dimensions.dp(context, value);
     }
 
 }

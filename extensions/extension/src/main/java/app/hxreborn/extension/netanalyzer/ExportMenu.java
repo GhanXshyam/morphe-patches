@@ -11,12 +11,13 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
+
+import app.hxreborn.extension.shared.Dimensions;
 
 @TargetApi(Build.VERSION_CODES.S_V2)
 @SuppressWarnings("unused")
@@ -126,8 +127,7 @@ public final class ExportMenu {
     }
 
     private static int dp(Activity activity, int value) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value,
-                activity.getResources().getDisplayMetrics()));
+        return Dimensions.dp(activity, value);
     }
 
 }

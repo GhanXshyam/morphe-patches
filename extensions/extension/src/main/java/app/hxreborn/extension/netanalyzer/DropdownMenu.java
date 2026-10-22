@@ -14,7 +14,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import app.hxreborn.extension.shared.Dimensions;
 
 @TargetApi(Build.VERSION_CODES.S_V2)
 final class DropdownMenu {
@@ -126,8 +127,7 @@ final class DropdownMenu {
     }
 
     private int dp(int value) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value,
-                this.context.getResources().getDisplayMetrics()));
+        return Dimensions.dp(this.context, value);
     }
 
     private static final class Item {

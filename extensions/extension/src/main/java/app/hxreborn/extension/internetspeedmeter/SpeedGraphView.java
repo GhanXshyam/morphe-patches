@@ -12,6 +12,8 @@ import android.graphics.Path;
 import android.util.TypedValue;
 import android.view.View;
 
+import app.hxreborn.extension.shared.Dimensions;
+
 final class SpeedGraphView extends View {
 
     private static final int SAMPLES = 61;
@@ -115,7 +117,7 @@ final class SpeedGraphView extends View {
     }
 
     private float dp(float value) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
+        return Dimensions.dpExact(getContext(), value);
     }
 
 }

@@ -34,6 +34,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import app.hxreborn.extension.shared.Dimensions;
+
 @TargetApi(Build.VERSION_CODES.S_V2)
 abstract class HostScreenActivity extends Activity {
 
@@ -363,8 +365,7 @@ abstract class HostScreenActivity extends Activity {
     }
 
     final int dp(float value) {
-        return Math
-            .round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics()));
+        return Dimensions.dp(this, value);
     }
 
     final RippleDrawable rowBackground() {

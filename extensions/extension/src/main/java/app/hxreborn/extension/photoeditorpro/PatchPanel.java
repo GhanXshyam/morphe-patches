@@ -41,6 +41,7 @@ import app.morphe.extension.shared.settings.EnumSetting;
 import app.morphe.extension.shared.settings.Setting;
 
 import app.hxreborn.extension.BuildConfig;
+import app.hxreborn.extension.shared.Dimensions;
 
 public final class PatchPanel {
 
@@ -150,8 +151,7 @@ public final class PatchPanel {
     }
 
     static int dp(Context c, float v) {
-        return Math
-            .round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, c.getResources().getDisplayMetrics()));
+        return Dimensions.dp(c, v);
     }
 
     static int topInset(WindowInsets insets) {

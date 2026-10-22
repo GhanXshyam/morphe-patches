@@ -28,6 +28,8 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import app.hxreborn.extension.shared.Dimensions;
+
 final class TileMapView extends View {
 
     static final int TILE_SIZE = 256;
@@ -504,7 +506,7 @@ final class TileMapView extends View {
     }
 
     private float dp(float value) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, displayMetrics());
+        return Dimensions.dpExact(getContext(), value);
     }
 
     private final class GestureListener extends GestureDetector.SimpleOnGestureListener {

@@ -40,6 +40,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import app.hxreborn.extension.shared.Dimensions;
+
 public final class QuickOverviewActivity extends Activity {
 
     private static final long SAMPLE_INTERVAL_MS = 1000;
@@ -355,8 +357,7 @@ public final class QuickOverviewActivity extends Activity {
     }
 
     private int dp(int value) {
-        return Math
-            .round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics()));
+        return Dimensions.dp(this, value);
     }
 
 }
