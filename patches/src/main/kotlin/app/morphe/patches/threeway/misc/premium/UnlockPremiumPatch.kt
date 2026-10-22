@@ -9,6 +9,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.shared.compat.AppCompatibilities
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionReversedOrThrow
@@ -16,7 +17,6 @@ import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
-import com.android.tools.smali.dexlib2.util.ReferenceUtil
 
 private const val GOLD = 1
 
@@ -43,7 +43,7 @@ val unlockPremiumPatch = bytecodePatch(
                 """
                     if-eqz v$profileRegister, :done
                     const/4 v$goldRegister, $GOLD
-                    invoke-virtual { v$profileRegister, v$goldRegister }, ${ReferenceUtil.getMethodDescriptor(setGold)}
+                    invoke-virtual { v$profileRegister, v$goldRegister }, ${descriptor(setGold)}
                 """,
                 ExternalLabel("done", getInstruction(returnIndex)),
             )

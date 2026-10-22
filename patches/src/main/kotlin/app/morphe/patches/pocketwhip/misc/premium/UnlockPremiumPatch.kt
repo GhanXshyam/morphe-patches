@@ -8,6 +8,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionReversedOrThrow
 import app.morphe.util.matchSingle
@@ -15,7 +16,6 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
-import com.android.tools.smali.dexlib2.util.ReferenceUtil
 
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
@@ -39,7 +39,7 @@ val unlockPremiumPatch = bytecodePatch(
             }
             method.getInstruction(readIndex).getReference<FieldReference>()!!
         }
-        val ownedFieldDescriptor = ReferenceUtil.getFieldDescriptor(ownedField)
+        val ownedFieldDescriptor = descriptor(ownedField)
 
         // The app only reads ownership from this field, both through its getters and when unlocking
         // purchases. Storing true after every write makes each whip owned as soon as it is created, on
