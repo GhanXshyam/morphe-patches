@@ -7,6 +7,7 @@ package app.morphe.patches.shared.misc.generated
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
@@ -20,6 +21,19 @@ internal fun descriptor(method: MethodReference): String = DexFormatter.INSTANCE
 
 internal fun descriptor(field: FieldReference): String = DexFormatter.INSTANCE.getFieldDescriptor(field)
 
+private fun MutableClass.compileMethod(
+    name: String,
+    parameters: List<ImmutableMethodParameter>,
+    returnType: String,
+    accessFlags: Int,
+    registers: Int,
+    smali: String,
+): MutableMethod {
+    require(".catch" !in smali) { "$name: addInstructionsWithLabels drops try blocks" }
+    return ImmutableMethod(type, name, parameters, returnType, accessFlags, null, null, MutableMethodImplementation(registers))
+        .toMutable().apply { addInstructionsWithLabels(0, smali) }
+}
+
 internal fun MutableClass.addStaticMethod(
     name: String,
     parameters: List<String>,
@@ -27,16 +41,14 @@ internal fun MutableClass.addStaticMethod(
     registers: Int,
     smali: String,
 ): String {
-    val method = ImmutableMethod(
-        type,
+    val method = compileMethod(
         name,
         parameters.map { ImmutableMethodParameter(it, null, null) },
         returnType,
         AccessFlags.PUBLIC.value or AccessFlags.STATIC.value,
-        null,
-        null,
-        MutableMethodImplementation(registers),
-    ).toMutable().apply { addInstructionsWithLabels(0, smali) }
+        registers,
+        smali,
+    )
     methods.add(method)
     return descriptor(method)
 }
@@ -51,16 +63,14 @@ internal fun MutableClass.replaceMethod(name: String, registers: Int, smali: Str
     val original = methods.single { it.name == name }
     methods.remove(original)
     methods.add(
-        ImmutableMethod(
-            type,
+        compileMethod(
             name,
-            original.parameters,
+            original.parameters.map { ImmutableMethodParameter.of(it) },
             original.returnType,
             original.accessFlags,
-            null,
-            null,
-            MutableMethodImplementation(registers),
-        ).toMutable().apply { addInstructionsWithLabels(0, smali) },
+            registers,
+            smali,
+        ),
     )
 }
 
