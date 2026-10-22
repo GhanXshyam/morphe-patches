@@ -4,7 +4,6 @@
  */
 package app.morphe.patches.protonmail.misc.banner
 
-import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.PatchException
@@ -23,14 +22,6 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
 internal const val AUTO_DELETE_BANNER_EXTENSION_CLASS =
     "Lapp/hxreborn/extension/protonmail/AutoDeleteBanner;"
-
-internal object AutoDeleteStatesFingerprint : Fingerprint(
-    strings = listOf("AutoDeleteUpsell", "AutoDeleteDisabled", "AutoDeleteEnabled"),
-)
-
-internal object AutoDeleteBannerFingerprint : Fingerprint(
-    strings = listOf("Getting the auto-delete banner failed."),
-)
 
 private fun Method.enumConstant(name: String): FieldReference =
     getInstruction<ReferenceInstruction>(
