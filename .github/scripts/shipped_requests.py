@@ -6,18 +6,10 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "actions" / "triage"))
-from app_request import find_package
+from app_request import find_package, supported_apps
 from fields import field, parse_fields
 
 OPEN_ENDED = "something else"
-
-
-def packages(patches_list):
-    return {
-        package["packageName"].lower(): package["name"]
-        for patch in patches_list["patches"]
-        for package in patch.get("compatiblePackages") or []
-    }
 
 
 def requested_features(body):
@@ -31,7 +23,8 @@ def asks_for_one_feature(body):
 
 
 def shipped(previous, current, requests):
-    added = {package: name for package, name in packages(current).items() if package not in packages(previous)}
+    known = supported_apps(previous)
+    added = {package: name for package, name in supported_apps(current).items() if package not in known}
     rows = []
     for request in requests:
         if request.get("state") != "OPEN":
