@@ -5,6 +5,9 @@
 package app.morphe.patches.shared.misc.ijiami
 
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patches.shared.DEX_MAGIC
+import app.morphe.patches.shared.readInt
+import app.morphe.patches.shared.writeInt
 import java.security.MessageDigest
 import java.util.zip.Adler32
 
@@ -20,32 +23,10 @@ private const val CONTAINER_LENGTH_OFFSET = 20
 private const val CONTAINER_FIELDS_SIZE = 8
 private const val CONTAINER_DIGEST_SIZE = 32
 
-internal val DEX_MAGIC = byteArrayOf(0x64, 0x65, 0x78, 0x0a)
 private val CONTAINER_NAME = "ijiami.dat".toByteArray(Charsets.US_ASCII)
 
 // Second cipher on the first and last payload blocks
 internal const val OPAQUE_BLOCK_SIZE = 1024
-
-internal fun ByteArray.readInt(offset: Int) =
-    (this[offset].toInt() and 0xFF) or
-        ((this[offset + 1].toInt() and 0xFF) shl 8) or
-        ((this[offset + 2].toInt() and 0xFF) shl 16) or
-        ((this[offset + 3].toInt() and 0xFF) shl 24)
-
-internal fun ByteArray.writeInt(offset: Int, value: Int) {
-    this[offset] = value.toByte()
-    this[offset + 1] = (value ushr 8).toByte()
-    this[offset + 2] = (value ushr 16).toByte()
-    this[offset + 3] = (value ushr 24).toByte()
-}
-
-internal fun ByteArray.writeShort(offset: Int, value: Int) {
-    this[offset] = value.toByte()
-    this[offset + 1] = (value ushr 8).toByte()
-}
-
-internal fun ByteArray.readShort(offset: Int) =
-    (this[offset].toInt() and 0xFF) or ((this[offset + 1].toInt() and 0xFF) shl 8)
 
 internal fun ByteArray.sealDex(size: Int = this.size) = sealDexAt(0, size)
 

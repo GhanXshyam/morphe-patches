@@ -5,6 +5,7 @@
 package app.morphe.patches.shared.misc.ijiami
 
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patches.shared.readInt
 import java.security.MessageDigest
 import java.util.zip.Adler32
 

@@ -5,6 +5,10 @@
 package app.morphe.patches.shared.misc.ijiami
 
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patches.shared.DEX_MAGIC
+import app.morphe.patches.shared.readInt
+import app.morphe.patches.shared.readShort
+import app.morphe.patches.shared.writeInt
 
 private const val FILE_SIZE_OFFSET = 32
 private const val MAP_OFF_OFFSET = 52
