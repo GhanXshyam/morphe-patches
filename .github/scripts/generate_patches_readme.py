@@ -299,6 +299,7 @@ ICONS = {
     "com.naraorganics.nara": "narababy.png",
     "com.jndapp.glass.widgets": "glasswidgets.png",
     "io.yuka.android": "yuka.png",
+    "com.viber.voip": "viber.png",
 }
 
 ICON_DIR = Path(".github/assets/icons")
