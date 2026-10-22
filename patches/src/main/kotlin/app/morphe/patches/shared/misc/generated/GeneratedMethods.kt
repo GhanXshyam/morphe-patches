@@ -8,7 +8,6 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
-import app.morphe.util.inputStreamFromBundledResource
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.formatter.DexFormatter
@@ -16,8 +15,6 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
-
-private const val REGISTERS_DIRECTIVE = ".registers "
 
 internal fun descriptor(method: MethodReference): String = DexFormatter.INSTANCE.getMethodDescriptor(method)
 
@@ -65,15 +62,6 @@ internal fun MutableClass.replaceMethod(name: String, registers: Int, smali: Str
             MutableMethodImplementation(registers),
         ).toMutable().apply { addInstructionsWithLabels(0, smali) },
     )
-}
-
-internal fun MutableClass.replaceMethod(name: String, resourceFolder: String, resourceName: String) {
-    val lines = inputStreamFromBundledResource(resourceFolder, "$resourceName.smali")
-        ?.use { it.readBytes().decodeToString().lines() }
-        ?: error("Missing $resourceFolder/$resourceName.smali")
-    val registersLine = lines.first()
-    check(registersLine.startsWith(REGISTERS_DIRECTIVE)) { "$resourceFolder/$resourceName.smali has no register count" }
-    replaceMethod(name, registersLine.removePrefix(REGISTERS_DIRECTIVE).toInt(), lines.drop(1).joinToString("\n"))
 }
 
 internal fun MutableClass.addDefaultConstructor() {
