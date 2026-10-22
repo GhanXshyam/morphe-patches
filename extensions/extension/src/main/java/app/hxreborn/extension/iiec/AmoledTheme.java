@@ -19,6 +19,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 
+import app.hxreborn.extension.shared.ActivityCallbacksAdapter;
+
 @SuppressWarnings("unused")
 public final class AmoledTheme {
 
@@ -61,7 +63,7 @@ public final class AmoledTheme {
         };
         preferences.registerOnSharedPreferenceChangeListener(editorThemeListener);
 
-        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+        application.registerActivityLifecycleCallbacks(new ActivityCallbacksAdapter() {
             @Override
             public void onActivityPreCreated(Activity activity, Bundle savedInstanceState) {
                 applyOverlay(activity);
@@ -80,26 +82,6 @@ public final class AmoledTheme {
                 if (applyOverlay(activity)) {
                     reapplyWindowBackground(activity);
                 }
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
             }
 
             @Override

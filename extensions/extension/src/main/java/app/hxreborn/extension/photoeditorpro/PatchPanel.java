@@ -41,6 +41,7 @@ import app.morphe.extension.shared.settings.EnumSetting;
 import app.morphe.extension.shared.settings.Setting;
 
 import app.hxreborn.extension.BuildConfig;
+import app.hxreborn.extension.shared.ActivityCallbacksAdapter;
 import app.hxreborn.extension.shared.Dimensions;
 
 public final class PatchPanel {
@@ -195,36 +196,12 @@ public final class PatchPanel {
     }
 
     public static void install(Application application) {
-        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+        application.registerActivityLifecycleCallbacks(new ActivityCallbacksAdapter() {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
                 if (activity.getClass().getName().endsWith(".SettingActivity")) {
                     attach(activity);
                 }
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
             }
         });
     }
