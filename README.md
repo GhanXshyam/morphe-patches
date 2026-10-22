@@ -17,11 +17,6 @@ settings tweaks for Proton Mail, Pass and VPN, Perplexity, MovieBox, Showly, Pro
 Network Analyzer, Cx File Explorer and the rest of the list below. Add the source in Morphe Manager,
 pick the app, and patch the APK on your phone.
 
-New patches and fixes go out as pre-releases first. To get them, open Sources in Morphe Manager, pick
-this bundle and turn on **Pre-release patches**; the
-[pre-release changelog](https://github.com/hxreborn/morphe-patches/blob/dev/CHANGELOG.md) lists what
-each one changes.
-
 ## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="48" align="absmiddle" alt="Patches"> Patches list
 
 <!-- PATCHES_START -->
