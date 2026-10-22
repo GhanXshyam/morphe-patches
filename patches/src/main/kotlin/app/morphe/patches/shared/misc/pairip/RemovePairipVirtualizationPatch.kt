@@ -25,11 +25,13 @@ import app.morphe.util.inputStreamFromBundledResource
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction10x
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction11x
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
+import com.android.tools.smali.dexlib2.dexbacked.DexBackedDexFile
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableFieldReference
@@ -45,6 +47,8 @@ private const val PAIRIP_APPLICATION_CLASS = "Lcom/pairip/application/Applicatio
 private const val EXTENSION_CLASS = "Lapp/hxreborn/extension/shared/PairipMethods;"
 private const val STRING_TYPE = "Ljava/lang/String;"
 private const val METHOD_TYPE = "Ljava/lang/reflect/Method;"
+private const val HASHED_KIND = "hash"
+private const val HEX_RADIX = 16
 private val HOISTED_TYPES = setOf(STRING_TYPE, METHOD_TYPE)
 
 private val PAIRIP_ASSET_MAGIC = byteArrayOf(0x00, 0x49, 0x41, 0x50, 0x02)
@@ -54,6 +58,7 @@ private const val DEX_FILE_SIZE_OFFSET = 0x20
 private const val KEY_DIGEST_BYTES = 8
 
 private val recoveredDexFiles = mutableListOf<ByteArray>()
+private var hoistedFields = emptyList<HoistedField>()
 private var isPairipPacked = false
 
 private fun ByteArray.indexOfSequence(sequence: ByteArray): Int {
@@ -95,6 +100,7 @@ internal fun recoverEmbeddedDex(asset: ByteArray): ByteArray? {
 private val extractRecoveredDexPatch = rawResourcePatch {
     execute {
         recoveredDexFiles.clear()
+        hoistedFields = emptyList()
         isPairipPacked = get("lib").listFiles { file -> file.isDirectory }
             ?.any { architecture -> architecture.resolve("libpairipcore.so").exists() } == true
         if (!isPairipPacked) return@execute
@@ -104,6 +110,13 @@ private val extractRecoveredDexPatch = rawResourcePatch {
         }
 
         check(recoveredDexFiles.isNotEmpty()) { "No dex file embedded in the pairip assets" }
+
+        val appDexFiles = generateSequence(1) { it + 1 }
+            .map { get(if (it == 1) "classes.dex" else "classes$it.dex") }
+            .takeWhile { it.exists() }
+            .map { it.readBytes() }
+            .toList()
+        hoistedFields = readHoistedFields("${packageMetadata.packageName}-${packageMetadata.versionCode}.tsv", appDexFiles)
     }
 }
 
@@ -215,7 +228,7 @@ private val removePairipResourcesPatch = rawResourcePatch {
     }
 }
 
-private class HoistedField(
+internal class HoistedField(
     val type: String,
     val className: String,
     val fieldName: String,
@@ -242,22 +255,45 @@ private fun String.unescape() = buildString {
 
 private fun String.toClassDescriptor() = "L${replace('.', '/')};"
 
-private fun readHoistedFields(tableName: String): List<HoistedField> {
-    val stream = inputStreamFromBundledResource("pairip", tableName)
+private fun hashPrefix(value: String): Long =
+    ByteBuffer.wrap(MessageDigest.getInstance("SHA-256").digest(value.toByteArray(Charsets.UTF_8))).long
+
+private fun findDexStrings(dexFiles: List<ByteArray>, hashes: Set<Long>): Map<Long, Set<String>> {
+    val found = mutableMapOf<Long, MutableSet<String>>()
+    dexFiles.forEach { dexFile ->
+        DexBackedDexFile(Opcodes.getDefault(), ByteBuffer.wrap(dexFile)).stringReferences.forEach { reference ->
+            val prefix = hashPrefix(reference.string)
+            if (prefix in hashes) found.getOrPut(prefix) { mutableSetOf() } += reference.string
+        }
+    }
+    return found
+}
+
+private fun readHoistedFields(tableName: String, dexFiles: List<ByteArray>): List<HoistedField> {
+    val rows = inputStreamFromBundledResource("pairip", tableName)
+        ?.bufferedReader()?.useLines { lines -> lines.filter { it.isNotEmpty() }.toList() }
         ?: throw IllegalStateException("Missing pairip/$tableName")
 
-    return stream.bufferedReader().useLines { lines ->
-        lines.filter { it.isNotEmpty() }.map { line ->
-            val (kind, className, fieldName, value) = line.split('\t', limit = 4)
+    return resolveHoistedFields(tableName, rows, dexFiles)
+}
 
-            val type = when (kind) {
-                "string" -> STRING_TYPE
-                "method" -> METHOD_TYPE
-                else -> throw IllegalStateException("Unknown kind $kind in pairip/$tableName")
+internal fun resolveHoistedFields(tableName: String, rows: List<String>, dexFiles: List<ByteArray>): List<HoistedField> {
+    val columns = rows.map { it.split('\t', limit = 4) }
+    val dexStrings = findDexStrings(dexFiles, columns.filter { it[0] == HASHED_KIND }.map { it[3].toULong(HEX_RADIX).toLong() }.toSet())
+
+    return columns.map { (kind, className, fieldName, value) ->
+        when (kind) {
+            "string" -> HoistedField(STRING_TYPE, className, fieldName, value.unescape())
+            "method" -> HoistedField(METHOD_TYPE, className, fieldName, value.unescape())
+            HASHED_KIND -> {
+                val matches = dexStrings[value.toULong(HEX_RADIX).toLong()].orEmpty()
+                check(matches.size == 1) {
+                    "$className.$fieldName: ${matches.size} strings in the app's dex match hash $value in pairip/$tableName"
+                }
+                HoistedField(STRING_TYPE, className, fieldName, matches.single())
             }
-
-            HoistedField(type, className, fieldName, value.unescape())
-        }.toList()
+            else -> throw IllegalStateException("Unknown kind $kind in pairip/$tableName")
+        }
     }
 }
 
@@ -293,7 +329,7 @@ val removePairipVirtualizationPatch = bytecodePatch {
         ) { "attachBaseContext not found on $PAIRIP_APPLICATION_CLASS" }
 
         val tableName = "${packageMetadata.packageName}-${packageMetadata.versionCode}.tsv"
-        val table = readHoistedFields(tableName).groupBy { it.className.toClassDescriptor() }
+        val table = hoistedFields.groupBy { it.className.toClassDescriptor() }
 
         val holders = mutableSetOf<String>()
         classDefForEach { classDef ->
