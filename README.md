@@ -17,10 +17,10 @@ unlocks for Proton Mail, Pass and VPN, Perplexity, MovieBox, Showly, Projectivy 
 Analyzer, Cx File Explorer and the rest of the list below. Add the source in Morphe Manager, pick the
 app, and patch the APK on your phone.
 
-Stable releases come from `main`. Every push to `dev` publishes a pre-release (`X.Y.Z-dev.N`) with
-changes awaiting confirmation: in Morphe Manager open Sources, this bundle, and turn on
-**Pre-release patches** to get them. What each pre-release changes is in the
-[dev changelog](https://github.com/hxreborn/morphe-patches/blob/dev/CHANGELOG.md).
+New patches and fixes go out as pre-releases first. To get them, open Sources in Morphe Manager, pick
+this bundle and turn on **Pre-release patches**; the
+[pre-release changelog](https://github.com/hxreborn/morphe-patches/blob/dev/CHANGELOG.md) lists what
+each one changes.
 
 ## 🩹 Patches list
 
