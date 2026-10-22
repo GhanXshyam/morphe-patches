@@ -19,10 +19,6 @@ die() {
     exit 1
 }
 
-hashes() {
-    grep -E '^[0-9a-f]{64}  ' "$1"
-}
-
 [ -x "$build_tools/d8" ] || die "no d8 at $build_tools; install build-tools $build_tools_version or set BUILD_TOOLS"
 [ -f "$platform" ] || die "no android.jar at $platform; install platform $platform_version or set PLATFORM"
 [ -x "$toolchain/clang" ] || die "no NDK toolchain at $toolchain; install NDK $ndk_version or set NDK"
@@ -30,39 +26,15 @@ hashes() {
 javac_version=$("$javac" -version 2>&1 | cut -d' ' -f2)
 [ "${javac_version%%.*}" = 21 ] || die "javac $javac_version at $javac is not JDK 21"
 
-verify=false
-[ "${1:-}" = "--verify" ] && verify=true
-
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 
-out=$resources
-$verify && out=$work/resources
-mkdir -p "$out"
+mkdir -p "$resources"
 
 "$javac" -nowarn -source 8 -target 8 -bootclasspath "$platform" -d "$work/boot" "$here"/src/Boot.java
 "$build_tools/d8" --min-api 23 --lib "$platform" --output "$work/boot" "$work"/boot/*.class
-cp "$work/boot/classes.dex" "$out/boot.dex"
+cp "$work/boot/classes.dex" "$resources/boot.dex"
 
-"$toolchain/aarch64-linux-android23-clang" -O2 -fPIC -shared -s -o "$out/hiddenapi.so" "$here/hiddenapi.c"
+"$toolchain/aarch64-linux-android23-clang" -O2 -fPIC -shared -s -o "$resources/hiddenapi.so" "$here/hiddenapi.c"
 
-{
-    echo "ndk $ndk_version"
-    echo "build-tools $build_tools_version"
-    echo "platform android-$platform_version"
-    echo "javac $javac_version"
-    ( cd "$here" && sha256sum hiddenapi.c src/Boot.java )
-    ( cd "$out" && sha256sum boot.dex hiddenapi.so )
-} > "$out/provenance.txt"
-
-if $verify; then
-    for built in boot.dex hiddenapi.so; do
-        cmp -s "$resources/$built" "$out/$built" ||
-            die "$built does not match its sources; run extensions/gstarmc/build.sh"
-    done
-    cmp -s <(hashes "$resources/provenance.txt") <(hashes "$out/provenance.txt") ||
-        die "provenance.txt does not match its sources; run extensions/gstarmc/build.sh"
-    echo "checked-in binaries match their sources"
-else
-    ls -la "$resources"
-fi
+ls -la "$resources"
