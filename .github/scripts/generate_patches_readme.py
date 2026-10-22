@@ -181,8 +181,6 @@ def versions_table(targets):
     return "\n".join(rows)
 
 
-# Package name -> icon file in .github/assets/icons/. Apps with no entry render
-# without an icon, so adding a new app does not require touching this map.
 ICONS = {
     "com.thesortdapp.sortd": "albo.png",
     "ir.ilmili.telegraph": "graphmessenger.png",
