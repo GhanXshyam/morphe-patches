@@ -50,6 +50,7 @@ dependencies {
     checkstyle(libs.spring.javaformat.checkstyle)
     implementation(libs.morphe.extensions.library)
     compileOnly(libs.okhttp)
+    compileOnly(libs.androidx.annotation)
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
     testImplementation(libs.okhttp)
