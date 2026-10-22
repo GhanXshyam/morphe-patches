@@ -9,9 +9,9 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patches.shared.misc.smali.addMethod
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.getReference
 import com.android.tools.smali.dexlib2.AccessFlags
-import com.android.tools.smali.dexlib2.formatter.DexFormatter
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
@@ -32,17 +32,17 @@ internal fun MutableClass.addSettingsRowMethod(
     val templateRow = templateCall.getReference<MethodReference>()!!
     val parameterTypes = templateRow.parameterTypes.map(CharSequence::toString)
     if (parameterTypes.any { it == "J" || it == "D" }) {
-        throw PatchException("Wide parameters are unsupported in ${DexFormatter.INSTANCE.getMethodDescriptor(templateRow)}")
+        throw PatchException("Wide parameters are unsupported in ${descriptor(templateRow)}")
     }
     if (parameterTypes[titleParameter] != "Ljava/lang/String;") {
         throw PatchException(
-            "Expected String title at parameter $titleParameter in ${DexFormatter.INSTANCE.getMethodDescriptor(templateRow)}",
+            "Expected String title at parameter $titleParameter in ${descriptor(templateRow)}",
         )
     }
     val onClickType = parameterTypes[onClickParameter]
     val composerParameter = composerParameter ?: parameterTypes.indexOf(COMPOSER_TYPE)
     if (composerParameter < 0) {
-        throw PatchException("No Composer parameter in ${DexFormatter.INSTANCE.getMethodDescriptor(templateRow)}")
+        throw PatchException("No Composer parameter in ${descriptor(templateRow)}")
     }
     val composerType = parameterTypes[composerParameter]
 
@@ -75,10 +75,10 @@ internal fun MutableClass.addSettingsRowMethod(
             check-cast v$onClickParameter, $onClickType
             move-object/from16 v$composerParameter, p0
             const v$defaultArgumentsParameter, $defaultArgumentsMask
-            invoke-static/range { v0 .. v$defaultArgumentsParameter }, ${DexFormatter.INSTANCE.getMethodDescriptor(templateRow)}
+            invoke-static/range { v0 .. v$defaultArgumentsParameter }, ${descriptor(templateRow)}
             return-void
         """,
     )
 
-    return DexFormatter.INSTANCE.getMethodDescriptor(method)
+    return descriptor(method)
 }

@@ -12,6 +12,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.misc.smali.addMethod
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -79,7 +80,7 @@ internal val hostPalettePatch = bytecodePatch {
 
         theme.method.addInstructions(
             constructorCallIndex + 1,
-            "invoke-static/range { v${constructorCall.startRegister} .. v${constructorCall.startRegister} }, ${captureMethod.descriptor()}",
+            "invoke-static/range { v${constructorCall.startRegister} .. v${constructorCall.startRegister} }, ${descriptor(captureMethod)}",
         )
     }
 }

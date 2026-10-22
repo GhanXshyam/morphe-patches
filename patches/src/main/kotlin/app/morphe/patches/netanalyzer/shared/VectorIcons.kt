@@ -15,6 +15,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patches.shared.misc.smali.addMethod
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -110,7 +111,7 @@ internal fun iconMethod(classDef: MutableClass, name: String, pathData: String):
             appendLine("new-instance v0, ${api.builderInit.definingClass}")
             appendLine("const-string v1, \"$name\"")
             api.builderArguments.forEach { (register, literal) -> appendLine(literal.format(register)) }
-            appendLine("invoke-direct/range { v0 .. v${api.builderRegisters - 1} }, ${api.builderInit.descriptor()}")
+            appendLine("invoke-direct/range { v0 .. v${api.builderRegisters - 1} }, ${descriptor(api.builderInit)}")
             appendLine("new-instance v1, $ARRAY_LIST_TYPE")
             appendLine("invoke-direct { v1 }, $ARRAY_LIST_TYPE-><init>()V")
             pathCommands(pathData).forEach { (command, values) ->
@@ -122,15 +123,15 @@ internal fun iconMethod(classDef: MutableClass, name: String, pathData: String):
                     values.forEachIndexed { value, number ->
                         appendLine("const v${value + 3}, ${number.toRawBits()}")
                     }
-                    appendLine("invoke-direct/range { v2 .. v${values.size + 2} }, ${node.descriptor()}")
+                    appendLine("invoke-direct/range { v2 .. v${values.size + 2} }, ${descriptor(node)}")
                 }
                 appendLine("invoke-virtual { v1, v2 }, $ARRAY_LIST_TYPE->add(Ljava/lang/Object;)Z")
             }
             appendLine("new-instance v2, ${api.brushInit.definingClass}")
             appendLine("sget-wide v3, ${api.black.definingClass}->${api.black.name}:${api.black.type}")
-            appendLine("invoke-direct { v2, v3, v4 }, ${api.brushInit.descriptor()}")
-            appendLine("invoke-static { v0, v1, v2 }, ${api.addPath.descriptor()}")
-            appendLine("invoke-virtual { v0 }, ${api.build.descriptor()}")
+            appendLine("invoke-direct { v2, v3, v4 }, ${descriptor(api.brushInit)}")
+            appendLine("invoke-static { v0, v1, v2 }, ${descriptor(api.addPath)}")
+            appendLine("invoke-virtual { v0 }, ${descriptor(api.build)}")
             appendLine("move-result-object v0")
             appendLine("sput-object v0, $cacheReference")
             appendLine(":done")

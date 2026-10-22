@@ -15,7 +15,6 @@ import app.morphe.patches.netanalyzer.shared.PING_RESULT_ROW
 import app.morphe.patches.netanalyzer.shared.PING_RESULT_ROW_PROBE
 import app.morphe.patches.netanalyzer.shared.addFeatureActivity
 import app.morphe.patches.netanalyzer.shared.composableParameters
-import app.morphe.patches.netanalyzer.shared.descriptor
 import app.morphe.patches.netanalyzer.shared.patchesMenuPatch
 import app.morphe.patches.netanalyzer.shared.rowChevronMethod
 import app.morphe.patches.netanalyzer.shared.toolbarActionsPatch
@@ -24,6 +23,7 @@ import app.morphe.patches.netanalyzer.shared.propertyFields
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.requireArm64
 import app.morphe.patches.shared.misc.smali.addMethod
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
@@ -60,7 +60,7 @@ val hostDetailsPatch = bytecodePatch(
         val composerRegister = spacerCall.getInstruction<FiveRegisterInstruction>().registerC
         spacer.method.replaceInstruction(
             spacerCall.index,
-            "invoke-static { v$composerRegister }, ${rowChevronMethod(spacer.classDef).descriptor()}",
+            "invoke-static { v$composerRegister }, ${descriptor(rowChevronMethod(spacer.classDef))}",
         )
 
         val row = PingResultRowBackgroundFingerprint.matchSingle()
@@ -103,7 +103,7 @@ val hostDetailsPatch = bytecodePatch(
                 const/4 v1, $CLICKABLE_ENABLED
                 const/4 v2, $CLICKABLE_NO_LABEL
                 const/4 v4, $CLICKABLE_NO_DEFAULTS
-                invoke-static/range { v0 .. v4 }, ${clickable.descriptor()}
+                invoke-static/range { v0 .. v4 }, ${descriptor(clickable)}
                 move-result-object v0
                 return-object v0
             """,
@@ -120,7 +120,7 @@ val hostDetailsPatch = bytecodePatch(
             """
                 move-object/from16 v$modifierCopy, v$modifierRegister
                 move-object/from16 v$probeCopy, v$probeRegister
-                invoke-static { v$modifierCopy, v$probeCopy }, ${clickableRow.descriptor()}
+                invoke-static { v$modifierCopy, v$probeCopy }, ${descriptor(clickableRow)}
                 move-result-object v$modifierCopy
                 move-object/from16 v$modifierRegister, v$modifierCopy
             """,

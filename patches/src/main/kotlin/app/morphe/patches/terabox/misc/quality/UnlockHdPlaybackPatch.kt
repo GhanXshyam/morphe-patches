@@ -12,6 +12,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.smali.addMethod
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.patches.terabox.misc.fix.signature.spoofSignaturePatch
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
@@ -20,7 +21,6 @@ import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.formatter.DexFormatter
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
@@ -48,7 +48,7 @@ internal val unlockHdPlaybackPatch = bytecodePatch {
                     0,
                     """
                         const/4 v$register, 0x1
-                        iput-boolean v$register, p0, ${DexFormatter.INSTANCE.getFieldDescriptor(waitingForMetadata)}
+                        iput-boolean v$register, p0, ${descriptor(waitingForMetadata)}
                     """,
                 )
             }
@@ -107,10 +107,10 @@ internal val unlockHdPlaybackPatch = bytecodePatch {
                 new-instance v1, Landroid/os/Bundle;
                 invoke-direct { v1 }, Landroid/os/Bundle;-><init>()V
                 const/4 v2, 0x0
-                iget-object v3, p0, ${DexFormatter.INSTANCE.getFieldDescriptor(finalInfo)}
-                invoke-direct { p0, v1, v2, v3, p1 }, ${DexFormatter.INSTANCE.getMethodDescriptor(reload.method)}
+                iget-object v3, p0, ${descriptor(finalInfo)}
+                invoke-direct { p0, v1, v2, v3, p1 }, ${descriptor(reload.method)}
                 const/16 v1, $MAIN_PLAYER_VIEW_ID
-                invoke-virtual { p0, v1, v2 }, ${DexFormatter.INSTANCE.getMethodDescriptor(switchResult)}
+                invoke-virtual { p0, v1, v2 }, ${descriptor(switchResult)}
                 :keep_stream
                 return v0
             """,

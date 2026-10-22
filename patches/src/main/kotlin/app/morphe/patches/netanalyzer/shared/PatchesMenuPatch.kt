@@ -12,6 +12,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patches.shared.misc.smali.addMethod
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.iface.Method
@@ -158,7 +159,7 @@ internal val patchesMenuPatch = bytecodePatch {
 
         aboutSection.method.insertBeforeStringLoad(
             sectionLabelIndex,
-            "invoke-static/range { v$composerRegister .. v$composerRegister }, ${rowsMethod.descriptor()}",
+            "invoke-static/range { v$composerRegister .. v$composerRegister }, ${descriptor(rowsMethod)}",
         )
     }
 }
@@ -190,5 +191,5 @@ private fun composableCall(
         appendLine("const/16 v${composerRegister + 2}, $mask")
     }
     val lastRegister = composerRegister + if (hasDefaults) 2 else 1
-    appendLine("invoke-static/range { v0 .. v$lastRegister }, ${composable.descriptor()}")
+    appendLine("invoke-static/range { v0 .. v$lastRegister }, ${descriptor(composable)}")
 }
