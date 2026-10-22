@@ -37,18 +37,26 @@ internal class SecShellPayload(private val container: SecShellContainer) {
 
     fun method(classType: String, name: String) = editor(dexContaining(classType)).method(classType, name)
 
+    fun methods(classType: String, name: String) = editor(dexContaining(classType)).methods(classType, name)
+
     fun prependToMethodUsingString(string: String, firstParameter: String, smali: String): String {
-        val matches = methodsUsingString(string, firstParameter)
-        val method = matches.singleOrNull()
-            ?: throw PatchException("Expected one method using \"$string\", found ${matches.size}")
+        val method = methodUsingString(string, firstParameter)
         method.addInstructions(0, smali)
         return method.definingClass
     }
 
-    fun methodsUsingString(string: String, firstParameter: String): List<MutableMethod> {
-        val entry = singleDex("\"$string\"") { it.hasString(string) }
-        return editor(entry).methodsUsingString(string, firstParameter)
+    fun methodUsingString(string: String, firstParameter: String? = null): MutableMethod {
+        val matches = methodsUsingString(string, firstParameter)
+        return matches.singleOrNull()
+            ?: throw PatchException("Expected one method using \"$string\", found ${matches.size}")
     }
+
+    fun methodsUsingString(string: String, firstParameter: String? = null) =
+        editorUsing(string).methodsUsingString(string, firstParameter)
+
+    fun instanceFields(classType: String) = editor(dexContaining(classType)).instanceFields(classType)
+
+    fun referencesInMethodUsing(string: String) = editorUsing(string).referencesInMethodUsing(string)
 
     fun addExtensionPackage(packageType: String, besideClass: String) {
         val extension = SecShellPayload::class.java.classLoader.getResourceAsStream(EXTENSION_DEX)
@@ -69,6 +77,8 @@ internal class SecShellPayload(private val container: SecShellContainer) {
         return owners.singleOrNull()
             ?: throw PatchException("Expected $subject in one payload dex, found ${owners.size}")
     }
+
+    private fun editorUsing(string: String) = editor(singleDex("\"$string\"") { it.hasString(string) })
 
     private fun editor(entry: String) = editors.getOrPut(entry) { SecShellDex(container.read(entry)) }
 }
