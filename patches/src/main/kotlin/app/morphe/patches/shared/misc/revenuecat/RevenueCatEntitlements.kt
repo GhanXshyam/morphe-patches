@@ -10,8 +10,17 @@ import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.matchSingle
 
 private const val EXTENSION_CLASS = "Lapp/hxreborn/extension/shared/RevenueCatUnlock;"
+private const val GRANT = "$EXTENSION_CLASS->grantEntitlement(Lorg/json/JSONObject;Ljava/lang/String;Ljava/lang/String;)V"
+private const val GRANT_LIFETIME =
+    "$EXTENSION_CLASS->grantLifetimeEntitlement(Lorg/json/JSONObject;Ljava/lang/String;Ljava/lang/String;)V"
 
-internal fun BytecodePatchContext.grantRevenueCatEntitlements(vararg entitlements: Pair<String, String>) {
+internal fun BytecodePatchContext.grantRevenueCatEntitlements(vararg entitlements: Pair<String, String>) =
+    injectGrants(GRANT, entitlements)
+
+internal fun BytecodePatchContext.grantRevenueCatLifetimeEntitlement(entitlement: String, product: String) =
+    injectGrants(GRANT_LIFETIME, arrayOf(entitlement to product))
+
+private fun BytecodePatchContext.injectGrants(grant: String, entitlements: Array<out Pair<String, String>>) {
     BuildCustomerInfoFingerprint.matchSingle().method.apply {
         val registers = getFreeRegisterProvider(0, 3)
         val jsonRegister = registers.getFreeRegister4Bit()
@@ -22,7 +31,7 @@ internal fun BytecodePatchContext.grantRevenueCatEntitlements(vararg entitlement
             """
                 const-string v$entitlementRegister, "$entitlement"
                 const-string v$productRegister, "$product"
-                invoke-static { v$jsonRegister, v$entitlementRegister, v$productRegister }, $EXTENSION_CLASS->grantEntitlement(Lorg/json/JSONObject;Ljava/lang/String;Ljava/lang/String;)V
+                invoke-static { v$jsonRegister, v$entitlementRegister, v$productRegister }, $grant
             """
         }
 
