@@ -1,3 +1,9 @@
+## [1.59.0-dev.6](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.5...v1.59.0-dev.6) (2026-10-22)
+
+### Bug Fixes
+
+* **Musicolet - Unlock premium:** restore widget play and pause ([a1cc317](https://github.com/hxreborn/morphe-patches/commit/a1cc317342c79f55688b1308028da3fcf012e206))
+
 ## [1.59.0-dev.5](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.4...v1.59.0-dev.5) (2026-10-22)
 
 ### Bug Fixes
