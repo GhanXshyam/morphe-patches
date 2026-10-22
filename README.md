@@ -10,12 +10,9 @@
   <img alt="Add to Morphe" src="https://img.shields.io/badge/Morphe-Add%20this%20source-00A8FF?style=for-the-badge" height="32"/>
 </a>
 
-</div>
+AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps.
 
-Patches for [Morphe](https://morphe.software): AMOLED themes, ad removal, tracking removal and
-settings tweaks for Proton Mail, Pass and VPN, Perplexity, MovieBox, Showly, Projectivy Launcher,
-Network Analyzer, Cx File Explorer and the rest of the list below. Add the source in Morphe Manager,
-pick the app, and patch the APK on your phone.
+</div>
 
 ## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="48" align="absmiddle" alt="Patches"> Patches list
 
