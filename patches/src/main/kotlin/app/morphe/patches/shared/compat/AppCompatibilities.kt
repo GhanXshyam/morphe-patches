@@ -1141,7 +1141,7 @@ internal object AppCompatibilities {
         apkFileType = ApkFileType.APKS_REQUIRED,
         appIconColor = 0xF2CF7F,
         signatures = setOf("89c58e85cc8fa88481577d6c237043f975c44765ef98f622385ecafac2f9694c"),
-        targets = listOf(AppTarget(version = "1.0.216", minSdk = 24)),
+        targets = listOf(AppTarget(version = "1.0.216", versionCode = 216, minSdk = 24)),
     )
 
     val RISE = Compatibility(
@@ -1150,12 +1150,12 @@ internal object AppCompatibilities {
         apkFileType = ApkFileType.APKS,
         appIconColor = 0x8E58FF,
         targets = listOf(
-            AppTarget(version = "Android V1.79.2", minSdk = 26),
-            AppTarget(version = "Android V1.79.1", minSdk = 26),
-            AppTarget(version = "Android V1.78.52", minSdk = 26),
-            AppTarget(version = "Android V1.78.51", minSdk = 26),
-            AppTarget(version = "Android V1.78.49", minSdk = 26),
-            AppTarget(version = "Android V1.78.47", minSdk = 26),
+            AppTarget(version = "Android V1.79.2", versionCode = 1792510364, minSdk = 26),
+            AppTarget(version = "Android V1.79.1", versionCode = 1792167278, minSdk = 26),
+            AppTarget(version = "Android V1.78.52", versionCode = 1791404757, minSdk = 26),
+            AppTarget(version = "Android V1.78.51", versionCode = 1789498935, minSdk = 26),
+            AppTarget(version = "Android V1.78.49", versionCode = 1788442704, minSdk = 26),
+            AppTarget(version = "Android V1.78.47", versionCode = 1786018144, minSdk = 26),
         ),
     )
 
