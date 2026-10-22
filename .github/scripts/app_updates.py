@@ -19,7 +19,7 @@ from pathlib import Path
 from urllib.parse import unquote
 
 import requests
-from versions import build_tags, compare, tracked_version, version_key
+from versions import APP_UPDATE_TITLE_PREFIX, build_tags, compare, tracked_version, version_key
 
 TRACKER_REPO = "https://github.com/rushiranpise/patches-tracker"
 TRACKER_SHA = "b41567ad88e784f04c8a60f1cd11e4c956d8e57a"
@@ -557,7 +557,7 @@ def sync_issues(apps, results, bundle_version):
     names = [app["name"] for app in apps.values()]
     for record in results:
         app = apps[record["package"]]
-        prefix = f"[App Update]: {app['name']} "
+        prefix = f"{APP_UPDATE_TITLE_PREFIX}{app['name']} "
         candidate = record["candidate"] if record["status"] == "update" else None
         open_same = None
         open_newer = False

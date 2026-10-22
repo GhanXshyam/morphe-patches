@@ -2,6 +2,7 @@ import re
 
 ABIS = {"arm64", "armeabi", "armv7", "x86", "x86_64"}
 PRERELEASE = {"alpha", "beta", "rc", "pre", "preview", "dev", "canary", "snapshot"}
+APP_UPDATE_TITLE_PREFIX = "[App Update]: "
 BUILD_TAG = re.compile(r"(?<![a-z0-9])(arm64(-v8a)?|armeabi(-v7a)?|armv7|x86(_64)?|tv|universal)(?![a-z0-9])")
 
 
@@ -48,9 +49,9 @@ def same_variant(version, target):
 
 
 def tracked_version(title, app, app_names):
-    prefix = f"[App Update]: {app} "
+    prefix = f"{APP_UPDATE_TITLE_PREFIX}{app} "
     if not title.startswith(prefix) or any(
-        len(other) > len(app) and title.startswith(f"[App Update]: {other} ") for other in app_names
+        len(other) > len(app) and title.startswith(f"{APP_UPDATE_TITLE_PREFIX}{other} ") for other in app_names
     ):
         return None
     version = title[len(prefix):]
