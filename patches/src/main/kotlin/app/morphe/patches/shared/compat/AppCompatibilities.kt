@@ -1,9 +1,6 @@
 /*
  * Copyright (C) 2026 hxreborn
  * SPDX-License-Identifier: GPL-3.0-only
- *
- * Central Morphe `Compatibility` metadata so Morphe Manager shows human-readable
- * app names and icons. Targets gate patching. An unlisted app version is refused.
  */
 package app.morphe.patches.shared.compat
 
