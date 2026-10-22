@@ -20,7 +20,7 @@ private const val PRODUCT = "pro_version"
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
     name = "Unlock premium",
-    description = "Grants the pro entitlement, which removes the ads and the paywalled tools.",
+    description = "Unlocks the Pro tools and removes ads.",
 ) {
     compatibleWith(AppCompatibilities.ALL_IN_ONE_CALCULATOR)
     extendWith("extensions/extension.mpe")
