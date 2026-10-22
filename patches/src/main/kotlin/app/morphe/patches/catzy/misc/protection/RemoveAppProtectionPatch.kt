@@ -13,10 +13,7 @@ import app.morphe.patches.shared.misc.arm64Availability
 import app.morphe.patches.shared.misc.pairip.removePairipProtectionPatch
 import app.morphe.patches.shared.misc.pairip.removePairipVirtualizationPatch
 
-val removeAppProtectionPatch = bytecodePatch(
-    name = "Remove app protection",
-    description = "Lets a patched build start.",
-) {
+val removeAppProtectionPatch = bytecodePatch {
     compatibleWith(AppCompatibilities.CATZY)
 
     availability(arm64Availability(PatchAvailability.REQUIRED))
