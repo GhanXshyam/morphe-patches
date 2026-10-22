@@ -20,9 +20,9 @@ private const val CONFIG_OFFSET = 12
 
 private val SUPPORTED_PAYLOAD_MAGIC = byteArrayOf(0x71, 0x68, 0x00, 0x01)
 
-private fun ByteArray.sealDex() = apply {
+private fun ByteArray.sealDexChecksum() = apply {
     writeInt(FILE_SIZE_OFFSET, size)
-    writeInt(CHECKSUM_OFFSET, Adler32().apply { update(this@sealDex, 12, size - 12) }.value.toInt())
+    writeInt(CHECKSUM_OFFSET, Adler32().apply { update(this@sealDexChecksum, 12, size - 12) }.value.toInt())
 }
 
 // Cipher region from keystream offset 0, ZSTD magic included
@@ -90,7 +90,7 @@ internal class JiaguDex(private val bytes: ByteArray) {
         }.toByteArray()
         rebuilt.writeInt(4, rebuilt.size - 8)
 
-        return (stub + rebuilt).sealDex()
+        return (stub + rebuilt).sealDexChecksum()
     }
 
     fun withStub(replacement: ByteArray): ByteArray {
@@ -113,7 +113,7 @@ internal class JiaguDex(private val bytes: ByteArray) {
             )
         }
 
-        return (replacement + payload).sealDex()
+        return (replacement + payload).sealDexChecksum()
     }
 
     private companion object {

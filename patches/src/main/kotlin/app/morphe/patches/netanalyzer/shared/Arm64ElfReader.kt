@@ -33,7 +33,7 @@ private const val PROGRAM_TYPE_LOAD = 1
 
 private const val FUNCTION_SCAN_LIMIT = 128
 
-internal class ElfImage(private val bytes: ByteArray) {
+internal class Arm64ElfReader(private val bytes: ByteArray) {
 
     private val buffer = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN)
 
