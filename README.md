@@ -7,7 +7,7 @@
 [![Ko-fi badge](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/hxreborn)
 
 <a href="https://morphe.software/add-source?github=hxreborn/morphe-patches" title="Add this source to Morphe">
-  <img alt="Add to Morphe" src="https://img.shields.io/badge/Morphe-Add%20this%20source-00A8FF?style=for-the-badge" height="38"/>
+  <img alt="Add to Morphe" src="https://img.shields.io/badge/Morphe-Add%20this%20source-00A8FF?style=for-the-badge" height="32"/>
 </a>
 
 </div>
@@ -22,7 +22,7 @@ this bundle and turn on **Pre-release patches**; the
 [pre-release changelog](https://github.com/hxreborn/morphe-patches/blob/dev/CHANGELOG.md) lists what
 each one changes.
 
-## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="24" alt="Patches"> Patches list
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="32" alt="Patches"> Patches list
 
 <!-- PATCHES_START -->
 > **[v1.58.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.58.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;296 patches total
@@ -208,7 +208,7 @@ each one changes.
 </tr>
 </table>
 
-## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/full-list.png" height="24" alt="Full list"> Full list
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/full-list.png" height="32" alt="Full list"> Full list
 
 <a id="1weather"></a>
 <details>
@@ -2287,18 +2287,18 @@ each one changes.
 
 <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/request.png" width="96" align="left" alt="">
 
-**Want to request an app?**<br>Check the [open requests](https://github.com/hxreborn/morphe-patches/discussions/categories/app-requests?discussions_q=is%3Aopen+category%3A%22App+Requests%22+sort%3Atop) first and upvote yours if it is there. If it isn't, open an [app request](https://github.com/hxreborn/morphe-patches/discussions/new?category=app-requests) with its Play Store link and package name, and pick the features you want.<br>Requests with many upvotes get looked at first, but what ships is whatever I can verify on a device, in no fixed order. Skipped: features the server enforces, region locks, and apps another bundle already patches.
+**Want an app patched?**<br>Upvote it in the [open requests](https://github.com/hxreborn/morphe-patches/discussions/categories/app-requests?discussions_q=is%3Aopen+category%3A%22App+Requests%22+sort%3Atop), or open an [app request](https://github.com/hxreborn/morphe-patches/discussions/new?category=app-requests) with the Play Store link, the package name and the features you want.<br>Upvotes set the order, a device check sets what ships. Not taken: features the server enforces, region locks, and apps another bundle already patches.
 
 <br clear="left">
 
 &nbsp;
-## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/installing.png" height="24" alt="Installing"> Installing
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/installing.png" height="32" alt="Installing"> Installing
 
 [Add this source](https://morphe.software/add-source?github=hxreborn/morphe-patches) to Morphe
 Manager, then patch any app listed above.
 
 &nbsp;
-## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/building.png" height="24" alt="Building"> Building
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/building.png" height="32" alt="Building"> Building
 
 You need Java 21 and a GitHub token with `read:packages`:
 
@@ -2310,7 +2310,7 @@ The build writes the bundle to `patches/build/libs/`. See the
 [Morphe documentation](https://github.com/MorpheApp/morphe-documentation) for setup instructions.
 
 &nbsp;
-## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/disclaimer.png" height="24" alt="Disclaimer"> Disclaimer
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/disclaimer.png" height="32" alt="Disclaimer"> Disclaimer
 
 These patches are provided as is, without warranty of any kind, for **educational and personal
 use only**.
@@ -2335,7 +2335,7 @@ use only**.
   reviewed promptly and in good faith
 
 &nbsp;
-## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/license.png" height="24" alt="License"> License
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/license.png" height="32" alt="License"> License
 
 hxreborn’s patches are licensed under the [GNU General Public License v3.0](LICENSE), with
 additional conditions under GPLv3 Section 7 inherited from Morphe:
