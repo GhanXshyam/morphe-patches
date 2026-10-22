@@ -16,6 +16,7 @@ import app.morphe.util.findInstructionIndicesReversed
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionOrThrow
+import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
@@ -148,7 +149,7 @@ val unlockPremiumPatch = rawResourcePatch(
             val rechargeSheetClass = methodUsingString(RECHARGE_COUNTDOWN_COLOR).definingClass
             methods(rechargeSheetClass).single {
                 it.returnType == "V" && it.parameterTypes.size == 2 && it.parameterTypes[1] == "Ljava/lang/String;"
-            }.addInstructions(0, "return-void")
+            }.returnEarly()
             methods(VIDEO_BODY_CLASS, "<init>")
                 .filter { DEFAULT_CONSTRUCTOR_MARKER !in it.parameterTypes && it.parameterTypes.getOrNull(3) == "Ljava/lang/Integer;" }
                 .maxBy { it.parameterTypes.size }
