@@ -9,6 +9,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.smali.descriptor
+import app.morphe.util.findInstructionIndicesReversed
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionReversedOrThrow
 import app.morphe.util.matchSingle
@@ -46,13 +47,12 @@ val unlockPremiumPatch = bytecodePatch(
         // every launch, without depending on product IDs, saved purchases or which whips exist.
         var writes = 0
         whipClass.methods.forEach { method ->
-            val instructions = method.implementation?.instructions?.toList() ?: return@forEach
+            if (method.implementation == null) return@forEach
 
-            instructions.withIndex().filter { (_, instruction) ->
-                instruction.opcode == Opcode.IPUT_BOOLEAN &&
-                    instruction.getReference<FieldReference>() == ownedField
-            }.reversed().forEach { (index, instruction) ->
-                val write = instruction as TwoRegisterInstruction
+            method.findInstructionIndicesReversed {
+                opcode == Opcode.IPUT_BOOLEAN && getReference<FieldReference>() == ownedField
+            }.forEach { index ->
+                val write = method.getInstruction<TwoRegisterInstruction>(index)
 
                 method.addInstructions(
                     index + 1,

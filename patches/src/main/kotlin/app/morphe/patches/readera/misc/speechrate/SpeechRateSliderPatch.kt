@@ -15,6 +15,7 @@ import app.morphe.patches.shared.misc.requireArm64
 import app.morphe.patches.shared.misc.smali.addMethod
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
+import app.morphe.util.indexOfFirstInstructionReversed
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -65,9 +66,7 @@ val speechRateSliderPatch = bytecodePatch(
             val rootField = it.instructionMatches[0].instruction.getReference<FieldReference>()!!
             val seekBarId = it.method.getInstruction<WideLiteralInstruction>(it.instructionMatches[1].index).wideLiteral
             val labelId = it.method.getInstruction<WideLiteralInstruction>(it.instructionMatches[4].index).wideLiteral
-            val returnIndex = it.method.implementation!!.instructions.indexOfLast { instruction ->
-                instruction.opcode == Opcode.RETURN_VOID
-            }
+            val returnIndex = it.method.indexOfFirstInstructionReversed(Opcode.RETURN_VOID)
             val registers = it.method.getFreeRegisterProvider(returnIndex, 3)
             val rootRegister = registers.getFreeRegister4Bit()
             val seekBarRegister = registers.getFreeRegister4Bit()
