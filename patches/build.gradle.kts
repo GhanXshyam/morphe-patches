@@ -35,6 +35,10 @@ dependencies {
 tasks {
     jar {
         exclude("ar/com/hjg/pngj/pixels/ImageLine*.class")
+        exclude("LICENSE.txt", "NOTICE.txt")
+        from(rootProject.file("LICENSE"))
+        from(rootProject.file("NOTICE"))
+        from(rootProject.file("third-party/licenses")) { into("META-INF/third-party/licenses") }
 
         doLast {
             val desktopOnlyPackages = listOf("java/awt/", "javax/imageio/", "javax/swing/")
