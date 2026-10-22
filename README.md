@@ -2347,7 +2347,8 @@ Manager, then patch any app listed above.
 &nbsp;
 ## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/building.png" height="48" align="absmiddle" alt="Building"> Building
 
-You need Java 21 and a GitHub token with `read:packages`:
+You need Java 21, the Android SDK (`ANDROID_HOME` or `sdk.dir` in `local.properties`) and a GitHub
+token with `read:packages`:
 
 ```bash
 ./gradlew buildAndroid
