@@ -22,7 +22,7 @@ this bundle and turn on **Pre-release patches**; the
 [pre-release changelog](https://github.com/hxreborn/morphe-patches/blob/dev/CHANGELOG.md) lists what
 each one changes.
 
-## 🩹 Patches list
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="24" alt="Patches"> Patches list
 
 <!-- PATCHES_START -->
 > **[v1.58.0](https://github.com/hxreborn/morphe-patches/releases/tag/v1.58.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;296 patches total
@@ -208,7 +208,7 @@ each one changes.
 </tr>
 </table>
 
-## 📋 Full list
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/full-list.png" height="24" alt="Full list"> Full list
 
 <a id="1weather"></a>
 <details>
@@ -2292,13 +2292,13 @@ each one changes.
 <br clear="left">
 
 &nbsp;
-## 📲 Installing
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/installing.png" height="24" alt="Installing"> Installing
 
 [Add this source](https://morphe.software/add-source?github=hxreborn/morphe-patches) to Morphe
 Manager, then patch any app listed above.
 
 &nbsp;
-## 🛠️ Building
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/building.png" height="24" alt="Building"> Building
 
 You need Java 21 and a GitHub token with `read:packages`:
 
@@ -2310,7 +2310,7 @@ The build writes the bundle to `patches/build/libs/`. See the
 [Morphe documentation](https://github.com/MorpheApp/morphe-documentation) for setup instructions.
 
 &nbsp;
-## ⚖️ Disclaimer
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/disclaimer.png" height="24" alt="Disclaimer"> Disclaimer
 
 These patches are provided as is, without warranty of any kind, for **educational and personal
 use only**.
@@ -2335,7 +2335,7 @@ use only**.
   reviewed promptly and in good faith
 
 &nbsp;
-## 📜 License
+## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/license.png" height="24" alt="License"> License
 
 hxreborn’s patches are licensed under the [GNU General Public License v3.0](LICENSE), with
 additional conditions under GPLv3 Section 7 inherited from Morphe:
