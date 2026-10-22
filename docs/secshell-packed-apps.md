@@ -46,8 +46,6 @@ result against every payload dex: each decrypted header checksum must equal that
 - In 2.1.3 ART verifies the stub dex checksum, which now covers the payload:
   `Failure to verify dex file ... Bad checksum`, then `ClassNotFoundException` for
   `com.SecShell.SecShell.AP`.
-- Reading `/proc/<pid>/mem` or attaching Frida kills the app; `process_vm_readv` reads the in-memory
-  dex without a kill.
 
 2.1.1 restores the jar entry's CRC32 with four forged bytes in the inner zip's end record comment.
 2.1.3 has to keep both the stub adler32 and the `classes.dex` CRC32 right at once. It writes byte
