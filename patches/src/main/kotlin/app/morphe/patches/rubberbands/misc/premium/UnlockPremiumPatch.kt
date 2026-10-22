@@ -15,8 +15,8 @@ private const val PRODUCT = "rb_unlocked"
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
     name = "Unlock premium",
-    description = "Unlocks running and logging workouts, progress tracking and personal records " +
-        "(AI workout generation is not included).",
+    description = "Unlocks running and logging workouts, progress tracking and personal records. " +
+        "AI workout generation is not included.",
 ) {
     compatibleWith(AppCompatibilities.RUBBER_BANDS)
     extendWith("extensions/extension.mpe")
