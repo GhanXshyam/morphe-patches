@@ -28,6 +28,8 @@ private const val MACHINE_X86_64 = 62
 private const val MACHINE_AARCH64 = 183
 
 private const val PAIRIP_RUNTIME_LIBRARY = "libpairipcore.so"
+private const val ELF32_HEADER_SIZE = 52
+private val ELF_MAGIC = byteArrayOf(0x7F, 'E'.code.toByte(), 'L'.code.toByte(), 'F'.code.toByte())
 private const val PAIRIP_RUNNER_SYMBOL = "ExecuteProgram"
 private const val GLOBAL_FUNCTION_SYMBOL = (1 shl 4) or 2
 private const val SYMBOL_VERSION_GLOBAL = 1
@@ -80,18 +82,32 @@ internal class ElfImage(private val bytes: ByteArray) {
 
     private val programs = List(programCount) { readSegment(programOffset + it * programEntrySize) }
     private val sections = List(sectionCount) { readSection(sectionOffset + it * sectionEntrySize) }
-    private val sectionsByName = sections.associateBy { cString(sections[sectionNamesIndex].offset.toInt() + it.name) }
+    private val sectionsByName by lazy { sections.associateBy { cString(sections[sectionNamesIndex].offset.toInt() + it.name) } }
 
-    private val jumpSlotType = when (machine) {
-        MACHINE_AARCH64 -> 1026L
-        MACHINE_X86_64 -> 7L
-        MACHINE_ARM -> 22L
-        else -> throw IllegalStateException("Unsupported ELF machine $machine")
+    private val jumpSlotType by lazy {
+        when (machine) {
+            MACHINE_AARCH64 -> 1026L
+            MACHINE_X86_64 -> 7L
+            MACHINE_ARM -> 22L
+            else -> throw IllegalStateException("Unsupported ELF machine $machine")
+        }
     }
     private val relocationSection = if (wide) ".rela.plt" else ".rel.plt"
     private val relocationSize = if (wide) 24 else 8
     private val symbolSize = if (wide) 24 else 16
     private val dynamicEntrySize = if (wide) 16 else 8
+
+    fun needsPairipRuntime(): Boolean {
+        val dynamic = programs.singleOrNull { it.type == PT_DYNAMIC } ?: return false
+        val entries = readDynamicEntries(dynamic.offset.toInt(), (dynamic.fileSize / dynamicEntrySize).toInt())
+        val stringTable = entries.singleOrNull { it.tag == DT_STRTAB }?.value ?: return false
+        val strings = fileOffset(stringTable) ?: return false
+        return entries.any { it.tag == DT_NEEDED && cString(strings + it.value.toInt()) == PAIRIP_RUNTIME_LIBRARY }
+    }
+
+    private fun fileOffset(address: Long) = programs
+        .firstOrNull { it.type == PT_LOAD && address >= it.vaddr && address < it.vaddr + it.fileSize }
+        ?.let { (it.offset + address - it.vaddr).toInt() }
 
     fun withoutPairipRuntime(imports: List<HiddenImport>): ByteArray {
         val dynamic = programs.single { it.type == PT_DYNAMIC }
@@ -328,3 +344,6 @@ internal class ElfImage(private val bytes: ByteArray) {
         }
     }
 }
+
+internal fun ByteArray.isPairipWrappedLibrary() =
+    size >= ELF32_HEADER_SIZE && copyOf(ELF_MAGIC.size).contentEquals(ELF_MAGIC) && ElfImage(this).needsPairipRuntime()

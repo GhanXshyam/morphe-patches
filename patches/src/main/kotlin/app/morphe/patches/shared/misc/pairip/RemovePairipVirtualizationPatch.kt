@@ -21,6 +21,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patches.shared.compat.AppCompatibilities
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.inputStreamFromBundledResource
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -58,6 +59,7 @@ private const val DEX_FILE_SIZE_OFFSET = 0x20
 private const val KEY_DIGEST_BYTES = 8
 
 private val recoveredDexFiles = mutableListOf<ByteArray>()
+private val virtualizedCodeAssets = mutableListOf<File>()
 private var hoistedFields = emptyList<HoistedField>()
 private var isPairipPacked = false
 
@@ -78,6 +80,18 @@ private fun ByteArray.readLittleEndianInt(offset: Int) =
         ((this[offset + 1].toInt() and 0xFF) shl 8) or
         ((this[offset + 2].toInt() and 0xFF) shl 16) or
         ((this[offset + 3].toInt() and 0xFF) shl 24)
+
+private fun File.isVirtualizedCode(): Boolean {
+    val header = ByteArray(PAIRIP_ASSET_MAGIC.size)
+    return inputStream().use { it.read(header) == header.size } && header.contentEquals(PAIRIP_ASSET_MAGIC)
+}
+
+private fun pairipBuildLines(packageName: String, versionCode: String, extension: String): List<String> {
+    val name = "$packageName-$versionCode.$extension"
+    return inputStreamFromBundledResource("pairip", name)
+        ?.bufferedReader()?.useLines { lines -> lines.filter { it.isNotEmpty() }.toList() }
+        ?: throw PatchException("Missing pairip/$name")
+}
 
 internal fun recoverEmbeddedDex(asset: ByteArray): ByteArray? {
     if (asset.size < PAIRIP_ASSET_MAGIC.size) return null
@@ -100,12 +114,14 @@ internal fun recoverEmbeddedDex(asset: ByteArray): ByteArray? {
 private val extractRecoveredDexPatch = rawResourcePatch {
     execute {
         recoveredDexFiles.clear()
+        virtualizedCodeAssets.clear()
         hoistedFields = emptyList()
         isPairipPacked = get("lib").listFiles { file -> file.isDirectory }
             ?.any { architecture -> architecture.resolve("libpairipcore.so").exists() } == true
         if (!isPairipPacked) return@execute
 
-        get("assets").listFiles { file -> file.isFile }?.forEach { asset ->
+        get("assets").listFiles { file -> file.isFile && file.isVirtualizedCode() }?.forEach { asset ->
+            virtualizedCodeAssets += asset
             recoverEmbeddedDex(asset.readBytes())?.let { recoveredDexFiles += it }
         }
 
@@ -116,7 +132,11 @@ private val extractRecoveredDexPatch = rawResourcePatch {
             .takeWhile { it.exists() }
             .map { it.readBytes() }
             .toList()
-        hoistedFields = readHoistedFields("${packageMetadata.packageName}-${packageMetadata.versionCode}.tsv", appDexFiles)
+        hoistedFields = resolveHoistedFields(
+            "${packageMetadata.packageName}-${packageMetadata.versionCode}.tsv",
+            pairipBuildLines(packageMetadata.packageName, packageMetadata.versionCode, "tsv"),
+            appDexFiles,
+        )
     }
 }
 
@@ -124,54 +144,15 @@ private val mergeRecoveredDexPatch = bytecodePatch {
     dependsOn(extractRecoveredDexPatch)
 
     extendWithAll {
-        if (isPairipPacked) {
-            recoveredDexFiles.map { dex -> Supplier { ByteArrayInputStream(dex) } }
-        } else {
-            emptyList()
-        }
+        recoveredDexFiles.map { dex -> Supplier { ByteArrayInputStream(dex) } }
     }
 }
 
-private val PAIRIP_HOOKED_LIBRARIES = mapOf(
-    "all.in.one.calculator" to mapOf(
-        "libflutter" to "libflutter.so",
-        "libfastdev" to "libfastdev_quickjs_runtime.so",
-    ),
-    "com.darinsoft.vimo" to mapOf(
-        "libNvEffectSdkCore" to "libNvEffectSdkCore.so",
-        "libonnxruntime" to "libonnxruntime.so",
-        "libmediapipe_tasks_vision_jni" to "libmediapipe_tasks_vision_jni.so",
-    ),
-    "com.hitrolab.audioeditor" to mapOf(
-        "libavcodec" to "libavcodec.so",
-        "libavfilter" to "libavfilter.so",
-        "libavformat" to "libavformat.so",
-    ),
-    "com.nieruo.healthapp" to mapOf(
-        "librealmc" to "librealmc.so",
-    ),
-    "com.lingodeer" to mapOf(
-        "libmp3lamest" to "libmp3lamest.so",
-        "librenderscript-toolkit" to "librenderscript-toolkit.so",
-        "libskegn" to "libskegn.so",
-    ),
-    "flar2.devcheck" to mapOf(
-        "libbenchmarksuite" to "libbenchmarksuite.so",
-        "libdevcheck" to "libdevcheck.so",
-        "libvulkan_info" to "libvulkan_info.so",
-    ),
-    "in.krosbits.musicolet" to mapOf(
-        "lib_musicolet" to "lib_musicolet.so",
-    ),
-    "me.proton.android.lumo" to mapOf(
-        "libaccount_crux_ffi" to "libaccount_crux_ffi.so",
-        "libjnidispatch" to "libjnidispatch.so",
-        "libvosk" to "libvosk.so",
-    ),
-    "io.yuka.android" to mapOf(
-        "librealmc" to "librealmc.so",
-        "libscanditsdk" to "libscanditsdk.so",
-    ),
+private val LIBRARIES_LEFT_WRAPPED = setOf(
+    "libapplovin-native-crash-reporter.so",
+    "libconceal.so",
+    "libparams.so",
+    "libtraffic_interface1.so",
 )
 
 private class WrappedLibrary(val file: File, val wrapped: ByteArray, val keyName: String, val key: ByteArray?)
@@ -184,17 +165,16 @@ private val removePairipResourcesPatch = rawResourcePatch {
     execute {
         if (!isPairipPacked) return@execute
 
-        val hookedLibraries = PAIRIP_HOOKED_LIBRARIES[packageMetadata.packageName].orEmpty()
-        var restoredLibraries = 0
         var removedRuntimes = 0
         get("lib").listFiles { file -> file.isDirectory }?.forEach { architecture ->
-            val libraries = hookedLibraries.mapNotNull { (name, fileName) ->
-                architecture.resolve(fileName).takeIf { it.exists() }?.let { file ->
-                    val wrapped = file.readBytes()
-                    val digestPrefix = wrapped.sha256().take(KEY_DIGEST_BYTES).joinToString("") { "%02x".format(it) }
-                    val keyName = "key-${architecture.name}-$name-$digestPrefix.bin"
-                    WrappedLibrary(file, wrapped, keyName, inputStreamFromBundledResource("pairip", keyName)?.use { it.readBytes() })
-                }
+            val libraries = architecture.listFiles { file ->
+                file.name.endsWith(".so") && file.name !in LIBRARIES_LEFT_WRAPPED
+            }.orEmpty().mapNotNull { file ->
+                val wrapped = file.readBytes()
+                if (!wrapped.isPairipWrappedLibrary()) return@mapNotNull null
+                val digestPrefix = wrapped.sha256().take(KEY_DIGEST_BYTES).joinToString("") { "%02x".format(it) }
+                val keyName = "key-${architecture.name}-${file.name.removeSuffix(".so")}-$digestPrefix.bin"
+                WrappedLibrary(file, wrapped, keyName, inputStreamFromBundledResource("pairip", keyName)?.use { it.readBytes() })
             }
             val unkeyed = libraries.filter { it.key == null }
             val hasRuntime = architecture.resolve("libpairipcore.so").exists()
@@ -210,7 +190,6 @@ private val removePairipResourcesPatch = rawResourcePatch {
 
             libraries.forEach { library ->
                 library.file.writeBytes(unwrapNativeLibrary(library.wrapped, checkNotNull(library.key)))
-                restoredLibraries++
             }
 
             if (hasRuntime) {
@@ -219,16 +198,8 @@ private val removePairipResourcesPatch = rawResourcePatch {
             }
         }
         check(removedRuntimes > 0) { "No libpairipcore.so found under lib/" }
-        if (hookedLibraries.isNotEmpty()) check(restoredLibraries > 0) { "No pairip patched library found under lib/" }
 
-        get("assets").listFiles { file -> file.isFile }?.forEach { asset ->
-            val header = ByteArray(PAIRIP_ASSET_MAGIC.size)
-            val isVirtualizedCode = asset.inputStream().use { stream ->
-                stream.read(header) == header.size && header.contentEquals(PAIRIP_ASSET_MAGIC)
-            }
-
-            if (isVirtualizedCode) asset.delete()
-        }
+        virtualizedCodeAssets.forEach(File::delete)
     }
 }
 
@@ -259,26 +230,17 @@ private fun String.unescape() = buildString {
 
 private fun String.toClassDescriptor() = "L${replace('.', '/')};"
 
-private fun hashPrefix(value: String): Long =
-    ByteBuffer.wrap(MessageDigest.getInstance("SHA-256").digest(value.toByteArray(Charsets.UTF_8))).long
-
 private fun findDexStrings(dexFiles: List<ByteArray>, hashes: Set<Long>): Map<Long, Set<String>> {
     val found = mutableMapOf<Long, MutableSet<String>>()
+    if (hashes.isEmpty()) return found
+    val digest = MessageDigest.getInstance("SHA-256")
     dexFiles.forEach { dexFile ->
         DexBackedDexFile(Opcodes.getDefault(), ByteBuffer.wrap(dexFile)).stringReferences.forEach { reference ->
-            val prefix = hashPrefix(reference.string)
+            val prefix = ByteBuffer.wrap(digest.digest(reference.string.toByteArray(Charsets.UTF_8))).long
             if (prefix in hashes) found.getOrPut(prefix) { mutableSetOf() } += reference.string
         }
     }
     return found
-}
-
-private fun readHoistedFields(tableName: String, dexFiles: List<ByteArray>): List<HoistedField> {
-    val rows = inputStreamFromBundledResource("pairip", tableName)
-        ?.bufferedReader()?.useLines { lines -> lines.filter { it.isNotEmpty() }.toList() }
-        ?: throw IllegalStateException("Missing pairip/$tableName")
-
-    return resolveHoistedFields(tableName, rows, dexFiles)
 }
 
 internal fun resolveHoistedFields(tableName: String, rows: List<String>, dexFiles: List<ByteArray>): List<HoistedField> {
@@ -338,7 +300,9 @@ val removePairipVirtualizationPatch = bytecodePatch {
         val table = hoistedFields.groupBy { it.className.toClassDescriptor() }
 
         val holders = mutableSetOf<String>()
+        val virtualizedMethods = mutableSetOf<String>()
         classDefForEach { classDef ->
+            classDef.virtualizedMethods().mapTo(virtualizedMethods, ::descriptor)
             val onlyStaticFields = classDef.methods.none() &&
                 classDef.fields.all { AccessFlags.STATIC.isSet(it.accessFlags) }
             if (onlyStaticFields && classDef.staticFields.any { it.initialValue == null && it.type in HOISTED_TYPES }) {
@@ -346,6 +310,14 @@ val removePairipVirtualizationPatch = bytecodePatch {
             }
         }
         check(table.keys.containsAll(holders)) { "Holder classes missing from $tableName: ${holders - table.keys}" }
+
+        val listedMethods = pairipBuildLines(packageMetadata.packageName, packageMetadata.versionCode, "stubs").toSet()
+        if (virtualizedMethods != listedMethods) {
+            throw PatchException(
+                "Virtualized methods differ from ${tableName.removeSuffix(".tsv")}.stubs: " +
+                    "unlisted ${virtualizedMethods - listedMethods}, not virtualized ${listedMethods - virtualizedMethods}",
+            )
+        }
 
         table.forEach { (classDescriptor, records) ->
             val classDef = mutableClassDefBy(classDescriptor)
