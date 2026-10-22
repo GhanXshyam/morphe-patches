@@ -2,7 +2,7 @@
  * Copyright (C) 2026 hxreborn
  * SPDX-License-Identifier: GPL-3.0-only
  */
-package app.morphe.patches.shared.misc.generated
+package app.morphe.patches.shared.misc.smali
 
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.writer.builder.DexBuilder
@@ -11,10 +11,10 @@ import com.android.tools.smali.smali.LexerErrorInterface
 import com.android.tools.smali.smali.smaliFlexLexer
 import com.android.tools.smali.smali.smaliParser
 import com.android.tools.smali.smali.smaliTreeWalker
+import java.io.StringReader
 import org.antlr.runtime.CommonTokenStream
 import org.antlr.runtime.TokenSource
 import org.antlr.runtime.tree.CommonTreeNodeStream
-import java.io.StringReader
 
 internal fun assembleDex(smaliClasses: List<String>): ByteArray {
     val dexBuilder = DexBuilder(Opcodes.getDefault())

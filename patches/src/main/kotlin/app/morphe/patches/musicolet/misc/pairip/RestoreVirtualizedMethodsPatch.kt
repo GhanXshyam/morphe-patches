@@ -6,9 +6,9 @@ package app.morphe.patches.musicolet.misc.pairip
 
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.generated.addDefaultConstructor
-import app.morphe.patches.shared.misc.generated.replaceMethod
 import app.morphe.patches.shared.misc.pairip.removePairipVirtualizationPatch
+import app.morphe.patches.shared.misc.smali.addDefaultConstructor
+import app.morphe.patches.shared.misc.smali.replaceMethod
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference

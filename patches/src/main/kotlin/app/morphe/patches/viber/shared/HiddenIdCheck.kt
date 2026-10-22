@@ -5,7 +5,7 @@
 package app.morphe.patches.viber.shared
 
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
-import app.morphe.patches.shared.misc.generated.addStaticMethod
+import app.morphe.patches.shared.misc.smali.addStaticMethod
 
 internal fun MutableClass.addHiddenIdCheck(name: String, hiddenIds: Collection<Number>): String = addStaticMethod(
     name = name,

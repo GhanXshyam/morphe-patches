@@ -4,7 +4,7 @@
  */
 package app.morphe.patches.shared.misc.pairip
 
-import app.morphe.patches.shared.misc.generated.assembleDex
+import app.morphe.patches.shared.misc.smali.assembleDex
 import java.security.MessageDigest
 import kotlin.test.Test
 import kotlin.test.assertEquals

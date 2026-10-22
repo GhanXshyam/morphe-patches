@@ -13,8 +13,8 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.generated.descriptor
-import app.morphe.patches.shared.misc.generated.replaceStub
+import app.morphe.patches.shared.misc.smali.descriptor
+import app.morphe.patches.shared.misc.smali.replaceStub
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionOrThrow
 import app.morphe.util.matchSingle

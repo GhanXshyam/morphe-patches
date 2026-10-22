@@ -9,7 +9,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.extensions.InstructionExtensions.removeInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patches.shared.misc.generated.replaceMethod
+import app.morphe.patches.shared.misc.smali.replaceMethod
 import app.morphe.util.cloneMutable
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction

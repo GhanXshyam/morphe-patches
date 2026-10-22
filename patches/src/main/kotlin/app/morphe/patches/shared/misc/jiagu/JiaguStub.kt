@@ -5,7 +5,7 @@
 package app.morphe.patches.shared.misc.jiagu
 
 import app.morphe.patcher.patch.PatchException
-import app.morphe.patches.shared.misc.generated.assembleDex
+import app.morphe.patches.shared.misc.smali.assembleDex
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes

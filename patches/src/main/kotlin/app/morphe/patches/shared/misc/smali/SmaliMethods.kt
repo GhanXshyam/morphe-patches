@@ -2,9 +2,8 @@
  * Copyright (C) 2026 hxreborn
  * SPDX-License-Identifier: GPL-3.0-only
  */
-package app.morphe.patches.shared.misc.generated
+package app.morphe.patches.shared.misc.smali
 
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
@@ -77,17 +76,13 @@ internal fun MutableClass.replaceMethod(name: String, registers: Int, smali: Str
 internal fun MutableClass.addDefaultConstructor() {
     if (methods.any { it.name == "<init>" && it.parameterTypes.isEmpty() }) return
     methods.add(
-        ImmutableMethod(
-            type,
+        compileMethod(
             "<init>",
             emptyList(),
             "V",
             AccessFlags.PUBLIC.value or AccessFlags.CONSTRUCTOR.value,
-            null,
-            null,
-            MutableMethodImplementation(1),
-        ).toMutable().apply {
-            addInstructions(0, "invoke-direct {p0}, Ljava/lang/Object;-><init>()V\nreturn-void")
-        },
+            1,
+            "invoke-direct {p0}, Ljava/lang/Object;-><init>()V\nreturn-void",
+        ),
     )
 }

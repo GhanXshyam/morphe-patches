@@ -13,7 +13,7 @@ import app.morphe.patcher.resource.ResourceType
 import app.morphe.patcher.resource.resourceId
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.generated.descriptor
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.patches.viber.shared.addHiddenIdCheck
 import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference

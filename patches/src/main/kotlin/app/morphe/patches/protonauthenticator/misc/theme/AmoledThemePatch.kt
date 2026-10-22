@@ -15,13 +15,13 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMuta
 import app.morphe.patches.protonauthenticator.misc.settings.patchesSettingsPatch
 import app.morphe.patches.protonauthenticator.shared.themeColorReadInstructions
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.generated.descriptor
 import app.morphe.patches.shared.misc.proton.AMOLED_BACKGROUND_OVERLAY_STYLE
 import app.morphe.patches.shared.misc.proton.AMOLED_THEME_CLASS
 import app.morphe.patches.shared.misc.proton.COMPOSER_TYPE
 import app.morphe.patches.shared.misc.proton.amoledBackgroundOverlayPatch
 import app.morphe.patches.shared.misc.proton.markFeaturePatched
 import app.morphe.patches.shared.misc.proton.transformCoreDarkBackgrounds
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.findElementByAttributeValueOrThrow
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.AccessFlags
