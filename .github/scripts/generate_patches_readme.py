@@ -1,19 +1,9 @@
 #!/usr/bin/env python3
-"""
-Generates the patches section of README.md from patches-list.json
-and injects it between <!-- PATCHES_START --> / <!-- PATCHES_END --> markers.
-
-Spoilers are expanded (open by default) if:
-  1. Total patch count <= AUTO_EXPAND_THRESHOLD.
-  2. The README marker explicitly says: <!-- PATCHES_START EXPANDED -->
-
-python3 generate_patches_readme.py <owner/repo> <branch> [patches-list.json] [README.md]
-"""
+"""python3 generate_patches_readme.py <owner/repo> <branch> [patches-list.json] [README.md]"""
 
 import json
 import re
 import sys
-import os
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -39,35 +29,28 @@ with open(json_path, encoding="utf-8") as f:
     data = json.load(f)
 
 
-# Group patches by package; patches with no compatiblePackages are universal.
-# JSON structure: compatiblePackages is a list of objects with
-# { packageName, name, targets: [{ version, isExperimental, description }] }
-by_pkg = {}   # packageName -> { name, patches, targets }
+by_pkg = {}
 universal = {}
 
 for patch in data["patches"]:
     cp = patch.get("compatiblePackages")
     if not cp:
-        # Deduplicate universal patches by name
         if patch["name"] not in universal:
             universal[patch["name"]] = patch
         continue
     for pkg_entry in cp:
         pkg  = pkg_entry["packageName"]
-        name = pkg_entry.get("name") or pkg  # fall back to package name if no label
+        name = pkg_entry.get("name") or pkg
         if pkg not in by_pkg:
             by_pkg[pkg] = {"name": name, "patches": {}, "targets": []}
-        # An app's row is the union of its patches' targets
         for target in pkg_entry.get("targets") or []:
             if target not in by_pkg[pkg]["targets"]:
                 by_pkg[pkg]["targets"].append(target)
-        # Deduplicate patches that appear across multiple packages
         if patch["name"] not in by_pkg[pkg]["patches"]:
             by_pkg[pkg]["patches"][patch["name"]] = patch
 
 
 def slug(text):
-    """Convert text to a GitHub-compatible anchor slug."""
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", text.lower())).strip("-")
 
 
@@ -76,8 +59,6 @@ COMPAT_FILE  = PATCHES_SRC / "app/morphe/patches/shared/compat/AppCompatibilitie
 
 
 def build_source_index():
-    """Map (patch name, packageName) -> source file. Patch names repeat across apps,
-    so the compatibility constant is what tells three "Unlock premium" patches apart."""
     if not PATCHES_SRC.is_dir():
         return {}
 
@@ -115,16 +96,6 @@ def patch_cell(patch, pkg, pid):
 
 
 def patches_table(patches, app_slug, pkg=None):
-    """Render a sorted markdown table of patches with name, description, and options.
-
-    Each patch name links to its source file and carries an explicit <a id="app-patch">
-    anchor for deep links. The app slug is part of the id because patch names repeat
-    across apps (three "Unlock premium" patches here), and GitHub's heading-derived ids
-    would collide and get -1/-2 suffixes that shift whenever the list changes.
-
-    The Options column is omitted entirely when no patch in the table has options,
-    so it never renders as an empty column that looks broken.
-    """
     patches = sorted(patches, key=lambda x: x["name"])
     has_options = any(p.get("options") for p in patches)
 
@@ -141,7 +112,6 @@ def patches_table(patches, app_slug, pkg=None):
             rows.append(f"| {cell} | {desc} |")
             continue
         options = p.get("options") or []
-        # Show only option titles as a bullet list
         parts = [opt.get("title") or opt.get("key") or "" for opt in options]
         opts_cell = "<br>".join(f"• {t}" for t in parts)
         rows.append(f"| {cell} | {desc} | {opts_cell} |")
@@ -152,12 +122,6 @@ ANY_VERSION = "Any version"
 
 
 def versions_table(targets):
-    """Render a markdown table of supported versions.
-    Experimental versions get an "(experimental)" suffix.
-    Versions with a description get it shown in a second row below.
-    A target with no pinned version reads as "Any version", dropped once a
-    pinned one exists.
-    """
     columns = []
     for t in targets:
         ver = t["version"] or ANY_VERSION
@@ -345,8 +309,6 @@ def fetch_missing_icons(pkgs):
 
 
 def icon_img(pkg):
-    """Inline <img> for an app, or a generic package emoji when it has no icon.
-    Relative path so it resolves on any branch and in forks."""
     filename = icon_file(pkg)
     if not filename:
         return "📦&nbsp;"
@@ -354,9 +316,6 @@ def icon_img(pkg):
 
 
 def spoiler(label, count, targets, tbl, expanded=False, pkg=None):
-    """Wrap a patches table in a <details> spoiler with a versions sub-table.
-    If expanded=True, the spoiler is open by default (for repos with few patches).
-    """
     noun = "patch" if count == 1 else "patches"
     vtbl = versions_table(targets)
     versions_section = f"**🎯 Supported versions:**\n\n{vtbl}\n\n" if vtbl else ""
@@ -392,7 +351,6 @@ def app_grid(cells):
 
 
 def build_content(expanded=False):
-    """Build the full generated patches section."""
     lines = [
         f"> **[v{ver}](https://github.com/{owner}/{repo}/releases/tag/v{ver})**"
         f"&nbsp;&nbsp;•&nbsp;&nbsp;`{branch}`&nbsp;&nbsp;•&nbsp;&nbsp;"
@@ -413,7 +371,6 @@ def build_content(expanded=False):
         lines.append(spoiler(label, len(patches), entry["targets"], patches_table(patches, slug(label), pkg), expanded, pkg))
         lines.append("")
 
-    # Universal patches (no specific app)
     if universal:
         uni_patches = list(universal.values())
         noun = "patch" if len(uni_patches) == 1 else "patches"
@@ -431,22 +388,18 @@ def build_content(expanded=False):
     return "\n".join(lines)
 
 
-# Build and inject
 raw_ver = data["version"]
-# Strip leading "v" if present
 ver   = raw_ver.lstrip("v")
 total = len(data["patches"])
 
 readme = readme_path.read_text(encoding="utf-8")
 
-# Marker pattern, matches both <!-- PATCHES_START --> and <!-- PATCHES_START EXPANDED -->
 START_PATTERN = r"<!-- PATCHES_START(?:\s+EXPANDED)?\s*-->"
 END_MARKER    = "<!-- PATCHES_END -->"
 
 marker_match = re.search(START_PATTERN, readme)
 
 if not marker_match or END_MARKER not in readme:
-    # Fallback: print to stdout so CI can catch the issue
     print(build_content(expanded=False))
     sys.stderr.write(
         f"⚠️  Markers <!-- PATCHES_START [EXPANDED] --> / {END_MARKER} not found in {readme_path}. "
@@ -456,13 +409,8 @@ if not marker_match or END_MARKER not in readme:
 
 actual_start = marker_match.group(0)
 
-# Auto-expand threshold
 AUTO_EXPAND_THRESHOLD = 20
 
-# Spoilers are expanded if:
-# 1. Total patch count is small (≤ AUTO_EXPAND_THRESHOLD)
-#    with only a few patches where collapsing adds no benefit.
-# 2. The README marker explicitly requests it: <!-- PATCHES_START EXPANDED -->
 expanded = (
     total <= AUTO_EXPAND_THRESHOLD or
     "EXPANDED" in actual_start
@@ -470,7 +418,6 @@ expanded = (
 
 generated  = build_content(expanded=expanded)
 
-# Replace template links if present
 readme = readme.replace("https://morphe.software/add-source?github=xyz-user/xyz-patches", f"https://morphe.software/add-source?github={repo_full}")
 readme = readme.replace("https://github.com/xyz-user/xyz-patches", f"https://github.com/{repo_full}")
 
