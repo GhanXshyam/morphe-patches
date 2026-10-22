@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-22T18:38:18",
-  "description": "## [1.59.0-dev.3](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.2...v1.59.0-dev.3) (2026-10-22)\n\n### New Features\n\n* **Yuka - Unlock premium:** unlock food preferences and diet alerts ([223b32b](https://github.com/hxreborn/morphe-patches/commit/223b32b0be557b38f285abf4aef7c1e4dd39ba16))",
-  "download_url": "https://github.com/hxreborn/morphe-patches/releases/download/v1.59.0-dev.3/patches-1.59.0-dev.3.mpp",
+  "created_at": "2026-10-22T18:44:17",
+  "description": "## [1.59.0-dev.4](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.3...v1.59.0-dev.4) (2026-10-22)\n\n### New Features\n\n* **Internet Speed Meter Lite - Disable tracking:** stop Firebase ([9abfa06](https://github.com/hxreborn/morphe-patches/commit/9abfa068dbc4da44d0814163efa067357bc80c9f))\n* **Internet Speed Meter Lite - Remove ads:** remove ads and ad prompts ([f97c9e8](https://github.com/hxreborn/morphe-patches/commit/f97c9e89230dc8fc73d7d5a30f1c3ff82274e6a9))\n* **Internet Speed Meter Lite - Unlock premium:** unlock Pro settings ([b74e75b](https://github.com/hxreborn/morphe-patches/commit/b74e75bc17f38dac99923a004fce25dbf44a5ecd))",
+  "download_url": "https://github.com/hxreborn/morphe-patches/releases/download/v1.59.0-dev.4/patches-1.59.0-dev.4.mpp",
   "signature_download_url": "",
-  "version": "1.59.0-dev.3"
+  "version": "1.59.0-dev.4"
 }

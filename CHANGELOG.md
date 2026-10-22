@@ -1,3 +1,11 @@
+## [1.59.0-dev.4](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.3...v1.59.0-dev.4) (2026-10-22)
+
+### New Features
+
+* **Internet Speed Meter Lite - Disable tracking:** stop Firebase ([9abfa06](https://github.com/hxreborn/morphe-patches/commit/9abfa068dbc4da44d0814163efa067357bc80c9f))
+* **Internet Speed Meter Lite - Remove ads:** remove ads and ad prompts ([f97c9e8](https://github.com/hxreborn/morphe-patches/commit/f97c9e89230dc8fc73d7d5a30f1c3ff82274e6a9))
+* **Internet Speed Meter Lite - Unlock premium:** unlock Pro settings ([b74e75b](https://github.com/hxreborn/morphe-patches/commit/b74e75bc17f38dac99923a004fce25dbf44a5ecd))
+
 ## [1.59.0-dev.3](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.2...v1.59.0-dev.3) (2026-10-22)
 
 ### New Features
