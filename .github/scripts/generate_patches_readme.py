@@ -347,7 +347,7 @@ def grid_cell(label, caption, pkg=None):
 def app_grid(cells):
     rows = [cells[i:i + GRID_COLUMNS] for i in range(0, len(cells), GRID_COLUMNS)]
     body = "\n".join("<tr>\n" + "\n".join(row) + "\n</tr>" for row in rows)
-    return f'<table>\n{body}\n</table>\n\n## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/full-list.png" height="48" align="absmiddle" alt="Full list"> Full list\n'
+    return f'<table>\n{body}\n</table>\n\n## <img src="https://raw.githubusercontent.com/{owner}/{repo}/assets/aqua/icons/full-list.png" height="48" align="absmiddle" alt="Full list"> Full list\n'
 
 
 def build_content(expanded=False):
