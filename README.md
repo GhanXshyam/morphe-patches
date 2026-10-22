@@ -12,10 +12,10 @@
 
 </div>
 
-Patches for [Morphe](https://morphe.software): AMOLED themes, ad removal, tracking removal and premium
-unlocks for Proton Mail, Pass and VPN, Perplexity, MovieBox, Showly, Projectivy Launcher, Network
-Analyzer, Cx File Explorer and the rest of the list below. Add the source in Morphe Manager, pick the
-app, and patch the APK on your phone.
+Patches for [Morphe](https://morphe.software): AMOLED themes, ad removal, tracking removal and
+settings tweaks for Proton Mail, Pass and VPN, Perplexity, MovieBox, Showly, Projectivy Launcher,
+Network Analyzer, Cx File Explorer and the rest of the list below. Add the source in Morphe Manager,
+pick the app, and patch the APK on your phone.
 
 New patches and fixes go out as pre-releases first. To get them, open Sources in Morphe Manager, pick
 this bundle and turn on **Pre-release patches**; the
