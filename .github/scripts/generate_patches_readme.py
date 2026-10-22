@@ -294,6 +294,7 @@ ICONS = {
     "com.generalmagic.magicearth": "magicearth.png",
     "com.lbrc.PeriodCalendar": "periodcalendar.png",
     "com.sygic.aura": "sygic.png",
+    "app.threesome.dating": "3way.png",
     "com.omniashare.minishare": "minishare.png",
     "com.naraorganics.nara": "narababy.png",
     "com.jndapp.glass.widgets": "glasswidgets.png",

@@ -134,6 +134,7 @@ Showly's icon is also published under GPLv3 in [`trakt/showly`](https://github.c
 | `periodcalendar.png` | Period Tracker and Calendar (`com.lbrc.PeriodCalendar`) | SimpleInnovation | APK 13.3.2, adaptive icon `res/mipmap-anydpi-v26/ic_launcher.xml`, cut to a circle |
 | `udictionary.png` | U Dictionary (`com.youdao.hindict`) | Youdao (Hong Kong) Limited | APK 6.7.5, `res/mipmap-xxhdpi/ic_launcher_round.png` |
 | `magicearth.png` | Magic Earth (`com.generalmagic.magicearth`) | Magic Lane International | APK 7.1.26, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
+| `3way.png` | 3way: Couples & Singles Hookup (`app.threesome.dating`) | 3way App | APK 3.1.0, `res/drawable-xxhdpi-v4/ic_launcher_round.png` |
 so its copyright terms are compatible with this one. The rest are used under nominative fair
 use only, with no licence claimed.
 

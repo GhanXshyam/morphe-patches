@@ -1269,6 +1269,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val THREEWAY = Compatibility(
+        name = "3way",
+        packageName = "app.threesome.dating",
+        apkFileType = ApkFileType.XAPK_REQUIRED,
+        appIconColor = 0xFF5B66,
+        signatures = setOf(
+            "5f7a94bcfa985d974a41a58899a6b5f1481d266fd82d7dae904d83d9e3f60415",
+        ),
+        targets = listOf(AppTarget(version = "3.1.0", versionCode = 1053, minSdk = 26)),
+    )
+
     val TRAINLINE = Compatibility(
         name = "Trainline",
         packageName = "com.thetrainline",
