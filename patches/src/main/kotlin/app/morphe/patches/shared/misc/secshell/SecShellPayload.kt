@@ -9,10 +9,13 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.ResourcePatchContext
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.dexbacked.DexBackedDexFile
+import java.security.MessageDigest
+import java.util.Base64
 
 private const val PAYLOAD_JAR = "assets/classes0.jar"
 private const val SHELL_DEX = "classes.dex"
 private const val EXTENSION_DEX = "extensions/extension.mpe"
+private const val JAR_MANIFEST = "META-INF/MANIFEST.MF"
 
 internal interface SecShellContainer {
     fun dexEntries(): List<String>
@@ -64,7 +67,8 @@ internal class SecShellPayload(private val container: SecShellContainer) {
 
 internal fun ResourcePatchContext.editSecShellPayload(block: SecShellPayload.() -> Unit) {
     val jar = get(PAYLOAD_JAR)
-    val file = if (jar.exists()) jar else get(SHELL_DEX)
+    val entryName = if (jar.exists()) PAYLOAD_JAR else SHELL_DEX
+    val file = get(entryName)
     val bytes = file.readBytes()
     val container = when {
         jar.exists() -> SecShellJar.of(bytes)
@@ -74,5 +78,19 @@ internal fun ResourcePatchContext.editSecShellPayload(block: SecShellPayload.() 
 
     val payload = SecShellPayload(container)
     payload.block()
-    file.writeBytes(payload.sealed())
+    val sealed = payload.sealed()
+    file.writeBytes(sealed)
+    updateManifestDigest(entryName, sealed)
+}
+
+private fun ResourcePatchContext.updateManifestDigest(entryName: String, bytes: ByteArray) {
+    val manifest = get(JAR_MANIFEST)
+    if (!manifest.exists()) return
+
+    val text = manifest.readText()
+    val entryDigest = Regex("\\r?\\nName: ${Regex.escape(entryName)}\\r?\\n([A-Za-z0-9-]+)-Digest: ([A-Za-z0-9+/=]+)")
+    val match = entryDigest.find(text) ?: throw PatchException("$JAR_MANIFEST has no digest for $entryName")
+    val algorithm = match.groupValues[1].replace("SHA1", "SHA-1")
+    val digest = Base64.getEncoder().encodeToString(MessageDigest.getInstance(algorithm).digest(bytes))
+    manifest.writeText(text.replaceRange(match.groups[2]!!.range, digest))
 }
