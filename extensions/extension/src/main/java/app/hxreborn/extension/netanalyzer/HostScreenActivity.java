@@ -36,7 +36,7 @@ import android.widget.TextView;
 
 import app.hxreborn.extension.shared.Dimensions;
 
-@TargetApi(Build.VERSION_CODES.S_V2)
+@TargetApi(Build.VERSION_CODES.Q)
 abstract class HostScreenActivity extends Activity {
 
     static final TextStyle TITLE_LARGE = new TextStyle(22, 28, 0f, TextStyle.MEDIUM);
@@ -134,11 +134,13 @@ abstract class HostScreenActivity extends Activity {
                 new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         root.addView(this.scroll, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
 
-        root.setOnApplyWindowInsetsListener((view, insets) -> {
-            final Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
-            view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
-            return WindowInsets.CONSUMED;
-        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            root.setOnApplyWindowInsetsListener((view, insets) -> {
+                final Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+                return WindowInsets.CONSUMED;
+            });
+        }
         getWindow().setStatusBarColor(this.palette.bar);
         getWindow().setNavigationBarColor(this.palette.bar);
         final int lightBars = this.palette.dark ? 0

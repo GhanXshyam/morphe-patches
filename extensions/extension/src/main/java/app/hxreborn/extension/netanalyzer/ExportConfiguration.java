@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 import app.hxreborn.extension.shared.Dimensions;
 
-@TargetApi(Build.VERSION_CODES.S_V2)
+@TargetApi(Build.VERSION_CODES.Q)
 final class ExportConfiguration {
 
     static final String DEFAULT_SEPARATOR = ",";

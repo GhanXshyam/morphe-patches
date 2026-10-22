@@ -22,7 +22,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-@TargetApi(Build.VERSION_CODES.S_V2)
+@TargetApi(Build.VERSION_CODES.Q)
 @SuppressWarnings("unused")
 public final class ToolsHistoryActivity extends HostScreenActivity {
 

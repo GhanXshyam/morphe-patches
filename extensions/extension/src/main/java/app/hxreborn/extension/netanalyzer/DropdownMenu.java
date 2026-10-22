@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import app.hxreborn.extension.shared.Dimensions;
 
-@TargetApi(Build.VERSION_CODES.S_V2)
+@TargetApi(Build.VERSION_CODES.Q)
 final class DropdownMenu {
 
     private static final int MIN_WIDTH_DP = 112;

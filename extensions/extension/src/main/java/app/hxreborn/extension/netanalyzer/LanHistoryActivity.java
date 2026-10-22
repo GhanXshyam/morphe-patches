@@ -31,7 +31,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@TargetApi(Build.VERSION_CODES.S_V2)
+@TargetApi(Build.VERSION_CODES.Q)
 @SuppressWarnings("unused")
 public final class LanHistoryActivity extends HostScreenActivity {
 

@@ -19,7 +19,7 @@ import android.widget.FrameLayout;
 
 import app.hxreborn.extension.shared.Dimensions;
 
-@TargetApi(Build.VERSION_CODES.S_V2)
+@TargetApi(Build.VERSION_CODES.Q)
 @SuppressWarnings("unused")
 public final class ExportMenu {
 
@@ -116,14 +116,24 @@ public final class ExportMenu {
             anchor.setTag(ANCHOR_TAG);
             final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(dp(activity, ICON_BUTTON_DP),
                     dp(activity, ICON_BUTTON_DP), Gravity.TOP | Gravity.END);
-            final WindowInsets insets = content.getRootWindowInsets();
-            final int statusBar = (insets != null) ? insets.getInsets(WindowInsets.Type.statusBars()).top : 0;
-            params.topMargin = statusBar + (dp(activity, TOOLBAR_HEIGHT_DP) - dp(activity, ICON_BUTTON_DP)) / 2;
+            params.topMargin = statusBarHeight(content)
+                    + (dp(activity, TOOLBAR_HEIGHT_DP) - dp(activity, ICON_BUTTON_DP)) / 2;
             params.setMarginEnd(dp(activity, ICON_BUTTON_END_DP));
             content.addView(anchor, params);
         }
         final View placedAnchor = anchor;
         placedAnchor.post(() -> show(activity, placedAnchor, source));
+    }
+
+    private static int statusBarHeight(View content) {
+        final WindowInsets insets = content.getRootWindowInsets();
+        if (insets == null) {
+            return 0;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            return insets.getSystemWindowInsetTop();
+        }
+        return insets.getInsets(WindowInsets.Type.statusBars()).top;
     }
 
     private static int dp(Activity activity, int value) {
