@@ -235,12 +235,30 @@ private val RESTORED_METHODS = listOf(
         """,
     ),
     RestoredMethod(
-        "$APP_PACKAGE/fh;", ON_RECEIVE, 3,
+        "$APP_PACKAGE/fh;", ON_RECEIVE, 6,
         """
-            const-string p0, "tclass"
-            invoke-virtual {p2, p0}, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
-            move-result-object p0
-            invoke-static {p0}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+            new-instance v0, Landroid/content/Intent;
+            invoke-direct {v0, p2}, Landroid/content/Intent;-><init>(Landroid/content/Intent;)V
+            sget-object v1, $APP_PACKAGE/MyApplication;->i:$APP_PACKAGE/MyApplication;
+            invoke-virtual {v1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+            move-result-object v1
+            const-string v2, "tclass"
+            invoke-virtual {p2, v2}, Landroid/content/Intent;->getStringExtra(Ljava/lang/String;)Ljava/lang/String;
+            move-result-object v2
+            invoke-static {v2}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+            move-result-object v2
+            invoke-virtual {v0, v1, v2}, Landroid/content/Intent;->setClass(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;
+            const-string v1, "E_IA"
+            const/4 v2, 0x0
+            invoke-virtual {v0, v1, v2}, Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z
+            move-result v1
+            if-nez v1, :activity
+            invoke-static {p1, v0}, $APP_PACKAGE/fh;->a(Landroid/content/Context;Landroid/content/Intent;)V
+            return-void
+            :activity
+            const v1, 0x50800000
+            invoke-virtual {v0, v1}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+            invoke-virtual {p1, v0}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
             return-void
         """,
     ),
