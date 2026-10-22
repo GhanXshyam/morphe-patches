@@ -7,7 +7,7 @@ package app.morphe.patches.poe.misc.pairip
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.pairip.removePairipVirtualizationPatch
-import app.morphe.patches.shared.misc.smali.replaceMethod
+import app.morphe.patches.shared.misc.pairip.replaceVirtualizedMethod
 import app.morphe.util.matchSingle
 
 val restoreDownloadReceiverPatch = bytecodePatch {
@@ -17,7 +17,7 @@ val restoreDownloadReceiverPatch = bytecodePatch {
 
     execute {
         DownloadCompleteReceiverFingerprint.matchSingle().classDef.apply {
-            replaceMethod(
+            replaceVirtualizedMethod(
                 "onReceive",
                 5,
                 """

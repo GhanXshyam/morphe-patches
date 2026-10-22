@@ -7,13 +7,9 @@ package app.morphe.patches.musicolet.misc.pairip
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.pairip.removePairipVirtualizationPatch
+import app.morphe.patches.shared.misc.pairip.replaceVirtualizedMethod
 import app.morphe.patches.shared.misc.smali.addDefaultConstructor
-import app.morphe.patches.shared.misc.smali.replaceMethod
-import com.android.tools.smali.dexlib2.iface.Method
-import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
-import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-private const val VM_RUNNER = "Lcom/pairip/VMRunner;"
 private const val APP_PACKAGE = "Lin/krosbits/musicolet"
 private const val DO_IN_BACKGROUND = "doInBackground"
 private const val ON_RECEIVE = "onReceive"
@@ -285,10 +281,6 @@ private val RESTORED_METHODS = listOf(
     ),
 )
 
-private fun Method.callsVmRunner() = implementation?.instructions?.any { instruction ->
-    ((instruction as? ReferenceInstruction)?.reference as? MethodReference)?.definingClass == VM_RUNNER
-} == true
-
 val restoreVirtualizedMethodsPatch = bytecodePatch {
     compatibleWith(AppCompatibilities.MUSICOLET)
 
@@ -296,12 +288,7 @@ val restoreVirtualizedMethodsPatch = bytecodePatch {
 
     execute {
         RESTORED_METHODS.forEach { restored ->
-            mutableClassDefBy(restored.type).apply {
-                check(methods.single { it.name == restored.name }.callsVmRunner()) {
-                    "${restored.type}->${restored.name} is not a PairIP stub in this build"
-                }
-                replaceMethod(restored.name, restored.registers, restored.smali)
-            }
+            mutableClassDefBy(restored.type).replaceVirtualizedMethod(restored.name, restored.registers, restored.smali)
         }
         mutableClassDefBy("Lhm1;").addDefaultConstructor()
     }
