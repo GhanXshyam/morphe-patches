@@ -5,15 +5,13 @@
 package app.morphe.patches.devcheck.misc.pairip
 
 import app.morphe.patcher.Match
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
-import app.morphe.patcher.extensions.InstructionExtensions.instructions
-import app.morphe.patcher.extensions.InstructionExtensions.removeInstructions
 import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.resource.ResourceType
 import app.morphe.patcher.resource.resourceId
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patches.shared.misc.pairip.removePairipVirtualizationPatch
+import app.morphe.patches.shared.misc.pairip.replaceVirtualizedBody
 import app.morphe.patches.shared.misc.smali.addDefaultConstructor
 import app.morphe.patches.shared.misc.smali.assembleDex
 import app.morphe.patches.shared.misc.smali.descriptor
@@ -399,8 +397,7 @@ internal val restoreVirtualizedMethodsPatch = bytecodePatch {
             val call = "invoke-static/range {p0 .. p${method.parameterTypes.size}}, " +
                 "$RESTORED_CLASS->$restoredName($parameters)${method.returnType}"
             val returnSmali = if (method.returnType == "V") "return-void" else "move-result-object v0\nreturn-object v0"
-            method.removeInstructions(0, method.instructions.size)
-            method.addInstructions(0, "$call\n$returnSmali")
+            method.replaceVirtualizedBody("$call\n$returnSmali")
         }
     }
 }
