@@ -51,8 +51,6 @@ private const val DEX_HEADER_SIZE = 0x70
 private const val DEX_FILE_SIZE_OFFSET = 0x20
 private const val DELTA_DIGEST_BYTES = 8
 
-private val BUILDS_WITHOUT_EMBEDDED_DEX = setOf("com.nieruo.healthapp-284")
-
 private val recoveredDexFiles = mutableListOf<ByteArray>()
 private var isPairipPacked = false
 
@@ -103,10 +101,7 @@ private val extractRecoveredDexPatch = rawResourcePatch {
             recoverEmbeddedDex(asset.readBytes())?.let { recoveredDexFiles += it }
         }
 
-        val build = "${packageMetadata.packageName}-${packageMetadata.versionCode}"
-        check(recoveredDexFiles.isNotEmpty() || build in BUILDS_WITHOUT_EMBEDDED_DEX) {
-            "No dex file embedded in the pairip assets"
-        }
+        check(recoveredDexFiles.isNotEmpty()) { "No dex file embedded in the pairip assets" }
     }
 }
 
