@@ -72,7 +72,7 @@ tasks {
                 .filter { it.startsWith("provenance ") }
                 .flatMap { rootProject.file(it.split(" ")[1]).readLines() }
                 .mapNotNull { Regex("^([0-9a-f]{64})  ").find(it)?.groupValues?.get(1) }
-            val builtExtension = rootProject.file("extensions/extension/build/morphe/extensions/extension.mpe")
+            val builtExtension = layout.buildDirectory.file("resources/main/extensions/extension.mpe").get().asFile
             val ownHashes = registeredHashes.toSet() + listOfNotNull(builtExtension.takeIf { it.exists() }?.let { sha256(it.readBytes()) })
             val unregistered = ZipFile(archiveFile.get().asFile).use { zip ->
                 zip.entries().asSequence()
