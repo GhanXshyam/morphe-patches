@@ -59,8 +59,7 @@ private val TRACED_TOOLS = mapOf(
 @Suppress("unused")
 val showAiProgressPatch = bytecodePatch(
     name = "Show AI progress",
-    description = "Reads the current stage off the real network activity instead of the " +
-        "fake progress bar InShot ships.",
+    description = "Shows the current stage of AI Remove and Enhance on their loading screens.",
 ) {
     compatibleWith(AppCompatibilities.PHOTO_EDITOR_PRO)
     dependsOn(spoofIosPlatformPatch, spoofSignaturePatch)
