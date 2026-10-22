@@ -42,17 +42,15 @@ internal class SecShellDex(bytes: ByteArray) {
 
     fun hasString(string: String) = string in dexFile.stringSection
 
-    fun methodUsingString(string: String, firstParameter: String): MutableMethod {
-        val matches = dexFile.classes.flatMap { classDef ->
+    fun methodsUsingString(string: String, firstParameter: String): List<MutableMethod> =
+        dexFile.classes.flatMap { classDef ->
             classDef.methods.filter { method ->
                 method.parameterTypes.firstOrNull() == firstParameter &&
                     method.implementation?.instructions?.any { it.usesString(string) } == true
             }
+        }.map { found ->
+            editedClass(found.definingClass).methods.single { MethodUtil.methodSignaturesMatch(it, found) }
         }
-        val found = matches.singleOrNull()
-            ?: throw PatchException("Expected one method using \"$string\", found ${matches.size}")
-        return editedClass(found.definingClass).methods.single { MethodUtil.methodSignaturesMatch(it, found) }
-    }
 
     fun method(classType: String, name: String): MutableMethod {
         val matches = editedClass(classType).methods.filter { it.name == name }

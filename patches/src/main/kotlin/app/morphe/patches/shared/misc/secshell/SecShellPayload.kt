@@ -7,6 +7,8 @@ package app.morphe.patches.shared.misc.secshell
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.ResourcePatchContext
+import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.dexbacked.DexBackedDexFile
 import java.security.MessageDigest
@@ -36,10 +38,16 @@ internal class SecShellPayload(private val container: SecShellContainer) {
     fun method(classType: String, name: String) = editor(dexContaining(classType)).method(classType, name)
 
     fun prependToMethodUsingString(string: String, firstParameter: String, smali: String): String {
-        val entry = singleDex("\"$string\"") { it.hasString(string) }
-        val method = editor(entry).methodUsingString(string, firstParameter)
+        val matches = methodsUsingString(string, firstParameter)
+        val method = matches.singleOrNull()
+            ?: throw PatchException("Expected one method using \"$string\", found ${matches.size}")
         method.addInstructions(0, smali)
         return method.definingClass
+    }
+
+    fun methodsUsingString(string: String, firstParameter: String): List<MutableMethod> {
+        val entry = singleDex("\"$string\"") { it.hasString(string) }
+        return editor(entry).methodsUsingString(string, firstParameter)
     }
 
     fun addExtensionPackage(packageType: String, besideClass: String) {
@@ -65,22 +73,35 @@ internal class SecShellPayload(private val container: SecShellContainer) {
     private fun editor(entry: String) = editors.getOrPut(entry) { SecShellDex(container.read(entry)) }
 }
 
-internal fun ResourcePatchContext.editSecShellPayload(block: SecShellPayload.() -> Unit) {
-    val jar = get(PAYLOAD_JAR)
-    val entryName = if (jar.exists()) PAYLOAD_JAR else SHELL_DEX
-    val file = get(entryName)
-    val bytes = file.readBytes()
-    val container = when {
-        jar.exists() -> SecShellJar.of(bytes)
-        SecShellEmbeddedDex.isEmbedded(bytes) -> SecShellEmbeddedDex(bytes)
-        else -> throw PatchException("Neither $PAYLOAD_JAR nor a payload in $SHELL_DEX, this is not a SecShell build")
+private class OpenPayload(val entryName: String, val payload: SecShellPayload)
+
+private var openPayload: OpenPayload? = null
+
+internal val secShellPayloadPatch = rawResourcePatch {
+    execute {
+        val jar = get(PAYLOAD_JAR)
+        val entryName = if (jar.exists()) PAYLOAD_JAR else SHELL_DEX
+        val bytes = get(entryName).readBytes()
+        val container = when {
+            jar.exists() -> SecShellJar.of(bytes)
+            SecShellEmbeddedDex.isEmbedded(bytes) -> SecShellEmbeddedDex(bytes)
+            else -> throw PatchException("Neither $PAYLOAD_JAR nor a payload in $SHELL_DEX, this is not a SecShell build")
+        }
+        openPayload = OpenPayload(entryName, SecShellPayload(container))
     }
 
-    val payload = SecShellPayload(container)
-    payload.block()
-    val sealed = payload.sealed()
-    file.writeBytes(sealed)
-    updateManifestDigest(entryName, sealed)
+    finalize {
+        val open = openPayload ?: return@finalize
+        openPayload = null
+        val sealed = open.payload.sealed()
+        get(open.entryName).writeBytes(sealed)
+        updateManifestDigest(open.entryName, sealed)
+    }
+}
+
+internal fun editSecShellPayload(block: SecShellPayload.() -> Unit) {
+    val open = openPayload ?: throw PatchException("The SecShell payload is not open, depend on secShellPayloadPatch")
+    open.payload.block()
 }
 
 private fun ResourcePatchContext.updateManifestDigest(entryName: String, bytes: ByteArray) {
