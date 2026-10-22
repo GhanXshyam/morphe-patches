@@ -203,7 +203,6 @@ each one changes.
 <td align="center" width="25%"><a href="#yi-iot"><img src=".github/assets/icons/yiiot.png" width="40"><br>Yi iot</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
-<td align="center" width="25%"><a href="#tiktok"><img src=".github/assets/icons/tiktok.png" width="40"><br>TikTok</a><br><sub>separate bundle</sub></td>
 <td align="center" width="25%"><a href="#universal">🌐<br>Universal</a><br><sub>1 patch</sub></td>
 </tr>
 </table>
@@ -2251,22 +2250,6 @@ each one changes.
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="yi-iot-hide-ads"></a>[Hide ads](patches/src/main/kotlin/app/morphe/patches/yiiot/ads/HideAdsPatch.kt) | Removes splash, interstitial, banner and native ads. Keeps the optional ad that unlocks an alarm video. |
-
-</details>
-
-<a id="tiktok"></a>
-<details>
-<summary><img src=".github/assets/icons/tiktok.png" width="18" align="top">&nbsp;&nbsp;TikTok&nbsp;&nbsp;•&nbsp;&nbsp;separate bundle</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 46.2.3 |
-| :---: |
-
-| 📦&nbsp;Bundle | 📜&nbsp;Description |
-|----------|----------------|
-| [hxreborn-tiktok-patches](https://github.com/hxreborn/hxreborn-tiktok-patches) | Not part of this bundle, so it has to be added to Morphe as its own patch source. Forked from [icysymmetra/tiktok-patches-for-morphe](https://github.com/icysymmetra/tiktok-patches-for-morphe). [Add to Morphe](https://morphe.software/add-source?github=hxreborn/hxreborn-tiktok-patches) |
 
 </details>
 

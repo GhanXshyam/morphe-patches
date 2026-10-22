@@ -216,7 +216,6 @@ ICONS = {
     "co.steezy.app": "steezy.png",
     "com.storywise.storywise": "storywise.png",
     "com.sqcom.shangqing": "sqcom.png",
-    "com.zhiliaoapp.musically": "tiktok.png",
     "ch.protonmail.android": "protonmail.png",
     "proton.android.pass": "protonpass.png",
     "proton.android.authenticator": "protonauthenticator.png",
@@ -344,40 +343,6 @@ def fetch_missing_icons(pkgs):
             download_icon(listing[1], pkg)
 
 
-TIKTOK_REPO = "hxreborn/hxreborn-tiktok-patches"
-TIKTOK_PKG = "com.zhiliaoapp.musically"
-TIKTOK_LIST = f"https://raw.githubusercontent.com/{TIKTOK_REPO}/main/patches-list.json"
-
-
-def sibling_targets(url, pkg):
-    try:
-        with urllib.request.urlopen(url, timeout=10) as response:
-            data = json.load(response)
-    except Exception:
-        return []
-
-    versions = []
-    for patch in data.get("patches", []):
-        compatible = patch.get("compatiblePackages")
-        if isinstance(compatible, dict):
-            found = compatible.get(pkg) or []
-        elif isinstance(compatible, list):
-            found = [
-                t.get("version")
-                for entry in compatible
-                if entry.get("packageName") == pkg
-                for t in entry.get("targets") or []
-            ]
-        else:
-            continue
-
-        for version in found:
-            if version and version not in versions:
-                versions.append(version)
-
-    return [{"version": version} for version in versions]
-
-
 def icon_img(pkg):
     """Inline <img> for an app, or a generic package emoji when it has no icon.
     Relative path so it resolves on any branch and in forks."""
@@ -432,11 +397,10 @@ def build_content(expanded=False):
         f"&nbsp;&nbsp;•&nbsp;&nbsp;`{branch}`&nbsp;&nbsp;•&nbsp;&nbsp;"
         f"{total} patches total"
     ]
-    fetch_missing_icons(list(by_pkg) + [TIKTOK_PKG])
+    fetch_missing_icons(list(by_pkg))
 
     apps = sorted(by_pkg.items(), key=lambda item: item[1]["name"].lower())
     cells = [grid_cell(e["name"], patch_count(len(e["patches"])), pkg) for pkg, e in apps]
-    cells.append(grid_cell("TikTok", "separate bundle", TIKTOK_PKG))
     if universal:
         cells.append(grid_cell("Universal", patch_count(len(universal))))
     lines.append("")
@@ -447,23 +411,6 @@ def build_content(expanded=False):
         label   = entry["name"]
         lines.append(spoiler(label, len(patches), entry["targets"], patches_table(patches, slug(label), pkg), expanded, pkg))
         lines.append("")
-
-    # TikTok ships as its own bundle, so it has no entry in patches-list.json.
-    # Rendered here so the catalog lists it alongside the apps in this bundle.
-    tiktok_versions = versions_table(sibling_targets(TIKTOK_LIST, TIKTOK_PKG))
-    tiktok_section = f"**🎯 Supported versions:**\n\n{tiktok_versions}\n\n" if tiktok_versions else ""
-
-    lines.append(f"""<a id="tiktok"></a>
-{"<details open>" if expanded else "<details>"}
-<summary>{icon_img(TIKTOK_PKG)}TikTok&nbsp;&nbsp;•&nbsp;&nbsp;separate bundle</summary>
-<br>
-
-{tiktok_section}| 📦&nbsp;Bundle | 📜&nbsp;Description |
-|----------|----------------|
-| [hxreborn-tiktok-patches](https://github.com/{TIKTOK_REPO}) | Not part of this bundle, so it has to be added to Morphe as its own patch source. Forked from [icysymmetra/tiktok-patches-for-morphe](https://github.com/icysymmetra/tiktok-patches-for-morphe). [Add to Morphe](https://morphe.software/add-source?github={TIKTOK_REPO}) |
-
-</details>""")
-    lines.append("")
 
     # Universal patches (no specific app)
     if universal:
