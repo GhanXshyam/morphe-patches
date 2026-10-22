@@ -11,6 +11,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMuta
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.formatter.DexFormatter
+import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
@@ -19,6 +20,12 @@ import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 internal fun descriptor(method: MethodReference): String = DexFormatter.INSTANCE.getMethodDescriptor(method)
 
 internal fun descriptor(field: FieldReference): String = DexFormatter.INSTANCE.getFieldDescriptor(field)
+
+internal fun Method.parameterRegister(index: Int): String {
+    val receiver = if (AccessFlags.STATIC.isSet(accessFlags)) 0 else 1
+    val preceding = parameterTypes.take(index).sumOf { if (it == "J" || it == "D") 2 else 1 }
+    return "p${receiver + preceding}"
+}
 
 private fun MutableClass.compileMethod(
     name: String,
