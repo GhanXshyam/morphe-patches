@@ -14,7 +14,7 @@ import app.morphe.util.returnEarly
 
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
-    name = "Unlock premium",
+    name = "Unlock premium (root)",
     description = "Unlocks food preferences, diet alerts and the full history. " +
         "Search and offline downloads need a paid subscription. Requires a root mount install.",
 ) {
