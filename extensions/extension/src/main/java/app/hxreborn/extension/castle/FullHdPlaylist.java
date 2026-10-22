@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import app.hxreborn.extension.shared.Streams;
+
 @SuppressWarnings("unused")
 public final class FullHdPlaylist {
 
@@ -39,7 +41,7 @@ public final class FullHdPlaylist {
         if (!requested) {
             return playlist;
         }
-        byte[] original = PreviewPlaylist.readAll(playlist);
+        byte[] original = Streams.readAll(playlist);
         String fullHd;
         try {
             fullHd = fullHd(new String(original, StandardCharsets.UTF_8), new Existence() {
