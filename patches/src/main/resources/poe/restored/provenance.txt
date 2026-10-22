@@ -1,0 +1,10 @@
+build-tools 37.0.0
+platform android-37.0
+javac 21.0.12.1
+baksmali baksmali 2.5.2-dev (http://smali.org)
+ca499ee14299e694f4669203a501467e8a377b3b9d04072847e417751abbb20c  DownloadCompleteReceiver.java
+2a7f73898c9134a5e9a897343ef495c05bb3afcc3c5b14f541af2825114426e2  stub/j2.java
+8a0ea7474822a79d97e04688de844ead2ddb335f0682009ec21b711e8e19bbef  stub/k2.java
+77d88f928fce70340b05adbccec160cadf6df71012b1c0309e8095f0935f4e51  stub/m.java
+204141a3900f5b61d1c60482c5ff4f8e4b295d8baa65a0c854db9d82525f0595  stub/z.java
+0c1a4fd14237df277ee986e9cdd728acc22fb6acdea001748e195a80d09cefd9  onReceive.smali
