@@ -1,3 +1,10 @@
+## [1.59.0-dev.7](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.6...v1.59.0-dev.7) (2026-10-22)
+
+### Bug Fixes
+
+* **Castle - Unlock premium:** unblock playback on flagged installs ([0bec272](https://github.com/hxreborn/morphe-patches/commit/0bec272dda6292e864c1a9b4a59d9eb8259fb717))
+* **Yuka - Unlock premium:** show root requirement in the patch name ([93a47e9](https://github.com/hxreborn/morphe-patches/commit/93a47e9f14c0aa9292714338cebad49d3124519d))
+
 ## [1.59.0-dev.6](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.5...v1.59.0-dev.6) (2026-10-22)
 
 ### Bug Fixes
