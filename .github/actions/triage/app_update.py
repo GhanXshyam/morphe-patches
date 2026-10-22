@@ -10,21 +10,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parents[2] / "scripts"))
 from fields import field, normalize, parse_fields
-from versions import APP_UPDATE_TITLE_PREFIX, build_tags, compare, same_variant, tracked_version, version_key
+from versions import (APP_UPDATE_TITLE_PREFIX, build_tags, compare, same_variant, targets, tracked_version,
+                      version_key)
 
 MARKER = "<!-- app-update-bot -->"
 VERSION_CODE = re.compile(r"\s*\(([\w.+-]*)\)\s*$")
 VERSION = re.compile(r"[A-Za-z0-9._+-]+(?: [A-Za-z0-9._+-]+)?")
 MAX_VERSION = 64
-
-
-def targets(patches_list):
-    apps = {}
-    for patch in patches_list["patches"]:
-        for package in patch.get("compatiblePackages") or []:
-            versions = apps.setdefault(package["name"], set())
-            versions.update(t["version"] for t in package.get("targets") or [] if t.get("version"))
-    return apps
 
 
 def is_version(text):

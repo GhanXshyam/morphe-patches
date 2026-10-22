@@ -56,3 +56,12 @@ def tracked_version(title, app, app_names):
         return None
     version = title[len(prefix):]
     return version if re.search(r"\d", version) else None
+
+
+def targets(patches_list):
+    apps = {}
+    for patch in patches_list["patches"]:
+        for package in patch.get("compatiblePackages") or []:
+            versions = apps.setdefault(package["name"], set())
+            versions.update(t["version"] for t in package.get("targets") or [] if t.get("version"))
+    return apps
