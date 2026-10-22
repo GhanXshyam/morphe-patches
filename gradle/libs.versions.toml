@@ -3,7 +3,6 @@ morphe-patcher = "1.14.0"
 morphe-patches-library = "1.8.0"
 #noinspection GradleDependency
 smali = "d92701d947"
-# Pinned to the okhttp Photo Editor Pro ships
 okhttp = "5.5.0"
 pngj = "2.1.0"
 spring-javaformat = "0.0.48"

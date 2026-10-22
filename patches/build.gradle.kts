@@ -20,7 +20,6 @@ kotlin {
     }
 }
 
-// Matches the plugin's targetCompatibility 11 for this module's Java sources
 java {
     sourceCompatibility = JavaVersion.VERSION_11
 }
