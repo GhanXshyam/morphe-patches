@@ -29,7 +29,6 @@ val unlockPremiumPatch = bytecodePatch(
         val toString = WhipToStringFingerprint.matchSingle()
         val whipClass = toString.classDef
 
-        // The ownership flag is the field whose value toString() appends after the ", isAvailable=" label.
         val append = toString.instructionMatches.last()
         val flagRegister = append.getInstruction<FiveRegisterInstruction>().registerD
         val ownedField = toString.method.let { method ->
@@ -42,9 +41,6 @@ val unlockPremiumPatch = bytecodePatch(
         }
         val ownedFieldDescriptor = descriptor(ownedField)
 
-        // The app only reads ownership from this field, both through its getters and when unlocking
-        // purchases. Storing true after every write makes each whip owned as soon as it is created, on
-        // every launch, without depending on product IDs, saved purchases or which whips exist.
         var writes = 0
         whipClass.methods.forEach { method ->
             if (method.implementation == null) return@forEach

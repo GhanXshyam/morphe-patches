@@ -25,7 +25,6 @@ private const val CONTAINER_DIGEST_SIZE = 32
 
 private val CONTAINER_NAME = "ijiami.dat".toByteArray(Charsets.US_ASCII)
 
-// Second cipher on the first and last payload blocks
 internal const val OPAQUE_BLOCK_SIZE = 1024
 
 internal fun ByteArray.sealDex(size: Int = this.size) = sealDexAt(0, size)
