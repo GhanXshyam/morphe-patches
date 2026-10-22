@@ -19,10 +19,16 @@ die() {
     exit 1
 }
 
+hashes() {
+    grep -E '^[0-9a-f]{64}  ' "$1"
+}
+
 [ -x "$build_tools/d8" ] || die "no d8 at $build_tools; install build-tools $build_tools_version or set BUILD_TOOLS"
 [ -f "$platform" ] || die "no android.jar at $platform; install platform $platform_version or set PLATFORM"
 [ -x "$toolchain/clang" ] || die "no NDK toolchain at $toolchain; install NDK $ndk_version or set NDK"
 command -v javac >/dev/null || die "javac is not on PATH"
+javac_version=$(javac -version 2>&1 | cut -d' ' -f2)
+[ "${javac_version%%.*}" = 21 ] || die "javac $javac_version is not JDK 21"
 
 verify=false
 [ "${1:-}" = "--verify" ] && verify=true
@@ -124,12 +130,14 @@ cp "$work/fixture/classes.dex" "$fixture_out/sample.dex"
 } > "$out/provenance.txt"
 
 if $verify; then
-    for built in boot.dex provenance.txt $(cd "$out" && ls libhxpatch-*.so); do
+    for built in boot.dex $(cd "$out" && ls libhxpatch-*.so); do
         cmp -s "$resources/$built" "$out/$built" ||
             die "$built does not match its sources; run extensions/ijiami/build.sh"
     done
     cmp -s "$fixtures/sample.dex" "$fixture_out/sample.dex" ||
         die "sample.dex does not match its generator; run extensions/ijiami/build.sh"
+    cmp -s <(hashes "$resources/provenance.txt") <(hashes "$out/provenance.txt") ||
+        die "provenance.txt does not match its sources; run extensions/ijiami/build.sh"
     echo "checked-in binaries match their sources"
 else
     ls -la "$resources" "$fixtures"

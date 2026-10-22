@@ -1,0 +1,19 @@
+provenance patches/src/main/resources/ijiami/provenance.txt extensions/ijiami/build.sh patches/src/test/resources/ijiami
+provenance patches/src/main/resources/moviebox/provenance.txt extensions/moviebox/build.sh
+provenance patches/src/main/resources/gstarmc/provenance.txt extensions/gstarmc/build.sh
+provenance patches/src/main/resources/devcheck/restored/provenance.txt patches/restore/devcheck/generate.sh
+provenance patches/src/main/resources/poe/restored/provenance.txt patches/restore/poe/generate.sh
+large patches/src/main/resources/pairip/all.in.one.calculator-340.tsv
+large patches/src/main/resources/pairip/com.alokmandavgane.hinducalendar-177.tsv
+large patches/src/main/resources/pairip/com.darinsoft.vimo-130900.tsv
+large patches/src/main/resources/pairip/com.darinsoft.vimo-130906.tsv
+large patches/src/main/resources/pairip/com.hitrolab.audioeditor-5163.tsv
+large patches/src/main/resources/pairip/com.jndapp.glass.widgets-11.tsv
+large patches/src/main/resources/pairip/com.lingodeer-677.tsv
+large patches/src/main/resources/pairip/com.nieruo.healthapp-281.tsv
+large patches/src/main/resources/pairip/com.outscar.bd.bongcal-302400127.tsv
+large patches/src/main/resources/pairip/com.poe.android-3077006.tsv
+large patches/src/main/resources/pairip/flar2.devcheck-657.tsv
+large patches/src/main/resources/pairip/flar2.devcheck-660.tsv
+large patches/src/main/resources/pairip/ipnossoft.rma.free-26910.tsv
+large patches/src/main/resources/pairip/me.proton.android.lumo-78.tsv

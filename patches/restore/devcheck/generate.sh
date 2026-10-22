@@ -17,6 +17,10 @@ die() {
     exit 1
 }
 
+hashes() {
+    grep -E '^[0-9a-f]{64}  ' "$1"
+}
+
 [ -x "$build_tools/d8" ] || die "no d8 at $build_tools; install build-tools $build_tools_version or set BUILD_TOOLS"
 [ -f "$platform" ] || die "no android.jar at $platform; install platform $platform_version or set PLATFORM"
 [ -x "$javac" ] || die "no javac at $javac"
@@ -51,9 +55,11 @@ done
 } > "$out/provenance.txt"
 
 if $verify; then
-    for built in "$out"/*; do
+    for built in "$out"/*.smali; do
         cmp -s "$resources/$(basename "$built")" "$built" ||
             die "$(basename "$built") does not match its sources; run patches/restore/devcheck/generate.sh"
     done
+    cmp -s <(hashes "$resources/provenance.txt") <(hashes "$out/provenance.txt") ||
+        die "provenance.txt does not match its sources; run patches/restore/devcheck/generate.sh"
     echo "checked-in smali matches its sources"
 fi

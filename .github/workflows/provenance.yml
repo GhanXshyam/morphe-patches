@@ -1,0 +1,44 @@
+name: Provenance
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'extensions/**'
+      - 'patches/restore/**'
+      - 'patches/src/main/resources/**'
+      - '.github/scripts/check_vendor_content.py'
+      - '.github/vendor-content-allowlist.txt'
+
+jobs:
+  provenance:
+    name: Provenance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Install Android build tools
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;27.3.13750724" "build-tools;37.0.0" "platforms;android-36" "platforms;android-37.0"
+
+      - name: Install baksmali
+        run: sudo apt-get install -y libsmali-java
+
+      - name: Verify generated resources against their sources
+        run: |
+          export JAVAC="$JAVA_HOME/bin/javac"
+          extensions/ijiami/build.sh --verify
+          extensions/moviebox/build.sh --verify
+          extensions/gstarmc/build.sh --verify
+          patches/restore/devcheck/generate.sh --verify
+          patches/restore/poe/generate.sh --verify
