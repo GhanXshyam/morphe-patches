@@ -38,7 +38,7 @@ public final class PreviewPlaylist {
 
     public static InputStream expand(String location, InputStream playlist) throws IOException {
         if (location == null || !location.contains(PREVIEW_PATH)) {
-            return playlist;
+            return FullHdPlaylist.expand(playlist);
         }
         byte[] original = readAll(playlist);
         String expanded;
@@ -76,7 +76,7 @@ public final class PreviewPlaylist {
         return available;
     }
 
-    private static boolean exists(String url) throws IOException {
+    static boolean exists(String url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         try {
             connection.setConnectTimeout(TIMEOUT_MILLIS);
@@ -95,7 +95,7 @@ public final class PreviewPlaylist {
         }
     }
 
-    private static byte[] readAll(InputStream input) throws IOException {
+    static byte[] readAll(InputStream input) throws IOException {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         byte[] buffer = new byte[8192];
         int read;

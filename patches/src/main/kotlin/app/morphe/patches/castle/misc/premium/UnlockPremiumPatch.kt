@@ -23,6 +23,9 @@ private const val DOWNLOAD_PLAYLIST_TASK_CLASS = "Lcom/arialyy/aria/m3u8/M3U8Inf
 private const val PLAYLIST_HEADER_ERROR = "Input does not start with the #EXTM3U header."
 private const val EXTENSION_PACKAGE = "Lapp/hxreborn/extension/castle/"
 private const val PREVIEW_PLAYLIST_CLASS = "${EXTENSION_PACKAGE}PreviewPlaylist;"
+private const val FULL_HD_PLAYLIST_CLASS = "${EXTENSION_PACKAGE}FullHdPlaylist;"
+private const val VIDEO_BODY_CLASS = "Lcom/gxgx/daqiandy/requestBody/VideoBody;"
+private const val DEFAULT_CONSTRUCTOR_MARKER = "Lkotlin/jvm/internal/DefaultConstructorMarker;"
 
 private const val PREMIUM_VIP_INFO = """
     new-instance v0, Lcom/gxgx/base/bean/VipInfo;
@@ -41,6 +44,11 @@ private const val PREMIUM_VIP_INFO = """
 private const val NOT_PREVIEW = """
     sget-object v0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
     return-object v0
+"""
+
+private const val REQUEST_HD_RESOLUTION = """
+    invoke-static/range { p4 .. p4 }, $FULL_HD_PLAYLIST_CLASS->resolution(Ljava/lang/Integer;)Ljava/lang/Integer;
+    move-result-object p4
 """
 
 private const val EXPAND_PREVIEW_PLAYLIST = """
@@ -66,6 +74,10 @@ val unlockPremiumPatch = rawResourcePatch(
             methods(rechargeSheetClass).single {
                 it.returnType == "V" && it.parameterTypes.size == 2 && it.parameterTypes[1] == "Ljava/lang/String;"
             }.addInstructions(0, "return-void")
+            methods(VIDEO_BODY_CLASS, "<init>")
+                .filter { DEFAULT_CONSTRUCTOR_MARKER !in it.parameterTypes && it.parameterTypes.getOrNull(3) == "Ljava/lang/Integer;" }
+                .maxBy { it.parameterTypes.size }
+                .addInstructions(0, REQUEST_HD_RESOLUTION)
             val playlistParser = prependToMethodUsingString(
                 PLAYLIST_HEADER_ERROR,
                 firstParameter = "Landroid/net/Uri;",
