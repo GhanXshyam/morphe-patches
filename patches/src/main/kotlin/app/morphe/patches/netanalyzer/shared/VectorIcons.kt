@@ -5,7 +5,6 @@
 package app.morphe.patches.netanalyzer.shared
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.BytecodePatchContext
@@ -15,11 +14,11 @@ import app.morphe.patcher.string
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableField.Companion.toMutable
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
+import app.morphe.patches.shared.misc.smali.addMethod
 import app.morphe.util.getReference
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
@@ -31,7 +30,6 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
-import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 
 private const val REFERENCE_ICON = "leak_add"
 private const val ICON_METHOD = "hxIcon"
@@ -138,16 +136,14 @@ internal fun iconMethod(classDef: MutableClass, name: String, pathData: String):
             appendLine(":done")
             appendLine("return-object v0")
         }
-        ImmutableMethod(
-            classDef.type,
+        classDef.addMethod(
             "$ICON_METHOD$index",
             emptyList(),
             api.build.returnType,
             AccessFlags.PRIVATE.value or AccessFlags.STATIC.value,
-            null,
-            null,
-            MutableMethodImplementation(ICON_REGISTERS),
-        ).toMutable().apply { addInstructionsWithLabels(0, smali) }.also { classDef.methods.add(it) }
+            ICON_REGISTERS,
+            smali,
+        )
     }
 
 context(context: BytecodePatchContext)

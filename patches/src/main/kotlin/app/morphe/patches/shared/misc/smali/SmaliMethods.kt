@@ -33,24 +33,31 @@ private fun MutableClass.compileMethod(
         .toMutable().apply { addInstructionsWithLabels(0, smali) }
 }
 
+internal fun MutableClass.addMethod(
+    name: String,
+    parameters: List<String>,
+    returnType: String,
+    accessFlags: Int,
+    registers: Int,
+    smali: String,
+): MutableMethod = compileMethod(
+    name,
+    parameters.map { ImmutableMethodParameter(it, null, null) },
+    returnType,
+    accessFlags,
+    registers,
+    smali,
+).also(methods::add)
+
 internal fun MutableClass.addStaticMethod(
     name: String,
     parameters: List<String>,
     returnType: String,
     registers: Int,
     smali: String,
-): String {
-    val method = compileMethod(
-        name,
-        parameters.map { ImmutableMethodParameter(it, null, null) },
-        returnType,
-        AccessFlags.PUBLIC.value or AccessFlags.STATIC.value,
-        registers,
-        smali,
-    )
-    methods.add(method)
-    return descriptor(method)
-}
+): String = descriptor(
+    addMethod(name, parameters, returnType, AccessFlags.PUBLIC.value or AccessFlags.STATIC.value, registers, smali),
+)
 
 internal fun MutableClass.replaceStub(name: String, registers: Int, smali: String) {
     val stub = methods.single { it.name == name }
