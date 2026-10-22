@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""python3 shipped_requests.py <previous-patches-list.json> <patches-list.json> <requests.json>"""
+"""python3 shipped_requests.py <previous-patches-list.json> <patches-list.json> <requests.json> [<tag> <owner/repo>]"""
 
 import json
 import sys
@@ -44,7 +44,20 @@ def shipped(previous, current, requests):
     return rows
 
 
+def prerelease_comment(row, tag, repo):
+    link = f"[{tag}](https://github.com/{repo}/releases/tag/{tag})"
+    comment = (f"<!-- prerelease-bot -->\nA pre-release with patches for {row['app']} is out: {link}. "
+               f"In Morphe Manager open Sources, this bundle, and turn on Pre-release patches, "
+               f"then update the bundle and patch {row['app']}. Reply here whether it works.")
+    if row["close"]:
+        comment += " The request closes when the change is merged into main."
+    return comment + "\n"
+
+
 if __name__ == "__main__":
     previous, current, requests = (json.loads(Path(path).read_text(encoding="utf-8")) for path in sys.argv[1:4])
+    prerelease = sys.argv[4:6]
     for row in shipped(previous, current, requests):
+        if prerelease:
+            row["comment"] = prerelease_comment(row, *prerelease)
         print(json.dumps(row))
