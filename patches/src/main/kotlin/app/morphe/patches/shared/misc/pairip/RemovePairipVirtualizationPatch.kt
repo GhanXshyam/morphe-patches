@@ -16,6 +16,7 @@
  */
 package app.morphe.patches.shared.misc.pairip
 
+import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
@@ -35,6 +36,7 @@ import com.android.tools.smali.dexlib2.immutable.reference.ImmutableFieldReferen
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableStringReference
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.nio.ByteBuffer
 import java.security.MessageDigest
 import java.util.function.Supplier
@@ -49,7 +51,7 @@ private val PAIRIP_ASSET_MAGIC = byteArrayOf(0x00, 0x49, 0x41, 0x50, 0x02)
 private val DEX_MAGIC = byteArrayOf(0x64, 0x65, 0x78, 0x0a)
 private const val DEX_HEADER_SIZE = 0x70
 private const val DEX_FILE_SIZE_OFFSET = 0x20
-private const val DELTA_DIGEST_BYTES = 8
+private const val KEY_DIGEST_BYTES = 8
 
 private val recoveredDexFiles = mutableListOf<ByteArray>()
 private var isPairipPacked = false
@@ -155,28 +157,7 @@ private val PAIRIP_HOOKED_LIBRARIES = mapOf(
     ),
 )
 
-private fun ByteArray.applyDelta(delta: ByteArray): ByteArray {
-    val buffer = ByteBuffer.wrap(delta)
-
-    val magic = ByteArray(5).also(buffer::get)
-    check(magic.contentEquals("MDLT\u0001".toByteArray(Charsets.ISO_8859_1))) { "Not a delta file" }
-
-    val sourceDigest = ByteArray(32).also(buffer::get)
-    val targetDigest = ByteArray(32).also(buffer::get)
-    check(sha256().contentEquals(sourceDigest)) { "Library does not match the delta it is patched with" }
-
-    val target = ByteArray(buffer.long.toInt())
-    copyInto(target, endIndex = minOf(size, target.size))
-
-    repeat(buffer.int) {
-        val offset = buffer.long.toInt()
-        buffer.get(target, offset, buffer.int)
-    }
-
-    check(target.sha256().contentEquals(targetDigest)) { "Patched library does not match the expected result" }
-
-    return target
-}
+private class WrappedLibrary(val file: File, val wrapped: ByteArray, val keyName: String, val key: ByteArray?)
 
 private fun ByteArray.sha256() = MessageDigest.getInstance("SHA-256").digest(this)
 
@@ -190,25 +171,35 @@ private val removePairipResourcesPatch = rawResourcePatch {
         var restoredLibraries = 0
         var removedRuntimes = 0
         get("lib").listFiles { file -> file.isDirectory }?.forEach { architecture ->
-            hookedLibraries.forEach { (name, fileName) ->
-                val library = architecture.resolve(fileName)
-                if (!library.exists()) return@forEach
+            val libraries = hookedLibraries.mapNotNull { (name, fileName) ->
+                architecture.resolve(fileName).takeIf { it.exists() }?.let { file ->
+                    val wrapped = file.readBytes()
+                    val digestPrefix = wrapped.sha256().take(KEY_DIGEST_BYTES).joinToString("") { "%02x".format(it) }
+                    val keyName = "key-${architecture.name}-$name-$digestPrefix.bin"
+                    WrappedLibrary(file, wrapped, keyName, inputStreamFromBundledResource("pairip", keyName)?.use { it.readBytes() })
+                }
+            }
+            val unkeyed = libraries.filter { it.key == null }
+            val hasRuntime = architecture.resolve("libpairipcore.so").exists()
 
-                val wrapped = library.readBytes()
-                val digestPrefix = wrapped.sha256().take(DELTA_DIGEST_BYTES).joinToString("") { "%02x".format(it) }
-                val deltaName = "delta-${architecture.name}-$name-$digestPrefix.bin"
-                val delta = inputStreamFromBundledResource("pairip", deltaName)
-                    ?: if (architecture.name == "arm64-v8a") {
-                        throw IllegalStateException("Missing pairip/$deltaName for $fileName")
-                    } else {
-                        return@forEach
-                    }
+            if (unkeyed.isNotEmpty()) {
+                if (architecture.name == "arm64-v8a" || unkeyed.size < libraries.size) {
+                    throw PatchException("Missing pairip/${unkeyed.first().keyName} for ${architecture.name}/${unkeyed.first().file.name}")
+                }
+                architecture.deleteRecursively()
+                if (hasRuntime) removedRuntimes++
+                return@forEach
+            }
 
-                library.writeBytes(wrapped.applyDelta(delta.use { it.readBytes() }))
+            libraries.forEach { library ->
+                library.file.writeBytes(unwrapNativeLibrary(library.wrapped, checkNotNull(library.key)))
                 restoredLibraries++
             }
 
-            if (architecture.resolve("libpairipcore.so").delete()) removedRuntimes++
+            if (hasRuntime) {
+                architecture.resolve("libpairipcore.so").delete()
+                removedRuntimes++
+            }
         }
         check(removedRuntimes > 0) { "No libpairipcore.so found under lib/" }
         if (hookedLibraries.isNotEmpty()) check(restoredLibraries > 0) { "No pairip patched library found under lib/" }
