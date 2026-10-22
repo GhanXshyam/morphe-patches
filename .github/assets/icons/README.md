@@ -135,6 +135,7 @@ icon at 96x96, cut to a circle, for any app without an icon here.
 | `udictionary.png` | U Dictionary (`com.youdao.hindict`) | Youdao (Hong Kong) Limited | APK 6.7.5, `res/mipmap-xxhdpi/ic_launcher_round.png` |
 | `magicearth.png` | Magic Earth (`com.generalmagic.magicearth`) | Magic Lane International | APK 7.1.26, `res/mipmap-xxxhdpi-v4/ic_launcher_round.webp` |
 | `3way.png` | 3way: Couples & Singles Hookup (`app.threesome.dating`) | 3way App | APK 3.1.0, `res/drawable-xxhdpi-v4/ic_launcher_round.png` |
+| `internetspeedmeterlite.png` | Internet Speed Meter Lite (`com.internet.speed.meter.lite`) | DynamicApps | APK 1.7.0-lite, square icon `res/drawable/app_icon.png` cut to a circle |
 | `com.andatsoft.myapk.fwa.png` | My APK (`com.andatsoft.myapk.fwa`) | Cards | Google Play listing icon, added 2026-10-12 |
 | `com.azeravn.bulletjournal.png` | May: Beautiful Bullet Journal (`com.azeravn.bulletjournal`) | AZ Family | Google Play listing icon, added 2026-10-10 |
 | `com.dev2a.junk_journal.png` | Jujo (`com.dev2a.junk_journal`) | Dev2a Inc | Google Play listing icon, added 2026-10-14 |

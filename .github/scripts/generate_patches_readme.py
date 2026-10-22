@@ -265,6 +265,7 @@ ICONS = {
     "com.liori.echogram": "echogram.png",
     "com.hapibits.soundlift": "echoequalizer.png",
     "com.imo.android.imoim": "imo.png",
+    "com.internet.speed.meter.lite": "internetspeedmeterlite.png",
     "com.ledblinker": "ledblinker.png",
     "com.lingodeer": "lingodeer.png",
     "me.proton.android.lumo": "lumo.png",

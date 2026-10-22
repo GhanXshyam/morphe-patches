@@ -9,6 +9,7 @@ large patches/src/main/resources/pairip/com.alokmandavgane.hinducalendar-177.tsv
 large patches/src/main/resources/pairip/com.darinsoft.vimo-130900.tsv
 large patches/src/main/resources/pairip/com.darinsoft.vimo-130906.tsv
 large patches/src/main/resources/pairip/com.hitrolab.audioeditor-5163.tsv
+large patches/src/main/resources/pairip/com.internet.speed.meter.lite-57.tsv
 large patches/src/main/resources/pairip/com.jndapp.glass.widgets-11.tsv
 large patches/src/main/resources/pairip/com.lingodeer-677.tsv
 large patches/src/main/resources/pairip/com.nieruo.healthapp-281.tsv

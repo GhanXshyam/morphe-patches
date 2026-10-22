@@ -460,6 +460,17 @@ internal object AppCompatibilities {
         ),
     )
 
+    val INTERNET_SPEED_METER_LITE = Compatibility(
+        name = "Internet Speed Meter Lite",
+        packageName = "com.internet.speed.meter.lite",
+        apkFileType = ApkFileType.APKS_REQUIRED,
+        appIconColor = 0x3070C0,
+        signatures = setOf(
+            "802dcbe0db7955225c2f432aafed521681b835e274e0337aba8477b39c0261cf",
+        ),
+        targets = listOf(AppTarget(version = "1.7.0-lite", versionCode = 57, minSdk = 28)),
+    )
+
     val JUJO = Compatibility(
         name = "Jujo",
         packageName = "com.dev2a.junk_journal",

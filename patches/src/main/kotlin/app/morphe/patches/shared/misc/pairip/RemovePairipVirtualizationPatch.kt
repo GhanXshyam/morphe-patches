@@ -124,8 +124,8 @@ private val mergeRecoveredDexPatch = bytecodePatch {
     dependsOn(extractRecoveredDexPatch)
 
     extendWithAll {
-        if (isPairipPacked && recoveredDexFiles.isNotEmpty()) {
-            listOf(Supplier { ByteArrayInputStream(recoveredDexFiles.single()) })
+        if (isPairipPacked) {
+            recoveredDexFiles.map { dex -> Supplier { ByteArrayInputStream(dex) } }
         } else {
             emptyList()
         }
@@ -311,6 +311,7 @@ val removePairipVirtualizationPatch = bytecodePatch {
         AppCompatibilities.DEVCHECK,
         AppCompatibilities.GLASS_WIDGETS,
         AppCompatibilities.HINDU_CALENDAR,
+        AppCompatibilities.INTERNET_SPEED_METER_LITE,
         AppCompatibilities.LINGODEER,
         AppCompatibilities.LUMO,
         AppCompatibilities.MUSICOLET,
