@@ -87,14 +87,6 @@ public final class PatchPanel {
 
     private static final float CHIP_SP = 12f;
 
-    private static final int ROW_PAD_V_DP = 4;
-
-    private static final int ROW_TIME_WIDTH_DP = 46;
-
-    private static final int ROW_CHIP_MARGIN_DP = 10;
-
-    private static final float ROW_SP = 13f;
-
     private static final float DISABLED_ALPHA = 0.38f;
 
     private static final String GENERAL = "General";
@@ -633,37 +625,6 @@ public final class PatchPanel {
 
     static int methodColour(String method) {
         return (SAFE_METHODS.contains(method.toUpperCase(Locale.US))) ? NEUTRAL : ACCENT;
-    }
-
-    static View logRow(Activity activity, String time, String status, int statusColour, String detail) {
-        LinearLayout row = new LinearLayout(activity);
-        row.setOrientation(LinearLayout.HORIZONTAL);
-        row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(0, dp(activity, ROW_PAD_V_DP), 0, dp(activity, ROW_PAD_V_DP));
-
-        TextView timeView = new TextView(activity);
-        timeView.setText(time);
-        timeView.setTextColor(DIM);
-        timeView.setTextSize(TypedValue.COMPLEX_UNIT_SP, ROW_SP);
-        timeView.setLayoutParams(
-                new LinearLayout.LayoutParams(dp(activity, ROW_TIME_WIDTH_DP), ViewGroup.LayoutParams.WRAP_CONTENT));
-        row.addView(timeView);
-
-        View chip = chip(activity, status, statusColour);
-        LinearLayout.LayoutParams chipParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        chipParams.rightMargin = dp(activity, ROW_CHIP_MARGIN_DP);
-        chip.setLayoutParams(chipParams);
-        row.addView(chip);
-
-        if (detail != null) {
-            TextView detailView = new TextView(activity);
-            detailView.setText(detail);
-            detailView.setTextColor(DIM);
-            detailView.setTextSize(TypedValue.COMPLEX_UNIT_SP, ROW_SP);
-            row.addView(detailView);
-        }
-        return row;
     }
 
     static void showLog(Activity activity, String heading, View body) {
