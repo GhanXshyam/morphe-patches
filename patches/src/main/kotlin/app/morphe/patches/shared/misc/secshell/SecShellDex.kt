@@ -69,6 +69,8 @@ internal class SecShellDex(bytes: ByteArray) {
             ?: throw PatchException("Expected one method $name in $classType, found ${matches.size}")
     }
 
+    fun methods(classType: String) = editedClass(classType).methods.toList()
+
     fun methods(classType: String, name: String) = editedClass(classType).methods.filter { it.name == name }
 
     fun replaceBody(classType: String, name: String, registers: Int, smali: String) {

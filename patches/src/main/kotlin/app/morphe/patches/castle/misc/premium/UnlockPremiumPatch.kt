@@ -18,6 +18,7 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 private const val USER_CLASS = "Lcom/gxgx/base/bean/User;"
 private const val VIDEO_CLASS = "Lcom/gxgx/daqiandy/bean/VideoBean;"
+private const val RECHARGE_COUNTDOWN_COLOR = "#F0D953"
 private const val DOWNLOAD_PLAYLIST_TASK_CLASS = "Lcom/arialyy/aria/m3u8/M3U8InfoTask;"
 private const val PLAYLIST_HEADER_ERROR = "Input does not start with the #EXTM3U header."
 private const val EXTENSION_PACKAGE = "Lapp/hxreborn/extension/castle/"
@@ -50,7 +51,7 @@ private const val EXPAND_PREVIEW_PLAYLIST = """
 @Suppress("unused")
 val unlockPremiumPatch = rawResourcePatch(
     name = "Unlock premium",
-    description = "Unlocks member-only titles and shows the account as Premium. " +
+    description = "Unlocks member-only titles, shows the account as Premium and removes the premium bundle offer. " +
         "Requires a signed-in account.",
 ) {
     compatibleWith(AppCompatibilities.CASTLE)
@@ -61,6 +62,10 @@ val unlockPremiumPatch = rawResourcePatch(
         editSecShellPayload {
             replaceBody(USER_CLASS, "getVipInfos", registers = 6, smali = PREMIUM_VIP_INFO)
             replaceBody(VIDEO_CLASS, "isPreview", registers = 2, smali = NOT_PREVIEW)
+            val rechargeSheetClass = methodUsingString(RECHARGE_COUNTDOWN_COLOR).definingClass
+            methods(rechargeSheetClass).single {
+                it.returnType == "V" && it.parameterTypes.size == 2 && it.parameterTypes[1] == "Ljava/lang/String;"
+            }.addInstructions(0, "return-void")
             val playlistParser = prependToMethodUsingString(
                 PLAYLIST_HEADER_ERROR,
                 firstParameter = "Landroid/net/Uri;",
