@@ -69,7 +69,7 @@ internal object AppCompatibilities {
             "48e539b414808f7a13343b5e10310d268f63030ba3cd479db290048ca0a77e8f",
         ),
         targets = listOf(
-            AppTarget(version = "1.3.3", versionCode = 29, minSdk = 32),
+            AppTarget(version = "1.3.3", versionCode = 29, minSdk = 24),
             AppTarget(version = "1.3.4", versionCode = 30, minSdk = 24),
         ),
     )
@@ -292,7 +292,7 @@ internal object AppCompatibilities {
         signatures = setOf(
             "73ddcf1fcf184dd559d6239ea2de84c2a6f08d4224b78c4491dc921b5f11d54e",
         ),
-        targets = listOf(AppTarget(version = "1.0.12", versionCode = 45, minSdk = 32)),
+        targets = listOf(AppTarget(version = "1.0.12", versionCode = 45, minSdk = 24)),
     )
 
     val DEVCHECK = Compatibility(
@@ -335,7 +335,7 @@ internal object AppCompatibilities {
         ),
         targets = listOf(
             AppTarget(version = "9.2", versionCode = 86, minSdk = 25),
-            AppTarget(version = "9.3", versionCode = 87, minSdk = 29),
+            AppTarget(version = "9.3", versionCode = 87, minSdk = 24),
             AppTarget(version = "9.4", versionCode = 88, minSdk = 24),
         ),
     )
@@ -1150,7 +1150,7 @@ internal object AppCompatibilities {
         apkFileType = ApkFileType.APKS,
         appIconColor = 0x8E58FF,
         targets = listOf(
-            AppTarget(version = "Android V1.79.2", minSdk = 32),
+            AppTarget(version = "Android V1.79.2", minSdk = 26),
             AppTarget(version = "Android V1.79.1", minSdk = 26),
             AppTarget(version = "Android V1.78.52", minSdk = 26),
             AppTarget(version = "Android V1.78.51", minSdk = 26),
@@ -1245,7 +1245,7 @@ internal object AppCompatibilities {
             "982d28261c4cbcc2ff8c9ce397d66af80150a0f4e684aed8eef328c0af169019",
         ),
         targets = listOf(
-            AppTarget(version = "26.6.1-120585", versionCode = 272606010, minSdk = 32),
+            AppTarget(version = "26.6.1-120585", versionCode = 272606010, minSdk = 26),
             AppTarget(version = "26.6.2-121046", versionCode = 272606020, minSdk = 26),
         ),
     )
