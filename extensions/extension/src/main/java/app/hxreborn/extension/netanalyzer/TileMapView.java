@@ -198,22 +198,6 @@ final class TileMapView extends View {
         return HALF - Math.log((1 + sine) / (1 - sine)) / (4 * Math.PI);
     }
 
-    static double longitudeOf(double u) {
-        return u * FULL_TURN_DEGREES - HALF_TURN_DEGREES;
-    }
-
-    static double latitudeOf(double v) {
-        return Math.toDegrees(Math.atan(Math.sinh(Math.PI * (1 - 2 * v))));
-    }
-
-    static double pixelX(double longitude, double zoom) {
-        return mercatorU(longitude) * worldSize(zoom);
-    }
-
-    static double pixelY(double latitude, double zoom) {
-        return mercatorV(latitude) * worldSize(zoom);
-    }
-
     void setMarkers(List<MapMarker> markers, boolean animate) {
         final boolean moved = !samePositions(this.markers, markers);
         this.markers = new ArrayList<>(markers);
