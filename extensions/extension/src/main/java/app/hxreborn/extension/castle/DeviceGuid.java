@@ -21,6 +21,12 @@ public final class DeviceGuid {
 
     private static final int GUID_BYTES = 18;
 
+    private static final String BLACKLISTED = "\"inBlacklist\":true";
+
+    private static final ThreadLocal<Boolean> RETRY_PENDING = new ThreadLocal<>();
+
+    private static final ThreadLocal<Boolean> RETRYING = new ThreadLocal<>();
+
     private static volatile String guid;
 
     private DeviceGuid() {
@@ -34,13 +40,20 @@ public final class DeviceGuid {
         return guid;
     }
 
-    public static Boolean switchGuidIfBlacklisted(Boolean blacklisted) {
-        if (!Boolean.TRUE.equals(blacklisted)) {
-            return blacklisted;
+    public static void observeResponse(String json) {
+        if (Boolean.TRUE.equals(RETRYING.get()) || json == null || !json.contains(BLACKLISTED)) {
+            return;
         }
         guid = newGuid();
         write(guid);
-        return Boolean.FALSE;
+        RETRY_PENDING.set(Boolean.TRUE);
+    }
+
+    public static boolean shouldRetry() {
+        boolean retry = Boolean.TRUE.equals(RETRY_PENDING.get());
+        RETRY_PENDING.set(Boolean.FALSE);
+        RETRYING.set(retry);
+        return retry;
     }
 
     static String newGuid() {

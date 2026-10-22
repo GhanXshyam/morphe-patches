@@ -4,6 +4,7 @@
  */
 package app.morphe.patches.castle.misc.premium
 
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
@@ -11,10 +12,14 @@ import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.secshell.editSecShellPayload
 import app.morphe.patches.shared.misc.secshell.secShellPayloadPatch
+import app.morphe.util.findInstructionIndicesReversed
+import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import app.morphe.util.indexOfFirstInstructionOrThrow
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 private const val USER_CLASS = "Lcom/gxgx/base/bean/User;"
@@ -29,6 +34,15 @@ private const val VIDEO_BODY_CLASS = "Lcom/gxgx/daqiandy/requestBody/VideoBody;"
 private const val DEFAULT_CONSTRUCTOR_MARKER = "Lkotlin/jvm/internal/DefaultConstructorMarker;"
 private const val DEVICE_GUID_CLASS = "${EXTENSION_PACKAGE}DeviceGuid;"
 private const val GUID_GETTER_LOG = "getServiceOauthDeviceId Guid="
+private const val REQUEST_SIGNING_LOG = "differenceTime==="
+private const val RESPONSE_DECRYPT_LOG = "responseData==="
+private const val STRING_CLASS = "Ljava/lang/String;"
+private const val MEDIA_TYPE_CLASS = "Lokhttp3/MediaType;"
+private const val RESPONSE_BODY_COMPANION_CLASS = "Lokhttp3/ResponseBody${'$'}Companion;"
+private const val REQUEST_CLASS = "Lokhttp3/Request;"
+private const val RESPONSE_CLASS = "Lokhttp3/Response;"
+private const val REAL_CHAIN_CLASS = "Lokhttp3/internal/http/RealInterceptorChain;"
+private const val CHAIN_CLASS = "Lokhttp3/Interceptor${'$'}Chain;"
 
 private const val PREMIUM_VIP_INFO = """
     new-instance v0, Lcom/gxgx/base/bean/VipInfo;
@@ -46,13 +60,6 @@ private const val PREMIUM_VIP_INFO = """
 
 private const val NOT_PREVIEW = """
     sget-object v0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
-    return-object v0
-"""
-
-private const val SWITCH_BLACKLISTED_GUID = """
-    iget-object v0, p0, Lcom/gxgx/daqiandy/bean/VideoBean;->inBlacklist:Ljava/lang/Boolean;
-    invoke-static { v0 }, $DEVICE_GUID_CLASS->switchGuidIfBlacklisted(Ljava/lang/Boolean;)Ljava/lang/Boolean;
-    move-result-object v0
     return-object v0
 """
 
@@ -89,10 +96,55 @@ val unlockPremiumPatch = rawResourcePatch(
         editSecShellPayload {
             replaceBody(USER_CLASS, "getVipInfos", registers = 6, smali = PREMIUM_VIP_INFO)
             replaceBody(VIDEO_CLASS, "isPreview", registers = 2, smali = NOT_PREVIEW)
-            replaceBody(VIDEO_CLASS, "getInBlacklist", registers = 2, smali = SWITCH_BLACKLISTED_GUID)
             methodsUsingString(GUID_GETTER_LOG)
                 .single { it.parameterTypes.isEmpty() && it.returnType == "Ljava/lang/String;" }
                 .addInstructionsWithLabels(0, USE_SWITCHED_GUID)
+            methodUsingString(RESPONSE_DECRYPT_LOG, firstParameter = CHAIN_CLASS).apply {
+                val bodyCreation = indexOfFirstInstructionOrThrow {
+                    getReference<MethodReference>()?.let {
+                        it.definingClass == RESPONSE_BODY_COMPANION_CLASS &&
+                            it.parameterTypes.map { type -> type.toString() }.toSet() == setOf(MEDIA_TYPE_CLASS, STRING_CLASS)
+                    } == true
+                }
+                val creation = getInstruction<FiveRegisterInstruction>(bodyCreation)
+                val argumentRegisters = listOf(creation.registerC, creation.registerD, creation.registerE, creation.registerF)
+                val receivers = if (creation.opcode == Opcode.INVOKE_STATIC) 0 else 1
+                val parameters = (creation as ReferenceInstruction).reference.let { (it as MethodReference).parameterTypes }
+                val json = argumentRegisters[receivers + parameters.indexOfFirst { it == STRING_CLASS }]
+                addInstruction(bodyCreation, "invoke-static { v$json }, $DEVICE_GUID_CLASS->observeResponse($STRING_CLASS)V")
+            }
+            methodUsingString(REQUEST_SIGNING_LOG, firstParameter = CHAIN_CLASS).apply {
+                val proceedCalls = findInstructionIndicesReversed {
+                    getReference<MethodReference>()?.let {
+                        (it.definingClass == REAL_CHAIN_CLASS || it.definingClass == CHAIN_CLASS) &&
+                            it.parameterTypes == listOf(REQUEST_CLASS) && it.returnType == RESPONSE_CLASS
+                    } == true
+                }
+                check(proceedCalls.isNotEmpty()) { "No proceed call in the request signer" }
+                proceedCalls.forEach { index ->
+                    val call = getInstruction<FiveRegisterInstruction>(index)
+                    val response = getInstruction<OneRegisterInstruction>(index + 1).registerA
+                    check(getInstruction(index + 1).opcode == Opcode.MOVE_RESULT_OBJECT)
+                    val registers = getFreeRegisterProvider(index, 2, response, call.registerC, call.registerD)
+                    val chain = registers.getFreeRegister4Bit()
+                    val signer = registers.getFreeRegister4Bit()
+                    addInstructionsWithLabels(
+                        index + 2,
+                        """
+                            invoke-static { }, $DEVICE_GUID_CLASS->shouldRetry()Z
+                            move-result v$signer
+                            if-eqz v$signer, :signed_once_$index
+                            new-instance v$signer, $definingClass
+                            invoke-direct { v$signer }, $definingClass-><init>()V
+                            invoke-virtual { v$signer, v$chain }, $definingClass->$name($CHAIN_CLASS)$RESPONSE_CLASS
+                            move-result-object v$response
+                            :signed_once_$index
+                            nop
+                        """,
+                    )
+                    addInstruction(index, "move-object v$chain, v${call.registerC}")
+                }
+            }
             val rechargeSheetClass = methodUsingString(RECHARGE_COUNTDOWN_COLOR).definingClass
             methods(rechargeSheetClass).single {
                 it.returnType == "V" && it.parameterTypes.size == 2 && it.parameterTypes[1] == "Ljava/lang/String;"
