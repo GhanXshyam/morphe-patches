@@ -63,7 +63,6 @@ import stub.PublicIpTask;
 import stub.RemoteProcess;
 import stub.IRootServiceManager;
 import stub.IRootServiceManagerProxy;
-import stub.RootServiceKeys;
 import stub.RootServiceManager;
 import stub.RootServiceReceiver;
 import stub.HardwareFragment;
@@ -434,7 +433,7 @@ public final class DevCheckRestored {
             return;
         }
         RootServiceManager manager = (RootServiceManager) receiver.owner;
-        Bundle bundle = intent.getBundleExtra(RootServiceKeys.intentBundle);
+        Bundle bundle = intent.getBundleExtra("extra.bundle");
         if (bundle == null) {
             return;
         }
