@@ -766,7 +766,6 @@ body:
       options:
         - Morphe Manager
         - morphe-cli
-        - A Morphe-AutoBuilds APK
         - A pre-patched APK from somewhere else
     validations:
       required: true
