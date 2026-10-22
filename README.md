@@ -2328,9 +2328,8 @@ use only**.
   personal customization of software you already own or that is free. They are not a piracy
   tool: do not use them to obtain paid apps, subscriptions or content you have not licensed, and
   do not redistribute patched copies of anyone's apps
-- **No apps are distributed here.** This repository holds only patch definitions, small bytecode
-  recipes that the Morphe patcher applies on your own device. No APKs, paid content, activation
-  keys or circumvention services are hosted or sold
+- **No apps are distributed here.** This repository holds patch source code and the scripts that
+  build it. It hosts no APKs
 - **Non-commercial project.** There are no paid tiers, no ads and nothing for sale. Do not sell
   these patches or patched apps, and be wary of anyone who does
 - **Use at your own risk.** Modifying apps can violate their terms of service and may lead to
