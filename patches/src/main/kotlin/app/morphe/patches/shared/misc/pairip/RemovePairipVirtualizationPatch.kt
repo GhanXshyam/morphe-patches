@@ -52,7 +52,7 @@ private const val PAIRIP_APPLICATION_CLASS = "Lcom/pairip/application/Applicatio
 private const val EXTENSION_CLASS = "Lapp/hxreborn/extension/shared/PairipMethods;"
 private const val STRING_TYPE = "Ljava/lang/String;"
 private const val METHOD_TYPE = "Ljava/lang/reflect/Method;"
-private const val HASHED_KIND = "hash"
+private const val HASHED_ENCODING = "hash"
 private const val HEX_RADIX = 16
 private val HOISTED_TYPES = setOf(STRING_TYPE, METHOD_TYPE)
 
@@ -240,20 +240,20 @@ private fun findDexStrings(dexFiles: List<ByteArray>, hashes: Set<Long>): Map<Lo
 
 internal fun resolveHoistedFields(tableName: String, rows: List<String>, dexFiles: List<ByteArray>): List<HoistedField> {
     val columns = rows.map { it.split('\t', limit = 4) }
-    val dexStrings = findDexStrings(dexFiles, columns.filter { it[0] == HASHED_KIND }.map { it[3].toULong(HEX_RADIX).toLong() }.toSet())
+    val dexStrings = findDexStrings(dexFiles, columns.filter { it[0] == HASHED_ENCODING }.map { it[3].toULong(HEX_RADIX).toLong() }.toSet())
 
-    return columns.map { (kind, className, fieldName, value) ->
-        when (kind) {
+    return columns.map { (encoding, className, fieldName, value) ->
+        when (encoding) {
             "string" -> HoistedField(STRING_TYPE, className, fieldName, value.unescape())
             "method" -> HoistedField(METHOD_TYPE, className, fieldName, value.unescape())
-            HASHED_KIND -> {
+            HASHED_ENCODING -> {
                 val matches = dexStrings[value.toULong(HEX_RADIX).toLong()].orEmpty()
                 check(matches.size == 1) {
                     "$className.$fieldName: ${matches.size} strings in the app's dex match hash $value in pairip/$tableName"
                 }
                 HoistedField(STRING_TYPE, className, fieldName, matches.single())
             }
-            else -> throw IllegalStateException("Unknown kind $kind in pairip/$tableName")
+            else -> throw IllegalStateException("Unknown encoding $encoding in pairip/$tableName")
         }
     }
 }

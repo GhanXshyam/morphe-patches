@@ -123,12 +123,12 @@ internal class UnwrapNativeLibraryTest {
     }
 
     @Test
-    fun `rejects an unknown record kind`() {
+    fun `rejects an unknown record operation`() {
         val failure = assertFailsWith<IllegalStateException> {
             NativeLibraryKey.parse(SyntheticLibrary.rawKey(ByteArray(0), ByteArray(0)) { putInt(0).putInt(1).putInt(0).putInt(4).put(9) })
         }
 
-        assertTrue("Unknown key record kind 9" in failure.message.orEmpty())
+        assertTrue("Unknown key record operation 9" in failure.message.orEmpty())
     }
 
     @Test

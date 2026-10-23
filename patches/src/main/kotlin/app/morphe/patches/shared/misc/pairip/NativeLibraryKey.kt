@@ -18,9 +18,9 @@ private const val IMPORT_BYTES = 10
 
 internal class KeyWindow(val offset: Int, val length: Int, val patterns: List<ByteArray>)
 
-internal enum class KeyRecordKind { XOR, ZERO, WRAPPED }
+internal enum class KeyRecordOperation { XOR, ZERO, WRAPPED }
 
-internal class KeyRecord(val offset: Int, val length: Int, val kind: KeyRecordKind, val bytes: ByteArray, val source: Int)
+internal class KeyRecord(val offset: Int, val length: Int, val operation: KeyRecordOperation, val bytes: ByteArray, val source: Int)
 
 internal class HiddenImport(val slot: Long, val name: String)
 
@@ -38,7 +38,7 @@ internal class NativeLibraryKey private constructor(
         windows.forEach { checkRange(it.offset, it.length, wrapped.size, "Key window") }
         records.forEach { record ->
             checkRange(record.offset, record.length, wrapped.size, "Key record")
-            if (record.kind == KeyRecordKind.WRAPPED) checkRange(record.source, record.length, wrapped.size, "Key record source")
+            if (record.operation == KeyRecordOperation.WRAPPED) checkRange(record.source, record.length, wrapped.size, "Key record source")
         }
         val content = wrapped.copyOf()
         windows.forEach { window ->
@@ -54,10 +54,10 @@ internal class NativeLibraryKey private constructor(
         records.forEach { record ->
             for (index in 0 until record.length) {
                 val position = record.offset + index
-                content[position] = when (record.kind) {
-                    KeyRecordKind.ZERO -> 0
-                    KeyRecordKind.XOR -> (content[position].toInt() xor record.bytes[index].toInt()).toByte()
-                    KeyRecordKind.WRAPPED -> (content[position].toInt() xor wrapped[record.source + index].toInt()).toByte()
+                content[position] = when (record.operation) {
+                    KeyRecordOperation.ZERO -> 0
+                    KeyRecordOperation.XOR -> (content[position].toInt() xor record.bytes[index].toInt()).toByte()
+                    KeyRecordOperation.WRAPPED -> (content[position].toInt() xor wrapped[record.source + index].toInt()).toByte()
                 }
             }
         }
@@ -91,17 +91,17 @@ internal class NativeLibraryKey private constructor(
                 check(buffer.remaining() >= RECORD_BYTES) { "Truncated native library key" }
                 val offset = buffer.int
                 val length = buffer.int
-                val kindIndex = buffer.get().toInt()
+                val operationIndex = buffer.get().toInt()
                 check(offset >= 0 && length > 0) { "Invalid key record at $offset with length $length" }
-                check(kindIndex in KeyRecordKind.entries.indices) { "Unknown key record kind $kindIndex" }
-                when (val kind = KeyRecordKind.entries[kindIndex]) {
-                    KeyRecordKind.ZERO -> KeyRecord(offset, length, kind, ByteArray(0), 0)
-                    KeyRecordKind.XOR -> KeyRecord(offset, length, kind, buffer.readBytes(length), 0)
-                    KeyRecordKind.WRAPPED -> {
+                check(operationIndex in KeyRecordOperation.entries.indices) { "Unknown key record operation $operationIndex" }
+                when (val operation = KeyRecordOperation.entries[operationIndex]) {
+                    KeyRecordOperation.ZERO -> KeyRecord(offset, length, operation, ByteArray(0), 0)
+                    KeyRecordOperation.XOR -> KeyRecord(offset, length, operation, buffer.readBytes(length), 0)
+                    KeyRecordOperation.WRAPPED -> {
                         check(buffer.remaining() >= Int.SIZE_BYTES) { "Truncated native library key" }
                         val source = buffer.int
                         check(source >= 0) { "Invalid key record source $source" }
-                        KeyRecord(offset, length, kind, ByteArray(0), source)
+                        KeyRecord(offset, length, operation, ByteArray(0), source)
                     }
                 }
             }

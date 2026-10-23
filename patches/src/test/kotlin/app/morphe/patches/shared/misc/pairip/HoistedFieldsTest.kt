@@ -62,7 +62,7 @@ internal class HoistedFieldsTest {
     }
 
     @Test
-    fun `rejects an unknown row kind`() {
+    fun `rejects an unknown row encoding`() {
         assertFailsWith<IllegalStateException> { resolveHoistedFields("table.tsv", listOf("other\tsample.Holder\ta\tx"), emptyList()) }
     }
 
