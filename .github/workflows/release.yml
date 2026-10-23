@@ -53,7 +53,7 @@ jobs:
       - name: Check Java style
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew :extensions:extension:checkstyle --no-daemon
+        run: ./gradlew :extensions:extension:checkstyle :extensions:extension:lintRelease --no-daemon
 
       - name: Run tests
         env:
