@@ -279,9 +279,9 @@ internal class PayloadDex private constructor(
                 cursor = uleb(uleb(cursor).second).second
             }
 
-            for (kind in 2..3) {
+            for (section in 2..3) {
                 var method = 0L
-                repeat(counts[kind]) {
+                repeat(counts[section]) {
                     val (diff, afterDiff) = uleb(cursor)
                     method += diff.toLong() and 0xFFFFFFFFL
                     if (method >= methodIdsSize) {
