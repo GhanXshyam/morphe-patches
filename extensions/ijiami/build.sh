@@ -48,7 +48,6 @@ for header in "$here"/native/profiles/*.h; do
         -o "$resources/libhxpatch-$profile.so" "$here/native/hxpatch.c" -llog
 done
 
-# string_ids beyond the opaque block required for head recovery tests
 mkdir -p "$work/fixture/sample"
 {
     echo 'package sample;'
