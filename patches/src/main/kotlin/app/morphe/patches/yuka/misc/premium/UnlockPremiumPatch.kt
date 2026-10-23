@@ -8,6 +8,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.requireArm64RootMount
+import app.morphe.patches.shared.misc.smali.parameterRegister
 import app.morphe.patches.yuka.misc.pairip.guardVirtualizedTasksPatch
 import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
@@ -25,8 +26,9 @@ val unlockPremiumPatch = bytecodePatch(
     dependsOn(guardVirtualizedTasksPatch)
 
     execute {
-        val constructor = YukaUserConstructorFingerprint.matchSingle().method
-        constructor.addInstructions(0, "const/16 p${constructor.parameterTypes.size}, 0x1")
+        YukaUserConstructorFingerprint.matchSingle().method.apply {
+            addInstructions(0, "const/16 ${parameterRegister(parameterTypes.lastIndex)}, 0x1")
+        }
 
         CachedPremiumFingerprint.matchSingle().method.returnEarly(true)
     }

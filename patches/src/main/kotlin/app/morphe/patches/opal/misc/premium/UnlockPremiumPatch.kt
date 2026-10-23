@@ -10,6 +10,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.pairip.removePairipProtectionPatch
 import app.morphe.patches.shared.misc.revenuecat.grantRevenueCatLifetimeEntitlement
+import app.morphe.patches.shared.misc.smali.parameterRegister
 import app.morphe.util.matchSingle
 
 private const val ENTITLEMENT = "premium_tier_1"
@@ -30,8 +31,7 @@ val unlockPremiumPatch = bytecodePatch(
         BlockScreenCategoryConstructorFingerprint.matchSingle().method.apply {
             val isProParameterIndex = parameterTypes.indexOfFirst { it == "Z" }
             if (isProParameterIndex < 0) throw PatchException("BlockScreenCategoryUiModel has no boolean parameter")
-            val isProRegister = isProParameterIndex + 1
-            addInstructions(0, "const/4 p$isProRegister, 0x0")
+            addInstructions(0, "const/4 ${parameterRegister(isProParameterIndex)}, 0x0")
         }
     }
 }
