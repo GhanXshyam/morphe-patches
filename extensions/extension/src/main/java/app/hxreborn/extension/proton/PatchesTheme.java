@@ -16,6 +16,8 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
 
+import app.hxreborn.extension.shared.NightMode;
+
 public final class PatchesTheme {
 
     public static final String BACKGROUND_SECONDARY = "proton_background_secondary";
@@ -167,8 +169,7 @@ public final class PatchesTheme {
     }
 
     public static boolean isNightMode(Context context) {
-        return (context.getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        return NightMode.isActive(context);
     }
 
     public static boolean isAppNightMode(Context context) {
