@@ -17,7 +17,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 ## <img src="https://raw.githubusercontent.com/hxreborn/morphe-patches/assets/aqua/icons/patches.png" height="48" align="absmiddle" alt="Patches"> Patches list
 
 <!-- PATCHES_START -->
-> **[v1.59.0-dev.8](https://github.com/hxreborn/morphe-patches/releases/tag/v1.59.0-dev.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;302 patches total
+> **[v1.59.0-dev.9](https://github.com/hxreborn/morphe-patches/releases/tag/v1.59.0-dev.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;303 patches total
 
 <table>
 <tr>
@@ -48,159 +48,160 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 <td align="center" width="25%"><a href="#blurwall"><img src=".github/assets/icons/blurwall.png" width="40"><br>BlurWall</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#botim"><img src=".github/assets/icons/botim.png" width="40"><br>botim</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#calcnote"><img src=".github/assets/icons/calcnote.png" width="40"><br>CalcNote</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#castle"><img src=".github/assets/icons/castle.png" width="40"><br>Castle</a><br><sub>4 patches</sub></td>
+<td align="center" width="25%"><a href="#cast-plug-in-for-musicolet"><img src=".github/assets/icons/musicoletcastplugin.png" width="40"><br>Cast Plug-in for Musicolet</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#castle"><img src=".github/assets/icons/castle.png" width="40"><br>Castle</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#castle-for-tv"><img src=".github/assets/icons/castlefortv.png" width="40"><br>Castle for TV</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#catzy"><img src=".github/assets/icons/catzy.png" width="40"><br>Catzy</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#cubasis-le-3"><img src=".github/assets/icons/cubasisle3.png" width="40"><br>Cubasis LE 3</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#cx-file-explorer"><img src=".github/assets/icons/cx.png" width="40"><br>Cx File Explorer</a><br><sub>3 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#cx-file-explorer"><img src=".github/assets/icons/cx.png" width="40"><br>Cx File Explorer</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#cxxdroid"><img src=".github/assets/icons/cxxdroid.png" width="40"><br>Cxxdroid</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#depthpix"><img src=".github/assets/icons/depthpix.png" width="40"><br>DepthPix</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#devcheck"><img src=".github/assets/icons/devcheck.png" width="40"><br>DevCheck</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#dwg-fastview"><img src=".github/assets/icons/dwgfastview.png" width="40"><br>DWG FastView</a><br><sub>3 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#dwg-fastview"><img src=".github/assets/icons/dwgfastview.png" width="40"><br>DWG FastView</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#echo-equalizer"><img src=".github/assets/icons/echoequalizer.png" width="40"><br>Echo Equalizer</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#echogram"><img src=".github/assets/icons/echogram.png" width="40"><br>Echogram</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#etsy"><img src=".github/assets/icons/etsy.png" width="40"><br>Etsy</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#fast-stl-viewer"><img src=".github/assets/icons/faststlviewer.png" width="40"><br>Fast STL Viewer</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#fast-stl-viewer"><img src=".github/assets/icons/faststlviewer.png" width="40"><br>Fast STL Viewer</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#fddb"><img src=".github/assets/icons/fddb.png" width="40"><br>Fddb</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#focusnow"><img src=".github/assets/icons/focusnow.png" width="40"><br>FocusNow</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#forusapp"><img src=".github/assets/icons/forus.png" width="40"><br>ForusApp</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#glass-widgets"><img src=".github/assets/icons/glasswidgets.png" width="40"><br>Glass Widgets</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#glass-widgets"><img src=".github/assets/icons/glasswidgets.png" width="40"><br>Glass Widgets</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#graph-messenger"><img src=".github/assets/icons/graphmessenger.png" width="40"><br>Graph Messenger</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#hindu-calendar"><img src=".github/assets/icons/hinducalendar.png" width="40"><br>Hindu Calendar</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#imo"><img src=".github/assets/icons/imo.png" width="40"><br>imo</a><br><sub>17 patches</sub></td>
-<td align="center" width="25%"><a href="#internet-speed-meter-lite"><img src=".github/assets/icons/internetspeedmeterlite.png" width="40"><br>Internet Speed Meter Lite</a><br><sub>3 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#internet-speed-meter-lite"><img src=".github/assets/icons/internetspeedmeterlite.png" width="40"><br>Internet Speed Meter Lite</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#joyn"><img src=".github/assets/icons/joyn.png" width="40"><br>Joyn</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#joyn-austria"><img src=".github/assets/icons/joyn-austria.png" width="40"><br>Joyn Austria</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#jujo"><img src=".github/assets/icons/com.dev2a.junk_journal.png" width="40"><br>Jujo</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#jvdroid"><img src=".github/assets/icons/jvdroid.png" width="40"><br>Jvdroid</a><br><sub>3 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#jvdroid"><img src=".github/assets/icons/jvdroid.png" width="40"><br>Jvdroid</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#keepa"><img src=".github/assets/icons/keepa.png" width="40"><br>Keepa</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#kick"><img src=".github/assets/icons/kick.png" width="40"><br>Kick</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#klassik-radio"><img src=".github/assets/icons/klassikradio.png" width="40"><br>Klassik Radio+</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#lagguy-wallpapers"><img src=".github/assets/icons/lagguy.png" width="40"><br>Lagguy Wallpapers</a><br><sub>2 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#lagguy-wallpapers"><img src=".github/assets/icons/lagguy.png" width="40"><br>Lagguy Wallpapers</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#led-blinker"><img src=".github/assets/icons/ledblinker.png" width="40"><br>LED Blinker</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#lingodeer"><img src=".github/assets/icons/lingodeer.png" width="40"><br>LingoDeer</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#magic-earth"><img src=".github/assets/icons/magicearth.png" width="40"><br>Magic Earth</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#may-beautiful-bullet-journal"><img src=".github/assets/icons/com.azeravn.bulletjournal.png" width="40"><br>May: Beautiful Bullet Journal</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#may-beautiful-bullet-journal"><img src=".github/assets/icons/com.azeravn.bulletjournal.png" width="40"><br>May: Beautiful Bullet Journal</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#medicneet"><img src=".github/assets/icons/medicneet.png" width="40"><br>MedicNEET</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#memoneet"><img src=".github/assets/icons/memoneet.png" width="40"><br>MemoNeet</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#minishare"><img src=".github/assets/icons/minishare.png" width="40"><br>MiniShare</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#moon-reader"><img src=".github/assets/icons/moonreader.png" width="40"><br>Moon+ Reader</a><br><sub>3 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#moon-reader"><img src=".github/assets/icons/moonreader.png" width="40"><br>Moon+ Reader</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#moviebox"><img src=".github/assets/icons/moviebox.png" width="40"><br>MovieBox</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#moviebox-tv"><img src=".github/assets/icons/movieboxtv.png" width="40"><br>MovieBox TV</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#musicolet"><img src=".github/assets/icons/musicolet.png" width="40"><br>Musicolet</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#musixmatch"><img src=".github/assets/icons/musixmatch.png" width="40"><br>Musixmatch</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#musixmatch"><img src=".github/assets/icons/musixmatch.png" width="40"><br>Musixmatch</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#my-apk"><img src=".github/assets/icons/com.andatsoft.myapk.fwa.png" width="40"><br>My APK</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#mymoveset"><img src=".github/assets/icons/mymoveset.png" width="40"><br>MyMoveset</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#myscript-math"><img src=".github/assets/icons/myscriptmath.png" width="40"><br>MyScript Math</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#myscript-notes"><img src=".github/assets/icons/myscriptnotes.png" width="40"><br>MyScript Notes</a><br><sub>2 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#myscript-notes"><img src=".github/assets/icons/myscriptnotes.png" width="40"><br>MyScript Notes</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#nara-baby"><img src=".github/assets/icons/narababy.png" width="40"><br>Nara Baby</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#network-analyzer"><img src=".github/assets/icons/netanalyzer.png" width="40"><br>Network Analyzer</a><br><sub>18 patches</sub></td>
 <td align="center" width="25%"><a href="#notein"><img src=".github/assets/icons/notein.png" width="40"><br>Notein</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#notesnook"><img src=".github/assets/icons/notesnook.png" width="40"><br>Notesnook</a><br><sub>2 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#notesnook"><img src=".github/assets/icons/notesnook.png" width="40"><br>Notesnook</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#one4home-launcher"><img src=".github/assets/icons/one4home.png" width="40"><br>One4Home Launcher</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#opal"><img src=".github/assets/icons/opal.png" width="40"><br>Opal</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#period-tracker-and-calendar"><img src=".github/assets/icons/periodcalendar.png" width="40"><br>Period Tracker and Calendar</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#perplexity"><img src=".github/assets/icons/perplexity.png" width="40"><br>Perplexity</a><br><sub>4 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#perplexity"><img src=".github/assets/icons/perplexity.png" width="40"><br>Perplexity</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#photo-editor-pro"><img src=".github/assets/icons/photoeditorpro.png" width="40"><br>Photo Editor Pro</a><br><sub>6 patches</sub></td>
 <td align="center" width="25%"><a href="#photone"><img src=".github/assets/icons/photone.png" width="40"><br>Photone</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#pocket-whip"><img src=".github/assets/icons/pocketwhip.png" width="40"><br>Pocket Whip</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#poe"><img src=".github/assets/icons/poe.png" width="40"><br>Poe</a><br><sub>2 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#poe"><img src=".github/assets/icons/poe.png" width="40"><br>Poe</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#prayer-times-and-qibla"><img src=".github/assets/icons/prayertimes.png" width="40"><br>Prayer Times and Qibla</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#privacy-notes"><img src=".github/assets/icons/privacynotes.png" width="40"><br>Privacy Notes</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#projectivy-launcher"><img src=".github/assets/icons/projectivy.png" width="40"><br>Projectivy Launcher</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#proton-authenticator"><img src=".github/assets/icons/protonauthenticator.png" width="40"><br>Proton Authenticator</a><br><sub>4 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#proton-authenticator"><img src=".github/assets/icons/protonauthenticator.png" width="40"><br>Proton Authenticator</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#proton-lumo"><img src=".github/assets/icons/lumo.png" width="40"><br>Proton Lumo</a><br><sub>4 patches</sub></td>
 <td align="center" width="25%"><a href="#proton-mail"><img src=".github/assets/icons/protonmail.png" width="40"><br>Proton Mail</a><br><sub>10 patches</sub></td>
 <td align="center" width="25%"><a href="#proton-pass"><img src=".github/assets/icons/protonpass.png" width="40"><br>Proton Pass</a><br><sub>6 patches</sub></td>
-<td align="center" width="25%"><a href="#proton-vpn"><img src=".github/assets/icons/protonvpn.png" width="40"><br>Proton VPN</a><br><sub>13 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#proton-vpn"><img src=".github/assets/icons/protonvpn.png" width="40"><br>Proton VPN</a><br><sub>13 patches</sub></td>
 <td align="center" width="25%"><a href="#psiphon"><img src=".github/assets/icons/psiphon.png" width="40"><br>Psiphon</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#public"><img src=".github/assets/icons/publicvideos.png" width="40"><br>Public</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#pydroid-3"><img src=".github/assets/icons/pydroid.png" width="40"><br>Pydroid 3</a><br><sub>3 patches</sub></td>
-<td align="center" width="25%"><a href="#qr-barcode-scanner"><img src=".github/assets/icons/qrscanner.png" width="40"><br>QR & Barcode Scanner</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#qr-barcode-scanner"><img src=".github/assets/icons/qrscanner.png" width="40"><br>QR & Barcode Scanner</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#quick-cursor"><img src=".github/assets/icons/quickcursor.png" width="40"><br>Quick Cursor</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#quranify"><img src=".github/assets/icons/quranify.png" width="40"><br>Quranify</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#radio-javan"><img src=".github/assets/icons/radiojavan.png" width="40"><br>Radio Javan</a><br><sub>3 patches</sub></td>
-<td align="center" width="25%"><a href="#raindrop-io"><img src=".github/assets/icons/raindrop.png" width="40"><br>Raindrop.io</a><br><sub>6 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#raindrop-io"><img src=".github/assets/icons/raindrop.png" width="40"><br>Raindrop.io</a><br><sub>6 patches</sub></td>
 <td align="center" width="25%"><a href="#rateglance"><img src=".github/assets/icons/rateglance.png" width="40"><br>RateGlance</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#readera"><img src=".github/assets/icons/readera.png" width="40"><br>ReadEra</a><br><sub>13 patches</sub></td>
 <td align="center" width="25%"><a href="#realme-link"><img src=".github/assets/icons/realmelink.png" width="40"><br>Realme Link</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#ringtone-maker"><img src=".github/assets/icons/ringtonemaker.png" width="40"><br>Ringtone Maker</a><br><sub>2 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#ringtone-maker"><img src=".github/assets/icons/ringtonemaker.png" width="40"><br>Ringtone Maker</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#rise-sleep-tracker"><img src=".github/assets/icons/risesleep.png" width="40"><br>RISE Sleep Tracker</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#rubber-bands"><img src=".github/assets/icons/rubberbands.png" width="40"><br>Rubber Bands</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#serializd"><img src=".github/assets/icons/serializd.png" width="40"><br>Serializd</a><br><sub>3 patches</sub></td>
-<td align="center" width="25%"><a href="#sheytoon"><img src=".github/assets/icons/sheytoon.png" width="40"><br>Sheytoon</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#sheytoon"><img src=".github/assets/icons/sheytoon.png" width="40"><br>Sheytoon</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#showly"><img src=".github/assets/icons/showly.png" width="40"><br>Showly</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#sqcom"><img src=".github/assets/icons/sqcom.png" width="40"><br>SQCOM</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#steezy"><img src=".github/assets/icons/steezy.png" width="40"><br>STEEZY</a><br><sub>4 patches</sub></td>
-<td align="center" width="25%"><a href="#storywise"><img src=".github/assets/icons/storywise.png" width="40"><br>Storywise</a><br><sub>3 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#storywise"><img src=".github/assets/icons/storywise.png" width="40"><br>Storywise</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#sygic"><img src=".github/assets/icons/sygic.png" width="40"><br>Sygic</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#symfonium"><img src=".github/assets/icons/symfonium.png" width="40"><br>Symfonium</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#terabox"><img src=".github/assets/icons/terabox.png" width="40"><br>TeraBox</a><br><sub>7 patches</sub></td>
+</tr>
+<tr>
 <td align="center" width="25%"><a href="#trainline"><img src=".github/assets/icons/trainline.png" width="40"><br>Trainline</a><br><sub>1 patch</sub></td>
-</tr>
-<tr>
 <td align="center" width="25%"><a href="#u-dictionary"><img src=".github/assets/icons/udictionary.png" width="40"><br>U Dictionary</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#viber">🌐<br>Viber</a><br><sub>3 patches</sub></td>
+<td align="center" width="25%"><a href="#viber"><img src=".github/assets/icons/viber.png" width="40"><br>Viber</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#video-editor"><img src=".github/assets/icons/videoeditor.png" width="40"><br>Video Editor</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#vllo"><img src=".github/assets/icons/vllo.png" width="40"><br>VLLO</a><br><sub>2 patches</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#vllo"><img src=".github/assets/icons/vllo.png" width="40"><br>VLLO</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#vpn-super-unlimited-proxy"><img src=".github/assets/icons/vpnsuper.png" width="40"><br>VPN Super Unlimited Proxy</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#vpnify"><img src=".github/assets/icons/vpnify.png" width="40"><br>vpnify</a><br><sub>2 patches</sub></td>
 <td align="center" width="25%"><a href="#wallmaa"><img src=".github/assets/icons/wallmaa.png" width="40"><br>Wallmaa</a><br><sub>2 patches</sub></td>
-<td align="center" width="25%"><a href="#walp"><img src=".github/assets/icons/walp.png" width="40"><br>WalP</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#walp"><img src=".github/assets/icons/walp.png" width="40"><br>WalP</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#wattpad"><img src=".github/assets/icons/wattpad.png" width="40"><br>Wattpad</a><br><sub>3 patches</sub></td>
 <td align="center" width="25%"><a href="#yanosik"><img src=".github/assets/icons/pl.neptis.yanosik.mobi.android.png" width="40"><br>Yanosik</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#yi-iot"><img src=".github/assets/icons/yiiot.png" width="40"><br>Yi iot</a><br><sub>1 patch</sub></td>
-<td align="center" width="25%"><a href="#yuka"><img src=".github/assets/icons/yuka.png" width="40"><br>Yuka</a><br><sub>1 patch</sub></td>
 </tr>
 <tr>
+<td align="center" width="25%"><a href="#yuka"><img src=".github/assets/icons/yuka.png" width="40"><br>Yuka</a><br><sub>1 patch</sub></td>
 <td align="center" width="25%"><a href="#universal">🌐<br>Universal</a><br><sub>1 patch</sub></td>
 </tr>
 </table>
@@ -526,6 +527,22 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
 | <a id="calcnote-unlock-pro"></a>[Unlock pro](patches/src/main/kotlin/app/morphe/patches/calcnote/misc/premium/UnlockProPatch.kt) | Unlocks Pro features and removes ads. |
+
+</details>
+
+<a id="cast-plug-in-for-musicolet"></a>
+<details>
+<summary><img src=".github/assets/icons/musicoletcastplugin.png" width="18" align="top">&nbsp;&nbsp;Cast Plug-in for Musicolet&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 1.9 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description |
+|----------|----------------|
+| <a id="cast-plug-in-for-musicolet-remove-app-protection"></a>[Remove app protection](patches/src/main/kotlin/app/morphe/patches/musicoletcastplugin/misc/protection/RemoveAppProtectionPatch.kt) | Lets a patched build start. Cast in Musicolet requires both apps patched with the same signing key. |
 
 </details>
 
@@ -1474,8 +1491,8 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 |----------|----------------|
 | <a id="photo-editor-pro-hide-ads"></a>[Hide ads](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/ads/HideAdsPatch.kt) | Adds an option to hide banner, interstitial, app-open and rewarded ads. |
 | <a id="photo-editor-pro-hide-share-options"></a>[Hide share options](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/layout/HideShareOptionsPatch.kt) | Adds an option to hide the share buttons on the save screen and center the saved photo. |
-| <a id="photo-editor-pro-inspect-ai-requests"></a>[Inspect AI requests](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/diagnostics/TraceAiRequestsPatch.kt) | Shows the network calls an AI tool makes, such as HTTP requests and Firebase uploads, and keeps a log, so you can watch your photo fly to China or the US. |
-| <a id="photo-editor-pro-show-ai-progress"></a>[Show AI progress](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/aitools/ShowAiProgressPatch.kt) | Reads the current stage off the real network activity instead of the fake progress bar InShot ships. |
+| <a id="photo-editor-pro-inspect-ai-requests"></a>[Inspect AI requests](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/diagnostics/TraceAiRequestsPatch.kt) | Shows the network calls an AI tool makes, such as HTTP requests and Firebase uploads, and keeps a log. |
+| <a id="photo-editor-pro-show-ai-progress"></a>[Show AI progress](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/aitools/ShowAiProgressPatch.kt) | Shows the current stage of AI Remove and Enhance on their loading screens. |
 | <a id="photo-editor-pro-speed-up-ai-tools"></a>[Speed up AI tools](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/aitools/SpeedUpAiToolsPatch.kt) | Shortens the AI tool wait by polling for the result more often and uploading the photo in larger chunks. |
 | <a id="photo-editor-pro-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/photoeditorpro/misc/premium/UnlockPremiumPatch.kt) | Adds an option to unlock the pro tools, remove the export watermark and hide the upgrade prompts. |
 
@@ -1635,7 +1652,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 | <a id="proton-mail-hide-upgrade-promotions"></a>[Hide upgrade promotions](patches/src/main/kotlin/app/morphe/patches/protonmail/misc/upselling/HideUpgradePromotionsPatch.kt) | Hides the top-bar upgrade button, promotional sidebar rows and the auto-delete upgrade banner in Trash and Spam. Keeps the Empty trash and Empty spam buttons. |
 | <a id="proton-mail-material-3-switches"></a>[Material 3 switches](patches/src/main/kotlin/app/morphe/patches/protonmail/misc/materialswitch/MaterialSwitchesPatch.kt) | Shows switches in the Material 3 style with check and close icons. |
 | <a id="proton-mail-remove-sent-from-signature"></a>[Remove 'Sent from' signature](patches/src/main/kotlin/app/morphe/patches/protonmail/signature/RemoveSentFromSignaturePatch.kt) | Removes the 'Sent from Proton Mail' signature and unlocks the mobile signature setting. |
-| <a id="proton-mail-remove-free-accounts-limit"></a>[Remove free accounts limit](patches/src/main/kotlin/app/morphe/patches/protonmail/account/RemoveFreeAccountsLimitPatch.kt) | Removes the limit for maximum free accounts logged in. |
+| <a id="proton-mail-remove-free-accounts-limit"></a>[Remove free accounts limit](patches/src/main/kotlin/app/morphe/patches/protonmail/account/RemoveFreeAccountsLimitPatch.kt) | Removes the limit on signed-in free accounts. |
 | <a id="proton-mail-scheduled-trash-and-spam-deletion"></a>[Scheduled Trash and Spam deletion](patches/src/main/kotlin/app/morphe/patches/protonmail/misc/scheduleddeletion/ScheduledDeletionPatch.kt) | Deletes all messages in Trash and Spam on separate configurable schedules. Deleted messages cannot be recovered. |
 | <a id="proton-mail-swipe-to-switch-accounts"></a>[Swipe to switch accounts](patches/src/main/kotlin/app/morphe/patches/protonmail/misc/accountswipe/SwipeToSwitchAccountsPatch.kt) | Switches between signed-in accounts by swiping up or down on the account avatar. |
 | <a id="proton-mail-unlock-custom-time-picker"></a>[Unlock custom time picker](patches/src/main/kotlin/app/morphe/patches/protonmail/misc/scheduling/UnlockCustomTimePickerPatch.kt) | Enables picking a custom date and time when snoozing conversations and scheduling messages. |
@@ -1938,7 +1955,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 
 | 💊&nbsp;Patch | 📜&nbsp;Description |
 |----------|----------------|
-| <a id="rubber-bands-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/rubberbands/misc/premium/UnlockPremiumPatch.kt) | Unlocks running and logging workouts, progress tracking and personal records (AI workout generation is not included). |
+| <a id="rubber-bands-unlock-premium"></a>[Unlock premium](patches/src/main/kotlin/app/morphe/patches/rubberbands/misc/premium/UnlockPremiumPatch.kt) | Unlocks running and logging workouts, progress tracking and personal records. AI workout generation is not included. |
 
 </details>
 
@@ -2136,7 +2153,7 @@ AMOLED themes, ad and tracking removal and settings tweaks for 100+ Android apps
 
 <a id="viber"></a>
 <details>
-<summary>📦&nbsp;Viber&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<summary><img src=".github/assets/icons/viber.png" width="18" align="top">&nbsp;&nbsp;Viber&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 **🎯 Supported versions:**

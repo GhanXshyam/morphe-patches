@@ -1,3 +1,24 @@
+## [1.59.0-dev.9](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.8...v1.59.0-dev.9) (2026-10-23)
+
+### Bug Fixes
+
+* add version codes to RISE and May app targets ([3c02a10](https://github.com/hxreborn/morphe-patches/commit/3c02a10d6275351a70db73f378c801e8bcd4fb59))
+* **Biobird Flashcards - GmsCore support:** enable by default ([0bbf160](https://github.com/hxreborn/morphe-patches/commit/0bbf160c8ea2b753561ca98ece786be5e5d9ced4))
+* **Lagguy Wallpapers - GmsCore support:** enable by default ([4b4dea1](https://github.com/hxreborn/morphe-patches/commit/4b4dea1e12fcf84a8b5700ca81855a7d2588485d))
+* **Musicolet - Unlock premium:** stop Cast crash with Play Store plug-in ([bf5f98f](https://github.com/hxreborn/morphe-patches/commit/bf5f98f9766eb7254796c5af45582fd8214d5a31))
+* **Network Analyzer:** stop patch screens crashing on Android 10 ([eea4b94](https://github.com/hxreborn/morphe-patches/commit/eea4b949220b09c13ccaa270b65c56b8254ad801))
+* **Proton VPN - Hide upgrade promotions:** apply to GitHub APKs ([48f74ad](https://github.com/hxreborn/morphe-patches/commit/48f74ad23841420d5223930f2b06b6e8861b03f4)), closes [#337](https://github.com/hxreborn/morphe-patches/issues/337)
+* **Proton VPN - Show free server locations:** apply to GitHub APKs ([7c628fe](https://github.com/hxreborn/morphe-patches/commit/7c628fe19ceb9a87c895a5420f4d9ad11b9d3152)), closes [#337](https://github.com/hxreborn/morphe-patches/issues/337)
+* **Raindrop.io - GmsCore support:** enable by default ([04f6141](https://github.com/hxreborn/morphe-patches/commit/04f614109f65585762b6e1bcf12ee2f505a2d523))
+* **Ringtone Maker - Unlock premium:** apply to all supported versions ([cdd2054](https://github.com/hxreborn/morphe-patches/commit/cdd2054a2fda9d51cb9069dde3c1fc1477b7776e))
+* **STEEZY - GmsCore support:** enable by default ([741b3c7](https://github.com/hxreborn/morphe-patches/commit/741b3c722f9e1031f010732d41ab427e73aed788))
+* stop hiding 5 app versions on older Android versions ([1b643f5](https://github.com/hxreborn/morphe-patches/commit/1b643f52ee672f128557dd44c2c94ee7ec13bdf1))
+* **Wattpad - GmsCore support:** enable by default ([6d682df](https://github.com/hxreborn/morphe-patches/commit/6d682df2ef5e77e213fde343013b04ed83bfe328))
+
+### New Features
+
+* **Cast Plug-in for Musicolet - Remove app protection:** enable casting ([d1fb331](https://github.com/hxreborn/morphe-patches/commit/d1fb331170b02ef200601c01df5b5e232e5b8463))
+
 ## [1.59.0-dev.8](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.7...v1.59.0-dev.8) (2026-10-22)
 
 ### Bug Fixes
