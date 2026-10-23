@@ -9,15 +9,7 @@ import app.morphe.patches.internetspeedmeter.misc.protection.removeAppProtection
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.analytics.disableAnalyticsCollectionPatch
 import app.morphe.patches.shared.misc.analytics.disableCrashlyticsCollectionPatch
-import app.morphe.patches.shared.misc.analytics.putApplicationMetaData
-
-private val disableFirebaseSessionsPatch = resourcePatch {
-    execute {
-        document("AndroidManifest.xml").use { document ->
-            document.putApplicationMetaData("firebase_sessions_enabled", "false")
-        }
-    }
-}
+import app.morphe.patches.shared.misc.analytics.disableFirebaseSessionsPatch
 
 @Suppress("unused")
 val disableTrackingPatch = resourcePatch(

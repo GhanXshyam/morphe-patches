@@ -45,3 +45,11 @@ val disableCrashlyticsCollectionPatch = resourcePatch {
         }
     }
 }
+
+val disableFirebaseSessionsPatch = resourcePatch {
+    execute {
+        document("AndroidManifest.xml").use { document ->
+            document.putApplicationMetaData("firebase_sessions_enabled", "false")
+        }
+    }
+}
