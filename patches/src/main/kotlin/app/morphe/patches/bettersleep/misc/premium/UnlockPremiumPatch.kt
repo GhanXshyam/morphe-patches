@@ -11,6 +11,7 @@ import app.morphe.patches.bettersleep.misc.fix.iterable.restoreIterableRequestsP
 import app.morphe.patches.bettersleep.misc.fix.signature.spoofSignaturePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.pairip.removePairipVirtualizationPatch
+import app.morphe.patches.shared.misc.smali.descriptor
 import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -18,7 +19,6 @@ import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
-import com.android.tools.smali.dexlib2.util.ReferenceUtil
 
 internal const val PURCHASE_CLASS = "Lcom/ipnossoft/api/purchasemanager/purchaserepo/localdb/Purchase;"
 
@@ -102,7 +102,7 @@ private fun lifetimePurchaseMethod(
             const/16 v17, 0x0
             const/16 v18, 0x0
             const/16 v19, 0x0
-            invoke-direct/range { v0 .. v19 }, ${ReferenceUtil.getMethodDescriptor(constructor)}
+            invoke-direct/range { v0 .. v19 }, ${descriptor(constructor)}
             return-object v0
         """,
     )
