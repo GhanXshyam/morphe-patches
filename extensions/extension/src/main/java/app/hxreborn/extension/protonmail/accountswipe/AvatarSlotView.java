@@ -14,7 +14,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.PathInterpolator;
 
@@ -130,8 +129,7 @@ final class AvatarSlotView extends View {
             final Paint text = new Paint(Paint.ANTI_ALIAS_FLAG);
             text.setColor(textColor);
             text.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-            text.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, INITIALS_TEXT_SP,
-                    context.getResources().getDisplayMetrics()));
+            text.setTextSize(Dimensions.spExact(context, INITIALS_TEXT_SP));
             text.setTextAlign(Paint.Align.CENTER);
             final Paint.FontMetrics metrics = text.getFontMetrics();
             canvas.drawText(initials, width / 2f, height / 2f - (metrics.ascent + metrics.descent) / 2f, text);

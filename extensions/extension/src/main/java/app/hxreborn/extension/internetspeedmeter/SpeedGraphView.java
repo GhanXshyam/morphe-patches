@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.util.TypedValue;
 import android.view.View;
 
 import app.hxreborn.extension.shared.Dimensions;
@@ -57,8 +56,7 @@ final class SpeedGraphView extends View {
         this.gridPaint.setColor(Color.argb(40, 0, 0, 0));
         this.gridPaint.setStrokeWidth(1f);
         this.labelPaint.setColor(Color.GRAY);
-        this.labelPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, LABEL_TEXT_SP,
-                getResources().getDisplayMetrics()));
+        this.labelPaint.setTextSize(Dimensions.spExact(context, LABEL_TEXT_SP));
     }
 
     void add(long downloadBytesPerSecond, long uploadBytesPerSecond) {

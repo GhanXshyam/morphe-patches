@@ -397,8 +397,7 @@ abstract class HostScreenActivity extends Activity {
     }
 
     final LinearLayout.LayoutParams dotParams(int marginStartDp) {
-        final int size = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                BODY_MEDIUM.sizeSp * DOT_FONT_SCALE, getResources().getDisplayMetrics()));
+        final int size = Dimensions.sp(this, BODY_MEDIUM.sizeSp * DOT_FONT_SCALE);
         final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
         params.setMarginStart(dp(marginStartDp));
         return params;
@@ -591,8 +590,7 @@ abstract class HostScreenActivity extends Activity {
             view.setIncludeFontPadding(false);
             view.setLetterSpacing(this.trackingSp / this.sizeSp);
             view.setTypeface(Typeface.create(Typeface.DEFAULT, this.weight, false));
-            final int lineHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, this.lineHeightSp,
-                    view.getResources().getDisplayMetrics()));
+            final int lineHeight = Dimensions.sp(view.getContext(), this.lineHeightSp);
             view.setLineHeight(lineHeight);
             final int leading = lineHeight - view.getPaint().getFontMetricsInt(null);
             view.setPadding(0, leading / 2, 0, leading - leading / 2);

@@ -22,7 +22,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.net.Uri;
-import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -171,8 +170,7 @@ final class TileMapView extends View {
         this.markerOutline.setColor(OUTLINE_COLOR);
         this.markerOutline.setStrokeWidth(dp(MARKER_OUTLINE_DP));
         this.attributionText.setColor(ATTRIBUTION_TEXT_COLOR);
-        this.attributionText
-            .setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, ATTRIBUTION_TEXT_SP, displayMetrics()));
+        this.attributionText.setTextSize(Dimensions.spExact(context, ATTRIBUTION_TEXT_SP));
         this.attributionBackground.setColor(ATTRIBUTION_BACKGROUND_COLOR);
         this.gestures = new GestureDetector(context, new GestureListener());
         this.scaler = new ScaleGestureDetector(context, new ScaleListener());

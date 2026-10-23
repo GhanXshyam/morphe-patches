@@ -22,4 +22,13 @@ public final class Dimensions {
                 context.getResources().getDisplayMetrics());
     }
 
+    public static int sp(Context context, float value) {
+        return Math.round(spExact(context, value));
+    }
+
+    public static float spExact(Context context, float value) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, value,
+                context.getResources().getDisplayMetrics());
+    }
+
 }
