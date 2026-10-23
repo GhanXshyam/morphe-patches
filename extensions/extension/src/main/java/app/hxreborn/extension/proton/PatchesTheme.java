@@ -4,7 +4,6 @@
  */
 package app.hxreborn.extension.proton;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -15,6 +14,7 @@ import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
+import androidx.annotation.RequiresApi;
 
 import app.hxreborn.extension.shared.NightMode;
 
@@ -142,7 +142,7 @@ public final class PatchesTheme {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.Q)
+    @RequiresApi(Build.VERSION_CODES.Q)
     private static void tintTextCursor(EditText input, int accentColor) {
         final Drawable cursor = input.getTextCursorDrawable();
         if (cursor == null) {
