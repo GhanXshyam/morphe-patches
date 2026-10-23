@@ -9,6 +9,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import app.morphe.patcher.util.smali.InlineSmaliCompiler
+import app.morphe.util.getReference
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
@@ -96,7 +97,7 @@ internal class SecShellDex(bytes: ByteArray) {
     }
 
     private fun Instruction.usesString(string: String) =
-        ((this as? ReferenceInstruction)?.reference as? StringReference)?.string == string
+        getReference<StringReference>()?.string == string
 
     private fun classDef(type: String) =
         dexFile.classes.firstOrNull { it.type == type } ?: throw PatchException("Payload dex has no class $type")
