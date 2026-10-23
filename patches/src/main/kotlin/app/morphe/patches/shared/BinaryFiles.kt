@@ -9,6 +9,12 @@ import java.io.File
 import java.io.RandomAccessFile
 
 internal val DEX_MAGIC = byteArrayOf(0x64, 0x65, 0x78, 0x0a)
+internal const val DEX_CHECKSUM_OFFSET = 8
+internal const val DEX_SIGNATURE_OFFSET = 12
+internal const val DEX_FILE_SIZE_OFFSET = 32
+internal const val DEX_MAP_OFF_OFFSET = 52
+internal const val DEX_HEADER_SIZE = 0x70
+internal const val DEX_MAP_ITEM_SIZE = 12
 
 internal fun ByteArray.readInt(offset: Int) =
     (this[offset].toInt() and 0xFF) or

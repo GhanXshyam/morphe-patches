@@ -20,6 +20,8 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
+import app.morphe.patches.shared.DEX_FILE_SIZE_OFFSET
+import app.morphe.patches.shared.DEX_HEADER_SIZE
 import app.morphe.patches.shared.DEX_MAGIC
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.smali.descriptor
@@ -55,8 +57,6 @@ private const val HEX_RADIX = 16
 private val HOISTED_TYPES = setOf(STRING_TYPE, METHOD_TYPE)
 
 private val PAIRIP_ASSET_MAGIC = byteArrayOf(0x00, 0x49, 0x41, 0x50, 0x02)
-private const val DEX_HEADER_SIZE = 0x70
-private const val DEX_FILE_SIZE_OFFSET = 0x20
 private const val KEY_DIGEST_BYTES = 8
 
 private val recoveredDexFiles = mutableListOf<ByteArray>()

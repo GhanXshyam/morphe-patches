@@ -5,14 +5,14 @@
 package app.morphe.patches.shared.misc.jiagu
 
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patches.shared.DEX_CHECKSUM_OFFSET
+import app.morphe.patches.shared.DEX_FILE_SIZE_OFFSET
 import app.morphe.patches.shared.readInt
 import app.morphe.patches.shared.readShort
 import app.morphe.patches.shared.writeInt
 import app.morphe.patches.shared.writeShort
 import java.util.zip.Adler32
 
-private const val CHECKSUM_OFFSET = 8
-private const val FILE_SIZE_OFFSET = 32
 private const val STRING_IDS_OFFSET = 56
 private const val TYPE_IDS_OFFSET = 64
 private const val PROTO_IDS_OFFSET = 72
@@ -101,9 +101,9 @@ internal class PayloadDexEditor(dex: ByteArray) {
         replace(descriptor, name, intArrayOf(RETURN_VOID), setOf("V"))
 
     fun buildDex(): ByteArray {
-        bytes.writeInt(FILE_SIZE_OFFSET, bytes.size)
+        bytes.writeInt(DEX_FILE_SIZE_OFFSET, bytes.size)
         bytes.writeInt(
-            CHECKSUM_OFFSET,
+            DEX_CHECKSUM_OFFSET,
             Adler32().apply { update(bytes, 12, bytes.size - 12) }.value.toInt(),
         )
         return bytes
