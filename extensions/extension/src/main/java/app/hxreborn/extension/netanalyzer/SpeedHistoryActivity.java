@@ -34,8 +34,6 @@ public final class SpeedHistoryActivity extends HostScreenActivity {
 
     private static final int LOCATION_END_DP = 4;
 
-    private static final int LINE_TOP_DP = 2;
-
     private static final int SWATCH_DP = 10;
 
     private static final int SWATCH_RADIUS_DP = 3;
@@ -97,12 +95,6 @@ public final class SpeedHistoryActivity extends HostScreenActivity {
         column.addView(speedLine(DOWNLOAD_LABEL, this.palette.green, entry.downloadBytesPerSecond), lineParams());
         column.addView(speedLine(UPLOAD_LABEL, this.palette.red, entry.uploadBytesPerSecond), lineParams());
         return column;
-    }
-
-    private LinearLayout.LayoutParams lineParams() {
-        final LinearLayout.LayoutParams params = matchWidth();
-        params.topMargin = dp(LINE_TOP_DP);
-        return params;
     }
 
     private LinearLayout speedLine(String label, int color, long bytesPerSecond) {

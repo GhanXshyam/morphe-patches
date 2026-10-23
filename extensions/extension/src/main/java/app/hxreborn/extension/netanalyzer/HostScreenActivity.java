@@ -73,6 +73,8 @@ abstract class HostScreenActivity extends Activity {
 
     private static final int VALUE_SPACING_DP = 8;
 
+    private static final int LINE_TOP_DP = 2;
+
     private static final int DOT_CHEVRON_GAP_DP = 2;
 
     private static final int CHEVRON_END_DP = 8;
@@ -419,6 +421,12 @@ abstract class HostScreenActivity extends Activity {
 
     static LinearLayout.LayoutParams matchWidth() {
         return new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+    final LinearLayout.LayoutParams lineParams() {
+        final LinearLayout.LayoutParams params = matchWidth();
+        params.topMargin = dp(LINE_TOP_DP);
+        return params;
     }
 
     static int withAlpha(int color, float alpha) {

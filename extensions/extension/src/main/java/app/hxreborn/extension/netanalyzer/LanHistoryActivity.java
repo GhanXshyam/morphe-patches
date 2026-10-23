@@ -55,8 +55,6 @@ public final class LanHistoryActivity extends HostScreenActivity {
 
     private static final String RANGE_SEPARATOR = " - ";
 
-    private static final int SECOND_LINE_TOP_DP = 2;
-
     private static final int COUNT_GAP_DP = 6;
 
     private static final int RANGE_END_DP = 4;
@@ -201,7 +199,7 @@ public final class LanHistoryActivity extends HostScreenActivity {
         final LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
         content.addView(HistoryRows.titleLine(this, scan.name, date), matchWidth());
-        content.addView(secondLine(scan, connected), secondLineParams());
+        content.addView(secondLine(scan, connected), lineParams());
         final LinearLayout row = HistoryRows.row(this, favorite, (view) -> {
             LanHistory.setFavorite(this, entry, !favorite);
             populate();
@@ -228,12 +226,6 @@ public final class LanHistoryActivity extends HostScreenActivity {
         dotParams.setMarginStart(dp(COUNT_GAP_DP));
         line.addView(dot(active ? this.palette.green : this.palette.grey), dotParams);
         return line;
-    }
-
-    private LinearLayout.LayoutParams secondLineParams() {
-        final LinearLayout.LayoutParams params = matchWidth();
-        params.topMargin = dp(SECOND_LINE_TOP_DP);
-        return params;
     }
 
     private CharSequence ipRange(LanScan scan) {

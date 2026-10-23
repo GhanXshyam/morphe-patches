@@ -30,8 +30,6 @@ public final class LanScanResultsActivity extends HostScreenActivity {
 
     private static final int ROW_END_DP = 8;
 
-    private static final int LINE_TOP_DP = 2;
-
     private static final int RIGHT_GAP_DP = 8;
 
     private static final int CHEVRON_DP = 24;
@@ -126,12 +124,6 @@ public final class LanScanResultsActivity extends HostScreenActivity {
         row.addView(details, new LinearLayout.LayoutParams(dp(CHEVRON_DP), dp(CHEVRON_DP)));
         row.setOnClickListener((view) -> LanDeviceActivity.show(device, saved, false, null));
         return row;
-    }
-
-    private LinearLayout.LayoutParams lineParams() {
-        final LinearLayout.LayoutParams params = matchWidth();
-        params.topMargin = dp(LINE_TOP_DP);
-        return params;
     }
 
     private CharSequence address(String ip) {
