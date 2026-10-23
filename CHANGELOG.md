@@ -1,3 +1,9 @@
+## [1.59.0-dev.10](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.9...v1.59.0-dev.10) (2026-10-23)
+
+### Updated App Support
+
+* **Proton Lumo:** add support for `2.1.5-nogms` ([552c30b](https://github.com/hxreborn/morphe-patches/commit/552c30b680dcb224cd18f51ce4b02fbb695fd652))
+
 ## [1.59.0-dev.9](https://github.com/hxreborn/morphe-patches/compare/v1.59.0-dev.8...v1.59.0-dev.9) (2026-10-23)
 
 ### Bug Fixes
