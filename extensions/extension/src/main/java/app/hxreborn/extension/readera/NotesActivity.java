@@ -631,8 +631,7 @@ public final class NotesActivity extends Activity {
             super(context);
             this.paint.setColor(color);
             this.paint.setStyle(Paint.Style.STROKE);
-            this.paint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2,
-                    context.getResources().getDisplayMetrics()));
+            this.paint.setStrokeWidth(Dimensions.dpExact(context, 2));
             this.paint.setStrokeCap(Paint.Cap.ROUND);
             this.paint.setStrokeJoin(Paint.Join.ROUND);
         }

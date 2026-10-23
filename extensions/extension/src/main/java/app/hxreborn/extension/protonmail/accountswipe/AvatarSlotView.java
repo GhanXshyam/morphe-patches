@@ -18,6 +18,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.PathInterpolator;
 
+import app.hxreborn.extension.shared.Dimensions;
+
 @SuppressLint("ViewConstructor")
 final class AvatarSlotView extends View {
 
@@ -121,8 +123,7 @@ final class AvatarSlotView extends View {
 
         final Paint fill = new Paint(Paint.ANTI_ALIAS_FLAG);
         fill.setColor(fillColor);
-        final float radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, CORNER_RADIUS_DP,
-                context.getResources().getDisplayMetrics());
+        final float radius = Dimensions.dpExact(context, CORNER_RADIUS_DP);
         canvas.drawRoundRect(new RectF(inset, inset, width - inset, height - inset), radius, radius, fill);
 
         if (initials != null && !initials.isEmpty()) {
