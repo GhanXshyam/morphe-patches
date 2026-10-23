@@ -46,6 +46,14 @@ val disableCrashlyticsCollectionPatch = resourcePatch {
     }
 }
 
+val deactivateFirebaseAnalyticsPatch = resourcePatch {
+    execute {
+        document("AndroidManifest.xml").use { document ->
+            document.putApplicationMetaData("firebase_analytics_collection_deactivated", "true")
+        }
+    }
+}
+
 val disableFirebaseSessionsPatch = resourcePatch {
     execute {
         document("AndroidManifest.xml").use { document ->
