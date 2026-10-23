@@ -74,7 +74,10 @@ public final class LanHistoryActivity extends HostScreenActivity {
 
     @Override
     void buildContent() {
-        addToolbarIcon(MaterialIcons.DELETE, "Clear History", (view) -> confirmClear());
+        addClearHistoryIcon(true, () -> {
+            LanHistory.clearUnstarred(this);
+            populate();
+        });
         addToolbarIcon(MaterialIcons.ALARM, "Wake on LAN",
                 (view) -> startActivity(new Intent(this, WakeOnLanActivity.class)));
         if (LiveLanScan.isAvailable()) {
@@ -269,17 +272,6 @@ public final class LanHistoryActivity extends HostScreenActivity {
             LanHistory.delete(this, entry);
             populate();
         }).show();
-    }
-
-    private void confirmClear() {
-        new AlertDialog.Builder(this).setTitle("Warning")
-            .setMessage("Do you want to delete all history items? (Starred items will be preserved.)")
-            .setPositiveButton("OK", (dialog, which) -> {
-                LanHistory.clearUnstarred(this);
-                populate();
-            })
-            .setNegativeButton("Cancel", null)
-            .show();
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -74,6 +75,10 @@ abstract class HostScreenActivity extends Activity {
     private static final int VALUE_SPACING_DP = 8;
 
     private static final int LINE_TOP_DP = 2;
+
+    private static final String CLEAR_HISTORY_MESSAGE = "Do you want to delete all history items?";
+
+    private static final String KEEP_STARRED_NOTICE = " (Starred items will be preserved.)";
 
     private static final int DOT_CHEVRON_GAP_DP = 2;
 
@@ -358,6 +363,16 @@ abstract class HostScreenActivity extends Activity {
         final ImageButton button = iconButton(pathData, description, onClick);
         this.topBar.addView(button, new LinearLayout.LayoutParams(dp(CLICKABLE_MIN_DP), dp(CLICKABLE_MIN_DP)));
         return button;
+    }
+
+    final void addClearHistoryIcon(boolean keepsStarred, Runnable clear) {
+        final String message = (keepsStarred) ? CLEAR_HISTORY_MESSAGE + KEEP_STARRED_NOTICE : CLEAR_HISTORY_MESSAGE;
+        addToolbarIcon(MaterialIcons.DELETE, "Clear History",
+                (view) -> new AlertDialog.Builder(this).setTitle("Warning")
+                    .setMessage(message)
+                    .setPositiveButton("OK", (dialog, which) -> clear.run())
+                    .setNegativeButton("Cancel", null)
+                    .show());
     }
 
     final TextView text(String value, TextStyle style, int color) {

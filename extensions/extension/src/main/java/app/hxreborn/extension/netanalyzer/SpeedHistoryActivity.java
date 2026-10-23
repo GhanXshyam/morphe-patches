@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.Gravity;
@@ -51,7 +50,10 @@ public final class SpeedHistoryActivity extends HostScreenActivity {
 
     @Override
     void buildContent() {
-        addToolbarIcon(MaterialIcons.DELETE, "Clear History", (view) -> confirmClear());
+        addClearHistoryIcon(false, () -> {
+            SpeedHistory.clear(this);
+            populate();
+        });
         addToolbarIcon(MaterialIcons.MORE, "More Options",
                 (view) -> ExportMenu.show(this, view, new SpeedHistoryExport()));
         populate();
@@ -121,17 +123,6 @@ public final class SpeedHistoryActivity extends HostScreenActivity {
         bytes.setMinWidth(dp(VALUE_MIN_DP));
         line.addView(bytes);
         return line;
-    }
-
-    private void confirmClear() {
-        new AlertDialog.Builder(this).setTitle("Warning")
-            .setMessage("Do you want to delete all history items?")
-            .setPositiveButton("OK", (dialog, which) -> {
-                SpeedHistory.clear(this);
-                populate();
-            })
-            .setNegativeButton("Cancel", null)
-            .show();
     }
 
 }
