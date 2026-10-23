@@ -20,8 +20,10 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
+import app.morphe.patches.shared.DEX_MAGIC
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.shared.misc.smali.descriptor
+import app.morphe.patches.shared.readInt
 import app.morphe.util.inputStreamFromBundledResource
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -53,7 +55,6 @@ private const val HEX_RADIX = 16
 private val HOISTED_TYPES = setOf(STRING_TYPE, METHOD_TYPE)
 
 private val PAIRIP_ASSET_MAGIC = byteArrayOf(0x00, 0x49, 0x41, 0x50, 0x02)
-private val DEX_MAGIC = byteArrayOf(0x64, 0x65, 0x78, 0x0a)
 private const val DEX_HEADER_SIZE = 0x70
 private const val DEX_FILE_SIZE_OFFSET = 0x20
 private const val KEY_DIGEST_BYTES = 8
@@ -74,12 +75,6 @@ private fun ByteArray.indexOfSequence(sequence: ByteArray): Int {
 
     return -1
 }
-
-private fun ByteArray.readLittleEndianInt(offset: Int) =
-    (this[offset].toInt() and 0xFF) or
-        ((this[offset + 1].toInt() and 0xFF) shl 8) or
-        ((this[offset + 2].toInt() and 0xFF) shl 16) or
-        ((this[offset + 3].toInt() and 0xFF) shl 24)
 
 private fun File.isVirtualizedCode(): Boolean {
     val header = ByteArray(PAIRIP_ASSET_MAGIC.size)
@@ -103,7 +98,7 @@ internal fun recoverEmbeddedDex(asset: ByteArray): ByteArray? {
     val available = asset.size - dexOffset
     check(available >= DEX_HEADER_SIZE) { "Embedded dex header is truncated" }
 
-    val dexSize = asset.readLittleEndianInt(dexOffset + DEX_FILE_SIZE_OFFSET)
+    val dexSize = asset.readInt(dexOffset + DEX_FILE_SIZE_OFFSET)
     check(dexSize in DEX_HEADER_SIZE..available) {
         "Embedded dex declares $dexSize bytes but the asset holds only $available from the dex offset"
     }
