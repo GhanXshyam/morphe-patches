@@ -277,6 +277,7 @@ val removePairipVirtualizationPatch = bytecodePatch {
         AppCompatibilities.LINGODEER,
         AppCompatibilities.LUMO,
         AppCompatibilities.MUSICOLET,
+        AppCompatibilities.MUSICOLET_CAST_PLUGIN,
         AppCompatibilities.POE,
         AppCompatibilities.VLLO,
         AppCompatibilities.YUKA,
